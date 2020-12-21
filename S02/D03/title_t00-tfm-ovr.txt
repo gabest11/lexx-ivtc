@@ -1,8 +1,8 @@
 #intro
 0,1172 pcccp
 0,1172 -
-1248,1258 cppcc
-1259,1266 cccpp
+1248,1257 cppcc
+1258,1266 pcccp
 1267,1274 ccppc
 1275,1282 ccppc
 1283,1290 ppccc
