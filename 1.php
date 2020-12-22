@@ -16,17 +16,22 @@ function sanitycheck($title, &$bogusframes)
 	
 		if(preg_match('/^([0-9]+)(,([0-9]+))? +([cpbnu]+)/i', $row, $m))
 		{
-			if(!empty($m[2])) 
+			if(is_numeric($m[3])) 
 			{
+				if((int)$m[1] >= (int)$m[3]) {echo 'check row '.$row.PHP_EOL;}
+				
 				// should be one for every "scene change", but we basically mark every single one of them
 				
 				$frames[$m[1]]['first'] = true; 
+
 			}
 			
 			if(empty($m[3])) $m[3] = $m[1];
 		
 			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
 			{
+				if(isset($frames[$i]['type'])) die($row);
+				
 				$frames[$i]['type']['value'] = $m[4][$k];
 				$frames[$i]['type']['row'] = $row;
 		
@@ -36,10 +41,17 @@ function sanitycheck($title, &$bogusframes)
 	
 		if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)/i', $row, $m))
 		{
+			if(is_numeric($m[3])) 
+			{
+				if((int)$m[1] >= (int)$m[3]) {echo 'check row '.$row.PHP_EOL;}
+			}
+			
 			if(empty($m[3])) $m[3] = $m[1];
 		
 			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
 			{
+				if(isset($frames[$i]['deint'])) die($row);
+				
 				$frames[$i]['deint']['value'] = $m[4][$k];
 				$frames[$i]['deint']['row'] = $row;
 		
