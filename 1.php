@@ -50,7 +50,7 @@ function sanitycheck($title, &$bogusframes)
 		
 			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
 			{
-				if(isset($frames[$i]['deint'])) die($row);
+				//if(isset($frames[$i]['deint'])) die($row);
 				
 				$frames[$i]['deint']['value'] = $m[4][$k];
 				$frames[$i]['deint']['row'] = $row;
