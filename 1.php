@@ -38,8 +38,7 @@ function sanitycheck($title, &$bogusframes)
 				if(++$k == strlen($m[4])) $k = 0;
 			}
 		}
-	
-		if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)/i', $row, $m))
+		else if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)/i', $row, $m))
 		{
 			if(is_numeric($m[3])) 
 			{
@@ -58,6 +57,16 @@ function sanitycheck($title, &$bogusframes)
 				if(++$k == strlen($m[4])) $k = 0;
 			}
 		}
+		else if(preg_match('/^([0-9]+)(,([0-9]+))? +i +([0-9]+)/i', $row, $m))
+		{
+			if(empty($m[3])) $m[3] = $m[1];
+
+			for($i = (int)$m[1], $j = (int)$m[3]; $i <= $j; $i++)
+			{
+				$frames[$i]['MI']['value'] = $m[4];
+				$frames[$i]['MI']['row'] = $row;
+			}
+		}
 	}
 
 	$bogusframes = [];
@@ -70,12 +79,21 @@ function sanitycheck($title, &$bogusframes)
 	
 		$i = (int)$m[1];
 	
+		// ignore:
+		// - unknown
+		// - directly deinterlaced
+		// - indirectly deinterlaced by MI level
+		// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
+
 		if(!isset($frames[$i]['type']) 
 		|| isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '+' 
+		|| isset($frames[$i]['MI'])
 		|| isset($frames[$i]['first']))
 		{
 			continue;
 		}
+		
+		// still auto-deinterlaced by TFM, examine the reason
 	
 		$bogusframes[$i] = $frames[$i];
 	}
@@ -154,6 +172,7 @@ foreach($bogusframes as $i => $bf)
 	$s = ' '.$i.' '.$bf['type']['value'];
 	
 	if(isset($bf['deint'])) $s .= ' '.$bf['deint']['value'];
+	if(isset($bf['MI'])) $s .= ' '.$bf['MI']['value'];
 	
 	$rows[] = $s;
 }
