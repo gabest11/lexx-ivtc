@@ -1,4 +1,5 @@
 #S02E01
+
 2839,3496 v
 4337,4624 v
 7709,7962 v
@@ -72,6 +73,11 @@
 106175,106242 v
 106304,106367 v
 113596,113670 v
+# two patterns are mixed here, cccpp and ccppc, and they overlap, so we can 
+# drop the common repeating frame in the middle and get a nice 23.768 section
+# this trick rarely works, there is usually no overlap :(
+114623,114688 f
+114623,114688 ++-++
 114727,114810 v
 120029,120393 v
 129721,129773 v

@@ -1,4 +1,5 @@
 #S02E01
+
 0,1172 pcccp
 0,1172 -
 1248,1257 cppcc
@@ -323,6 +324,7 @@
 40538,41006 c
 40538,41006 -
 41007,41458 cccpp
+41459,41678 c
 41459,41678 -+-+-
 41679,41832 cccpp
 41833,41938 ccppc
@@ -1026,8 +1028,9 @@
 114331,114463 cccpp
 114464,114499 cppcc
 114500,114622 cppcc
-114623,114688 ccppc # reflection is cccpp, but with ccppc the 3rd+5th frames go wrong, foreground is more important, deinterlacer can hide it nicely
-114623,114688 --+-+ 
+114623,114688 ccppp # see tdev-ovr.txt
+#114623,114688 ccppc # reflection is cccpp, but with ccppc the 3rd+5th frames go wrong, foreground is more important, deinterlacer can hide it nicely
+#114623,114688 --+-+ 
 114689,114726 ppccc
 #114727,114810 ppccc
 114727,114810 c # display is 29.97 and already deinterlaced
@@ -1266,7 +1269,7 @@
 138079,138157 cppcc
 138158,138207 cppcc
 138208,138362 cccpp
-138363,138409 c # scene cut, previous played back in reverse and one field only
+138363,138409 c # scene cut, previous scene played back in reverse and one field only
 138363,138409 +
 138363,138409 Q 5
 138410,138955 ppccc
@@ -1493,9 +1496,9 @@
 158465,158536 ---++ # still combed
 158537,158621 cppcc
 158537,158621 -++--
-# Kai isn't moving enough to see a pattern or not noticable, 
-# we just enjoy the colorful light, repeats several times below.
-# Motion based deinterlacers also produce nasty artifacts.
+# Kai isn't moving enough to see a pattern or not noticeable, 
+# we just enjoy the colorful lights, repeats several times below.
+# Motion based deinterlacers produce nasty artifacts.
 158622,158817 c #ccppc
 158622,158817 - #--++-
 158806 +

@@ -5,7 +5,7 @@ ffmpeg.exe ^
 -pix_fmt yuv420p ^
 -map 0:v ^
 -c:v libx265 -preset %3 -crf %4 ^
--vf "scale=768:576:flags=lanczos" ^
+-vf "scale=720:576:flags=lanczos" ^
 -tune grain ^
 -aspect 4:3 ^
 -movflags +faststart ^
