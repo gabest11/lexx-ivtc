@@ -31,7 +31,7 @@
 805,919 c
 838,842 + # RATED
 838,842 Q 6
-920,1186 pcccp
+920,1186 pcccp # keyframe
 1187,1844 pcccp
 1845,2121 ccppc
 2122,2398 cppcc
@@ -77,10 +77,10 @@
 8309,8611 ccppc
 8612,8847 ccppc
 8848,9000 cppcc
-9001,9119 c
+9001,9119 c # keyframe
 9120,9209 c
 9210,9291 c
-9292,9598 ccppc
+9292,9598 ccppc # keyframe
 9599,9639 cppcc
 9640,9771 cccpp
 9772,9830 ccppc
