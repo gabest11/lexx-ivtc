@@ -52,11 +52,11 @@ if(preg_match('/(.+title_t[0-9]+-)/i', $src, $m))
 $cmd = [];
 
 $cmd[] = 'ffmpeg -hide_banner';
-if($res >= 720) $cmd[] = '-colorspace bt709';
+if($resolution >= 720) $cmd[] = '-colorspace bt709';
 $cmd[] = '-i "'.$src.'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
-if($codec == 'h264') $cmd[] = '-c:v libx264 -profile high -level 4.1';
+if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
 $cmd[] = '-vf "scale='.$resolution.':flags=lanczos"';

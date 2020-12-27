@@ -314,7 +314,8 @@ for($i = 0; $i < count($m[0]); $i++)
 	
 		if((int)$tfc <= $frame && $frame < (int)($tfc + $fc + 0.5))
 		{
-			$vfrframe = ceil($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000);
+			$vfrframe = (int)($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000 + 0.5);
+			//$vfrframe = ceil($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000);
 			$vfrtime = $vfrframe / 25; // ffmpeg defaults to 25 fps for image seqs
 			
 			$ms = (int)(($vfrtime * 1000) % 1000);
@@ -323,7 +324,10 @@ for($i = 0; $i < count($m[0]); $i++)
 			$hh = $vfrtime;
 			$t = sprintf("%d:%02d:%02d.%03d", $hh, $mm, $ss, $ms);
 			
-			//echo $vfrframe.' '.$t.PHP_EOL;
+			print_r($f);
+			print_r([$frame, $tfc, $tfc + $fc, (int)($tfc + $fc + 0.5), $f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000]);
+		
+			echo $vfrframe.' '.$t.PHP_EOL;
 			
 			$keyframes[] = $t; //['f' => $vfrframe, 't' => $t];
 
