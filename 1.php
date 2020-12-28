@@ -74,28 +74,44 @@ function sanitycheck($title, &$bogusframes)
 	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
 	{
 		$row = trim($row);
-	
-		if(!preg_match('/^([0-9]+) ([cpbnuhl]) \\+/i', $row, $m)) continue;
-	
-		$i = (int)$m[1];
-	
-		// ignore:
-		// - unknown
-		// - directly deinterlaced
-		// - indirectly deinterlaced by MI level
-		// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
 
-		if(!isset($frames[$i]['type']) 
-		|| isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '+' 
-		|| isset($frames[$i]['MI'])
-		|| isset($frames[$i]['first']))
-		{
-			continue;
-		}
+		if(!preg_match('/^([0-9]+) ([cpbnuhl]) ([\\+\\-])/i', $row, $m)) continue;
+
+		$i = (int)$m[1];		
 		
-		// still auto-deinterlaced by TFM, examine the reason
-	
-		$bogusframes[$i] = $frames[$i];
+		if($m[3] == '-')
+		{
+			// first frame p and not deinterlaced
+			
+			if(isset($frames[$i]['first'])
+			&& isset($frames[$i]['type']) && $frames[$i]['type']['value'] == 'p'
+			&& isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '-')
+			{
+				//echo $i.PHP_EOL;
+				//print_r($frames[$i]);
+				$bogusframes[$i] = $frames[$i];
+			}
+		}
+		else if($m[3] == '+')
+		{
+			// ignore:
+			// - unknown
+			// - directly deinterlaced
+			// - indirectly deinterlaced by MI level
+			// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
+
+			if(!isset($frames[$i]['type']) 
+			|| isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '+' 
+			|| isset($frames[$i]['MI'])
+			|| isset($frames[$i]['first']))
+			{
+				continue;
+			}
+		
+			// still auto-deinterlaced by TFM, examine the reason
+
+			$bogusframes[$i] = $frames[$i];
+		}
 	}
 }
 
@@ -324,10 +340,10 @@ for($i = 0; $i < count($m[0]); $i++)
 			$hh = $vfrtime;
 			$t = sprintf("%d:%02d:%02d.%03d", $hh, $mm, $ss, $ms);
 			
-			print_r($f);
-			print_r([$frame, $tfc, $tfc + $fc, (int)($tfc + $fc + 0.5), $f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000]);
+			//print_r($f);
+			//print_r([$frame, $tfc, $tfc + $fc, (int)($tfc + $fc + 0.5), $f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000]);
 		
-			echo $vfrframe.' '.$t.PHP_EOL;
+			//echo $vfrframe.' '.$t.PHP_EOL;
 			
 			$keyframes[] = $t; //['f' => $vfrframe, 't' => $t];
 
