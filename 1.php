@@ -75,42 +75,39 @@ function sanitycheck($title, &$bogusframes)
 	{
 		$row = trim($row);
 
-		if(!preg_match('/^([0-9]+) ([cpbnuhl]) ([\\+\\-])/i', $row, $m)) continue;
+		if(!preg_match('/^([0-9]+) +([cpbnuhl]) +([\\+\\-]) +\\[([\-0-9]+)\\]/i', $row, $m)) continue;
 
-		$i = (int)$m[1];		
+		$i = (int)$m[1];
 		
-		if($m[3] == '-')
+		if(isset($frames[$i]['type']))
 		{
-			// first frame p and not deinterlaced
+			if($m[3] == '-')
+			{
+				// first frame p and not deinterlaced
 			
-			if(isset($frames[$i]['first'])
-			&& isset($frames[$i]['type']) && $frames[$i]['type']['value'] == 'p'
-			&& isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '-')
-			{
-				//echo $i.PHP_EOL;
-				//print_r($frames[$i]);
-				$bogusframes[$i] = $frames[$i];
+				if(isset($frames[$i]['first'])
+				&& $frames[$i]['type']['value'] == 'p'
+				&& isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '-')
+				{
+					$bogusframes[$i] = $frames[$i];
+				}
 			}
-		}
-		else if($m[3] == '+')
-		{
-			// ignore:
-			// - unknown
-			// - directly deinterlaced
-			// - indirectly deinterlaced by MI level
-			// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
-
-			if(!isset($frames[$i]['type']) 
-			|| isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '+' 
-			|| isset($frames[$i]['MI'])
-			|| isset($frames[$i]['first']))
+			else if($m[3] == '+' || $m[4] >= 60)
 			{
-				continue;
-			}
-		
-			// still auto-deinterlaced by TFM, examine the reason
+				// ignore:
+				// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
+				// - indirectly deinterlaced by MI level
+				// - directly deinterlaced
 
-			$bogusframes[$i] = $frames[$i];
+				if(!isset($frames[$i]['first'])
+				&& !isset($frames[$i]['MI'])
+				&& !(isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '+'))
+				{
+					// still auto-deinterlaced by TFM, examine the reason
+
+					$bogusframes[$i] = $frames[$i];
+				}
+			}
 		}
 	}
 }
