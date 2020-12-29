@@ -11,15 +11,19 @@ $timecodes = '';
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
-if(preg_match('/^[0-9]+/i', $resolution, $m))
+$resolution = explode(':', $resolution);
+
+if(count($resolution) == 1 && is_numeric($resolution[0]))
 {
-	if($resolution == '480' || $resolution == '576')
+	$h = (int)$resolution[0];
+	
+	if($h == 480 || $h == 576)
 	{
-		$resolution = '720:'.$resolution;
+		$resolution = [720, $h];
 	}
 	else
 	{
-		$resolution = ($resolution*4/3).':'.$resolution;
+		$resolution = [$h * 4 / 3, $h];
 	}
 }
 
@@ -52,14 +56,14 @@ if(preg_match('/(.+title_t[0-9]+-)/i', $src, $m))
 $cmd = [];
 
 $cmd[] = 'ffmpeg -hide_banner';
-if($resolution >= 720) $cmd[] = '-colorspace bt709';
+if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 $cmd[] = '-i "'.$src.'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
-$cmd[] = '-vf "scale='.$resolution.':flags=lanczos"';
+$cmd[] = '-vf "scale='.implode(':', $resolution).':flags=lanczos"';
 $cmd[] = '-tune grain';
 $cmd[] = '-aspect 4:3';
 $cmd[] = '-movflags +faststart';
