@@ -70,6 +70,8 @@ $cmd[] = '-movflags +faststart';
 if(!empty($keyframes)) $cmd[] = '-force_key_frames '.$keyframes;
 $cmd[] = '"'.$dst.'"';
 
+// TODO: chapters for keyframes
+
 $cmd = implode(' ', $cmd);
 
 echo $cmd.PHP_EOL;

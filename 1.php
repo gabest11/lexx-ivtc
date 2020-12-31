@@ -91,6 +91,12 @@ function sanitycheck($title, &$bogusframes)
 				{
 					$bogusframes[$i] = $frames[$i];
 				}
+/*
+				else if($m[4] >= 30 && !isset($frames[$i]['MI']) && !isset($frames[$i]['deint']))
+				{
+					$bogusframes[$i] = $frames[$i];
+				}
+*/				
 			}
 			else if($m[3] == '+' || $m[4] >= 60)
 			{
