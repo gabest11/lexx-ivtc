@@ -4,41 +4,66 @@ if(!file_exists($argv[1])) die('check file name');
 
 $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
-function sanitycheck($title, &$bogusframes)
+function sanitycheck($title, &$bogusframes, &$bogusscenes)
 {
-	// find auto-deinterlaced frames that should be progressive
+	$bogusframes = [];
+	$bogusscenes = [];
 
-	$frames = [];
+	$tfmframes = [];
+		
+	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
+	{
+		$row = trim($row);
+
+		if(!preg_match('/^([0-9]+) +([cpbnuhl]) +([\\+\\-]) +\\[([\-0-9]+)\\] +(\\(([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)\\))?/i', $row, $m)) continue;
+		
+		$i = (int)$m[1];
+
+		$tfmframes[$i] = ['type' => $m[2], 'deint' => $m[3], 'mic' => (int)$m[4]];
+
+		if(!empty($m[5]))
+		{
+			$mics = [];
+			
+			$mics['p'] = (int)$m[6];
+			$mics['c'] = (int)$m[7];
+			$mics['n'] = (int)$m[8];
+			$mics['b'] = (int)$m[9];
+			$mics['u'] = (int)$m[10];
+						
+			$tfmframes[$i]['mics'] = $mics;
+			
+			$mint = 'c';
+			$minv = $mics[$mint];
+			
+			foreach($mics as $t => $mic) 
+			{
+				if($mic < $minv)
+				{
+					$mint = $t; 
+					$minv = $mic;
+				}
+			}
+
+			$tfmframes[$i]['micmin'] = ['t' => $mint, 'v' => $minv];
+		}
+	}
+
+	$ovrframes = [];
+	$ovrscenes = [];
 
 	foreach(explode("\n", file_get_contents("$title-tfm-ovr.txt")) as $row)
 	{
 		$row = trim($row);
+		
+		$s = $row;
+		
+		if(($i = strpos($row, '#')) !== false)
+		{
+			$s = trim(substr($row, 0, $i));
+		}
 	
-		if(preg_match('/^([0-9]+)(,([0-9]+))? +([cpbnu]+)/i', $row, $m))
-		{
-			if(is_numeric($m[3])) 
-			{
-				if((int)$m[1] >= (int)$m[3]) {echo 'check row '.$row.PHP_EOL;}
-				
-				// should be one for every "scene change", but we basically mark every single one of them
-				
-				$frames[$m[1]]['first'] = true; 
-
-			}
-			
-			if(empty($m[3])) $m[3] = $m[1];
-		
-			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
-			{
-				if(isset($frames[$i]['type'])) die($row);
-				
-				$frames[$i]['type']['value'] = $m[4][$k];
-				$frames[$i]['type']['row'] = $row;
-		
-				if(++$k == strlen($m[4])) $k = 0;
-			}
-		}
-		else if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)/i', $row, $m))
+		if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)$/i', $s, $m))
 		{
 			if(is_numeric($m[3])) 
 			{
@@ -49,71 +74,200 @@ function sanitycheck($title, &$bogusframes)
 		
 			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
 			{
-				//if(isset($frames[$i]['deint'])) die($row);
+				//if(isset($ovrframes[$i]['deint'])) die($row);
 				
-				$frames[$i]['deint']['value'] = $m[4][$k];
-				$frames[$i]['deint']['row'] = $row;
+				$ovrframes[$i]['deint']['value'] = $m[4][$k];
+				$ovrframes[$i]['deint']['row'] = $row;
 		
 				if(++$k == strlen($m[4])) $k = 0;
 			}
 		}
-		else if(preg_match('/^([0-9]+)(,([0-9]+))? +i +([0-9]+)/i', $row, $m))
+		else if(preg_match('/^([0-9]+)(,([0-9]+))? +i +([0-9]+)$/i', $s, $m))
 		{
 			if(empty($m[3])) $m[3] = $m[1];
 
 			for($i = (int)$m[1], $j = (int)$m[3]; $i <= $j; $i++)
 			{
-				$frames[$i]['MI']['value'] = $m[4];
-				$frames[$i]['MI']['row'] = $row;
+				$ovrframes[$i]['MI']['value'] = $m[4];
+				$ovrframes[$i]['MI']['row'] = $row;
+			}
+		}
+		else if(preg_match('/^([0-9]+)(,([0-9]+))?( +([cpbnu]+))?$/i', $s, $m))
+		{
+			if(isset($m[3]) && is_numeric($m[3])) 
+			{
+				if((int)$m[1] >= (int)$m[3]) {echo 'check row '.$row.PHP_EOL;}
+				
+				// should be one for every "scene change", but we basically mark every single one of them
+				
+				$ovrframes[$m[1]]['first'] = true;
+			}
+			
+			if(empty($m[3])) $m[3] = $m[1];
+			
+			if(empty($m[5])) $m[5] = '';
+			
+			$ovrscenes[] = ['s' => (int)$m[1], 'e' => (int)$m[3], 't' => $m[5], 'row' => $row];
+			
+			if(!empty($m[5]))
+			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
+			{
+				if(isset($ovrframes[$i]['type'])) die($row);
+				
+				$ovrframes[$i]['type']['value'] = $m[4][$k];
+				$ovrframes[$i]['type']['row'] = $row;
+		
+				if(++$k == strlen($m[5])) $k = 0;
 			}
 		}
 	}
 
-	$bogusframes = [];
-
-	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
+	foreach($tfmframes as $i => $tfm)
 	{
-		$row = trim($row);
+		if(!isset($ovrframes[$i]['type'])) continue;
 
-		if(!preg_match('/^([0-9]+) +([cpbnuhl]) +([\\+\\-]) +\\[([\-0-9]+)\\]/i', $row, $m)) continue;
-
-		$i = (int)$m[1];
-		
-		if(isset($frames[$i]['type']))
+		if($tfm['deint'] == '-')
 		{
-			if($m[3] == '-')
+			// first frame p and not deinterlaced
+		
+			if(isset($ovrframes[$i]['first'])
+			&& $ovrframes[$i]['type']['value'] == 'p'
+			&& isset($ovrframes[$i]['deint']) && $ovrframes[$i]['deint']['value'] == '-')
 			{
-				// first frame p and not deinterlaced
-			
-				if(isset($frames[$i]['first'])
-				&& $frames[$i]['type']['value'] == 'p'
-				&& isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '-')
-				{
-					$bogusframes[$i] = $frames[$i];
-				}
-/*
-				else if($m[4] >= 30 && !isset($frames[$i]['MI']) && !isset($frames[$i]['deint']))
-				{
-					$bogusframes[$i] = $frames[$i];
-				}
-*/				
+				$bogusframes[$i] = $ovrframes[$i];
 			}
-			else if($m[3] == '+' || $m[4] >= 60)
+/*
+			else if($tfm['mic'] >= 30 && !isset($ovrframes[$i]['MI']) && !isset($ovrframes[$i]['deint']))
 			{
-				// ignore:
-				// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
-				// - indirectly deinterlaced by MI level
-				// - directly deinterlaced
+				$bogusframes[$i] = $ovrframes[$i];
+			}
+*/				
+		}
+		else if($tfm['deint'] == '+' || $tfm['mic'] >= 60)
+		{
+			// ignore:
+			// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
+			// - indirectly deinterlaced by MI level
+			// - directly deinterlaced
 
-				if(!isset($frames[$i]['first'])
-				&& !isset($frames[$i]['MI'])
-				&& !(isset($frames[$i]['deint']) && $frames[$i]['deint']['value'] == '+'))
-				{
+			if(!isset($ovrframes[$i]['first'])
+			&& !isset($ovrframes[$i]['MI'])
+			&& !(isset($ovrframes[$i]['deint']) && $ovrframes[$i]['deint']['value'] == '+'))
+			{
 					// still auto-deinterlaced by TFM, examine the reason
 
-					$bogusframes[$i] = $frames[$i];
+				$bogusframes[$i] = $ovrframes[$i];
+			}
+		}
+	}
+	
+	foreach($ovrscenes as $scene)
+	{
+		$mics = [];
+		$count = [];
+		
+		$cycle = strlen($scene['t']);
+		
+		if($cycle <= 1) $cycle = 5;
+		
+		for($k = 0; $k < $cycle; $k++)
+		{
+			$mics[$k] = ['p' => 0, 'c' => 0, 'n' => 0, 'b' => 0, 'u' => 0];
+			$count[$k] = 1;
+		}
+			
+		for($i = $scene['s'], $j = $scene['e'], $k = 0; $i <= $j; $i++)
+		{
+			foreach($tfmframes[$i]['mics'] as $t => $v)
+			{
+				$mics[$k][$t] += $v;
+			}
+			
+			$count[$k]++;
+		
+			if(++$k == $cycle) $k = 0;
+		}
+
+		foreach($mics as $k => $mic)
+		{
+			asort($mic, SORT_NUMERIC);
+			
+			foreach($mic as $t => $v)
+			{
+				$mic[$t] /= $count[$k];
+			}
+			
+			$mics[$k] = $mic;
+		}		
+/*
+		// best values each position
+		
+		$suggested = '';
+		
+		for($k = 0; $k < $cycle; $k++)
+		{
+			$mint = 'c';
+			$minv = $mics[$k][$mint];
+
+			foreach($mics[$k] as $t => $v)
+			{
+				if($t == 'u' || $t == 'b' || $t == 'n') continue;
+				
+				if($v < $minv && $minv > 1)
+				{
+					$mint = $t; 
+					$minv = $v;
 				}
 			}
+			
+			$suggested .= $mint;
+		}
+		
+		#echo $scene['row'].PHP_EOL;
+		#print_r($mics);
+		#continue;
+		
+		if($scene['t'] != $suggested 
+		//&& !($scene['t'] == 'c' && $suggested == 'ccccc') 
+		//&& $suggested != 'ccccc'
+		&& array_search($suggested, ['ppccc', 'cppcc', 'ccppc', 'cccpp', 'pcccp']) !== false)
+		{
+			$bogusscenes[] = $scene['row'].' => '.$suggested;
+		}
+*/				
+		// TODO
+		//
+		// Find (pu pu cp cx cu) as the best two field matches, can start at any position, x means any, likely not p.
+		//
+		// The sequence will just be the first letters combined for now, but it could be improved by checking the 
+		// second letter and the order they follow each other, as above.
+		
+		$types = [];
+
+		for($k = 0; $k < $cycle; $k++)
+		{
+			$ts = [];
+			
+			foreach($mics[$k] as $t => $v)
+			{
+				$ts[] = $t;
+				
+				if(count($ts) >= 2) break;
+			}
+			
+			sort($ts); // c < p, lucky
+			
+			$types[] = substr(implode($ts), 0, 1);
+		}
+		
+		$suggested = implode('', $types);
+		
+		if($scene['t'] != $suggested 
+		//&& !($scene['t'] == 'c' && $suggested == 'ccccc') 
+		//&& $suggested != 'ccccc'
+		&& array_search($suggested, ['ppccc', 'cppcc', 'ccppc', 'cccpp', 'pcccp']) !== false)
+		{
+			$bogusscenes[] = trim($scene['row']).' # '.$suggested;
 		}
 	}
 }
@@ -140,7 +294,7 @@ $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
 deint=yadifmod2(mode=0)
-TFM(d2v=d2vpath,clip2=deint,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+TFM(d2v=d2vpath,clip2=deint,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=4,denoise=true,output="$title-tdec.txt")
 crop(344,224,-344,-224)
 EOT;
@@ -170,8 +324,9 @@ if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 // sanity check
 
 $bogusframes = [];
+$bogusscenes = [];
 
-sanitycheck($title, $bogusframes);
+sanitycheck($title, $bogusframes, $bogusscenes);
 
 $rows = [];
 
@@ -197,6 +352,7 @@ foreach($bogusframes as $i => $bf)
 }
 
 file_put_contents("$title-bogusframes.txt", implode(PHP_EOL, $rows));
+file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));
 
 // 2nd pass
 
