@@ -114,7 +114,7 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 			{
 				if(isset($ovrframes[$i]['type'])) die($row);
 				
-				$ovrframes[$i]['type']['value'] = $m[4][$k];
+				$ovrframes[$i]['type']['value'] = $m[5][$k];
 				$ovrframes[$i]['type']['row'] = $row;
 		
 				if(++$k == strlen($m[5])) $k = 0;
@@ -342,7 +342,7 @@ foreach($bogusframes as $i => $bf)
 		
 		$typerow = $bf['type']['row'];
 	}
-	
+
 	$s = ' '.$i.' '.$bf['type']['value'];
 	
 	if(isset($bf['deint'])) $s .= ' '.$bf['deint']['value'];
