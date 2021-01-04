@@ -154,7 +154,7 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 			&& !isset($ovrframes[$i]['MI'])
 			&& !(isset($ovrframes[$i]['deint']) && $ovrframes[$i]['deint']['value'] == '+'))
 			{
-					// still auto-deinterlaced by TFM, examine the reason
+				// still auto-deinterlaced by TFM, examine the reason
 
 				$bogusframes[$i] = $ovrframes[$i];
 			}
