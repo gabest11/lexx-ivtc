@@ -57,7 +57,7 @@
 1573,1630 +---+
 1631,1826 c
 
-1828,2007 ccppc
+1828,2007 ccppc # keyframe
 1828,2007 --++-
 1828,2007 Q 5 # yadif is terrible for the cgi here
 1828,2007 M 15
