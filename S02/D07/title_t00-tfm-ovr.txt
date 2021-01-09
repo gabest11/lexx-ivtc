@@ -57,7 +57,8 @@
 1573,1630 +---+
 1631,1829 c
 
-1830 # keyframe
+1830,1883 ppccc # keyframe
+1884,1921 pcccp
 1922,1985 cppcc
 1986,2024 ccppc
 2025,2061 cppcc
