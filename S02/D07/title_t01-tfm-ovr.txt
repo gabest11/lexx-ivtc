@@ -111,12 +111,13 @@
 6271,6455 c
 6456,6543 c
 6544,6947 cppcc # fg cppcc, bg pcccp, keep fg, bg is terrible
-6544,6888 +
-6683,6684 Q 5
-6689 Q 5
-6693,6694 Q 5
-6743,6744 Q 5
-6748,6749 Q 5
+6544,6888 -++--
+6544,6888 Q 5 # yadif just looks disgusting here, pixels are jittering
+#6683,6684 Q 5
+#6689 Q 5
+#6693,6694 Q 5
+#6743,6744 Q 5
+#6748,6749 Q 5
 6948,7146 c
 7147,7271 pcccp
 7157,7256 +---+
@@ -441,9 +442,9 @@
 47323,47387 +
 47388,47444 ppccc
 47445,47552 cccpp
-47553,47698 c # left side ccppc, right side c
-47553,47615 +
-47616,47698 --++- # robot stops moving
+47553,47624 c # left side ccppc, right side c
+47553,47624 +
+47625,47698 ppccc # robot stops moving
 47699,47780 pcccp
 47781,47933 ccppc
 47934,48014 c # fg ccppc, bg ppccc
@@ -759,7 +760,6 @@
 68062,68148 ppccc
 68149,68221 ccppc
 68222,68323 ppccp # ppccc + pcccp drop every 5th
-68222,68323 -
 68324,68462 cccpp
 68463,68522 ppccc
 68523,68631 cppcc
@@ -788,6 +788,7 @@
 70183,70305 ccppc
 70306,70442 pcccp
 70443,70574 ppccc
+70493,70574 ++--- # robot head still interlaced
 70575,70714 pcccp
 70715,70845 cppcc
 70814,70877 + # crossfade
