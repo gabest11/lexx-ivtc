@@ -135,6 +135,7 @@
 23093,23381 ppccc
 23382,23492 c
 23493,23550 cppcc
+#23493,23550 -++-- # hand # too small to notice any difference
 23551,23615 c
 23616,23721 c
 23722,23767 pcccp
@@ -498,7 +499,7 @@
 65515,65770 c
 65771,65885 c
 65886,66022 cppcc
-65886,66022 -++-- # combed agasint the bg left side
+65886,66022 -++-- # combed against the bg left side
 66023,66170 cppcc
 66171,66245 ccppc
 66171,66245 --++- # same
