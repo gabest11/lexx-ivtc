@@ -141,7 +141,7 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 			{
 				$bogusframes[$i] = $ovrframes[$i];
 			}
-*/				
+*/
 		}
 		else if($tfm['deint'] == '+' || $tfm['mic'] >= 60)
 		{
@@ -158,6 +158,19 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 
 				$bogusframes[$i] = $ovrframes[$i];
 			}
+		}
+		
+		if(!isset($ovrframes[$i]['first'])
+		&& $tfm['micmin']['t'] != $tfm['type']
+		&& $tfm['type'] == 'c' && $tfm['micmin']['t'] == 'p'
+//		&& ($tfm['type'] == 'c' || $tfm['type'] == 'p')
+//		&& ($tfm['micmin']['t'] == 'c' || $tfm['micmin']['t'] == 'p')
+		&& $tfm['micmin']['v'] < 20 && $tfm['mics'][$tfm['type']] > 50)
+		{
+			// recommendation by tfm is different
+			
+print_r([$i, $tfm, $ovrframes[$i]]);
+			$bogusframes[$i] = $ovrframes[$i];
 		}
 	}
 	
@@ -256,7 +269,7 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 			}
 			
 			sort($ts); // c < p, lucky
-			
+
 			$types[] = substr(implode($ts), 0, 1);
 		}
 		

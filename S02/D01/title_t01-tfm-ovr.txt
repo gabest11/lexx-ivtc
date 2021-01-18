@@ -37,11 +37,11 @@
 2122,2398 cppcc
 2399,2637 ppccc
 2638,2758 cccpp 
-#2759,2819 ppcccppc
+2759,3222 c # ppcccppc TODO works up to 2820
+2759,3222 +
 #2820,3222 # very random pattern
-2759,3222 c
-2759,3222 i 80
-#2759,3222 +
+#2820,3222 c
+#2759,3222 i 880
 3223,3251 c
 3252,3357 ccppc
 3358,4169 ccppc
