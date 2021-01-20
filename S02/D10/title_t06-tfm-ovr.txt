@@ -328,7 +328,7 @@
 27873,27915 c
 27916,28303 c
 28304,28587 pcccp
-28588 u # lexx looks terrible if we yadif handle the 1st p frame
+28588 u # lexx looks terrible if we let yadif handle the 1st p frame
 28589,28834 cccpp 
 28589,28834 - # ---++ # blob should be deinterlaced, but the difference is not visible
 28835,28978 cppcc
