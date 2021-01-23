@@ -353,7 +353,7 @@
 44809,45063 pcccp
 45064,45120 cppcc
 45121,45255 ppccc
-45121,45255 ++--- # not 1:1
+45121,45255 ++--- # not 1:1 (the separated fields already have other fields blended together)
 45256,45357 ccppc
 45358,45489 cccpp
 45490,45613 cccpp
