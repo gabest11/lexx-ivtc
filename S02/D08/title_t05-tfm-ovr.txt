@@ -435,10 +435,9 @@
 #
 53683,53791 ppccc
 53792,53961 cccpp
-53962,54074 pcccp
-54061,54100 + # crossfade (kindof)
-54061,54100 Q 2
-54075,55107 ppccc
+53962,54060 pcccp
+54061,54099 ppccp # crossfade (kindof), ppccc + pcccp
+54100,55107 ppccc
 55108,55270 cccpp
 55271,57127 ppccc
 57128,57243 cppcc
@@ -625,7 +624,7 @@
 83681,83759 cppcc
 83760,83831 pcccp
 83832,83943 ppccc
-83942,83970 + # crossfade (kindof)
+83942,83970 + # crossfade (kindof), ppccc + ccppc
 83944,84246 ppccc
 84214,84246 + # fadeout
 

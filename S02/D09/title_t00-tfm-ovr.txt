@@ -431,10 +431,9 @@
 #
 44684,44792 ppccc
 44793,44962 cccpp
-44963,45075 pcccp
-45059,45100 + # crossfade (kindof)
-45059,45100 Q 2
-45076,46108 ppccc
+44963,45061 pcccp
+45062,45099 ppccp # crossfade (kindof), ppccc + pcccp
+45100,46108 cppcc
 46109,46271 cccpp
 46272,48486 ppccc
 48487,48597 cppcc

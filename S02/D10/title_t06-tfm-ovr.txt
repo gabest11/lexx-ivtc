@@ -836,9 +836,9 @@
 82205,82313 cccpp
 82314,82412 cppcc 
 82383,82443 + # crossfade
-82413,82707 cccpp 
-82704,82723 + # crossfade (kindof)
-82708,83821 pcccp 
+82413,82703 cccpp 
+82704,82723 ccppp # crossfade (kindof), ccppc + cccpp
+82724,83821 cccpp
 83817,83826 + # crossfade (kindof)
 83822,84246 ppccc 
 84216,84259 + # crossfade
