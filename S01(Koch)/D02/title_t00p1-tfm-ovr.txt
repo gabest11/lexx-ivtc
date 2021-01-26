@@ -1,3 +1,5 @@
+#S01E02
+
 0,954 cccpp
 #0,954 ---++ # text runs at 29.97 and should be deinterlaced on p frames, TODO: pick only the most obvious cases
 521 -
@@ -87,11 +89,13 @@
 5564,5589 ccppc
 5590,5605 cccpp 
 5606,5626 ccppc 
-5627,5649 cccnn # ?
+5627,5649 cccbb # ?
 5650,5682 cppcc
 5683,5790 pcccp
 5687,5693 +
 5748,5754 +
+5763 - # MIC = 81
+5776 - # MIC = 100
 5683,5790 Q 5
 5791,5849 c
 5802,5849 +
@@ -133,7 +137,7 @@
 7131,7179 ccppc 
 7171,7180 + # crossfade
 7180,7233 pccpp # cccpp + pcccp, drop every 4th
-7180,7233 -
+7181,7233 -
 7227,7256 + # crossfade
 7234,7352 ccpcc # 1-2 wrong, no match
 7234,7352 ++---
@@ -190,7 +194,7 @@
 8993,9522 ppccc 
 9523,9728 c
 
-9729,9935 # keyframe
+9729,9935 pcccp # keyframe
 9729,9739 + # fade-in
 9936,10114 cppcc 
 10115,10221 c
@@ -208,7 +212,7 @@
 11790,11816 pcccp 
 11817,11904 cccpp 
 11905,12066 pcccp 
-12067,12200 pcccp
+12067,12200 cccpp#pcccp
 12201,12574 cppcc 
 12575,12966 ccppc 
 12967,13222 ppccc 
@@ -225,6 +229,7 @@
 14538,14630 Q 5
 14631,14952 cccpp 
 14953,15124 cccpp
+14987 - # MIC 100
 15125,15206 pcccp 
 15207,15315 ppccc
 15316,15418 cppcc 
@@ -236,7 +241,9 @@
 15973,16119 pcccp
 16120,16184 ccppc # bg 59.94i, mostly static, dropping p will only remove two moving frames
 16120,16128 +
+16133 +
 16150,16158 +
+16163 +
 16120,16184 Q 5
 16185,16232 pcccp
 16233,16291 c
@@ -269,7 +276,8 @@
 19399,19419 + # fade-in
 19399,19759 cppcc
 19760,19842 pppcc # crossfade, ppccc + cppcc
-19843,20017 cccpp
+19843,19956 cccpp
+19957,20017 cccpp
 20018,20054 cccpp
 20055,20421 ccppc
 20401,20469 + # crossfade
@@ -309,6 +317,7 @@
 22160,22248 cppcc
 22249,22284 cpppc # crossfade, ccppc + cppcc
 22285,22313 ppccc # mmmm
+22312 + # ?
 22314,22369 cppcc # crossfade, cppcc + cppcc
 22370,22537 ppccc
 22524,22565 + # crossfade, cppcc + cccpp
@@ -341,8 +350,11 @@
 25869,25925 ppccc
 25926,26136 cccpp
 26137,26349 cppcc
+26137,26349 - # MIC high
 26350,26666 ccppc
 26667,26748 pcccp
+26667,26748 + # fields are shifted, but nothing is moving
+26667,26748 Q 5
 26749,27017 cccpp
 27018,27203 ccppc
 27204,27286 c # 59.94i
@@ -397,12 +409,15 @@
 32493,32510 cppcc
 32511,32538 cppcc
 32539,32600 cppcc
+32576 - # MIC = 146
+32899 - # MIC = 149
 32601,32643 cppcc
 32644,32689 cppcc
 32690,32748 cccpp
 32749,32804 ppccc
 32805,32865 ppccc
 32866,32918 cppcc
+32888 - # MIC = 116
 32919,32966 ppccc
 32967,33002 cppcc
 33003,33047 ccppc
@@ -440,11 +455,14 @@
 35407,35464 pcccp
 35465,35651 ppccc
 35652,35704 ppccc
-35705,35763 pcccp
-35764,35891 ppccc
+35705,35738 pcccp
+35739,35765 c # 59.94i in the later part and the first two frames of the next scene
+35739,35765 +
+35766,35891 cccpp
 35892,35990 ccppc
 #35977,36000 ccppc # crossfade, ccppc + ccppc, lucky
 35991,36401 cccpp
+36101 - # MIC = 82
 36402,36505 pcccp
 36506,36608 ppccc
 36609,36751 cccpp
@@ -468,9 +486,7 @@
 38471,38960 pcccp
 38961,39069 cppcc
 39070,39328 ccppc
-39329,39397 c # cccpp
-39329,39397 ---++ # hand + cgi, prefer cgi
-#39329,39397 Q 6
+39329,39397 cccbb # ?
 39398,39584 cppcc
 39585,39655 cccpp
 39656,39756 c
@@ -480,10 +496,12 @@
 40019,40197 cppcc
 40198,40259 c
 40198,40259 +
+#40198,40259 Q 6
 40260,40340 pcccp
 40341,40369 cccpp
 40370,40403 ccppc
 40404,40459 cccpp
+40418 - # MIC = 192
 40460,40512 pcccp
 40513,40554 pcccp
 40555,40618 c
@@ -519,7 +537,7 @@
 41488,41541 cccpp
 41542,41563 cccpp
 41564,41590 cccpp
-41591,41651 cppcc
+41591,41651 ppccc
 41652,41690 ppccc
 41691,41731 ppccc
 41732,41764 c
@@ -554,7 +572,17 @@
 44399,44478 ccppc
 44479,44526 cccpp
 44527,45030 ccppc
-45031,45119 ccppc
+
+45031,45043 ccppc
+45044,45059 ccppc
+45060 u
+45061,45076 cccpp
+45077 u
+45078,45094 pcccp
+45095 u
+45096,45111 pcccp
+45112,45119 pcccp
+
 45120,45311 ccppc
 45312,45723 cppcc
 45724,45819 cppcc
@@ -567,7 +595,9 @@
 46276,46328 ccppc
 46329,46412 cppcc # now the same tower looks perfect
 46413,46550 cppcc
-46551,46699 cppcc
+46551,46699 cppcc # bg cppcc, fg cccpp (inside of the moth)
+46551,46699 +
+46551,46699 Q 5
 46700,46811 ccppc
 46812,47016 cppcc
 47017,47197 cppcc
