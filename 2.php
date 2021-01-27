@@ -27,7 +27,7 @@ if(count($resolution) == 1 && is_numeric($resolution[0]))
 	}
 }
 
-if(preg_match('/(.+title_t[0-9]+-)/i', $src, $m))
+if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m))
 {
 	$fn = $m[1].'keyframes.txt';
 
@@ -44,13 +44,18 @@ if(preg_match('/(.+title_t[0-9]+-)/i', $src, $m))
 
 		$keyframes = implode(',', $keyframes);
 	}
-}
 
-if(preg_match('/(.+title_t[0-9]+-)/i', $src, $m))
-{
 	$fn = $m[1].'timecodes.txt';
-
+	
 	if(file_exists($fn)) $timecodes = $fn;
+	
+	$fn = $m[1].'tfm-ovr.txt';
+	
+	if(file_exists($fn)) $tfm_ovr = $fn;
+	
+	$fn = $m[1].'tdec-ovr.txt';
+	
+	if(file_exists($fn)) $tdec_ovr = $fn;
 }
 
 $cmd = [];
@@ -92,8 +97,33 @@ E:\\tmp\\media\\util\\mkvtoolnix\\mkvmerge.exe ^
 --default-track 0:yes ^
 --timestamps "0:$timecodes" ^
 --fix-bitstream-timing-information 0:1 ^
-"$dst"
+--attachment-description "VFR timecodes" ^
+--attachment-mime-type text/plain ^
+--attach-file "$timecodes" ^
+
 EOT;
+
+if(file_exists($tfm_ovr))
+{
+$cmd .= <<<EOT
+--attachment-description "TFM overrides" ^
+--attachment-mime-type text/plain ^
+--attach-file "$tfm_ovr" ^
+
+EOT;
+}
+
+if(file_exists($tdec_ovr))
+{
+$cmd .= <<<EOT
+--attachment-description "TDecimate overrides" ^
+--attachment-mime-type text/plain ^
+--attach-file "$tdec_ovr" ^
+
+EOT;
+}
+
+$cmd .= '"'.$dst.'"';
 
 $cmd = preg_replace('/[\r\n]+/', ' ', $cmd);
 
