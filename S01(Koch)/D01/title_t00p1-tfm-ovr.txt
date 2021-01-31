@@ -294,7 +294,10 @@
 31067,31158 pcccp
 31159,31302 ppccc 
 31303,31548 ppccc
-31549,31925 cppcc
+31549,31668 c # people 59.94i(?) or not 1:1, nothing fits, bg cppcc
+31669,31925 cppcc # people stop moving
+31549,31728 + # ++-++ 3rd looks like a p
+#31549,31925 Q 5
 31926,32474 ccppc 
 32475,32591 cccpp 
 32592,32826 ppccc
@@ -1363,9 +1366,12 @@
 122465,122512 cppcc
 122513,122922 cppcc
 122923,123068 ppccc
-123069,123113 ppccc
+123069 u
+123070,123113 ppccc
+123069,123113 + # left side is single field until the saw starts
+123069,123113 Q 5
 123114,123256 cppcc # hidden scene cut
-123114,123256 +++-+ # somehow the two sides of the picture are out of sync, pcccp+cppcc
+123114,123256 +++-+ # somehow the two sides of the picture are out of sync, pcccp + cppcc
 123257,123319 cccpp
 123320,123407 cccpp
 123408,123462 ppccc

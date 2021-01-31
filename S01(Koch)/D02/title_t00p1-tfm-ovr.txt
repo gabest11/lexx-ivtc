@@ -30,7 +30,7 @@
 3661,3675 c
 3661,3675 +
 3676,3710 ppccp # mid ppccc, side pcccp, drop 5th
-3711,3760 cccpp
+3711,3760 pcccp
 3761,3815 cccpp
 3816,3907 cccpp
 3908,3983 ccppc
@@ -108,9 +108,9 @@
 6040,6090 pcccp
 6091,6134 pcccp
 6135,6145 cppcc
-6146,6167 ppccc
-6168,6223 cccpp
-6168,6178 + # fade-in
+6146,6168 ppccc
+6169,6219 cppcpucccpccppcccpc # yep
+6169,6178 + # fade-in
 6224,6279 pcccp
 6280,6354 cccpp
 6355,6396 pcccp

@@ -8,6 +8,7 @@ $resolution = !empty($argv[5]) ? $argv[5] : 720;
 $crf = !empty($argv[6]) ? $argv[6] : ($codec == 'h265' ? 20 : 17);
 $keyframes = '';
 $timecodes = '';
+$audio = [];
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
@@ -56,6 +57,24 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m))
 	$fn = $m[1].'tdec-ovr.txt';
 	
 	if(file_exists($fn)) $tdec_ovr = $fn;
+	
+	foreach(['eng', 'hun', 'rus'] as $lang)
+	{
+		$fn2 = rtrim($m[1], '-');
+	
+		$fn = $fn2.'_'.$lang.'.mka';
+
+		if(file_exists($fn)) $audio[] = $fn;
+		
+		for($i = 1; ; $i++)
+		{
+			$fn = $fn2.'_'.$lang.$i.'.mka';
+			
+			if(!file_exists($fn)) break;
+			
+			$audio[] = $fn;
+		}
+	}
 }
 
 $cmd = [];
@@ -63,8 +82,11 @@ $cmd = [];
 $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 $cmd[] = '-i "'.$src.'"';
+foreach($audio as $a) $cmd[] = '-i "'.$a.'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
+foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
+$cmd[] = '-c copy';
 if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
@@ -133,6 +155,7 @@ $ret = 0;
 passthru($cmd, $ret);
 if(!empty($ret)) die($ret);
 
+unlink($dst);
 }
 
 ?>
