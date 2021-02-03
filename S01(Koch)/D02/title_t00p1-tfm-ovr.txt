@@ -213,7 +213,7 @@
 11790,11816 pcccp
 11817,11904 cccpp
 11905,12066 pcccp
-12067,12200 cccpp#pcccp
+12067,12200 cccpp
 12201,12574 cppcc
 12575,12966 ccppc
 12967,13222 ppccc
@@ -596,26 +596,32 @@
 46276,46328 ccppc
 46329,46412 cppcc # now the same tower looks perfect
 46413,46550 cppcc
-46551,46699 cppcc # bg cppcc, fg cccpp (inside of the moth)
-46551,46699 + # TODO # moving frames
+#46551,46699 cppcc # bg cppcc, fg cccpp (inside of the moth)
+#46551,46699 + # TODO # moving frames
 #46551,46699 Q 5
+46551,46699 cluph # bg cppcc, fg cccpp (inside of the moth)
+46551,46699 -+--+
+46551,46699 Q 6
 46700,46811 ccppc
 46812,47016 cppcc
 47017,47197 cppcc
 47198,47277 cppcc
 47278,47343 pcccp
 47344,47510 cppcc
-47511,47620 ppccc # bg ppccc, fg cccpp (moth)
-47511,47560 ++-----------+------------------+++-----++-----++- # moving frames
-47561,47610 ----+-+------+--+-++---++-+-++-+----+----+-+------
-47611,47620 ----+----
-47511 Q 3
+#47511,47620 ppccc # bg ppccc, fg cccpp (moth)
+#47511,47560 ++-----------+------------------+++-----++-----++- # moving frames
+#47561,47610 ----+-+------+--+-++---++-+-++-+----+----+-+------
+#47611,47620 ----+----
+#47511 Q 3
+47511,47620 phclu # bg ppccc, fg cccpp (moth)
+47511,47620 -+-+-
+47511,47620 Q 6
 
 47621,47664 cppcc
 47665,47701 cppcc
 
-#47702,47806 cccpp # bg ? + fg cccpp (moth)
 47702,47719 pccpp # pcccp + cccpp (moth)
+47702 Q 3
 47720,47737 ppccp # pcccp + ppccc (moth)
 47738,47756 pcccp # pcccp + ccppc (moth)
 47738,47756 -----+-+----+-----+ # moving frames
@@ -627,8 +633,15 @@
 
 47807,47941 ppccc
 
-47942,48026 cuupp # cppcc + cccpp (moth)
+#47942,48026 cppcc # cppcc + cccpp (moth)
+#47942,47961 -++-----+----++----+ # moving frames
+#47962,47981 --++--++-----++-----
+#47982,48001 -+++----+-----+-++--
+#48002,48021 --++--++----+++-++++
+#48022,48026 -++--
+47942,48026 cluph # cppcc + cccpp (moth)
 47942,48026 -+--+
+47942,48026 Q 6
 
 48027,48089 cppcc
 48090,48158 ccppc
@@ -960,8 +973,11 @@
 77732,77800 c # bg pcccp
 77732,77800 +
 77732,77800 Q 5
-77801,77847 cuupp # fg cccpp, bg cuucc
+#77801,77847 cccpp # fg cccpp, bg cppcc
+#77801,77847 -++++
+77801,77847 cluph # fg cccpp, bg cppcc
 77801,77847 -+--+
+77801,77847 Q 6
 77848,77885 cccpp
 77886,78075 c # bg pcccp
 77886,78075 +
@@ -973,9 +989,12 @@
 78257,78315 ppccc # fg ppccc, bg ppccc
 78316,78347 cppcc
 78348,78375 cppcc
-78376,78424 ppcuu # fg ppccc, bg cccpp
+#78376,78424 ppccc # fg ppccc, bg cccpp
+#78376,78424 ++-++
+78376,78424 phclu # fg ppccc, bg cccpp
 78376,78424 -+-+-
-78376 +
+78376,78424 Q 6
+78377 Q 3
 78425,78522 cccpp
 78523,78572 pppcc # fg cppcc, bg ppccc
 78573,78669 ccppc
@@ -985,10 +1004,11 @@
 78670,78745 c # bg ppccc
 78670,78745 +
 78670,78745 Q 5
-78746,78876 ppcuu # fg cccpp, bg ppccc
+#78746,78876 cccpp # fg cccpp, bg ppccc
+#78746,78876 ++-++
+78746,78876 phclu # fg cccpp, bg ppccc
 78746,78876 -+-+-
-78746 +
-78746,78876 Q 6 # yadif bad
+78746,78876 Q 6
 78877,79065 c # bg ccppc
 78877,79065 +
 #78877,79065 Q 5
@@ -997,22 +1017,38 @@
 79405,79518 +
 79405,79518 Q 5
 79519,79545 pccpp # fg pcccp, bg cccpp
-79546,79562 cccpp # fg cccpp, bg ppccc
-79546,79562 ++-++ # TODO
+#79546,79562 cccpp # fg cccpp, bg ppccc
+#79546,79562 ++-++
+79546,79562 phclu # fg cccpp, bg ppccc
+79546,79562 -+-+-
+79546,79562 Q 6
 79563,79580 pppcc # fg cppcc, bg ppccc
-79581,79602 cccpp # fg cccpp, bg cppcc
-79581,79602 -++++ # TODO
-79603,79619 cccpp # fg cccpp, bg cppcc
-79603,79619 -++++ # TODO
-79620,79695 pcccp # fg pcccp, bg ccppc
-79620,79695 +-+++ # TODO
+#79581,79602 cccpp # fg cccpp, bg cppcc
+#79581,79602 -++++
+79581,79602 cluph # fg cccpp, bg cppcc
+79581,79602 -+--+
+79581,79602 Q 6
+#79603,79619 cccpp # fg cccpp, bg cppcc
+#79603,79619 -++++
+79603,79619 cluph # fg cccpp, bg cppcc
+79603,79619 -+--+
+79603,79619 Q 6
+#79620,79695 pcccp # fg pcccp, bg ccppc
+#79620,79695 +-+++
+79620,79695 hclup # fg pcccp, bg ccppc
+79620,79695 +-+--
+79620,79695 Q 6
 79696,79773 c # bg pcccp
 79696,79773 +
 #79696,79773 Q 5
-79774,79961 c # bg ppccc, bg2 cccpp
+#79774,79961 c # bg ppccc, bg2 cccpp
+79774,79913 c # bg ppccc, bg2 cccpp
 79774,79913 +
-79914,79961 ++-++ # TODO
 79774,79873 Q 5
+#79914,79961 ++-++
+79914,79961 phclu # fg ppccc, bg cccpp
+79914,79961 -+-+-
+79914,79961 Q 6
 # it's one of those specials
 79962,79969 ppcccpcc
 79970,79985 ppccpccc
@@ -1814,7 +1850,7 @@
 137382,137620 cccpp
 137621,137727 ccppc
 137728,137844 cppcc
-137845,137918 c
+137845,137918 c # hourglass
 137845,137918 +-
 137845,137918 Q 5
 137919,138067 cccpp
@@ -2052,8 +2088,11 @@
 159474,159614 ppccc
 159615,159714 pcccp
 159715,159771 ppccc
-159772,159848 c # cccpp + ppccc # second left hand
-159772,159848 +
+#159772,159848 c # cccpp + ppccc # second left hand
+#159772,159848 +
+159772,159848 phclu # cccpp + ppccc # second left hand
+159772,159848 -+-+-
+159772,159848 Q 6
 159849,159928 ppccc
 159929,160061 cppcc
 160062,160118 ccppc

@@ -458,17 +458,24 @@
 46474,46524 cccpp 
 46525,46761 cccpp 
 46762,46846 ccppc 
+
 46847,46966 c
 46847,46966 +
 #46847,46966 Q 6
-#46967,47045 cpppc # top cccpp, center cppcc, bottom ccppc, drop 2nd, deinterlace 5th
-#46967,47045 --+-+ # does not look very good, top row skips too much
-46967,47045 c
-46967,47045 +
-#46967,47045 Q 6
-47046,47101 c # same problem, three different phases
-47046,47101 +
+
+#46967,47045 c # top cccpp, center cppcc, bottom ccppc
+#46967,47045 +
+46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
+46967,47045 -+--+
+46967,47045 Q 6
+
+47046,47101 phclu # pcccp + ppccc + cccpp
+47046,47101 -+-+-
+47046 + # starts with a p
+47046,47101 Q 6
+
 47102,47174 pccpp # mid pcccp, side cccpp, drop 4th, far sides?
+
 47175,47332 cccpp
 47333,47606 ccppc 
 47607,47938 pcccp 
@@ -580,6 +587,9 @@
 57260,57481 pcccp # fg pcccp, bg cppcc, spotlight in the bg small visibility, don't care
 57261,57481 + # same
 57261,57481 Q 5
+#57260,57481 uphcl # can't use this because the stadium is still permanently combed
+#57260,57481 --+-+
+#57260,57481 Q 6
 57482,57590 cppcc
 57591,57660 cppcc
 57661,57710 cppcc 
@@ -594,15 +604,26 @@
 58663,58739 c
 58663,58739 -
 58740,58839 ccppc 
-58840,58943 ppccp # fg pcccp, bg ppccc, ppccp, drop every 5th
+58840,58943 ppccp # fg pcccp, bg ppccc, drop every 5th
 58841,58943 -
 58870,58886 +
 58944,59009 ppccc
 58944 Q 3
-59010,59217 ppccp # fg pcccp, bg ppccc, bg2 ccppc, spotlight ppccc, drop every 5th, deinterlace bg2
-59010,59072 +
-59073,59123 - # no bg2 here
-59124,59217 +
+
+#59010,59217 ppccp # fg pcccp, bg ppccc, bg2 ccppc, spotlight ppccc, drop every 5th, deinterlace bg2
+#59010,59072 +
+#59073,59123 - # no bg2 here
+#59124,59217 +
+
+59010,59072 lchhl # fg pcccp, bg & spotlight ppccc, bg2 ccppc
+59010,59072 +-+++
+59073,59123 cpppc # fg cppcc, bg & spotlight ccppc
+59073,59123 -
+59074 + # cannot drop 59074, already dropped 59071 from the previous
+59124,59217 llchh # fg ppccc, bg & spotlight cppcc, bg2 cccpp
+59124,59217 ++-++
+59010,59217 Q 6
+
 59218,59286 ppccc 
 59287,59379 c # fg ppccc, bg ccppc, bg2 ppccc, spotlight pcccp
 59287,59379 +
