@@ -155,13 +155,13 @@ There is no good solution, what I do is leave the more pronounced part of the pi
 If the ccppc part is small or stationary but the other has to look smooth. (moving background)
 
     tfm: ccppc, --++-
-    tovr: v, +++++
+    tdec: v, +++++
 
-Otherwise, if ivtc is more important that smoothness.
+Otherwise, if ivtc is more important than smoothness.
 
     tfm: ccppc, --++-
-    tovr: f, ++-++
+    tdec: f, ++-++
 
 #### 59.94i
 
-Not much to do here, deinterlace every frame.
+Not much to do here, deinterlace every frame. Or make interlaced h264. DVD extras are mostly 59.94i.

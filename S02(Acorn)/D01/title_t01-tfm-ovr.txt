@@ -57,8 +57,10 @@
 6524,6933 cppcc
 6934,7079 ppccc
 7080,7124 ppccc
-7125,7267 cppcc # hidden scene cut
-7125,7267 +++-+ # somehow the two sides of the picture are out of sync, pcccp+cppcc
+# somehow the two sides of the picture are out of sync...
+# are you trying to tell me they did not really cut his head open???
+7125,7267 uphcl # pcccp + cppcc
+7125,7267 --+-+
 7268,7330 cccpp
 7331,7418 cccpp
 7419,7473 ppccc
@@ -99,5 +101,3 @@
 11001,11418 c
 11419,11450 +
 11419,11450 Q 5
-
-

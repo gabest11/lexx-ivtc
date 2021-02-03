@@ -476,7 +476,12 @@
 
 47102,47174 pccpp # mid pcccp, side cccpp, drop 4th, far sides?
 
-47175,47332 cccpp
+#47175,47332 cluph # ccppc + cccpp + cppcc (not sure about the 3rd, it does not make it smoother)
+#47175,47332 -+--+
+#47175,47332 Q 6
+47175,47332 ccppp # ccppc + cccpp
+47175,47332 -
+
 47333,47606 ccppc 
 47607,47938 pcccp 
 47621 + # clock (ending in 1,6 are dropped anyway)
@@ -610,22 +615,23 @@
 58944,59009 ppccc
 58944 Q 3
 
-#59010,59217 ppccp # fg pcccp, bg ppccc, bg2 ccppc, spotlight ppccc, drop every 5th, deinterlace bg2
-#59010,59072 +
-#59073,59123 - # no bg2 here
-#59124,59217 +
+# crowd looks bad, too low res and bobbing
+#59010,59072 lchhl # fg pcccp, bg & spotlight ppccc, bg2 ccppc
+#59010,59072 +-+++
+#59073,59123 cpppc # fg cppcc, bg & spotlight ccppc
+#59073,59123 -
+#59074 + # cannot drop 59074, already dropped 59071 from the previous
+#59124,59217 llchh # fg ppccc, bg & spotlight cppcc, bg2 cccpp
+#59124,59217 ++-++
+#59010,59217 Q 6
 
-59010,59072 lchhl # fg pcccp, bg & spotlight ppccc, bg2 ccppc
-59010,59072 +-+++
-59073,59123 cpppc # fg cppcc, bg & spotlight ccppc
-59073,59123 -
-59074 + # cannot drop 59074, already dropped 59071 from the previous
-59124,59217 llchh # fg ppccc, bg & spotlight cppcc, bg2 cccpp
-59124,59217 ++-++
-59010,59217 Q 6
+59010,59217 ppccp # fg pcccp, bg & spotlight ppccc, bg2 ccppc, drop every 5th, deinterlace bg2
+59010,59072 +
+59073,59123 - # no bg2 here
+59124,59217 +
 
 59218,59286 ppccc 
-59287,59379 c # fg ppccc, bg ccppc, bg2 ppccc, spotlight pcccp
+59287,59379 c # fg & bg2 ppccc, bg ccppc, spotlight pcccp
 59287,59379 +
 59380,59626 ccppc 
 59380,59626 - # MIC high
@@ -797,9 +803,12 @@
 70592,70625 pcccp 
 70626,70666 ccppc 
 70667,70700 pccpp # pcccp + cccpp, drop 4th
-70701,70748 ccppc
-70749,70761 c # ccppc + pcccp 
-70749,70761 +
+70701,70744 ccppc
+#70749,70761 c # ccppc + pcccp 
+#70749,70761 +
+70745,70761 phclu # cccpp + ppccc (lizard)
+70745,70761 -+-+-
+70745,70761 Q 6
 70762,70820 cpppc # ccppc + cppcc, drop 2nd
 70821,70908 cccpp 
 70909,70998 cccpp 
@@ -958,7 +967,7 @@
 78566,78688 Q 5
 78689,78747 cppcc 
 78748,78795 pcccp 
-78796,78852 
+78796,78852 ccppc
 78853,78946 ccppc 
 78947,79004 ppccc 
 79005,79115 pcccp 
@@ -990,7 +999,7 @@
 81182,81206 cppcc 
 81207,81283 cccpp 
 81284,81337 cccpp 
-81338,81393 ccnnc # ?
+81338,81393 ccbbc # ?
 81394,81521 ccppc 
 81522,81574 ccppc 
 81575,81800 ccppc 
@@ -1351,19 +1360,34 @@
 117117,117194 ppccc
 117195,117247 ccppc 
 117248,117388 ppccc 
-117389,117442 c # ccppc 
+
+117389,117442 c # ccppc + bg 29.97
 117389,117442 +
-117443,117452 pcccp 
-117453,117467 c # fg pcccp, bg cppcc
-117453,117467 +
+
+117443,117452 pcccp # fg & bg pcccp
+
+#117453,117467 c # fg pcccp, bg cppcc
+#117453,117467 +
+#117453,117467 Q 6
+117453,117467 uphcl # fg pcccp, bg cppcc
+117453,117467 --+-+
 117453,117467 Q 6
-117468,117494 c # many layers
-117468,117494 +
+
+#117468,117494 c # many layers, fg1 ccppc, fg2 pcccp, bg ccppc
+#117468,117494 +
+#117468,117494 Q 6
+# not working smoothly, some objects seem to have other than c/p, but better then blurring everything
+117468,117494 lxhhl # fg1 ccppc, fg2 pcccp, fg3 ppccc, bg ccppc
+117468,117494 +-+++
 117468,117494 Q 6
+
 117495,117571 ppccc 
+
+# fg very small, only a few combed pixels, not worth a phclu -+-+-
 117572,117680 ppccc # fg cccpp, bg ppccc
-#117572,117680 + # fg very small, only a few combed pixels
+#117572,117680 + 
 #117572,117680 Q 6
+
 117681,117895 cppcc # fg cppcc, drop 2nd, bg moves so slow that any frame we choose will be a dup
 117681,117895 --+-- # deinterlace 3rd for bg
 117896,118030 cppcc 
@@ -1391,8 +1415,11 @@
 123070,123113 ppccc
 123069,123113 + # left side is single field until the saw starts
 123069,123113 Q 5
-123114,123256 cppcc # hidden scene cut
-123114,123256 +++-+ # somehow the two sides of the picture are out of sync, pcccp + cppcc
+# somehow the two sides of the picture are out of sync...
+# are you trying to tell me they did not really cut his head open???
+123114,123256 uphcl # pcccp + cppcc
+123114,123256 --+-+
+
 123257,123319 cccpp
 123320,123407 cccpp
 123408,123462 ppccc

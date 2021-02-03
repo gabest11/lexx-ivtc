@@ -376,8 +376,8 @@
 27882,27979 c # fg cppcc, bg 59.94i
 27882,27979 +
 27924,27948 Q 5 # crosshair looks bad with yadif
-27980,28064 ccppc # fg cccpp, bg ccppc (not moving, except the last frame)
-28064 +
+27980,28064 ccppp # fg cccpp, bg ccppc
+28064 + # ?
 28065,28181 cccpp
 28182,28683 ppccc
 28684,28818 ppccc
@@ -483,7 +483,7 @@
 
 41426,41575 uphcl # fg cppcc, bg pcccp
 41426,41575 --+-+
-41426,41575 Q 6 # yadif bad
+41426,41575 Q 6
 
 41576,41669 pcccp
 41670,41734 cccpp # fg cccpp, bg cccpp
@@ -909,34 +909,19 @@
 92881,92943 ccppc
 92944,92972 pcccp
 
-# bottom field is bad in the first two, top field is bad in the last two of every five frames 
-# 0t 1t 2t 2t 3t 4t 5t
-# 0b 1b 2b 3b 4b 4b 5b
-# instead of cccppc... (0 1 2 2 3 4 ...), we can do cccuuc... (0 1 2 3 4 4 ...) 
-# where 1 and 3 are still bad, but 0 is a dup and 2/4 are good, so we swap one bad for a good frame
-92973,93425 cccuu
-92973,93426 -+--- # 1 will look nicer, cannot do anything about 3, yadif would use the bad field
-# a few nasty frames
-92978 +
-92981 +
-92983 +
-92986 +
-92988 +
-92991 +
-92996 +
-92998 +
-93001 +
-93003 +
-92981 Q 5
-92986 Q 5
-92991 Q 5
-92996 Q 5
-93001 Q 5
-93121,93247 +-++- # uuccc + ccppc (sfx on the brains partially overlap, second u selects the first p)
+# * bad fields
+# 1t  2t  3t  3t* 4t* 5t
+# 1b* 2b* 3b  4b  5b  5b*
+# to avoid bad fields replace cccpp with phclu and deinterlace the two half fields
+# p and u will be the same, drop one of them
+
+92973,93120 phclu # or cccpp if you want the bad fields
+92973,93120 -+-+-
+92973,93120 Q 6
+93121,93247 luphc # ppccc (should be luphc, the same we used in this scene before, yay) + ccppc (sfx)
+93121,93247 +--+-
 93121,93247 Q 6
-93426 c # last frame cannot be a u
-93426 +
-93426 Q 6
+93248,93426 cccpp # does not seem to be so bad towards the end, maybe just things are too small to notice
 
 93427,93518 ccppc
 93519,93589 cppcc
@@ -1114,13 +1099,9 @@
 113886 + # red herring, dropped anyway
 114002,114071 ppccp # fg pcccp, bg ppccc
 114072,114134 ccppc
-
-#114135,114320 ccppc # c # pcuup # fg pcccp, bg ccppc, drop either of the last two
-#114135,114320 + # +-+-- # deinterlace every 2nd
 114135,114320 hcluc
 114135,114320 +-+--
-114135,114320 Q 6 # yadif bad
-
+114135,114320 Q 6
 114321,114379 ccppc
 114380,114484 cccpp
 114485,114554 cccpp
@@ -1425,7 +1406,7 @@
 #147329,147383 cccpp # fg cccpp, bg cppcc
 #147329,147383 +
 147329,147383 cluph # fg cccpp, bg cppcc
-147329,147383 + # -+--+ # bg on top of being cppcc, is also combed in every frame (?)
+147329,147383 + # -+--+ # bg cppcc, and also combed in every frame (?)
 147329,147383 Q 6
 147384,147695 ccppc
 147696,147979 ccppc
@@ -1464,7 +1445,7 @@
 150438,150510 cppcc
 150511,150601 cppcc
 150602,150672 ppccc
-150642,150643 - # macro block error
+150642,150643 + # macro block error
 150673,150801 ppccc
 150802,150861 ppccc
 150802 Q 3
@@ -1612,7 +1593,6 @@
 162702,162763 ppcpccpccpccpcpccpc
 162764,162810 cccpp
 162811,162839 ppccc
-162811,162839 i 1111
 162823 - # MIC = 178
 162826 - # MIC = 131
 162840,162920 pcccp
