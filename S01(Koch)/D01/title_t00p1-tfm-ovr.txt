@@ -158,11 +158,21 @@
 18259,18723 + # same mess in Lexx Rated part 1 -++---++-++---++-++---+-+++---+-++---
 18724,18937 c # already deinterlaced
 18938,19117 cppcc 
-19118,19929 ccppc 
-19930,20108 c
-19931,19944 +
-19945,20108 +---+ # display
-19960,19973 +
+19118,19929 ccppc
+
+19930,19944 c # 1st display
+19930,19944 +
+#19930,19944 Q 6
+19945,19959 uphcl # display pcccp, bg cppcc
+19945,19959 --+-+
+#19945,19959 Q 6
+19960,19974 c # 2nd display
+19960,19974 +
+#19960,19974 Q 6
+19975,20108 uphcl # display pcccp, bg cppcc
+19975,20108 --+-+
+#19975,20108 Q 6
+
 20109,20419 ccppc
 20420,20722 cppcc 
 20723,20830 cppcc 
@@ -337,8 +347,7 @@
 37388,37458 ccppc 
 37459,37972 pcccp 
 37942,37974 + # crossfade
-37973,38228 pcccp 
-38138,38198 +---+ # sfx
+37973,38228 pcccp
 38199,38288 + # crossfade
 38229,38866 cpppc # cppcc + ccppc, drop every 2nd
 38289,38866 -
@@ -461,24 +470,18 @@
 
 46847,46966 c
 46847,46966 +
-#46847,46966 Q 6
 
-#46967,47045 c # top cccpp, center cppcc, bottom ccppc
-#46967,47045 +
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
-46967,47045 Q 6
 
 47046,47101 phclu # pcccp + ppccc + cccpp
 47046,47101 -+-+-
 47046 + # starts with a p
-47046,47101 Q 6
 
 47102,47174 pccpp # mid pcccp, side cccpp, drop 4th, far sides?
 
 #47175,47332 cluph # ccppc + cccpp + cppcc (not sure about the 3rd, it does not make it smoother)
 #47175,47332 -+--+
-#47175,47332 Q 6
 47175,47332 ccppp # ccppc + cccpp
 47175,47332 -
 
@@ -536,8 +539,8 @@
 51869,51976 +
 51869,51976 Q 5
 51977,52043 ppccc
-51977,52043 +
-51977,52043 Q 5
+51978,52043 +
+51978,52043 Q 5
 52044,52223 c
 52044,52223 +
 52044,52223 Q 5
@@ -615,24 +618,26 @@
 58944,59009 ppccc
 58944 Q 3
 
-# crowd looks bad, too low res and bobbing
-#59010,59072 lchhl # fg pcccp, bg & spotlight ppccc, bg2 ccppc
-#59010,59072 +-+++
-#59073,59123 cpppc # fg cppcc, bg & spotlight ccppc
-#59073,59123 -
-#59074 + # cannot drop 59074, already dropped 59071 from the previous
-#59124,59217 llchh # fg ppccc, bg & spotlight cppcc, bg2 cccpp
-#59124,59217 ++-++
-#59010,59217 Q 6
+#59010,59217 ppccp # fg pcccp, bg & spotlight ppccc, bg2 ccppc, drop every 5th, deinterlace bg2
+#59010,59072 +
+#59073,59123 - # no bg2 here
+#59124,59217 +
 
-59010,59217 ppccp # fg pcccp, bg & spotlight ppccc, bg2 ccppc, drop every 5th, deinterlace bg2
+59010,59072 hhllh # fg pcccp, bg & spotlight ppccc, bg2 ccppc
 59010,59072 +
-59073,59123 - # no bg2 here
+59073,59123 cpppc # fg cppcc, bg & spotlight ccppc
+59073,59123 -
+59124,59217 hhhll # fg ppccc, bg & spotlight cppcc, bg2 cccpp
 59124,59217 +
 
 59218,59286 ppccc 
-59287,59379 c # fg & bg2 ppccc, bg ccppc, spotlight pcccp
+
+#59287,59379 c # fg & bg2 ppccc, bg ccppc, spotlight pcccp
+#59287,59379 +
+
+59287,59379 hhllh # fg & bg2 ppccc, bg ccppc, spotlight pcccp
 59287,59379 +
+
 59380,59626 ccppc 
 59380,59626 - # MIC high
 59627,59846 cppcc 
@@ -804,11 +809,9 @@
 70626,70666 ccppc 
 70667,70700 pccpp # pcccp + cccpp, drop 4th
 70701,70744 ccppc
-#70749,70761 c # ccppc + pcccp 
-#70749,70761 +
 70745,70761 phclu # cccpp + ppccc (lizard)
 70745,70761 -+-+-
-70745,70761 Q 6
+#70745,70761 Q 6
 70762,70820 cpppc # ccppc + cppcc, drop 2nd
 70821,70908 cccpp 
 70909,70998 cccpp 
@@ -1293,6 +1296,7 @@
 110767,110884 ccppc
 110885,111193 pcccp 
 111194,111422 ppccc 
+111194 Q 3
 111423,111759 ccppc 
 111760,111847 pcccp
 111848,111946 ppccc
@@ -1358,8 +1362,8 @@
 116458,117056 ppccc 
 117057,117116 pcccp 
 117117,117194 ppccc
-117195,117247 ccppc 
-117248,117388 ppccc 
+117195,117247 ccppc
+117248,117388 ppccc
 
 117389,117442 c # ccppc + bg 29.97
 117389,117442 +
@@ -1377,9 +1381,9 @@
 #117468,117494 +
 #117468,117494 Q 6
 # not working smoothly, some objects seem to have other than c/p, but better then blurring everything
-117468,117494 lxhhl # fg1 ccppc, fg2 pcccp, fg3 ppccc, bg ccppc
-117468,117494 +-+++
-117468,117494 Q 6
+117468,117494 hhllh # fg1 & bg ccppc, fg2 pcccp, fg3 ppccc
+117468,117494 +
+#117468,117494 Q 6 # so motion blurred, yadif would actually make it annoyingly sharp
 
 117495,117571 ppccc 
 

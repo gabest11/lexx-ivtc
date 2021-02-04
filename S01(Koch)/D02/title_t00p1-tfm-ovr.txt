@@ -269,9 +269,10 @@
 18258,18467 cppcc
 18468,18535 cccpp
 18536,18718 ppccc
-18719,19004 ccppc
-19001,19029 + # crossfade
-19005,19344 cccpp
+18719,19000 ccppc
+19001,19029 luphc # crossfade, ppccc + ccppc
+19001,19029 +--+-
+19030,19344 cccpp
 19294,19344 + # fade-out
 19345,19398 c
 19399,19419 + # fade-in
@@ -286,18 +287,18 @@
 20535,20576 pcccp
 20577,20612 hclup # crossfade, pcccp + ccppc
 20577,20612 +-+--
-20577,20612 Q 6
+#20577,20612 Q 6
 20613,20774 cccpp
 20775,20826 cpppc # crossfade
 20827,21137 ppccc
 21138,21213 hclup # crossfade, pcccp + ccppc
 21138,21213 +-+--
-21138,21213 Q 6
+#21138,21213 Q 6
 21214,21289 cppcc
 21221 - # MIC 120
 21290,21334 luphc # crossfade, ppccc + ccppc
 21290,21334 +--+-
-21290,21334 Q 6
+#21290,21334 Q 6
 21335,21438 ccppc
 21418,21474 + # crossfade
 # this part makes no sense
@@ -322,7 +323,7 @@
 22064,22131 ppccc
 22132,22171 hclup # crossfade, ccppc + pcccp
 22132,22171 +-+--
-22132,22171 Q 6
+#22132,22171 Q 6
 22172,22248 pcccp
 22249,22284 cpppc # crossfade, ccppc + cppcc
 22285,22313 ppccc # mmmm
@@ -331,11 +332,11 @@
 22370,22523 ppccc
 22524,22565 cluph # crossfade, cppcc + cccpp
 22524,22565 -+--+
-22524,22565 Q 6
+#22524,22565 Q 6
 22566,22615 cppcc
 22616,22646 uphcl # crossfade, cppcc + pcccp
 22616,22646 --+-+
-22616,22646 Q 6
+#22616,22646 Q 6
 22647,22776 cccpp
 22777,22879 ccppc
 22880,23026 ccppc
@@ -469,7 +470,7 @@
 35465,35651 ppccc
 35652,35704 ppccc
 35705,35738 pcccp
-35739,35765 c # 59.94i in the later part and the first two frames of the next scene
+35739,35765 c # 59.94i in the later part and in the first two frames of the next scene
 35739,35765 +
 35766,35891 cccpp
 35892,35990 ccppc
@@ -613,7 +614,7 @@
 #46551,46699 Q 5
 46551,46699 cluph # bg cppcc, fg cccpp (inside of the moth)
 46551,46699 -+--+
-46551,46699 Q 6
+#46551,46699 Q 6
 46700,46811 ccppc
 46812,47016 cppcc
 47017,47197 cppcc
@@ -627,7 +628,7 @@
 #47511 Q 3
 47511,47620 phclu # bg ppccc, fg cccpp (moth)
 47511,47620 -+-+-
-47511,47620 Q 6
+#47511,47620 Q 6
 47511 + # first frame is a p and we drop u from the end, the one we keep has to be deinterlaced
 47511 Q 3
 
@@ -639,18 +640,18 @@
 47720,47737 ppccp # pcccp + ppccc (moth)
 47738,47756 hclup # pcccp + ccppc (moth)
 47738,47756 +-+--
-47738,47756 Q 6
+#47738,47756 Q 6
 47757,47775 cccpp # cccpp + cccpp (moth)
 47776,47794 hclup # ccppc + pcccp (moth)
 47776,47794 +-+--
-47776,47794 Q 6
+#47776,47794 Q 6
 47795,47806 pppcc # cppcc + ppccc (moth)
 
 47807,47941 ppccc
 
 47942,48026 cluph # cppcc + cccpp (moth)
 47942,48026 -+--+
-47942,48026 Q 6
+#47942,48026 Q 6
 
 48027,48089 cppcc
 48090,48158 ccppc
@@ -885,7 +886,7 @@
 70336,70504 ccppc
 70505,70533 cluph # crossfade, cccpp + cppcc
 70505,70533 -+--+
-70505,70533 Q 6
+#70505,70533 Q 6
 70534,70611 ccppc
 70612,70797 cccpp
 70798,70912 cccpp
@@ -986,7 +987,7 @@
 77732,77800 Q 5
 77801,77847 cluph # fg cccpp, bg cppcc
 77801,77847 -+--+
-77801,77847 Q 6
+#77801,77847 Q 6
 77848,77885 cccpp
 77886,78075 c # bg pcccp
 77886,78075 +
@@ -1000,7 +1001,7 @@
 78348,78375 cppcc
 78376,78424 phclu # fg ppccc, bg cccpp
 78376,78424 -+-+-
-78376,78424 Q 6
+#78376,78424 Q 6
 78377 Q 3
 78425,78522 cccpp
 78523,78572 pppcc # fg cppcc, bg ppccc
@@ -1013,7 +1014,7 @@
 78670,78745 Q 5
 78746,78876 phclu # fg cccpp, bg ppccc
 78746,78876 -+-+-
-78746,78876 Q 6
+#78746,78876 Q 6
 78877,79065 c # bg ccppc
 78877,79065 +
 #78877,79065 Q 5
@@ -1024,17 +1025,17 @@
 79519,79545 pccpp # fg pcccp, bg cccpp
 79546,79562 phclu # fg cccpp, bg ppccc
 79546,79562 -+-+-
-79546,79562 Q 6
+#79546,79562 Q 6
 79563,79580 pppcc # fg cppcc, bg ppccc
 79581,79602 cluph # fg cccpp, bg cppcc
 79581,79602 -+--+
-79581,79602 Q 6
+#79581,79602 Q 6
 79603,79619 cluph # fg cccpp, bg cppcc
 79603,79619 -+--+
-79603,79619 Q 6
+#79603,79619 Q 6
 79620,79695 hclup # fg pcccp, bg ccppc
 79620,79695 +-+--
-79620,79695 Q 6
+#79620,79695 Q 6
 79696,79773 c # bg pcccp
 79696,79773 +
 #79696,79773 Q 5
@@ -1045,7 +1046,7 @@
 #79914,79961 ++-++
 79914,79961 phclu # fg ppccc, bg cccpp
 79914,79961 -+-+-
-79914,79961 Q 6
+#79914,79961 Q 6
 # it's one of those specials
 79962,79969 ppcccpcc
 79970,79985 ppccpccc
@@ -1099,7 +1100,7 @@
 82922 - # MIC high
 82983,83012 phclu # crossfade, cccpp + ppccc (only during crossfade, changes from 83013)
 82983,83012 -+-+-
-82983,83012 Q 6
+#82983,83012 Q 6
 83013,83138 cccpp
 83139,83194 cpppc # crossfade
 83195,83347 ppccc
@@ -1564,25 +1565,25 @@
 116104,116116 cppcc
 116117,116178 cluph # crossfade, cccpp + cppcc
 116117,116178 -+--+
-116117,116178 Q 6
+#116117,116178 Q 6
 116179,116224 pcccp
 116225,116287 phclu # crossfade, cccpp + ppccc
 116225,116287 -+-+-
-116225,116287 Q 6
+#116225,116287 Q 6
 116288,116289 ccppc
 116290,116352 luphc # crossfade, ppccc + ccppc
 116290,116352 +--+-
-116290,116352 Q 6
+#116290,116352 Q 6
 116353,116395 pcccp
 116396,116465 pppcc # cppcc + ppccc
 116466,116480 ppccc
 116481,116540 phclu # crossfade, ppccc + cccpp
 116481,116540 -+-+-
-116481,116540 Q 6
+#116481,116540 Q 6
 116541,116613 cccpp
 116614,116632 luphc # crossfade, ppccc + ccppc
 116614,116632 +--+-
-116614,116632 Q 6
+#116614,116632 Q 6
 116633,116635 cccpp
 116636,116651 ppccp # ppccc + pcccp
 116652,116675 cccpp
@@ -1593,14 +1594,14 @@
 117539,117701 cppcc
 117702,117792 cluph
 117702,117792 + # black sfx # -+--+
-117702,117792 Q 6
+#117702,117792 Q 6
 117793,117881 luphc # ppccc + cppcc
 117793,117881 + # black sfx # +--+-
-117793,117881 Q 6
+#117793,117881 Q 6
 117882,117941 pcccp
 117942,117995 hclup # pcccp + ccppc
 117942,117995 + # black sfx # +-+--
-117942,117995 Q 6
+#117942,117995 Q 6
 117996,118027 ppccc
 118028,118149 cppcc
 118150,118194 pcccp
@@ -1832,12 +1833,9 @@
 134276,134309 ccppp # ccppc + cccpp
 134310,134386 pcccp
 
-#rotating image, the motion adaptive deinterlacer is not very effective, keep yadif
-#134387,134445 luphc # ccppc + ppccc
-#134387,134445 +--+-
-#134387,134445 Q 6
-134387,134445 c # ccppc + ppccc
-134387,134445 +
+134387,134445 luphc # ccppc + ppccc
+134387,134445 +--+-
+#134387,134445 Q 6 # rotating image, the motion adaptive deinterlacer is not very effective, keep yadif
 
 134446,134553 cppcc
 134554,134597 pccpp # cccpp + pcccp
@@ -2109,7 +2107,7 @@
 159715,159771 ppccc
 159772,159848 phclu # cccpp + ppccc # second left hand
 159772,159848 -+-+-
-159772,159848 Q 6
+#159772,159848 Q 6
 159849,159928 ppccc
 159929,160061 cppcc
 160062,160118 ccppc

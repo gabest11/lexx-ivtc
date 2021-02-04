@@ -55,16 +55,23 @@
 
 1863,2605 cccpp # keyframe
 2606,2838 ccppc
-2606,2838 i 10
-2839,2986 c
-3142,3496 i 0 # TODO: three different patterns mixed
+2606,2838 i 10 # can't really see the many layers of debris
+
+# this the correct way, but looks trash because it is all CGI
+2839,3496 luphc # fg ccppc, bg ppccc, lens flare 29.97?
+2839,3496 +--+-
+#3320,3400 + # lens flare combed, every 5th frame, not very visible though
+#2839,3496 Q 6
+#2839,2986 c # not smooth, but nicer
+#3142,3496 i 0 
+
 3497,3821 pcccp
 3822,4147 cppcc
 4148,4336 ccppc
 4337,4624 c
 #4626,5079 -++--
 #4626,5079 PP 5
-4626,5079 cppcc
+4626,5079 cppcc # the helmet and the guy inside are on a different layer
 4626,5079 -++--
 5080,5383 ccppc
 5384,5863 ccppc
@@ -220,16 +227,22 @@
 25794,25914 c
 25915,26357 cppcc
 26358,26404 pcccp
-26405,26480 c
-26405,26480 -++++
+
+26405,26480 cluph # fg cccpp, bg cppcc
+26405,26480 -+--+
+#26405,26480 Q 6 # shimmering
+
 26481,26563 ccppc
 26564,26934 ccppc
 26935,27043 ccppc
 27044,27102 ccppc
 27103,27138 ccppc
 27139,27180 pcccp
-27181,27258 c
-27181,27258 +-+++
+
+27181,27258 hclup # fg pcccp, bg ccppc
+27181,27258 +-+-- # +-+++
+#27181,27258 Q 6 # shimmering
+
 27259,27335 cppcc
 27336,27447 ccppc
 27448,27710 ppccc
@@ -282,7 +295,7 @@
 34160,34265 pcccp
 34266,34381 ccppc
 34382,34463 c
-34464,34578 c
+34464,34578 pcccp # fg pcccp (snow), bg not sure, maybe 29.97
 34464,34578 +
 34579,35085 c
 34579,35085 -
@@ -292,8 +305,8 @@
 35538,35834 ppccc
 35835,36254 ppccc
 36255,36524 cppcc
-36525,36754 c
-36525,36754 +--++ # that's a strange one
+36525,36754 c # fg1 xcccx, fg2 cccxx, bg pcccp # arms not 1:1
+36525,36754 +--++
 36755,36825 cccpp
 36826,37025 cppcc
 37026,37127 pcccp
@@ -302,14 +315,25 @@
 37128 Q 3
 37269,37461 cppcc
 37462,37500 pcccp
-37501,37784 c # pcccp + ccppc
-37501,37784 +
+#37501,37784 c # pcccp + ccppc
+#37501,37784 +
+37501,37784 hclup # pcccp + ccppc
+37501,37784 +-+--
+#37501,37784 Q 6
 37785,37935 ppccc
 37936,38054 pcccp
 38055,38222 cppcc
-38223,38890 ppccp # ppccc + arms pcccp, drop 5th
-#38223,38890 -
-38288,38512 + # third arm changes to ccppc
+
+#38223,38890 ppccp # ppccc + arms pcccp, drop 5th
+#38288,38512 + # third arm changes to ccppc
+
+# OMG it is smooth now, although half res midway
+38223,38287 ppccp # ppccc + arms pcccp, drop 5th
+38288,38512 hhllh # third arm changes to ccppc
+38288,38512 +
+#38288,38512 Q 6
+38513,38890 ppccp # third arm leaves
+
 38891,39262 cccpp
 38891,39262 -
 39263,39381 c
@@ -328,7 +352,7 @@
 40538,41006 c
 40538,41006 -
 41007,41458 cccpp
-41459,41678 c
+41459,41678 c # fg ?, bg pcccp # not 1:1
 41459,41678 -+-+-
 41679,41832 cccpp
 41833,41938 ccppc
@@ -340,7 +364,7 @@
 42550,42627 cppcc
 42628,42810 ccppc
 42811,43118 ppccc
-43119,43337 cccpp
+43119,43337 cccpp # everything is in sync? would be unbelievable
 43338,43437 ppccc
 43438,43495 cccpp
 43496,43558 pcccp
@@ -357,39 +381,43 @@
 44891,45125 ccppc
 45126,45385 cppcc
 45386,45825 pcccp
-45826,45935 cppcc
+45826,45935 c # fg cppcc, bg ccppc, arms 29.97
 45826,45935 -++--
 45936,46102 cccpp
 46103,46266 ccppc
 46267,46358 pcccp
 46359,46474 cppcc
 46475,46548 pcccp
+46475 Q 3
 46549,46590 cppcc
 46591,46649 cppcc
-46650,46979 cccpp
+46650,46979 c # fg cccpp, bg cccpp, arms 29.97
 46650,46979 ---++
 46980,47024 ccppc
 47025,47085 pcccp
 47086,47275 ccppc
-47276,47420 c
-47276,47420 +
+47276,47420 c # fg cppcc, bg cppcc, arm1 xcccx, arm2 29.97 # not 1:1
+47276,47420 -++--
+47361,47420 + # arm1 starts moving
 47421,47458 cccpp # background is randomly combed
 47421,47458 +
 #47421,47458 Q 5
 47459,47594 cccpp
-47595,47676 pcccp
-47595,47676 +---+
+47595,47676 pcccp # fg & bg pcccp
 47677,47739 ppccc
 47740,47890 pcccp # hidden scene cut
 47740,47890 -
-47891,48020 cppcc
-47891,48020 +++-+
-48021,48161 c
+47891,48020 c # fg cppcc, bg ccppc, arm xcccx # not 1:1
+47891,48020 +
+48021,48161 c # very random layers
 48021,48161 +
-48162,48515 pcccp
-48166,48167 +
-48186,48414 +++--
+48162,48515 c # fg & bg pcccp, arms ppccc # not 1:1
+48162,48515 +
+48162 Q 3
+#48166,48167 +
+#48186,48414 +++--
 48516,48610 ppccc
+48516 Q 3
 48611,48795 ppccc
 48796,48876 cccpp
 48877,49288 pcccp
@@ -509,15 +537,15 @@
 62510,62579 +
 62510,62579 Q 5
 62580,62635 ccppc
-62636,62701 c
+62636,62701 c # cppcc + ccppc ? leaves combed outlines on the bg
 62636,62701 +
 62636,62701 Q 5
 62702,62823 cccpp
-62824,62897 ++-
-62898,63002 c
+62824,62897 ++- # stop motion animation?
+62898,63002 c # fg cppcc, bg ccppc # cpppc # not 1:1
 62898,63002 +
 #62898,63002 Q 5
-63003,63062 c
+63003,63062 llhhh # fg1 ppccc, fg2 cccpp, bg cppcc
 63003,63062 +
 63063,63143 c
 63063,63143 -++--
@@ -526,11 +554,11 @@
 63265,63319 ccppc
 63320,63410 cccpp
 63411,63480 pcccp
-63481,63579 cppcc
+63481,63579 cppcc # not 1:1
 63481,63579 -++--
 63580,63658 pcccp
 63659,63750 ccppc
-63751,63931 pcccp
+63751,63931 pcccp # not 1:1
 63751,63931 +---+
 63932,64007 cccpp
 64008,64091 ccppc
@@ -584,12 +612,14 @@
 70125,70257 ccppc
 70258,70293 pcccp
 70294,70360 ppccc
+70294 Q 3
 70361,70400 ccppc
 70401,70477 pcccp
+70401 Q 3
 70478,70560 c
-70561,70595 c
+70561,70595 c # not 1:1
 70561,70595 +
-70596,70663 c
+70596,70663 c # not 1:1
 70596,70663 ---++
 70596,70663 Q 5
 70664,70729 ppccc
@@ -622,6 +652,7 @@
 71860,71988 cccpp
 71989,72042 cppcc
 72043,72090 ppccc
+72043 Q 3
 72091,72143 cccpp
 72144,72569 cccpp
 72570,72695 c
@@ -724,6 +755,7 @@
 
 86115,87287 pcccp # keyframe
 86115,87287 -
+87180 +
 87363,87372 cppcc
 87373,87381 pcccp
 87382,87389 ccppc
@@ -775,8 +807,9 @@
 87720,87777 +---+
 87778,87970 c
 
-87973,88300 ++--- # keyframe
-87973,88300 Q 5
+87973,88300 llccc # keyframe
+87973,88300 ++--- # top field already blended, we also drop the 2nd, so one half res per group
+87973,88300 Q 6
 88301,89889 ppccc
 89890,90028 pcccp
 90029,90140 ccppc
@@ -856,7 +889,7 @@
 95723,95795 ccppc
 95796,95815 ccppc
 95816,95868 ccppc
-95818 + # missing frame for the first p
+95818 + # missing field for the first p
 95869,95919 ppccc
 95920,95988 cppcc
 95989,96029 cppcc
@@ -893,45 +926,48 @@
 100119,100347 ppccc
 100348,100486 ppccc
 100487,100499 c
-100500,100623 c
-100500,100623 ---++
+# bg in these clips is 29.97, the bubbles move vertically and slow, 
+# no one will probably notice if we drop a frame and some balls are
+# a bit combed in the other
+100500,100623 cccbb 
+100500,100623 -
 100624,100682 ppccc
-100683,100753 c
-100683,100753 --++-
+100683,100753 ccbbc
+100683,100753 -
 100754,100759 c
 100760,100825 c
 100826,100917 ppccc
 100918,101015 cppcc
 101016,101055 c
 101056,101061 c
-101062,101157 c
-101062,101157 --++-
+101062,101157 ccbbc
+101062,101157 -
 101158,101233 ppccc
-101234,101279 c
-101234,101279 +---+
+101234,101279 bcccb
+101235,101279 -
 101280,101470 cccpp
-101471,101532 c
-101471,101532 -++--
+101471,101532 cbbcc
+101471,101532 -
 101533,101771 cppcc
-101772,101861 c
-101772,101861 -++--
+101772,101861 cbbcc
+101772,101861 -
 101862,101944 cccpp
-101945,101991 c
-101945,101991 ---++
+101945,101991 cccbb
+101945,101991 -
 101992,102093 cppcc
 102094,102244 cppcc
 102245,102357 cccpp
-102358,102514 c
-102358,102514 ++---
+102358,102514 ppccc
+102359,102514 -
 102515,102631 ppccc
 102632,102688 ppccc
 102689,103028 cppcc
 102719,102817 -++-- # hand
-103029,103071 c
-103029,103071 ++---
+103029,103071 bbccc
+103030,103071 -
 103072,103077 c
-103078,103167 c
-103168,103255 c
+103078,103167 c # still image
+103168,103255 c 
 103168,103255 +
 103256,103384 c
 103256,103384 +
@@ -940,22 +976,22 @@
 103436,103534 c
 103436,103534 +
 103535,103595 ppccc
-103596,103635 c
-103596,103635 ---++
+103596,103635 cccbb
+103596,103635 -
 103636,103640 c
 103641,103754 c
 103755,103759 c
-103760,103871 c
-103760,103871 -++--
+103760,103871 cbbcc
+103760,103871 -
 103872,103906 ppccc
 103907,103964 ppccc
-103965,104015 c
-103965,104015 ++---
+103965,104015 bbccc
+103967,104015 -
 104016,104102 ppccc
-104103,104213 c
-104103,104213 ++---
+104103,104213 bbccc
+104104,104213 -
 104214,104276 ccppc
-104277,104383 c
+104277,104383 c # fg cccpp, display might be 29.97
 104277,104361 ---++
 104384,104532 c
 104384,104532 +
@@ -976,9 +1012,11 @@
 105986,106038 cccpp
 106039,106085 ppccc
 106086,106174 cppcc
-106175,106242 c # 29.97 progressive with a few dup frames
+106175,106242 c # single field
+106175,106242 +
 106243,106303 ccppc
-106304,106367 c # 29.97 progressive with a few dup frames
+106304,106367 c # single field
+106304,106367 +
 106368,106487 cppcc
 106488,106640 cccpp
 106597 - # noisy image MIC = 86
@@ -998,6 +1036,7 @@
 109073,109259 ppccc
 109260,109343 cppcc
 109344,109485 pcccp
+109344 Q 3
 109486,109537 cccpp
 109538,109662 pcccp
 109663,109751 cccpp
@@ -1040,9 +1079,7 @@
 114331,114463 cccpp
 114464,114499 cppcc
 114500,114622 cppcc
-114623,114688 ccppp # see tdev-ovr.txt
-#114623,114688 ccppc # reflection is cccpp, but with ccppc the 3rd+5th frames go wrong, foreground is more important, deinterlacer can hide it nicely
-#114623,114688 --+-+ 
+114623,114688 ccppp
 114689,114726 ppccc
 #114727,114810 ppccc
 114727,114810 c # display is 29.97 and already deinterlaced
@@ -1093,7 +1130,7 @@
 119555,119623 cccpp
 119624,120028 cccpp
 119904 - # MIC = 87
-120029,120393 c
+120029,120393 c # pcccp, already badly deinterlaced
 120029,120393 -
 120394,120548 ccppc
 120549,120718 pcccp
@@ -1152,33 +1189,20 @@
 127387,127417 + # crossfade
 127604,128056 cppcc
 128057,128495 ppccc
-128057,128495 ++---
 128496,128577 cppcc
-128496,128577 -++--
 128578,128661 ccppc
-128578,128661 --++-
 128662,128821 cccpp
-128662,128821 ---++
 128828,128978 cccpp
-128828,128978 ---++
 128979,129068 cccpp
-128979,129068 ---++
 129069,129113 ccppc
-129069,129113 --++-
 129114,129162 pcccp
-129114,129162 +---+
 129163,129206 cppcc
-129163,129206 -++--
 129207,129280 cppcc
-129207,129280 -++--
 129281,129559 cccpp
-129281,129559 ---++
 129560,129597 ppccc
-129560,129597 ++---
-129598,129637 cppcc
-129598,129637 -++--
+129598,129637 cluph # cppcc + cccpp
+129598,129637 -+--+
 129638,129720 pcccp
-129638,129720 +---+
 129721,129773 c
 129721,129773 Q 6
 129721,129722 + 
@@ -1190,17 +1214,10 @@
 129756 +
 129762 +
 129767 +
+#129721,129773 -
 129774,129886 ccppc
-129774,129886 --++-
 129887,129995 c
-129887,129995 Q 6
-129887,129888 +
-129895 +
-129897 +
-129901 +
-129905 +
-129907,129908 +
-129933 +
+129887,129995 -
 129996,130546 pcccp
 130547,130643 c
 130644,130768 ppccc
@@ -1264,7 +1281,6 @@
 136925,136968 ccppc
 136969,136994 c # single field, smoothing it
 136969,136994 +
-136969,136994 Q 5
 136995,137032 c
 136995,137032 ---++
 137033,137064 ccppc
@@ -1290,7 +1306,7 @@
 139120,139239 cppcc
 139240,139274 cppcc
 139275,139535 c
-139322,139368 ++--- # the foreground was badly deinterlaced, only really visible in this section
+139322,139368 ++--- # fg was badly deinterlaced, only really visible in this section
 139322,139368 Q 5
 139536,139594 pcccp
 139595,139675 c
@@ -1335,6 +1351,8 @@
 144372,144422 cccpp
 144423,144501 cppcc # the moving guy behind the transparent display will cause some errors, but it would be a shame to blur that fine graphics
 144423,144501 -
+#144423,144501 cllcc # alternatively, with minimal losses
+#144423,144501 -++--
 144502,144560 cccpp
 144561,144646 pcccp
 144647,144726 ppccc
@@ -1448,7 +1466,7 @@
 152941,152972 cccpp
 152973,153010 c
 153011,153026 pcccp 
-153011,153026 + # whole frames are still somewhat hairy
+153011,153026 + # still combed
 153027,153219 ppccc
 153220,153390 ppccc
 153220,153390 ++---
@@ -1509,7 +1527,7 @@
 158465,158536 ---++ # still combed
 158537,158621 cppcc
 158537,158621 -++--
-# Kai isn't moving enough to see a pattern or not noticeable, 
+# Kai does not move enough to see a pattern or not noticeable, 
 # we just enjoy the colorful lights, repeats several times below.
 # Motion based deinterlacers produce nasty artifacts.
 158622,158817 c #ccppc
@@ -1536,6 +1554,7 @@
 159511,159623 cppcc
 159511,159574 -++-- # sfx ends sooner than the scene
 159624,159881 pcccp
+159882,160069 c
 159882,160069 + # single field, smoothing it
 159882,160069 Q 6
 160070,160113 cppcc
@@ -1562,7 +1581,7 @@
 160752,160770 ++---
 160771,160793 ppccc
 160771,160793 + #- #++---
-160771,160793 Q 5
+160772,160793 Q 5
 160794,160835 pcccp
 160794,160835 +---+
 #160794,160835 PP 2

@@ -2,7 +2,7 @@
 
 Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
-## Current progress: 
+## Current progress
 
 * S01/E01-03 done (Koch)
 
@@ -20,7 +20,7 @@ Need a bunch of tools like avisynth, ffmpeg, dgindex, mpeg2dec, yadifmod2, php..
 
 Use 32-bit avisynth, as the  64-bit port of mpeg2dec did not carry over the deblocking filters, they were written in assembly code and pretty messy.
 
-The tfm overrides use the new Q parameter that I added, it can be found in my TIVTC fork. It's basically PP but ignores clip2.
+The tfm overrides use the new Q parameter that I added, it can be found in my [TIVTC fork](https://github.com/gabest11/TIVTC/releases/). It's basically PP but ignores clip2.
 
 First step is to rip every disc with mkvmerge.
 
@@ -90,6 +90,8 @@ Drop the first p as a general rule.
 
 Must use tfm's deinterlacer that understands h/l to be top or bottom field, no clip2. Drop either of the last two frames, they are identical.
 
+Update: It is now possible to use yadif or other external deinterlacers if you use my TIVTC build. The clip3 argument takes a secondary clip for PP and uses it for the non-default field. In that case Q 6 can be omitted.
+
 This method is obviously lossy, since we only keep two clean frames and make the deinterlacer guess the second half of the other two. Because they are surrounded by clean frames, the result is pretty good with motion-adaptive deinterlacers. Certainly better than deinterlacing every frame.
 
 If your pattern starts differently, just rotate the overrides. pcccp + cppcc => uphcl, --+-+ and f, +-+++
@@ -118,16 +120,17 @@ If your pattern starts differently, just rotate the overrides. pcccp + cppcc => 
     
 Surprisingly similar to the two layer solution.
 
-Example: 
-* Mantrid's first appearance with the many arms flying around
+Examples: 
+* Mantrid's first appearance with many arms flying around
 * During Thodin's trial, holograms, crowd and the stadium
+* S02E01 right at the beginning, a spaceship flying towards a planet
 
 ### More layers, but no common c, ppccc + ccppc + cccpp
 
     ppccc
 
-    1t  2t  3t  4t  5t 
-    2b  3b  3b  4b  5b
+    0t  1t  2t  3t  4t
+    1b  2b  2b  3b  4b
 
     ccppc
 
@@ -139,10 +142,10 @@ Example:
     1t  2t  3t  3t  4t  
     1b  2b  3b  4b  5b 
 
-    1h  2h  3l  4l  5x
+    1l  2l  3h  3h  4h
 
-    tfm: hhllx, ++++-, Q 6
-    tdec: f, ++++-
+    tfm: llhhh, +, Q 6
+    tdec: f, ++-++ or +++-+
     
 Not a single clean frame, maybe when smooth motion is needed.
 

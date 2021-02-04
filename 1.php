@@ -294,8 +294,9 @@ $PP = 6;
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
-deint=yadifmod2(mode=0)
-TFM(d2v=d2vpath,clip2=deint,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
+deint2=yadifmod2(order=0)
+deint3=yadifmod2(order=1)
+TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
 #TDecimate(mode=0,hybrid=1,denoise=true,ovr="$title-tdec-ovr.txt")
 EOT;
 
@@ -306,8 +307,9 @@ if(!file_exists("$title.avs")) file_put_contents($title.'.avs', $avs);
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
-deint=yadifmod2(mode=0)
-TFM(d2v=d2vpath,clip2=deint,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+deint2=yadifmod2(order=0)
+deint3=yadifmod2(order=1)
+TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=4,denoise=true,output="$title-tdec.txt")
 crop(344,224,-344,-224)
 EOT;
@@ -372,8 +374,9 @@ file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
-deint=yadifmod2(mode=0)
-TFM(d2v=d2vpath,clip2=deint,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+deint2=yadifmod2(order=0)
+deint3=yadifmod2(order=1)
+TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 # If your source is not anime or cartoon then add
 # vfrDec=0  into the line below
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",ovr="$title-tdec-ovr.txt")

@@ -483,7 +483,7 @@
 
 41426,41575 uphcl # fg cppcc, bg pcccp
 41426,41575 --+-+
-41426,41575 Q 6
+#41426,41575 Q 6
 
 41576,41669 pcccp
 41670,41734 cccpp # fg cccpp, bg cccpp
@@ -917,10 +917,10 @@
 
 92973,93120 phclu # or cccpp if you want the bad fields
 92973,93120 -+-+-
-92973,93120 Q 6
+#92973,93120 Q 6
 93121,93247 luphc # ppccc (should be luphc, the same we used in this scene before, yay) + ccppc (sfx)
 93121,93247 +--+-
-93121,93247 Q 6
+#93121,93247 Q 6
 93248,93426 cccpp # does not seem to be so bad towards the end, maybe just things are too small to notice
 
 93427,93518 ccppc
@@ -1101,7 +1101,7 @@
 114072,114134 ccppc
 114135,114320 hcluc
 114135,114320 +-+--
-114135,114320 Q 6
+#114135,114320 Q 6
 114321,114379 ccppc
 114380,114484 cccpp
 114485,114554 cccpp
@@ -1407,7 +1407,7 @@
 #147329,147383 +
 147329,147383 cluph # fg cccpp, bg cppcc
 147329,147383 + # -+--+ # bg cppcc, and also combed in every frame (?)
-147329,147383 Q 6
+147329,147383 Q 6 # yadif bad here
 147384,147695 ccppc
 147696,147979 ccppc
 147980,148235 ccppc
@@ -1607,7 +1607,7 @@
 164608,164664 ccppc
 164665,164786 hclup # pcccp + ccppc (sfx)
 164665,164786 +-+--
-164665,164786 Q 6
+#164665,164786 Q 6
 164787,165109 ccppc
 165074,165109 + # fade-out
 
