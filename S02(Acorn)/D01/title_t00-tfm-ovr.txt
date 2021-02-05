@@ -1012,10 +1012,10 @@
 105986,106038 cccpp
 106039,106085 ppccc
 106086,106174 cppcc
-106175,106242 c # single field
+106175,106242 c # single field, and it's not smooth, because missing a field for continuity
 106175,106242 +
 106243,106303 ccppc
-106304,106367 c # single field
+106304,106367 c # single field (same problem)
 106304,106367 +
 106368,106487 cppcc
 106488,106640 cccpp

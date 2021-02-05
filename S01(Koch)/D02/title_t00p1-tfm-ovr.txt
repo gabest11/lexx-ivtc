@@ -604,14 +604,11 @@
 45929,46104 pcccp
 46105,46211 ppccc
 46212,46275 cppcc
-46212,46275 + # closest tower permanently combed
+46212,46275 + # towers permanently combed
 #46212,46275 Q 6
 46276,46328 ccppc
-46329,46412 cppcc # now the same tower looks perfect
+46329,46412 cppcc # now the same towers look perfect
 46413,46550 cppcc
-#46551,46699 cppcc # bg cppcc, fg cccpp (inside of the moth)
-#46551,46699 + # TODO # moving frames
-#46551,46699 Q 5
 46551,46699 cluph # bg cppcc, fg cccpp (inside of the moth)
 46551,46699 -+--+
 #46551,46699 Q 6
@@ -621,16 +618,13 @@
 47198,47277 cppcc
 47278,47343 pcccp
 47344,47510 cppcc
-#47511,47620 ppccc # bg ppccc, fg cccpp (moth)
-#47511,47560 ++-----------+------------------+++-----++-----++- # moving frames
-#47561,47610 ----+-+------+--+-++---++-+-++-+----+----+-+------
-#47611,47620 ----+----
-#47511 Q 3
 47511,47620 phclu # bg ppccc, fg cccpp (moth)
 47511,47620 -+-+-
 #47511,47620 Q 6
 47511 + # first frame is a p and we drop u from the end, the one we keep has to be deinterlaced
 47511 Q 3
+47620 + # this is dropped
+47620 Q 3
 
 47621,47664 cppcc
 47665,47701 cppcc
@@ -1131,7 +1125,7 @@
 85641,85737 Q 5
 85738,85806 ccppc
 85807,86038 c
-85807,86038 +
+85807,86038 +	
 85807,86038 Q 5
 86039,86112 cppcc
 86113,86245 pcccp
@@ -1728,6 +1722,7 @@
 127891,127975 pcccp
 127951 +
 127891,127975 Q 5
+127891 Q 3
 127976,128085 ccppc
 128086,128202 pcccp
 128203,128256 ccppc
@@ -1859,6 +1854,7 @@
 136415,136672 pcccp
 136415,136672 + # still combed
 136415,136672 Q 5
+136415 Q 3
 136673,136759 ccppc
 136760,136952 pcccp
 136760 Q 3
@@ -2105,6 +2101,7 @@
 159474,159614 ppccc
 159615,159714 pcccp
 159715,159771 ppccc
+159715 Q 3
 159772,159848 phclu # cccpp + ppccc # second left hand
 159772,159848 -+-+-
 #159772,159848 Q 6

@@ -328,9 +328,11 @@
 23959,24119 ppccc
 24120,24172 ppccc
 24173,24380 ccppc
-24381,24502 ppccc
-24493,24521 + # crossfade
-24503,24571 cppcc
+24381,24492 ppccc
+24493,24521 cluph # crossfade, cccpp + cppcc
+24493,24521 -+--+
+#24493,24521 Q 6
+24522,24571 ccppc
 24572,24630 cppcc
 24631,24695 ccppc
 24696,24777 cppcc
@@ -722,7 +724,6 @@
 71878 - # MIC = 128
 71901,71947 cppcc
 71948,72081 cppcc
-71948,72081 i 11111
 71983 - # MIC = 98
 72082,72260 cppcc
 72261,72409 cppcc
@@ -760,28 +761,96 @@
 75106,75216 cppcc
 75113 - # MIC = 88
 75217,75263 ppccc
-75264,75324 ccccccpppppcpccccccccccpppppcpccccccccpppppccccccccccpppppppc # three dups and a few skips
-75264,75324 ---+-+------------+-+-+------------+-+------+-----+-+--------
-75325,75376 cppccpcccccccpccppccpcccccccpccppccpcccccccpccppccpc
-75325,75376 ---------+--+-----------+--+-----------+--+---------
-75377,75449 ppppcpccccccccccpppppcpccccccccpppppcpcpccccccccpppppcpccccccccpppppcpccc
-75377,75449 +------------+-+------------+-+--------------+-+------------+-+--------+-
+
+# there are a few missing fields, we can plug the temporal gap by blending
+
+75264,75280 ccchchppppcclcccc
+75264,75280 ---+-+----+-+----
+75274 Q 5
+75281,75295 chchchppppcclcc
+75281,75295 -+-+-+----+-+--
+75291 Q 5
+75296,75310 ccchchppppcclcc
+75296,75310 ---+-+----+-+--
+75306 Q 5
+75311,75324 ccchchppppppcc
+75311,75324 ---+-+------+-
+75323 Q 5
+
+# same bs happens in the next hour (for me)
+
+75325,75376 culcclccchcchpc
+75325,75376 --+--+---+--+--
+
+75377,75393 pppcclccccccchchp
+75377,75393 ---+-+-------+-+-
+75394,75408 pppcclccccchchp
+75394,75408 ---+-+-----+-+-
+75409,75425 pppcclclccccchchp
+75409,75425 ---+-+-+-----+-+-
+75426,75440 pppcclccccchchp
+75426,75440 ---+-+-----+-+-
+75441,75449 pppcclclc
+75441,75449 ---+-+-+-
+75377 + # scene start
+75380 Q 2
+75397 Q 2
+75412 Q 2
+75429 Q 2
+75444 Q 2
+
 75450,75493 cccpp
-75494,75539 cccccpcccppccppccppccppcccpcccppccppccppccppcc
-75494,75539 -+-------------------+--------------------+---
-75540,75569 cccppccppccppcccpcccccccpcccpc
-75540,75569 ---------------+----+---------
+
+75494,75539 hpccclccculccppcpppcc
+75494,75539 ++---+----+-----+----
+75510 Q 2
+75531 Q 2
+
+75540,75569 ccculccuccpppcchpccchccclccccc
+75540,75569 ----+---+-+----+----+---+-----
+75548 Q 5 # this is not a time gap, just a dup
+75550 Q 2
+
 75570,75614 pcccp
-75615,75653 ppppcpccccccccpppppcpccccccccpppppcpccc
-75615,75653 +----------+-+------------+-+----------
-75654,75689 cccccccpccppccppccpcccccccpccppccpcc
-75654,75689 ---+--+---------------+--+----------
-75690,75729 ppppppcpccccccccpppppppcpccccccccpppppcp
-75690,75729 +------------+-+--------------+-+-------
-75730,75794 ccpppppppcpccccccccccpppppppcpccccccccccppppccpcpccccccpcccpppppc
-75730,75794 -+----------------+-+--------------+-+-+----+---------+-+-+------
-75795,75850 ccpcccccccpccppccppccpcccccccpccppccpcccpcccccccpccppccp
-75795,75850 ------+--+---------------+--+---------------+--+--------
+
+75615,75653 hppcclccccchchp
+75615,75653 +--+-+-----+-+-
+75618 Q 2
+75633 Q 2
+75648 Q 2
+
+75654,75689 ccchcchpcpppcculcclccchcchpcpppcclcc
+75654,75689 ---+--+--+-----+--+---+--+--+----+--
+75663 Q 2
+75682 Q 2
+
+75690,75723 ppppppplccccchchp
+75690,75723 ------++-----+-+-
+75724,75729 pppppl # last run -2 pp
+75724,75729 ----++
+75690 +
+75695 Q 6
+75696 Q 2
+75713 Q 2
+75728 Q 2
+
+# by starting with a bunch of u's we can skip a dup later at the cost of throwing away the first frame
+75730,75794 uuuuuuuulclccccccchchppppppcclccccchchchpppppphclccccchchchpppppp
+75730,75794 +-------+-+-------+-+------+-+-----+-+-+-----++-+-----+-+-+-----+
+75730 Q 2
+75757 Q 2
+#75775 Q 2
+75775 Q 6
+75775 f 0
+75776 Q 2
+75794 Q 2
+
+75795,75850 cclccchcchpcculcculcclccchcchpcculcclccclccchcchpcculccl
+75795,75850 --+---+--+----+---+--+---+--+----+--+---+---+--+----+--+
+75807 Q 2
+# the jump between 75825-75826 is a bit large
+
+
 75851,76060 pcccp
 75894,75895 - # MIC = 87
 76061,76673 ppccc
@@ -917,6 +986,7 @@
 
 92973,93120 phclu # or cccpp if you want the bad fields
 92973,93120 -+-+-
+92973 + # dropped anyway
 #92973,93120 Q 6
 93121,93247 luphc # ppccc (should be luphc, the same we used in this scene before, yay) + ccppc (sfx)
 93121,93247 +--+-
@@ -955,8 +1025,8 @@
 97912,97966 ppccc
 97967,98068 pcccp
 98069,98342 cppcc
-98343,98385 c
-98343,98385 +
+98343,98385 cchchpppppppcpccccchchpppppcpccccchchchpppp
+98343,98385 --+-+--------------+-+------------+-+-+----
 98386,98685 ccppp # cccpp + ccppc (snake)
 98686,98749 ccppc
 98750,98821 ccppc
