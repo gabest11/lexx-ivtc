@@ -83,7 +83,7 @@ Drop the first p as a general rule.
     1t* 2t* 3t  4t  4t* 5t  6t
     2b  2b* 3b* 4b* 5b  6b  6b
 
-    1h  2c  3l  4u  5p
+    1h  2c  3l  4u  4p
 
     tfm: hclup, +-+--, Q 6
     tdec: f, ++++-
@@ -129,23 +129,23 @@ Examples:
 
     ppccc
 
-    0t  1t  2t  3t  4t
-    1b  2b  2b  3b  4b
+    0t  1t  2t  3t* 4t*
+    1b* 2b* 2b  3b  4b
 
     ccppc
 
-    1t  2t  2t  3t  4t  
-    1b  2b  3b  4b  4b
+    1t  2t  2t  3t* 4t* 
+    1b* 2b* 3b  4b  4b
 
     cccpp
 
-    1t  2t  3t  3t  4t  
-    1b  2b  3b  4b  5b 
+    1t  2t  3t  3t* 4t* 
+    1b* 2b* 3b  4b  5b 
 
-    1l  2l  3h  3h  4h
+    1l  2l  xx  3h  4h
 
-    tfm: llhhh, +, Q 6
-    tdec: f, ++-++ or +++-+
+    tfm: llxhh, +, Q 6
+    tdec: f, ++-++
     
 Not a single clean frame, maybe when smooth motion is needed.
 
