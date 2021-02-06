@@ -134,8 +134,6 @@
 3093,3096 +
 3101,3120 cppcc
 3121,3260 ccppc
-3121,3260 --++-
-3241,3259 +
 3261,3416 c
 3261,3262 +
 3263,3416 +++--
@@ -154,7 +152,6 @@
 3779,3935 c
 3779,3935 +
 3936,4002 ccppc
-3936,4002 --++-
 3936 +
 4003,4060 ppccc
 4061,4158 c
@@ -163,6 +160,7 @@
 4069 Q 5
 4085 +
 4159,4257 pcccp
+4159 Q 3
 4258,4310 c
 4258 +
 4266,4268 +
@@ -271,7 +269,7 @@
 8311,8386 pcccp
 8311 Q 6
 8311 M 2
-8387,8437 c#ppccc
+8387,8437 c # ppccc
 8387,8437 ++---
 8387,8437 Q 5
 8438,8472 ccppc
@@ -282,8 +280,9 @@
 8525,8624 c
 8525,8624 ++---
 8625,8644 pcccp
-8645,8870 c # pcccp + cppcc
-8645,8870 +++-+
+8645,8870 uphcl
+8645,8870 --+-+
+8870 + # ends on u, dropping it though
 8871,8949 cccpp
 8871,8949 ---++
 8871,8949 Q 5
@@ -295,7 +294,6 @@
 9737,9910 pcccp
 9911,9947 cccpp
 9948,10011 cccpp
-9948,10011 ---++
 10012,10234 cppcc
 10235,10572 ccppc
 10573,10740 ppccc
@@ -360,16 +358,19 @@
 17586,17752 ppccc # still combed but looks nicer deinterlaced with p
 17586,17752 ++---
 17586,17752 Q 5
+17586 Q 3
 17753,17978 ccppc
 17979,18069 pcccp # same
 17979,18069 +---+
 17979,18069 Q 5
+17979 Q 3
 18070,18340 cppcc # same
 18070,18340 -++--
 18070,18340 Q 5
 18341,18425 ccppc # same
 18341,18425 --++-
 18341,18425 Q 5
+18341 +
 18426,18644 cuucc # same
 18426,18644 -++--
 18426,18644 Q 5
@@ -420,6 +421,7 @@
 22676,22761 ccppc
 22762,22836 ccppc
 22837,22908 ppccc
+22837 Q 3
 22909,22988 cppcc
 22880,22934 + # crossfade
 22989,23032 pcccp
@@ -479,6 +481,7 @@
 30794,30939 c
 30940,31071 ccppc
 31072,31166 pcccp
+31072 Q 3
 31167,31227 cppcc
 31228,31281 cppcc
 31282,31428 ppccc
@@ -515,8 +518,9 @@
 35957,36153 c
 35957,36153 -
 36154,36713 cccpp
-36714,36748 c # ccppc 
-36714,36748 + # background randomly combed
+36714,36748 ccppc # background randomly combed
+36733,36736 +
+36740,36748 +
 36749,37243 ppccc
 36749,37243 i 255 # many MIC > 80
 37244,37287 ccppc
@@ -601,7 +605,7 @@
 47521,47662 -
 47663,47759 pcccp
 47760,47876 ccppc
-47760,47876 --++- # still combed
+47760,47806 --++- # still combed
 47877,48146 cccpp
 47842,47904 + # crossfade
 48147,48223 ppccc
@@ -763,8 +767,8 @@
 69313,69423 pcccp
 69424,69608 pcccp
 69609,69694 cppcc
-69695,69769 pcccp
-69695,69769 +-+++ # fg = pcccp, robot head = ccppc
+69695,69769 hclup # fg pcccp, robot head ccppc
+69695,69769 +-+--
 69770,69879 pcccp
 69880,69967 cppcc
 69968,70001 pcccp
@@ -774,10 +778,7 @@
 70229,70339 pcccp # exact same scene as 69313,69423
 70340,70601 cppcc
 70602,70706 ppccc
-70707,70792 cccpp
-70724 + # robot head
-70739 + # same
-70789 + # same
+70707,70792 ccppp # cccpp + ccppc (robot head)
 70793,70866 ppccc
 70849 + # MIC = 81 combed a little
 70867,70938 cccpp
@@ -800,11 +801,9 @@
 73370,73538 c
 73370,73538 -
 73539,73714 pcccp
+73539 Q 3
 73715,73778 ppccc
-73779,73840 ccppc
-73815 + # robot head
-73820 + # same
-73835 + # same
+73779,73840 cpppc # ccppc + cppcc (robot head)
 73841,73902 pcccp
 73903,74359 cppcc
 74360,74591 ppccc
@@ -877,7 +876,7 @@
 79504,80290 ppccc
 79504,80200 ++--- # still combed
 79504,80200 Q 5
-80291,80587 c
+80291,80587 c # 59.94i
 80291,80587 +
 80588,80707 cccpp
 80573,80603 + # crossfade
@@ -985,14 +984,14 @@
 91184,91218 ppccc
 91184,91218 ++---
 91219 c
-91220,91254 ppccc
-91220,91254 ++++-
+91220,91254 luphc # ppccc + ccppc
+91220,91254 +--+-
 91255 c
-91256,91290 ppccc
-91256,91290 ++++-
+91256,91290 luphc # ppccc + ccppc
+91256,91290 +--+-
 91291 c
-91292,91326 ppccc
-91292,91326 ++++-
+91292,91326 luphc # ppccc + ccppc
+91292,91326 +--+-
 91327 c
 91328,91362 ppccc
 91328,91362 ++---
@@ -1017,10 +1016,9 @@
 93738,93858 ccppc
 93859,93974 cccpp
 
-93975,94115 cpppc # cppcc + ccppc, lucky! drop every 2nd
-93975,94115 -
+93975,94115 cpppc # cppcc + ccppc
 94116,94222 ppccc
-94223,94381 ncccn # ?
+94223,94381 lccch # hey, it's 29.97, the split frame in pp does not line up
 94223,94381 +---+
 94382,94489 pcccp
 94490,94654 ppccc
@@ -1033,7 +1031,7 @@
 95307,95456 pcccp
 95457,95533 ccppc
 95534,95624 cppcc
-95625,95723 pccpp # pcccp + cccpp, lucky again! drop every 4th
+95625,95723 pccpp # pcccp + cccpp
 95625 + # starts with p
 95626,95723 -
 95724,96029 pcccp
@@ -1050,7 +1048,7 @@
 96829,96859 Q 5
 96860,96876 cppcc
 96877,96910 ccppc
-96911,97104 cppcc
+96911,97104 cppcc # not 1:1
 96911,97104 -++--
 
 97105,97244 c # bg c, fg cppcc
@@ -1058,6 +1056,7 @@
 97245,97421 pcccp
 97245,97421 +---+
 97422,97522 pcccp
+97422 Q 3
 97523,97594 ppccc
 97523,97594 ++---
 97595,97723 ccppc
@@ -1067,8 +1066,11 @@
 97934,98392 ccppc
 97934,98392 --++-
 98393,98740 ppccc
+
+# 1st frame on the displays is the dup, but all progressive and 1-2 aren't p frames
+# we have to choose between a jerky display and two blurry pp's, I vote for smoothness
 98741,98950 cppcc
-98851,98950 -++--
+98851,98950 -++-- 
 
 98951,99272 ccppc
 99273,99319 ppccc
@@ -1114,7 +1116,7 @@
 103990,104078 ppccc
 104079,104134 ppccc
 104135,104235 ppccc
-104236,104355 ccppp # ccppc + cccpp, drop every 3rd
+104236,104355 ccppp # ccppc + cccpp
 104236,104355 ---++ # have to deinterlace the display on the legs, still nice
 104221,104237 + # crossfade
 104356,104568 cppcc
@@ -1247,10 +1249,12 @@
 120302,120691 ppccc
 120302,120691 ++---
 120302,120691 Q 5
+120302 Q 3
 120692,120802 ccppc
 120803,120926 pcccp
 120803,120926 +---+
 120803,120926 Q 5
+120803 Q 3
 120927,120962 + # combed still image
 120927,120962 Q 6
 120963,121003 ppccc
@@ -1353,7 +1357,7 @@
 127827,127877 cppcc
 127878,127911 cccpp
 127912,128060 pcccp
-128061,128340 c # not 1:1
+128061,128340 cchlc
 128061,128340 --++-
 128341,128628 ccppc
 128629,128712 pcccp
@@ -1538,21 +1542,35 @@
 147141,147290 c
 
 # this is the 35+1 frame technique again
-147291 u
-147292,147326 ppccc
-147292,147326 ++---
-147327 c
-147328,147362 ppccc
-147328,147362 ++---
-147363 c
-147364,147398 ppccc
-147364,147398 ++---
-147399 c
-147400,147426 ppccc
-147400,147426 ++---
+#147291 u
+#147292,147326 ppccc
+#147292,147326 ++---
+#147327 c
+#147328,147362 ppccc
+#147328,147362 ++---
+#147363 c
+#147364,147398 ppccc
+#147364,147398 ++---
+#147399 c
+#147400,147426 ppccc
+#147400,147426 ++---
 # shame the outline is combed, against the background 
-147291,147426 +
-147291,147426 Q 5
+#147291,147426 +
+#147291,147426 Q 5
+
+# this is the 35+1 frame technique again
+147291 u
+147292,147326 ppccc # pcccp + ?
+147327 c
+147328,147362 ppccp # ppccc + pcccp
+147363 c
+147364,147398 phclu # ppccc + cccpp
+147364,147398 -+-+-
+147398 + # ends on u
+147399 p # must be a better way to join these up
+147400,147426 phclu # ppccc + cccpp
+147400,147426 -+-+-
+
 147427,147488 ppccc
 147489,147699 ppccc
 147700,147874 pcccp
@@ -1719,10 +1737,65 @@
 164542,164618 cccpp
 164619,164821 ppccc
 164822,164945 pcccp
-164930,164959 + # crossfade
-164946,165087 c # ???
-164946,165087 +
-164946,165087 Q 5
+#164930,164959 + # crossfade
+164930,164945 + # crossfade
+
+#164946,165087 c # ???
+#164946,165087 +
+#164946,165087 Q 5
+
+# pp: body ?/?, outline 23/78, moth 34/89
+
+164946,164958 cpppc # cppcc + cppcc + ccppc
+164946,164958 -
+
+164959,164969 pccpp # pcccp + cccpp + pcccp
+164959,164969 -
+
+164970,164980 hclup # pcccp + ccppc + cccpp
+164970,164980 +-+--
+
+#164981,164994 lhhhl # pcccp + cppcc + ccppc
+#164981,164994 +
+164981,164994 uphcl # pcccp + cppcc + ccppc # without the moth
+164981,164994 --+-+
+
+#164995,165005 cluph # cppcc + ccppc + cccpp
+#164995,165005 -+--+
+164995,165005 cpppc # cppcc + ccppc + cccpp # without the moth
+164995,165005 -
+
+165006,165016 cpppc # cppcc + cppcc + ccppc
+165006,165016 -
+
+165017,165029 pppcc # cppcc + ppccc + cppcc
+165017,165029 -
+
+# combed outline not visible anymore
+
+#165030,165040 hclup # pcccp + ccppc + cccpp 
+#165030,165040 +-+--
+165030,165040 pccpp # pcccp + ccppc + cccpp # just the body and the moth
+165030,165040 -
+
+#165041,165051 lhhhl # pcccp + cppcc + ccppc
+#165041,165051 +
+165041,165051 hclup # pcccp + cppcc + ccppc # just the body and the moth
+165041,165051 +-+--
+
+165052,165065 uphcl # pcccp + ppccc + cppcc # outline's pp in the middle, makes no difference in the pattern
+165052,165065 --+-+
+
+165066,165076 cpppc # cppcc + cppcc + ccppc
+165066,165076 -
+
+# body gone (almost)
+
+165077,165087 cppcc # cppcc + ppccc + cppcc 
+165077,165087 -
+
+# deinterlaced 20 out of 141
+
 165088,165590 ccppc
 165591,165738 pcccp
 165739,166073 cppcc
@@ -1737,21 +1810,22 @@
 167853,167924 cccpp
 167925,168388 ccppc
 167935,168325 --++- # hand
-168389,168658 c # ???
+168389,168658 c # fields are motion blurred or something
 168389,168659 +
 168659,168869 ppccc
 168870,169002 ccppc
 169003,169736 cppcc
-169737,169828 c # ccppc + ppccc
-169737,169828 +
+169737,169828 luphc # ccppc + ppccc
+169737,169828 +--+-
 169829,169883 cppcc
-169884,169923 c
+169884,169923 c # ccppc + 29.97
 169884,169923 --++-
 169924,169928 c
 169924,169928 ++++-
-169929,169949 ccppc
+169929,169949 c # ccppc + 29.97
 169929,169949 --++-
-169950,169967 c
+#169950,169967 c # ppccc + cppcc + cccpp
+169950,169967 hhhll # ppccc + cppcc + cccpp
 169950,169967 +
 169968,170435 c
 169968,170435 -

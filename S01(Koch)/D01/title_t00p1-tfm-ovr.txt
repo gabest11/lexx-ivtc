@@ -321,7 +321,8 @@
 33332,33421 c
 33332,33421 +
 33422,33784 pcccp
-33422,33784 + # clouds
+33422,33784 #+---+ # clouds (colums jitter, sacrifice the slow moving clouds?)
+#33422,33784 Q 5
 33422 Q 3
 33785,33900 ccppc 
 33901,34045 cccpp # thank you random white spot at 33934,33935
@@ -341,7 +342,8 @@
 36395,36543 cccpp # pcccp maybe
 36544,36908 ccppc 
 36909,37141 ppccc
-36909,37141 + # clouds
+36909,37141 #++--- # clouds
+#36909,37141 Q 5
 37142,37261 ppccc 
 37262,37387 cccpp
 37388,37458 ccppc 
@@ -1049,9 +1051,11 @@
 84807,84885 ccppc
 84886,85063 cppcc
 85064,85207 ppccc 
-85208,85544 cppcc # bg cppcc, fg cppnp, two dups, drop one, blend the other, it will looks somewhat continuous
-85208,85544 ---+- # take care of the n frame
-85472,85544 Q 5 # blend the hand waving
+
+85208,85544 cpplc # bg cppcc, fg cppnc, the order is swapped somehow
+85208,85544 ---+-
+85474,85544 Q 6 # clip2/3 does not work very well with h/l when the order is swapped, investigate it...
+
 85545,86029 cccpp 
 86030,86090 cccpp 
 86091,86171 pcccp 
