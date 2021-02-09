@@ -6,6 +6,9 @@ $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
 function sanitycheck($title, &$bogusframes, &$bogusscenes)
 {
+	#TODO: check if the wrong frame is dropped in the override file for known patterns
+	#TODO: scene begins with p/b, ends on u/n and blended
+
 	$bogusframes = [];
 	$bogusscenes = [];
 

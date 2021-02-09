@@ -766,16 +766,16 @@
 
 75264,75280 ccchchppppcclcccc
 75264,75280 ---+-+----+-+----
-75274 Q 5
+75274 Q 2
 75281,75295 chchchppppcclcc
 75281,75295 -+-+-+----+-+--
-75291 Q 5
+75291 Q 2
 75296,75310 ccchchppppcclcc
 75296,75310 ---+-+----+-+--
-75306 Q 5
+75306 Q 2
 75311,75324 ccchchppppppcc
 75311,75324 ---+-+------+-
-75323 Q 5
+75323 Q 2
 
 # same bs happens in the next hour (for me)
 

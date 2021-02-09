@@ -71,8 +71,11 @@
 4337,4624 c
 #4626,5079 -++--
 #4626,5079 PP 5
-4626,5079 cppcc # the helmet and the guy inside are on a different layer
+#4626,5079 cppcc # the helmet and the guy inside are on a different layer
+#4626,5079 -++--
+4626,5079 cupcc # one of those 29.97 deinterlaced scenes
 4626,5079 -++--
+4626,5079 Q 5
 5080,5383 ccppc
 5384,5863 ccppc
 5864,6113 cccpp
@@ -533,11 +536,11 @@
 62257,62356 cppcc
 62357,62449 ppccc
 62450,62509 cppcc
-62510,62579 c
+62510,62579 c # fg cppcc, bg pcccp # fg pp blended cupcc/-++-- vs uphcl/--+-+
 62510,62579 +
 62510,62579 Q 5
 62580,62635 ccppc
-62636,62701 c # cppcc + ccppc ? leaves combed outlines on the bg
+62636,62701 c # llhhl # fg1 cppcc, fg2 ccppc, bg pcccp ? fg1/2 are pp blended and not in phase
 62636,62701 +
 62636,62701 Q 5
 62702,62823 cccpp
@@ -554,12 +557,14 @@
 63265,63319 ccppc
 63320,63410 cccpp
 63411,63480 pcccp
-63481,63579 cppcc # not 1:1
+63481,63579 cupcc
 63481,63579 -++--
+63481,63579 Q 5
 63580,63658 pcccp
 63659,63750 ccppc
-63751,63931 pcccp # not 1:1
+63751,63931 pcccu
 63751,63931 +---+
+63751,63931 Q 5
 63932,64007 cccpp
 64008,64091 ccppc
 64092,64167 cppcc
@@ -619,15 +624,15 @@
 70478,70560 c
 70561,70595 c # not 1:1
 70561,70595 +
-70596,70663 c # not 1:1
+70596,70663 cccup
 70596,70663 ---++
 70596,70663 Q 5
 70664,70729 ppccc
-70730,70757 ppccc
+70730,70757 upccc
 70730,70757 ++---
 70730,70757 Q 5
 70758,70792 ppccc
-70793,70805 ppccc
+70793,70805 upccc
 70793,70805 ++---
 70793,70805 Q 5
 70806,70821 ppccc
@@ -928,7 +933,7 @@
 100487,100499 c
 # bg in these clips is 29.97, the bubbles move vertically and slow, 
 # no one will probably notice if we drop a frame and some balls are
-# a bit combed in the other
+# a bit combed in the other p frame
 100500,100623 cccbb 
 100500,100623 -
 100624,100682 ppccc
@@ -986,7 +991,9 @@
 103872,103906 ppccc
 103907,103964 ppccc
 103965,104015 bbccc
-103967,104015 -
+103966,104015 -
+103965,103966 +
+103966 f 0 # ?
 104016,104102 ppccc
 104103,104213 bbccc
 104104,104213 -
@@ -997,9 +1004,19 @@
 104384,104532 +
 104533,104757 cppcc
 104758,104899 cppcc
-104900,105040 c # what is going on here?
-104900,105040 i 80
+
+#             c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc # repeats three times
+104900,105040 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
+104900,105040 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
 104900,105040 Q 5
+
+# c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc
+# the goal is to make it play as smooth as possible
+# ? are dups, blend with the next frame
+# first p's can also be considered a dup, blend their two fields as c
+# seconds p's are real new frames, keep them
+# this way there are a few blended frames, but not a single one is a dup or skipped
+
 105041,105284 ppccc
 105285,105317 pcccp
 105318,105547 ccppc
@@ -1193,12 +1210,15 @@
 128578,128661 ccppc
 128662,128821 cccpp
 128828,128978 cccpp
+128828,128978 - # MIC high
 128979,129068 cccpp
 129069,129113 ccppc
 129114,129162 pcccp
 129163,129206 cppcc
 129207,129280 cppcc
+129207,129280 - # MIC high
 129281,129559 cccpp
+129281,129559 - # MIC high
 129560,129597 ppccc
 129598,129637 cluph # cppcc + cccpp
 129598,129637 -+--+

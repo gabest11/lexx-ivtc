@@ -168,3 +168,47 @@ Otherwise, if ivtc is more important than smoothness.
 #### 59.94i
 
 Not much to do here, deinterlace every frame. Or make interlaced h264. DVD extras are mostly 59.94i.
+
+### ccppc, but already deinterlaced to 29.97 by blending
+
+    ccppc
+
+    1t  2t  [(2t+3b)/2]t  [(3t+4b)/2]t  4t 
+    1b  2b  [(2t+3b)/2]b  [(3t+4b)/2]b  4b
+
+Currently there is no way to fix this, but if my theory is correct, there is. 
+
+We need 3b and 3t, every information is there, except the difference to the original caused by the lossy mpeg compression and the LSB after /2.
+
+    3t = [(2t+3b)/2]t*2 - 2t
+    3b = [(3t+4b)/2]b*2 - 4b
+
+There is also the 1 row shift to take into consideration when (un)blending top and bottom fields.
+
+TIVTC could do this if there was an override implementing this transformation, like ccxyc.
+
+When there is small movement, and the ghosting in one frame is nicer then in two, 23.976 can be achieved by simply blending again. In this new frame 3t and 3b are both present, and also 2t and 4b, with their interpolated false field. Set a blending deinterlacer.
+
+    tfm: ccupc, --++-, Q 5
+    tdec: f, +++-+ or ++-++
+
+    u=p, drop whichever can join up with the surrounding scenes
+
+    if the fields are reversed: ccnbc
+
+Altough, the Lexx uses a fancier deinterlacer, it tries to recreate four temporally unique fields out of pp, we can still blend the two in the middle. It gives a similar looking result as above, most of the time... Except there is no way to tell which the middle two are. The order is not always the same, only the pairs are. t1 t2 t3 t4, t2 t1 t3 t4, t1 t2 t4 t3... Can even alternate during the same scene.
+
+The only "correct" way to deal with this, if you can tolerate the ghosting in two frames:
+
+    tfm: ccccc, --++-, Q 5
+    tdec: v
+
+Examples: (there are many, easy to find, just few of the ugliest looking)
+* S02E01 Mantrid, at the beginning, the astronaut's helmet and face, just before descending into the shaft
+* S02E04 Luvliner, fight on the edge of Lexx's bridge
+* S02E05 Lafftrak, after landing on the small planet and exploring
+* S02E06 Stan's Trial, green mask 
+* S02E07 Love Grows, asian bikini girl talking into the microphone
+* S02E09 791, when 791 is about to be sucked out through the gate towards the end
+
+When a green screen is involved, some of the combed parts are lost and the sides are missing in the direction of motion.

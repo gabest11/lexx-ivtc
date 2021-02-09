@@ -61,7 +61,7 @@
 7391,7411 cccpp 
 7412,7444 cppcc 
 7445,7643 ppccc
-7638,7643 + # crossfade (kindof)
+7638,7643 + # crossfade (kindof, cpppc does not work)
 7644,8971 ppccc
 9165,9275 ccppc 
 9276,9379 pcccp 
@@ -77,7 +77,7 @@
 11541,11675 ccppc 
 11676,11930 cppcc 
 11931,12087 cccpp 
-12088,12529 pcccp # 59.94i + pcccp
+12088,12529 pcccp # 59.94i + pcccp # TODO: not always pcccp
 12088,12529 +
 12530,12732 pcccp 
 
@@ -154,7 +154,7 @@
 18046,18096 ppccc 
 18097,18180 cccpp
 18181,18258 pcccp
-18259,18723 c
+18259,18723 c # TODO: make it smooth
 18259,18723 + # same mess in Lexx Rated part 1 -++---++-++---++-++---+-+++---+-++---
 18724,18937 c # already deinterlaced
 18938,19117 cppcc 
@@ -384,7 +384,7 @@
 41125,41172 cccpp 
 41173,41187 cppcc
 41188,41227 cppcc
-41228,41297 cppcccpcppcccpcppccccccp # wtf?
+41228,41297 cppcccpcppcccpcppccccccp # TODO: make it smooth
 41298,41465 cccpp 
 41466,41815 ccppc
 41816,41906 pcccp 
@@ -470,7 +470,7 @@
 46525,46761 cccpp 
 46762,46846 ccppc 
 
-46847,46966 c
+46847,46966 c # TODO: find the correct patterns
 46847,46966 +
 
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
@@ -890,7 +890,7 @@
 74905,74968 ccppc 
 74969,75003 ccppc 
 74969,75003 -+--- # few frames still combed, 2-3 mostly, but 3rd is dropped
-74969,75003 Q 2
+74969,75003 Q 5
 75004,75042 c # 59.94i
 75004,75042 +
 75004,75042 Q 5
@@ -1374,24 +1374,20 @@
 
 117443,117452 pcccp # fg & bg pcccp
 
-#117453,117467 c # fg pcccp, bg cppcc
-#117453,117467 +
-#117453,117467 Q 6
 117453,117467 uphcl # fg pcccp, bg cppcc
 117453,117467 --+-+
 117453,117467 Q 6
 
-#117468,117494 c # many layers, fg1 ccppc, fg2 pcccp, bg ccppc
-#117468,117494 +
-#117468,117494 Q 6
 # not working smoothly, some objects seem to have other than c/p, but better then blurring everything
+
 117468,117494 hhllh # fg1 & bg ccppc, fg2 pcccp, fg3 ppccc
 117468,117494 +
-#117468,117494 Q 6 # so motion blurred, yadif would actually make it annoyingly sharp
+117468,117494 Q 6 # so blurred, yadif would actually make it annoyingly sharp
 
 117495,117571 ppccc 
 
 # fg very small, only a few combed pixels, not worth a phclu -+-+-
+
 117572,117680 ppccc # fg cccpp, bg ppccc
 #117572,117680 + 
 #117572,117680 Q 6

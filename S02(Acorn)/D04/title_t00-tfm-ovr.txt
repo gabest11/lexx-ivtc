@@ -44,22 +44,22 @@
 1240,1286 -++-- # crossfade to all c
 1287,2244 c
 2245,2394 c
-2395,2521 ppccc
+2395,2521 c # ppccc
 2395,2521 ++---
 2395,2521 Q 5
-2522,2599 cccpp
+2522,2599 c # cccpp
 2522,2599 ---++
 2522,2599 Q 5
-2600,2650 cppcc
+2600,2650 c # cppcc
 2600,2650 -++--
 2600,2650 Q 5
-2651,2706 cppcc
+2651,2706 c # cppcc
 2651,2706 -++--
 2651,2706 Q 5
 2707,2936 c
 2937,3010 cccpp
 3011,3211 pcccp
-3212,3338 c # ccppc # keep the background
+3212,3338 cpphc # c # ccppc + cppcc (tv, pp fields already blended, drop one)
 3212,3338 --++-
 3339,3434 ppccc
 3435,3536 c
@@ -94,6 +94,7 @@
 6426,6504 ppccc
 6505,6699 ppccc
 6505,6506 +
+6505 Q 3
 6530,6699 ++--- # cgi truck in the fg starts here
 6530,6699 M 3
 6700,7533 c
@@ -147,7 +148,7 @@
 16651,16861 c
 16862,16940 pcccp
 16941,17032 pcccp
-17033,17206 c # ppccc # keep the background
+17033,17206 ppccc # c (tv, pp fields already blended, drop one)
 17033,17206 ++---
 17207,17375 c
 17376,18200 c
@@ -209,7 +210,7 @@
 22572,22623 c
 22624,22677 pcccp
 22678,22730 c
-22678,22730 --++- # not 1:1
+22678,22730 --++- # not 1:1 (combed on an angle)
 22731,22765 ppccc
 22766,22806 cppcc
 22807,22844 ppccc
@@ -252,7 +253,7 @@
 24123,24178 c
 24179,24207 cppcc
 24208,24261 c
-24262,24323 c
+24262,24323 c # fg ccppc, bg 29.97
 24262,24323 --++-
 24324,24349 ccppc
 24350,24364 ppccc
@@ -263,10 +264,10 @@
 25262,25382 pcccp # purple fog also interlaced sideways
 25383,25505 c
 25383,25505 -
-25506,25642 pcccp
-#25506,25642 +---+ # ?
-25643,25790 ccppc
-#25643,25790 --++- # ?
+25506,25642 c # pcccp # not 1:1
+25506,25642 +---+ # ?
+25643,25790 c # ccppc # not 1:1
+25643,25790 --++- # ?
 25791,26622 c
 26623,26733 ccppc
 26734,26812 ppccc
@@ -307,15 +308,15 @@
 30243,30334 c
 30335,30578 c
 30579,30688 c
-30689,30789 cppcc
+30689,30789 c # cppcc # bg 59.94i blended to 29.97
 30689,30789 -++--
 30689,30789 Q 5
 30790,30879 ppccc
-30880,30927 ccppc
+30880,30927 ccppc # same but bg isn't moving much
 30880,30927 --++-
 30880,30927 Q 5
 30928,30988 cccpp
-30989,31237 c
+30989,31237 c # 1st frame different color tone
 31238,31388 c
 31389,31490 c
 31491,31629 c
@@ -329,13 +330,13 @@
 32503,32593 c
 32594,32861 cppcc
 32862,33047 pcccp
-33048,33217 ccnnc # looks like n instead of p, but still not perfect
+33048,33217 cchhc # other field bad or just not 1:1 
 33048,33217 --++-
 33183,33248 + # crossfade
 33218,33337 cccpp
 33338,33539 c
 33540,33600 cccpp
-33601,33759 c # cppc # not 1:1
+33601,33759 c # ccppc # not 1:1
 33601,33759 --++-
 33760,33830 cccpp
 33831,33934 ppccc
@@ -353,14 +354,33 @@
 35139,35301 ccppc
 35302,35469 cppcc # pattern change in the middle of the scene
 35470,35602 ppccc
-35603,35800 pcccp # ccppc + pcccp, fix the water, it covers more
-35603,35800 +-+++
+
+35603,35800 hclup # ccppc + pcccp
+35603,35800 +-+--
+35763,35800 +-++- # crossfade, ccppc + pcccp + cccpx (x no match, hclup uses it in both u and p)
+
 35801,36460 ppccc
-36461,36526 ++-++ # xev slides out to the left, transitioning to the next scene with a different pattern
-#36461,36526 Q 5
-36461,36637 cccpp
-36638,36751 ppccc # cccpp + ppccc, same, people are even smaller here
-36638,36751 ++-++
+36461,36527 phclu # crossfade, ppccc + cccpp
+36461,36527 -+-++ # u not 1:1
+36470 Q 2 # only blending, this kind of, helps
+36475 Q 2
+36480 Q 2
+36485 Q 2
+36490 Q 2
+36495 Q 2
+36500 Q 2
+36505 Q 2
+36510 Q 2
+36515 Q 2
+36520 Q 2
+36525 Q 2
+36528,36637 cuucc # should be cppcc, but cannot drop from the beginning for continuity, cuucc is the same and we can drop the 4th
+36528,36637 -
+
+36638,36751 phclu # cccpp + ppccc
+36638,36751 -+-+-
+36638 +
+
 36752,36883 ccppc
 36884,36934 cppcc
 36935,37027 cppcc
@@ -371,6 +391,7 @@
 37233,37305 Q 3
 37306,37347 ccppc 
 37348,37400 pcccp
+37348 Q 3
 37401,37873 c
 37874,37903 pcccp
 37904,37943 pcccp
@@ -379,7 +400,7 @@
 37944,37991 Q 5
 37992,38056 c # zoomed again, no match
 37992,38056 ---++
-37992,38056 Q 2
+37992,38056 Q 5
 38057,38120 ppccc
 38121,38184 ppccc
 38185,38272 cppcc
@@ -394,7 +415,7 @@
 38774,38824 ccppc
 38825,38889 c # zoomed
 38825,38889 ++---
-38825,38889 Q 2
+38825,38889 Q 5
 38890,38919 ppccc
 38920,38950 c
 38951,38976 ccppc
@@ -659,16 +680,16 @@
 77302,77492 ppccc
 77493,77755 ccppc
 77756,77881 cccpp
-77882,78086 ccppc
+77882,78086 c # ccppc + 29.97
 77882,78086 --++-
 78087,78487 cccpp
 78488,78630 ppccc
 78631,78678 ppccc
 78679,78798 cccpp
-78799,78964 pcccp
+78799,78964 c # pcccp + 29.97
 78799,78964 +---+
 78965,79049 pcccp
-78965,79002 +---+
+78965,79002 +---+ # only a few sparklings
 79050,79241 pcccp
 79242,79312 cppcc
 79313,79515 cccpp
@@ -698,8 +719,9 @@
 83136,83354 c
 83355,83358 c
 83359,83581 ppccc
-83582,83762 cccpp
-83582,83762 ---++ # still combed
+83582,83762 cccup
+83582,83762 ---++
+83582,83762 Q 5
 83763,84275 pcccp
 84246,84275 + # fade-out
 
@@ -769,7 +791,6 @@
 87956,88189 pcccp # keyframe
 88150 - # MIC = 81
 88165,88189 + # fade-out
-# TODO
 88190,88481 c
 88482,88633 c
 88634,88858 c
@@ -843,7 +864,7 @@
 105526,105678 ccppc
 105526,105554 + # fade-in
 105679,106631 c
-106632,106727 cpppc # cppcc + ccppc # drop every 2nd
+106632,106727 cpppc # cppcc + ccppc
 106632,106727 -
 106728,106778 c
 106779,106876 c
@@ -922,7 +943,7 @@
 125237,125452 c
 125453,125996 c
 125997,126088 c
-126089,126179 c # cccpp # robot head eyes cccpp, mouth ccccc, amazing
+126089,126179 c # cccpp # robot head eyes cccpp, mouth 29.97 and singe field, amazing
 126089,126179 ---++ # deinterlace the eyes, smaller area
 126180,126255 c
 126256,126323 c # pcccp # same
@@ -970,8 +991,8 @@
 135277,135325 cppcc
 135326,135414 c
 135415,135569 c
-135570,135678 cccpp
-135570,135678 ---++ # still combed
+135570,135678 cccch # cccpp, only a single usable field in pp, deinterlace and crop the other p
+135570,135678 ----+
 135679,136043 c
 136044,136099 c
 136100,136310 c
@@ -1190,16 +1211,21 @@
 163395,163468 c
 163395,163468 -++--
 163395,163468 Q 5
+#163395,163468 cupcc # rope looks strange this way
+#163395,163468 -++--
+#163395,163468 Q 5 # stars shimmering
 163469,163554 c
 163469,163554 +
-163734,163800 ppccc
-163734,163800 ++--- # still combed, background 29.97
-163801,163910 cppcc
-163801,163910 -++-- # same
+163734,163800 upccc
+163734,163800 ++---
+163734,163800 Q 5 # stars...
+163801,163910 cupcc # all bad fields look terrible
+163801,163910 -++--
+163801,163910 Q 5 # stars...
 163911,164275 c
 164276,164461 c
 164462,164583 c
-164584,164659 c # ccppc
+164584,164659 ccppc # ccppc + 29.97 (planet is rotating slowly)
 164584,164659 --++-
 164660,164742 c
 164743,164787 c
@@ -1213,10 +1239,11 @@
 165569,165681 ppccc
 165610 - # MIC = 93
 165682,165795 ccppc
-165796,165836 cppcc
+165796,165836 c # cppcc + 29.97
+165796,165836 -++--
 165837,165898 c
-165899,165938 ccppc
-165899,165938 --++- # background
+165899,165938 c # ccppc + 29.97
+165899,165938 --++-
 165939,166064 ccppc
 166065,166128 c
 166129,166209 c # ccppc # top half ccppc, bottom half 29.97

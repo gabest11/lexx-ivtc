@@ -55,12 +55,11 @@
 1546,1572 --++-
 1573,1612 pcccp
 1573,1630 +---+
-1631,1826 c
+1631,1827 c
 
-1828,2007 ccppc # keyframe
-1828,2007 --++-
-1828,2007 Q 5 # yadif is terrible for the cgi here
-1828,2007 M 15
+1828,2007 ccupc # keyframe
+1828,2007 --++- # bus 29.97, bg is ccppc, bus moves so slowly that we can convert it to 23.976
+1828,2007 Q 5 # yadif is terrible for the cgi here, but stars will shimmer a bit
 2008,2206 cccpp
 2207,2644 cccpp
 2645,2706 ccppc
@@ -155,7 +154,7 @@
 13391,13440 pcccp
 13441,13562 cccpp
 13563,13614 c
-13563,13614 +++-- # ?
+13563,13614 +++-- # ? investigate
 13615,13737 cccpp
 13738,13766 pcccp
 13767,13804 ccppc
@@ -281,7 +280,7 @@
 28945,31820 ppccc
 31821,31888 ppccc
 31889,31942 cppcc
-31943,32003 ccppc
+31943,32003 ccupc # robot eyes/mouth are on a green screen
 31943,31985 --++-
 31943,31985 Q 5
 32004,33977 cppcc
@@ -492,8 +491,9 @@
 70896,71281 cccpp
 71282,71359 cccpp
 71360,71663 pcccp
-71664,71734 cccpp
-71664,71734 ---++ # still interlaced
+71664,71734 cccup
+71664,71734 ---++
+71664,71734 Q 5
 71735,71801 c
 71802,71972 cppcc
 71973,72767 ccppc
@@ -519,16 +519,20 @@
 74586,74615 cccpp
 74616,74654 cccpp
 74655,74682 ppccc
-74683,74720 ccppc
+74683,74720 ccupc # 790
 74683,74720 --++-
 74683,74720 Q 5
 74721,74763 ppccc
 74764,74815 cccpp
 74816,74864 cccpp
-74865,74892 cppcc
+74865,74892 cupcc # 790
+74865,74892 -++--
+74865,74892 Q 5
 74893,74912 ppccc
 74913,74957 cccpp
-74958,75017 cppcc
+74958,75017 cupcc # 790
+74958,75017 -++--
+74958,75017 Q 5
 75018,75153 ccppc
 75154,75204 cppcc
 75205,75257 ppccc
@@ -541,26 +545,31 @@
 75983,76103 ccppc
 76104,76161 cccpp
 76162,76248 ccppc
-76249,76324 cccpp
+76249,76324 cccup # strange strobing effect
 76249,76324 ---++
+76249,76324 Q 5
 76325,76534 ccppc
 76535,76658 ccppc
 76659,76726 cppcc
 76727,76840 c # ccppc # flying moth vs space again
 76727,76840 --++-
 76841,76949 pcccp
-76950,77032 cccpp
+76950,77032 cccup
 76950,77032 ---++
+76950,77032 Q 5
 77033,77116 c
 77117,77407 pcccp
 77408,77549 ppccc
 77550,77724 cppcc
-77725,77880 pcccp
+77725,77880 pcccu
 77725,77880 +---+
+77725,77880 Q 5
 77881,78008 ppccc
-78009,78246 c # deinterlaced
+78009,78246 c # cupcc, already deinterlaced, we were too late
+78009,78246 - # -++--
+78009,78246 # Q 5
 78247,78345 pcccp
-78346,78483 c # cccpp # not 1:1
+78346,78483 c # cccpp # same
 78346,78483 ---++
 78484,78594 ppccc
 78595,78635 c
