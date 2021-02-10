@@ -631,15 +631,16 @@
 
 47702,47719 pccpp # pcccp + cccpp (moth)
 47702 Q 3
-47720,47737 ppccp # pcccp + ppccc (moth)
+47720,47737 upccu # pcccp + ppccc (moth)
 47738,47756 hclup # pcccp + ccppc (moth)
 47738,47756 +-+--
+#47738 Q 2
 #47738,47756 Q 6
 47757,47775 cccpp # cccpp + cccpp (moth)
 47776,47794 hclup # ccppc + pcccp (moth)
 47776,47794 +-+--
 #47776,47794 Q 6
-47795,47806 pppcc # cppcc + ppccc (moth)
+47795,47806 uppcc # cppcc + ppccc (moth)
 
 47807,47941 ppccc
 
@@ -1590,7 +1591,7 @@
 117702,117792 cluph
 117702,117792 + # black sfx # -+--+
 #117702,117792 Q 6
-117793,117881 luphc # ppccc + cppcc
+117793,117881 pppcc # ppccc + cppcc
 117793,117881 + # black sfx # +--+-
 #117793,117881 Q 6
 117882,117941 pcccp

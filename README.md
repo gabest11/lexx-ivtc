@@ -62,14 +62,17 @@ Why would you want to do this when TIVTC can field-match and decimate automatica
     1t* 2t* 3t  3t* 4t* 5t
     1b* 2b* 3b* 4b* 5b  5b
 
-    1c  2c  xx  3p  4p
+    1c  2c  3u  3p  4p
 
-    tfm: ccxpp, -----
-    tdec: f, ++-++
+    tfm: ccupp, -----
+    tdec: f, ++-++ or +++-+
+    
+    ... or alternatively if you need to drop another frame ...
+    
+    tfm: ccuup, -----
+    tdec: f, +++-+ or ++++-
 
-x can be anything, that's the one we will drop. 
-
-Drop the first p as a general rule.
+One of the up pairs can be droped.
 
 ### pp does not overlap, ccppc + pcccp
 

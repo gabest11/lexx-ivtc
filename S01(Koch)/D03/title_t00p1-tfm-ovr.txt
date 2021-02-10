@@ -766,16 +766,16 @@
 
 75264,75280 ccchchppppcclcccc
 75264,75280 ---+-+----+-+----
-75274 Q 2
+75274 Q 5
 75281,75295 chchchppppcclcc
 75281,75295 -+-+-+----+-+--
-75291 Q 2
+75291 Q 5
 75296,75310 ccchchppppcclcc
 75296,75310 ---+-+----+-+--
-75306 Q 2
+75306 Q 5
 75311,75324 ccchchppppppcc
 75311,75324 ---+-+------+-
-75323 Q 2
+75323 Q 5
 
 # same bs happens in the next hour (for me)
 
@@ -793,36 +793,36 @@
 75441,75449 pppcclclc
 75441,75449 ---+-+-+-
 75377 + # scene start
-75380 Q 2
-75397 Q 2
-75412 Q 2
-75429 Q 2
-75444 Q 2
+75380 Q 5
+75397 Q 5
+75412 Q 5
+75429 Q 5
+75444 Q 5
 
 75450,75493 cccpp
 
 75494,75539 hpccclccculccppcpppcc
 75494,75539 ++---+----+-----+----
-75510 Q 2
-75531 Q 2
+75510 Q 5
+75531 Q 5
 
 75540,75569 ccculccuccpppcchpccchccclccccc
 75540,75569 ----+---+-+----+----+---+-----
 75548 Q 5 # this is not a time gap, just a dup
-75550 Q 2
+75550 Q 5
 
 75570,75614 pcccp
 
 75615,75653 hppcclccccchchp
 75615,75653 +--+-+-----+-+-
-75618 Q 2
-75633 Q 2
-75648 Q 2
+75618 Q 5
+75633 Q 5
+75648 Q 5
 
 75654,75689 ccchcchpcpppcculcclccchcchpcpppcclcc
 75654,75689 ---+--+--+-----+--+---+--+--+----+--
-75663 Q 2
-75682 Q 2
+75663 Q 5
+75682 Q 5
 
 75690,75723 ppppppplccccchchp
 75690,75723 ------++-----+-+-
@@ -830,29 +830,33 @@
 75724,75729 ----++
 75690 +
 75695 Q 6
-75696 Q 2
-75713 Q 2
-75728 Q 2
+75696 Q 5
+75713 Q 5
+75728 Q 5
 
 # by starting with a bunch of u's we can skip a dup later at the cost of throwing away the first frame
 75730,75794 uuuuuuuulclccccccchchppppppcclccccchchchpppppphclccccchchchpppppp
 75730,75794 +-------+-+-------+-+------+-+-----+-+-+-----++-+-----+-+-+-----+
-75730 Q 2
-75757 Q 2
-#75775 Q 2
+75730 Q 6 # this will grab the first field of the second frame, skipping the first completely
+75757 Q 5
+#75775 Q 5
 75775 Q 6
 75775 f 0
-75776 Q 2
-75794 Q 2
+75776 Q 5
+75794 Q 5
 
 75795,75850 cclccchcchpcculcculcclccchcchpcculcclccclccchcchpcculccl
 75795,75850 --+---+--+----+---+--+---+--+----+--+---+---+--+----+--+
-75807 Q 2
+75807 Q 5
 # the jump between 75825-75826 is a bit large
 
-
 75851,76060 pcccp
-75894,75895 - # MIC = 87
+75859,75860 +
+75862 +
+75864,75865 +
+75889,75890 +
+75892 +
+75894,75895 +
 76061,76673 ppccc
 76674,76784 pcccp
 76785,76882 cccpp
@@ -1304,6 +1308,7 @@
 131230,131247 ppccc
 131248,131285 pcccp
 
+# TODO: make this smooth
 131286,131304 ccpcpccpcppcpccpccp
 131305,131323 ccpcpcppcppcpccpccp
 131324,131342 ccpcpcppcpccpccpccp
@@ -1503,7 +1508,7 @@
 148933,149062 ccppc
 149063,149176 pcccp
 149177,149416 cppcc
-149417,149670 cccpp
+149417,149670 cccpp # green screen fail
 149671,149838 ccppc
 149839,149926 c
 149927,150071 pcccp

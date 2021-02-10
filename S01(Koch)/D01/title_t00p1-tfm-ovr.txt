@@ -61,8 +61,9 @@
 7391,7411 cccpp 
 7412,7444 cppcc 
 7445,7643 ppccc
-7638,7643 + # crossfade (kindof, cpppc does not work)
+7638,7643 + # crossfade (kindof, cuppc does not work)
 7644,8971 ppccc
+8972,9164 cppcc
 9165,9275 ccppc 
 9276,9379 pcccp 
 9380,9426 cccpp 
@@ -351,8 +352,7 @@
 37942,37974 + # crossfade
 37973,38228 pcccp
 38199,38288 + # crossfade
-38229,38866 cpppc # cppcc + ccppc, drop every 2nd
-38289,38866 -
+38229,38866 cuppc # cppcc + ccppc
 38867,38969 c # pcccp # reflection is 59.94i
 38867,38969 +
 38867,38969 Q 6
@@ -371,7 +371,7 @@
 40210,40227 pcpcccpccccp
 #40063,40227 -
 40223,40227 + # fade-out
-40228,40362 pppcc # bg cppcc, fg ppccc, drop every 1st
+40228,40362 uppcc # bg cppcc, fg ppccc
 40228 Q 3
 40363,40562 ccppc
 40563,40658 pcccp
@@ -384,7 +384,10 @@
 41125,41172 cccpp 
 41173,41187 cppcc
 41188,41227 cppcc
-41228,41297 cppcccpcppcccpcppccccccp # TODO: make it smooth
+#41228,41297 cppcccpcppcccpcppccccccp
+41228,41297 ccpcuccccpcuccccpcuccucc # make it smooth
+41228,41297 -+--+-+-+--+-+-+--+--+-+
+41228,41297 Q 5
 41298,41465 cccpp 
 41466,41815 ccppc
 41816,41906 pcccp 
@@ -480,12 +483,11 @@
 47046,47101 -+-+-
 47046 + # starts with a p
 
-47102,47174 pccpp # mid pcccp, side cccpp, drop 4th, far sides?
+47102,47174 pccup # mid pcccp, side cccpp, far sides?
 
 #47175,47332 cluph # ccppc + cccpp + cppcc (not sure about the 3rd, it does not make it smoother)
 #47175,47332 -+--+
-47175,47332 ccppp # ccppc + cccpp
-47175,47332 -
+47175,47332 ccupp # ccppc + cccpp
 
 47333,47606 ccppc 
 47607,47938 pcccp 
@@ -591,7 +593,7 @@
 56103,56270 cppcc 
 56271,56596 cccpp 
 56597,57057 cppcc 
-57058,57259 ppccp # fg pcccp, bg ppccc, drop every 5th
+57058,57259 ppccu # fg pcccp, bg ppccc
 57059,57259 + # non-moving parts are combed for no reason
 57059,57259 Q 5
 57260,57481 pcccp # fg pcccp, bg cppcc, spotlight in the bg small visibility, don't care
@@ -614,21 +616,15 @@
 58663,58739 c
 58663,58739 -
 58740,58839 ccppc 
-58840,58943 ppccp # fg pcccp, bg ppccc, drop every 5th
-58841,58943 -
-58870,58886 +
+58840,58943 ppccu # fg pcccp, bg ppccc
+58869,58886 +
 58944,59009 ppccc
 58944 Q 3
 
-#59010,59217 ppccp # fg pcccp, bg & spotlight ppccc, bg2 ccppc, drop every 5th, deinterlace bg2
-#59010,59072 +
-#59073,59123 - # no bg2 here
-#59124,59217 +
-
 59010,59072 hhllh # fg pcccp, bg & spotlight ppccc, bg2 ccppc
 59010,59072 +
-59073,59123 cpppc # fg cppcc, bg & spotlight ccppc
-59073,59123 -
+59073,59123 cuppc # fg cppcc, bg & spotlight ccppc
+#59073,59123 -
 59124,59217 hhhll # fg ppccc, bg & spotlight cppcc, bg2 cccpp
 59124,59217 +
 
@@ -643,8 +639,7 @@
 59380,59626 ccppc 
 59380,59626 - # MIC high
 59627,59846 cppcc 
-59847,59948 ccppp # bug ccppc, bg cccpp, drop 3rd
-#59847,59948 -
+59847,59948 ccupp # bug ccppc, bg cccpp
 59949,60185 ppccc 
 60186,60244 pcccp 
 60245,60359 pcccp 
@@ -684,7 +679,9 @@
 63049,63133 c # 59.94i
 63049,63133 +
 #63049,63133 Q 5
-63134,63230 cppcc 
+63134,63230 cppcc
+63134 + # first frame combed
+63134 Q 3
 63231,63278 ccppc 
 63279,63359 pcccp 
 63360,63780 c
@@ -741,7 +738,7 @@
 #67276,67396 Q 5
 67397,67541 cppcc
 67542,67636 ppccc 
-67637,67720 pppcc # fg ppccc, bg cppcc, drop 1st
+67637,67720 uppcc # fg ppccc, bg cppcc
 67721,67781 cppcc 
 67782,67840 cppcc 
 67841,67954 cppcc 
@@ -809,19 +806,20 @@
 #70524,70591 Q 5
 70592,70625 pcccp 
 70626,70666 ccppc 
-70667,70700 pccpp # pcccp + cccpp, drop 4th
+70667,70700 pccup # pcccp + cccpp
+70693 - # MIC = 84
 70701,70744 ccppc
 70745,70761 phclu # cccpp + ppccc (lizard)
 70745,70761 -+-+-
 #70745,70761 Q 6
-70762,70820 cpppc # ccppc + cppcc, drop 2nd
+70762,70820 cuppc # ccppc + cppcc
 70821,70908 cccpp 
 70909,70998 cccpp 
 70999,71036 ppccc
 70999,71036 +
 #70999,71036 Q 5
-71037,71084 ccppp # ccppc + cccpp, drop 3rd
-71085,71134 ppccp # ppccc + pcccp, drop 5th
+71037,71084 ccupp # ccppc + cccpp
+71085,71134 ppccu # ppccc + pcccp
 71135,71179 cppcc 
 71180,71302 c
 71180,71302 +
@@ -1180,7 +1178,7 @@
 100710,101145 pcccp 
 101146,101421 ccppc 
 101422,101964 cccpp 
-101965,101974 cccppcccppcppc # this scene ends in a strange way
+101965,101978 cccppcccppcppc # this scene ends in a strange way
 101979,102162 pcccp 
 102163,102176 cccppcccppcppc # same
 102177,102294 ccppc 
@@ -1334,24 +1332,49 @@
 113469,113634 pcccp 
 113635,113793 pcccp 
 113794,114020 ccppc 
-114021,114068 ccppc 
+114021,114067 ccppc 
+
 # 114068 is a 1st p frame, the second field has no pair, it skips to the next crazy pattern
-114069,114084 cpccpccpcpccpcpp
-114085,114100 cpccpccpcpcppcpc
-114101,114116 cpccpccpcpcppcpc
-114117,114132 cpccpccpcpcppcpc
-114133,114148 cpccpcpccpcppcpc
-114149,114164 cpccpcpccpcppcpc
-114165,114180 cpccpcpccpcppcpc
-114181,114196 cpccpcpcppcpccpc
-114197,114212 cpccpcpcppcpccpc
-114213,114228 cpccpcpcppcpccpc
-114229,114244 cpccpcpcppcpccpc
-114245,114260 cpcpccpcppcpccpc
-114261,114276 cpcpccpcppcpccpc
-114277,114292 cpcpcppcppcpccpc
-114293,114308 cpcpcppcpccpccpc
-114309,114321 cpcpcppcpccpc
+
+#114069,114084 cpccpccpcpccpcpp
+#114085,114100 cpccpccpcpcppcpc
+#114101,114116 cpccpccpcpcppcpc
+#114117,114132 cpccpccpcpcppcpc
+#114133,114148 cpccpcpccpcppcpc
+#114149,114164 cpccpcpccpcppcpc
+#114165,114180 cpccpcpccpcppcpc
+#114181,114196 cpccpcpcppcpccpc
+#114197,114212 cpccpcpcppcpccpc
+#114213,114228 cpccpcpcppcpccpc
+#114229,114244 cpccpcpcppcpccpc
+#114245,114260 cpcpccpcppcpccpc
+#114261,114276 cpcpccpcppcpccpc
+#114277,114292 cpcpcppcppcpccpc
+#114293,114308 cpcpcppcpccpccpc
+#114309,114321 cpcpcppcpccpc
+
+# plan B, make it smooth instead
+
+114068 l
+114068 +
+114069,114084 ccccuccucccccccp
+114069,114084 -+--+--+-+--+-+-
+114085,114132 ccccuccuccccpccc
+114085,114132 -+--+--+-+-+--+-
+114133,114148 ccccucccccccpccc
+114133,114148 -+--+-+--+-+--+-
+114149,114180 cuccucccccccpccc
+114149,114180 -+--+-+--+-+--+-
+114181,114244 cuccuccccpcccccc
+114181,114244 -+--+-+-+--+--+-
+114245,114276 cucccccccpcccccc
+114245,114276 -+-+--+-+--+--+-
+114277,114292 cuccccpccpcucccc
+114277,114292 -+-+-+--+--+--+-
+114293,114321 cuccccpccccucccc
+114293,114321 -+-+-+--+--+--+-
+114069,114321 Q 5
+
 114322,114413 ppccc 
 114414,115431 ccppc 
 115432,115540 c # fg ppccc, bg 59.94i
@@ -1415,13 +1438,12 @@
 122465,122512 cppcc
 122513,122922 cppcc
 122923,123068 ppccc
-123069 u
-123070,123113 ppccc
+123069,123113 upccc # right side
 123069,123113 + # left side is single field until the saw starts
 123069,123113 Q 5
 # somehow the two sides of the picture are out of sync...
 # are you trying to tell me they did not really cut his head open???
-123114,123256 uphcl # pcccp + cppcc
+123114,123256 uphcl # pcccp + cppcc (left)
 123114,123256 --+-+
 
 123257,123319 cccpp
@@ -1497,7 +1519,7 @@
 130485,130579 pcccp 
 130580,130668 cppcc
 130669,130702 ccppc
-130703,130742 pcccp 
+130703,130742 pcccp
 130743,130782 ppccc
 130783,130843 ccppc 
 130844,130939 ppccc 
@@ -1579,6 +1601,7 @@
 137346,137371 c # ???
 137346,137371 +
 137372,137406 cccpp 
+137372 + # ?
 137407,137530 ccppc 
 137531,137748 cccpp 
 137749,138236 ppccc 
@@ -1586,7 +1609,7 @@
 138493,138640 cppcc
 138641,141112 cccpp 
 141113,141216 cppcc 
-141217,141670 pppcc # fg cppcc, overlay ppccc, drop 1st
+141217,141670 uppcc # fg cppcc, overlay ppccc
 141671,141878 c
 141671,141878 +
 141671,141878 Q 5

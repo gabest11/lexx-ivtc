@@ -104,21 +104,29 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 				// should be one for every "scene change", but we basically mark every single one of them
 				
 				$ovrframes[$m[1]]['first'] = true;
+				$ovrframes[$m[3]]['last'] = true;
 			}
 			
 			if(empty($m[3])) $m[3] = $m[1];
 			
 			if(empty($m[5])) $m[5] = '';
 			
-			$ovrscenes[] = ['s' => (int)$m[1], 'e' => (int)$m[3], 't' => $m[5], 'row' => $row];
+			$scene = ['s' => (int)$m[1], 'e' => (int)$m[3], 't' => $m[5], 'row' => $row];
+			
+			$ovrscenes[] = $scene;
 			
 			if(!empty($m[5]))
 			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
 			{
 				if(isset($ovrframes[$i]['type'])) die($row);
 				
-				$ovrframes[$i]['type']['value'] = $m[5][$k];
+				$value = $m[5][$k];
+				
+				$ovrframes[$i]['type']['value'] = $value;
 				$ovrframes[$i]['type']['row'] = $row;
+
+				$ovrframes[$i]['first_pb'] = isset($ovrframes[$i]['first']) && array_search($value, ['p','b']) !== false;
+				$ovrframes[$i]['last_un'] = isset($ovrframes[$i]['last']) && array_search($value, ['u','n']) !== false;
 		
 				if(++$k == strlen($m[5])) $k = 0;
 			}
@@ -127,22 +135,24 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 
 	foreach($tfmframes as $i => $tfm)
 	{
-		if(!isset($ovrframes[$i]['type'])) continue;
-
+		if(!isset($ovrframes[$i])) continue; #TODO: warn about undefined ranges
+	
+		$f = $ovrframes[$i];
+		
+		if(!isset($f['type'])) continue;
+		
 		if($tfm['deint'] == '-')
 		{
-			// first frame p and not deinterlaced
+			// first frame p/b or last u/n and not deinterlaced
 		
-			if(isset($ovrframes[$i]['first'])
-			&& $ovrframes[$i]['type']['value'] == 'p'
-			&& isset($ovrframes[$i]['deint']) && $ovrframes[$i]['deint']['value'] == '-')
+			if(($f['first_pb'] || $f['last_un']) && isset($f['deint']) && $f['deint']['value'] == '-')
 			{
-				$bogusframes[$i] = $ovrframes[$i];
+				$bogusframes[$i] = $f;
 			}
 /*
-			else if($tfm['mic'] >= 30 && !isset($ovrframes[$i]['MI']) && !isset($ovrframes[$i]['deint']))
+			else if($tfm['mic'] >= 30 && !isset($f['MI']) && !isset($f['deint']))
 			{
-				$bogusframes[$i] = $ovrframes[$i];
+				$bogusframes[$i] = $f;
 			}
 */
 		}
@@ -152,18 +162,18 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 			// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
 			// - indirectly deinterlaced by MI level
 			// - directly deinterlaced
-
-			if(!isset($ovrframes[$i]['first'])
-			&& !isset($ovrframes[$i]['MI'])
-			&& !(isset($ovrframes[$i]['deint']) && $ovrframes[$i]['deint']['value'] == '+'))
+			
+			//if(isset($f['first']) && array_search(['p','b'], $f['type']['value']) !== false
+			
+			if(!($f['first_pb'] || $f['last_un'] || isset($f['MI']) || isset($f['deint']) && $f['deint']['value'] == '+'))
 			{
 				// still auto-deinterlaced by TFM, examine the reason
 
-				$bogusframes[$i] = $ovrframes[$i];
+				$bogusframes[$i] = $f;
 			}
 		}
 		
-		if(!isset($ovrframes[$i]['first'])
+		if(!isset($f['first'])
 		&& $tfm['micmin']['t'] != $tfm['type']
 		&& $tfm['type'] == 'c' && $tfm['micmin']['t'] == 'p'
 //		&& ($tfm['type'] == 'c' || $tfm['type'] == 'p')
@@ -172,8 +182,8 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 		{
 			// recommendation by tfm is different
 			
-print_r([$i, $tfm, $ovrframes[$i]]);
-			$bogusframes[$i] = $ovrframes[$i];
+print_r([$i, $tfm, $f]);
+			$bogusframes[$i] = $f;
 		}
 	}
 	
