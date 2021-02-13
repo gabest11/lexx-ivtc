@@ -4,7 +4,7 @@ if(!file_exists($argv[1])) die('check file name');
 
 $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
-function sanitycheck($title, &$bogusframes, &$bogusscenes)
+function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
 {
 	#TODO: check if the wrong frame is dropped in the override file for known patterns
 	#TODO: scene begins with p/b, ends on u/n and blended
@@ -95,7 +95,17 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 				$ovrframes[$i]['MI']['row'] = $row;
 			}
 		}
-		else if(preg_match('/^([0-9]+)(,([0-9]+))?( +([cpbnu]+))?$/i', $s, $m))
+		else if(preg_match('/^([0-9]+)(,([0-9]+))? +(Q|PP) +([0-9]+)$/i', $s, $m))
+		{
+			if(empty($m[3])) $m[3] = $m[1];
+
+			for($i = (int)$m[1], $j = (int)$m[3]; $i <= $j; $i++)
+			{
+				$ovrframes[$i]['Q']['value'] = $m[5];
+				$ovrframes[$i]['Q']['row'] = $row;
+			}
+		}
+		else if(preg_match('/^([0-9]+)(,([0-9]+))?( +([cpbnuhl]+))?$/i', $s, $m))
 		{
 			if(isset($m[3]) && is_numeric($m[3])) 
 			{
@@ -138,14 +148,14 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 		if(!isset($ovrframes[$i])) continue; #TODO: warn about undefined ranges
 	
 		$f = $ovrframes[$i];
-		
+				
 		if(!isset($f['type'])) continue;
-		
+
 		if($tfm['deint'] == '-')
 		{
 			// first frame p/b or last u/n and not deinterlaced
 		
-			if(($f['first_pb'] || $f['last_un']) && isset($f['deint']) && $f['deint']['value'] == '-')
+			if((!empty($f['first_pb']) || !empty($f['last_un'])) && isset($f['deint']) && $f['deint']['value'] == '-')
 			{
 				$bogusframes[$i] = $f;
 			}
@@ -165,10 +175,16 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes)
 			
 			//if(isset($f['first']) && array_search(['p','b'], $f['type']['value']) !== false
 			
-			if(!($f['first_pb'] || $f['last_un'] || isset($f['MI']) || isset($f['deint']) && $f['deint']['value'] == '+'))
+			if(!(!empty($f['first_pb']) || !empty($f['last_un']) || isset($f['MI']) || isset($f['deint']) && $f['deint']['value'] == '+'))
 			{
 				// still auto-deinterlaced by TFM, examine the reason
 
+				$bogusframes[$i] = $f;
+			}
+			else if((!empty($f['first_pb']) || !empty($f['last_un'])) && isset($f['Q']) && ($f['Q']['value'] == 2 || $f['Q']['value'] == 5))
+			{
+				// blended first/last half frame
+				
 				$bogusframes[$i] = $f;
 			}
 		}
@@ -295,6 +311,24 @@ print_r([$i, $tfm, $f]);
 		{
 			$bogusscenes[] = trim($scene['row']).' # '.$suggested;
 		}
+		
+		//
+		
+		if($scene['e'] > $scene['s'])
+		{
+			$f = $ovrframes[$scene['s']];
+
+			if((!empty($f['first_pb']) || !empty($f['last_un'])) 
+			&& !(isset($f['deint']) && $f['deint']['value'] == '+')
+			&& $tfmframes[$scene['s']]['deint'] == '+' 
+			&& (!isset($f['Q']) || $f['Q']['value'] >= 5)
+			//&& strlen($scene['t']) == 5
+			&& !empty($scene['t'])
+			)
+			{
+				$bogussc[$scene['s']] = $scene['s'].' Q 3 # '.$scene['t'].' '.$f['type']['value'];
+			}
+		}
 	}
 }
 
@@ -353,8 +387,9 @@ if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 
 $bogusframes = [];
 $bogusscenes = [];
+$bogussc = [];
 
-sanitycheck($title, $bogusframes, $bogusscenes);
+sanitycheck($title, $bogusframes, $bogusscenes, $bogussc);
 
 $rows = [];
 
@@ -381,6 +416,7 @@ foreach($bogusframes as $i => $bf)
 
 file_put_contents("$title-bogusframes.txt", implode(PHP_EOL, $rows));
 file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));
+file_put_contents("$title-bogussc.txt", implode(PHP_EOL, $bogussc));
 
 // 2nd pass
 

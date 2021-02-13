@@ -34,6 +34,11 @@ php 2.php input output h265/h264 preset vertical_res cfr will encode it into a u
 
 As of now, the best looking result is produced by Artemis HQ 150% 720p. This is the only preset where the smaller faces don't look like aliens from the movie They Live. There is still a small chance, usually MQ or LQ can fix it.
 
+Scenes where HQ is not recommended:
+* S01E01 Receptionist sitting under the clock when filmed from further away. Kai vs His Divine Shadow inside the Lexx, Kai's face
+* S01E02 TV screen, pixelation is not preserved
+* any intentionally noisy display or scene, use AA or CG
+
 ## How to apply TIVTC overrides effectively
 
 ### Not hybrid, ccppc
@@ -171,6 +176,8 @@ Otherwise, if ivtc is more important than smoothness.
 #### 59.94i
 
 Not much to do here, deinterlace every frame. Or make interlaced h264. DVD extras are mostly 59.94i.
+
+In a few scenes, the fields are also further scrambled with a ccppc pattern (S01E01 Hands appearing on the display when Stanley wakes up at home).
 
 ### ccppc, but already deinterlaced to 29.97 by blending
 
