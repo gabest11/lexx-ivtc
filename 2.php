@@ -10,6 +10,7 @@ $tune = !empty($argv[7]) ? $argv[7] : 'grain';
 $keyframes = '';
 $timecodes = '';
 $audio = [];
+$about = dirname(__FILE__).'/about.txt';
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
@@ -62,18 +63,21 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m))
 	foreach(['eng', 'hun', 'rus'] as $lang)
 	{
 		$fn2 = rtrim($m[1], '-');
-	
-		$fn = $fn2.'_'.$lang.'.mka';
-
-		if(file_exists($fn)) $audio[] = $fn;
 		
-		for($i = 1; ; $i++)
+		foreach(['mka', 'wav'] as $format)
 		{
-			$fn = $fn2.'_'.$lang.$i.'.mka';
+			$fn = $fn2.'_'.$lang.'.'.$format;
+
+			if(file_exists($fn)) $audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
+		
+			for($i = 1; ; $i++)
+			{
+				$fn = $fn2.'_'.$lang.$i.'.'.$format;
 			
-			if(!file_exists($fn)) break;
+				if(!file_exists($fn)) break;
 			
-			$audio[] = $fn;
+				$audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
+			}
 		}
 	}
 }
@@ -83,11 +87,12 @@ $cmd = [];
 $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 $cmd[] = '-i "'.$src.'"';
-foreach($audio as $a) $cmd[] = '-i "'.$a.'"';
+foreach($audio as $a) $cmd[] = '-i "'.$a['fn'].'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
 $cmd[] = '-c copy';
+foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
 if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
@@ -145,6 +150,17 @@ $cmd .= <<<EOT
 
 EOT;
 }
+
+if(file_exists($about))
+{
+$cmd .= <<<EOT
+--attachment-description "About this release" ^
+--attachment-mime-type text/plain ^
+--attach-file "$about" ^
+
+EOT;
+}
+
 
 $cmd .= '"'.$dst.'"';
 
