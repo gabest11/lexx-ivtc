@@ -1,0 +1,420 @@
+#S01E04
+
+0,200 c
+201,362 ccppc
+363,391 luphc # crossfade, ppccc + ccppc
+363,391 +--+-
+392,702 cccpp
+703,712 + # crossfade, ccppc + ?
+713,755 c # ?
+756,794 + # crossfade, ? +
+795,814 cppcc
+815,853 uphcl # crossfade, cppcc + pcccp
+815,853 --+-+
+854,984 ppccc
+985,1008 c
+985,1008 +
+1009,1036 cppcc
+1037,1058 ppccc
+1059,1093 ppccc
+1094,1108 c
+1094,1108 +
+1109,1143 ppccu # ppccc + pcccp
+1144,1193 ppccu # ppccc + pcccp
+1194,1248 cccpp
+1249,1340 cccpp
+1341,1416 ccppc
+1417,1457 cppcc
+1458,1526 ppccc
+1527,1543 pcccp
+1544,1551 ccppc
+1552,1570 ppccc
+1571,1580 pcccp
+1581,1645 ccppc
+1646,1677 ppccc
+1678,1775 ccppc
+1776,1808 cppcc
+1809,1856 ccppc
+1857,1900 c
+1857,1876 +
+1857,1876 Q 5
+1901,1971 cccpp
+1972,1997 pcccp
+1998,2038 ccppc
+2039,2139 cppcc
+2140,2194 pcccp
+2195,2250 ppccc
+2251,2394 ccppc
+2395,2443 cccpp
+2444,2456 ppccc
+2457,2516 cccpp
+2517,2529 cccpp
+2517,2529 + # blinking led
+2530,2542 pcccp
+2543,2570 cccpp
+2571,2607 c
+2571,2607 +
+2608,2628 cccpp
+2629,2644 pcccp
+2645,2666 pcccp
+2667,2734 cppcc
+2735,2794 pcccp
+2795,2824 cccpp
+2825,2836 ppccc
+2837,2862 cccpp
+2863,2869 cppcc
+2870,2882 cppcc
+2883,2888 pcccp
+2889,2895 cppcc
+2896,2902 pcccp
+2903,2909 cccpp
+2910,2914 cccpp
+2915,2926 cppcc
+2927,2936 ppccc
+2937,2948 ccppc
+2949,2996 cppcc
+2997,3022 ccppc
+3023,3038 cccpp
+3039,3059 ccppc
+3060,3082 cccbb
+3083,3115 cppcc
+3116,3223 pcccp
+3120,3126 +
+3120,3126 Q 5
+3181,3188 +
+3181,3188 Q 5
+3224,3282 c
+3224,3282 +
+3283,3313 pcccp
+3314,3324 cppcc
+3325,3357 pcccp
+3358,3399 ppccc
+3400,3447 ccppc
+3448,3472 pcccp
+3473,3523 pcccp
+3524,3567 pcccp
+3568,3578 cppcc
+3579,3601 ppccc
+3601,3610 + # crossfade
+3601 Q 3
+3602,3656 cccpp
+3657,3712 pcccp
+3713,3787 cccpp
+3788,3829 pcccp
+3830,3887 pcccp
+3888,3968 pcccp
+3969,4037 cppcc
+4038,4056 ccppc
+4057,4085 cppcc
+4086,4106 cppcc
+4107,4115 ccppc
+4116,4137 pcccp
+4138,4172 c
+4138,4172 +
+4173,4189 ppccc
+4190,4245 ccppc
+4246,4296 ppccc
+4297,4345 cccpp
+4346,4376 ppccc
+4377,4418 pcccp
+4419,4447 ccppc
+4448,4489 ccppc
+4490,4515 cppcc
+4516,4563 pcccp
+4564,4603 ccppc
+4604,4638 + # crossfade, ccppc + cccpp + whiteout
+4639,4659 ccppc
+4660,4690 # crossfade
+4691,4785 cccpc
+4691,4785 -++--
+4786,4909 pcccp
+4910,4938 ppccc
+4939,4998 ccppc
+4999,5048 ccppc
+5049,5083 ccppc
+5084,5116 pcccp
+5117,5160 cccpp
+5161,5225 cppcc
+5226,5363 cppcc
+5364,5473 ccppc
+5474,5524 cccpp
+5525,5556 c
+5525,5556 +
+5525,5556 Q 5
+5557,5583 ccppc
+5584,5611 pcccp
+5612,5648 cccpp
+5649,5706 ccppc
+5707,5732 c
+5733,5760 ccppc
+5761,5776 ppccc
+5777,5876 ccppc
+5877,5912 ppccc
+5913,5960 cppcc
+5961,5971 ccppc
+5972,5989 pcccp
+5990,6007 pcccp
+6008,6021 pcccp
+6022,6032 cccpp
+6033,6051 cccpp
+6052,6073 ccppc
+6074,6077 ppccc
+6078,6095 pcccp
+6096,6099 pcccp
+6100,6118 ppccc
+6119,6140 cppcc
+6141,6158 ppccc
+6159,6181 c
+6182,6199 ccppc
+6200,6221 pcccp
+6222,6243 ppccc
+6244,6278 ppccc
+6279,6329 cccpp
+6330,6362 cccpp
+6363,6417 ppccc
+6418,6445 phclu # crossfade, ppccc + cccpp
+6418,6445 -+-+-
+6446,6918 ppccc
+6892,6948 + # crossfade
+6919,7366 c
+7356,7370 + # crossfade
+7367,7501 cccpp
+7502,7527 + # crossfade, cccpp + phclu
+7528,7869 hclup # fg pcccp, bg ccppc
+7528,7869 +-+--
+7870,7898 + # crossfade
+7899,8038 pccup # fg cccpp, bg pcccp
+8039,8167 pcccp # fg pcccp, bg pcccp
+8168,8178 + # ppccu # crossfade, ppccc + pcccp + blackout
+8179,8253 cccpp
+8254,8266 + # crossfade, cccpp + ?
+8267,8271 cccpp
+8272,8333 ccppc
+8334,8378 cccpp
+8379,8483 cppcc
+8479 +
+8479 Q 2
+8484,8503 c # cuppc # crossfade, cppcc + ccppc
+8484,8503 +
+8504,8595 ccppc
+8596,8650 ppccc # crossfade, ppccc + ppccc
+8651,8661 ppccc
+8662,8688 cppcc
+8689,8702 pcccp
+8703,8773 cppcc
+8774,8927 pccup
+8928,8991 ccppc
+8992,9070 ccppc
+9071,9229 cppcc
+9230,9238 cccpp
+9239,9262 ccppc
+9263,9310 ppccc
+9311,9426 ccppc
+9427,9506 c
+#9427,9506 +
+9507,9649 pcccp
+9650,9830 ppccc
+9831,9934 ccpccpcccp
+9935,10083 ccppc
+# S01E01 18568+
+10084,10086 ccp
+10087,10126 pccccccp # pccc?ccp
+10127,10149 pccpcccp
+#
+10150,10168 + # crossfade
+10169,10188 c
+10189,10419 cccpp
+10189,10284 --+++ # crossfade, c + cccpp
+10189,10419 + # bg randomly combed (?)
+10420,10455 hclup # fg ccppc, bg pcccp
+10420,10455 +-+--
+10456,10459 ccup # ?
+10456,10459 +
+10460,10496 ccupp # fg ccppc, bg cccpp
+10497,10525 c # luphc # fg ppccc, bg ccppc # 10503+ wrong
+10497,10525 + # +--+-
+10526,10536 + # crossfade
+10537,10582 c # 59.94i
+10537,10582 +
+10537,10582 Q 5
+10583,10670 c # still image moving sideways at 59.94i
+10583,10670 +
+10671,10720 cppcc
+10721,10795 cccpp
+10796,11091 ccppc # bg 59.94i(?)
+10796,11091 +
+11092,11144 ccppc
+11145,11160 pcccp
+11161,11195 cccpp
+11196,11234 cppcc
+11235,11254 ccppc
+11255,11298 ccppc
+11299,11499 pcccp
+11500,11523 cppcc
+11524,11559 cccpp
+11560,11692 cccpp
+11693,11884 uppcc
+11885,11996 ccppc
+11997,12035 ccppc
+12036,12086 c#ppcc
+12087,12120 cppcc
+12121,12241 ccppc
+12242,12313 pcccp
+12314,13062 ccppc
+13063,13262 c
+13263,13412 cccpp
+13413,13554 cccpp
+13555,13675 c # looks like 59.94i, might be cppcc
+13555,13675 +
+13676,13776 cppcc
+13777,13859 cppcc
+13860,14069 cppcc
+13899,13907 + # zoom-in
+14061,14070 + # zoom-out
+14071,14185 pcccp
+14071,14185 + # bg fog combed
+#14071,14185 Q 6
+14186,14251 ppccc
+14252,14393 c
+14394,14474 cppcc
+14475,14744 cccpp
+14745,14854 pcccp
+14855,15019 cccpp
+15020,15062 cccpp
+15063,15113 ppccc
+15114,15170 ppccc
+15171,15266 cccpp
+15267,15314 pcccp
+15315,15512 pcccp
+15513,15595 pcccp
+15596,15709 cppcc
+15710,15765 cppcc
+15766,15880 cppcc
+15881,15955 cppcc
+15956,16015 ccppc
+16016,16131 pcccp
+16132,16191 # cannot see a pattern
+16192,16197 cppccp
+16198,16250 ccpccpcccp
+16251,16291 ccppc
+16292,16396 cccpp
+16397,16470 ppccc
+16471,16537 pcccp
+16538,16583 ppccc
+16584,16636 cppcc
+16637,16663 ccppc
+16654,16658 + # fade-out
+16664,16687 ppccc
+16681,16687 + # fade-out
+16688,16761 cccpp
+16750 +
+16762,16801 pcccp
+16802,16870 cppcc
+16871,16959 ppccc
+16960,17036 c # 59.94i, video inside the red frame is cccpp
+16960,17036 + # ---++
+17037,17333 ppccc
+17334,17370 ccppc
+17371,17463 ppccc
+17464,17523 cccpp
+17524,17659 ccppc
+17660,17712 # ?
+17713,17800 c
+17801,17886 ccppc
+17887,18099 pcccp
+18100,18159 # ?
+18160,18375 cccpp
+18376,18453 cccpp
+18454,18542 # ?
+18543,18707 # ?
+18708,18819 cccpp
+18820,18944 ccppc
+18945,19063 ppccc
+19064,19085 cccpp
+19086,19113 ppccc
+19114,19134 cppcc
+19135,19146 ppccc
+19147,19160 ppccc
+19161,19199 pcccp
+19200,19227 pcccp
+19228,19281 ppccc
+19282,19309 cppcc
+19310,19320 cppcc
+19321,19360 pcccp
+19361,19378 cppcc
+19379,19392 cccpp
+19393,19504 p
+19505,19525 ccppc
+19526,19543 ppccc
+19544,19570 cppcc
+19571,19620 c # 59.94i
+19571,19620 +
+19621,19769 cccpp
+19770,19775 cppccp
+19776,19822 ccpccpcccp
+19823,19909 pcccp # ?
+19910,19989 ppccc
+19990,20012 pcccp
+20013,20043 cppcc
+20044,20099 ppccc
+20100,20119 ccppc
+20120,20164 ppccc
+20165,20180 ppccc
+20181,20194 ccppc
+20195,20239 pcccp
+20240,20297 pcccp
+20298,20346 cppcc
+20347,20433 cppcc
+20434,20456 pcccp
+20457,20464 pcccp
+20465,20475 pcccp
+20476,20514 pcccp
+20515,20565 cppcc
+20566,20582 cccpp # TODO
+20583,20609 ccppc # TODO
+20610,20667 cccpp
+20668,20707 cccpp
+20708,20751 pcccp
+20752,20901 c
+20902,20966 c
+20902,20966 +
+20967,21097 c # 59.94i + cppcc
+20967,21097 + # -++--
+21098,21131 cppcc # TODO
+21132,21156 ppccc # ppccc + 29.97
+21132,21156 ++---
+21157,21170 c # pcccu # hcccl # pp three frames, middle is split between the two other
+21157,21170 +---+
+21157,21170 Q 5
+21171,21229 cppcc # TODO
+21230,21247 cccpp # TODO
+21248,21275 cccpp
+21276,21304 cccpp # TODO
+21305,21322 pccup # pcccp + ppppp, drop u, two whole, two half frames saved
+21305,21322 -+++-
+21323,21360 cccpp # TODO
+21361,21374 cccpp # TODO
+21375,21388 cppcc
+21389,21400 ccppc # TODO
+21401,21429 cccpp # TODO
+21430,21453 cccpp # TODO
+21454,21466 pcccp # TODO
+21467,21480 cccpp # TODO
+21481,21489 cccpp # TODO
+21490,21514 cccpp # TODO
+21515,21528 cccpp # TODO
+21529,21543 cccpp # TODO
+21544,21560 cccpp # TODO
+21561,21612 ccppc # TODO
+21613,21636 ppccc # TODO
+21637,21711 cccpp
+21712,21794 cppcc # TODO
+21795,21879 cccpp # TODO
+21880,21924 ccppc # TODO
+21925,22034 ccppc # TODO
+22035,22229 cccpp # TODO
+22221,22229 + # fade-out
+22230
+
+# TODO
+
