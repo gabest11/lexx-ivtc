@@ -24,6 +24,7 @@
 1194,1248 cccpp
 1249,1340 cccpp
 1341,1416 ccppc
+1394 - # MIC = 90
 1417,1457 cppcc
 1458,1526 ppccc
 1527,1543 pcccp
@@ -57,7 +58,8 @@
 2608,2628 cccpp
 2629,2644 pcccp
 2645,2666 pcccp
-2667,2734 cppcc
+2667,2701 ppccc
+2702,2734 cppcc
 2735,2794 pcccp
 2795,2824 cccpp
 2825,2836 ppccc
@@ -95,9 +97,9 @@
 3524,3567 pcccp
 3568,3578 cppcc
 3579,3601 ppccc
-3601,3610 + # crossfade
+3601,3611 + # crossfade
 3601 Q 3
-3602,3656 cccpp
+3602,3656 ccppc
 3657,3712 pcccp
 3713,3787 cccpp
 3788,3829 pcccp
@@ -114,9 +116,11 @@
 4173,4189 ppccc
 4190,4245 ccppc
 4246,4296 ppccc
+4296 +
 4297,4345 cccpp
 4346,4376 ppccc
 4377,4418 pcccp
+4412 - # MIC = 103
 4419,4447 ccppc
 4448,4489 ccppc
 4490,4515 cppcc
@@ -124,8 +128,9 @@
 4564,4603 ccppc
 4604,4638 + # crossfade, ccppc + cccpp + whiteout
 4639,4659 ccppc
-4660,4690 # crossfade
-4691,4785 cccpc
+4651 - # MIC = 127
+4660,4690 cuppc # crossfade, cppcc + ?
+4691,4785 chhpc
 4691,4785 -++--
 4786,4909 pcccp
 4910,4938 ppccc
@@ -144,6 +149,8 @@
 5557,5583 ccppc
 5584,5611 pcccp
 5612,5648 cccpp
+5620,5621 - # MIC = 85 115
+5636 - # MIC = 95
 5649,5706 ccppc
 5707,5732 c
 5733,5760 ccppc
@@ -168,6 +175,7 @@
 6182,6199 ccppc
 6200,6221 pcccp
 6222,6243 ppccc
+6238 - # MIC = 96
 6244,6278 ppccc
 6279,6329 cccpp
 6330,6362 cccpp
@@ -206,6 +214,7 @@
 8928,8991 ccppc
 8992,9070 ccppc
 9071,9229 cppcc
+9071,9229 - # MIC high
 9230,9238 cccpp
 9239,9262 ccppc
 9263,9310 ppccc
@@ -214,6 +223,7 @@
 #9427,9506 +
 9507,9649 pcccp
 9650,9830 ppccc
+9650,9651 + # fade-in
 9831,9934 ccpccpcccp
 9935,10083 ccppc
 # S01E01 18568+
@@ -241,6 +251,7 @@
 10583,10670 +
 10671,10720 cppcc
 10721,10795 cccpp
+10732 + # random interlaced frame
 10796,11091 ccppc # bg 59.94i(?)
 10796,11091 +
 11092,11144 ccppc
@@ -256,7 +267,7 @@
 11693,11884 uppcc
 11885,11996 ccppc
 11997,12035 ccppc
-12036,12086 c#ppcc
+12036,12086 cppcc
 12087,12120 cppcc
 12121,12241 ccppc
 12242,12313 pcccp
@@ -392,6 +403,7 @@
 21276,21304 cccpp # TODO
 21305,21322 pccup # pcccp + ppppp, drop u, two whole, two half frames saved
 21305,21322 -+++-
+21305 +
 21323,21360 cccpp # TODO
 21361,21374 cccpp # TODO
 21375,21388 cppcc

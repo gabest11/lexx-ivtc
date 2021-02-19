@@ -44,6 +44,7 @@
 3493,3533 cppcc
 3534,3713 ccppc
 3714,3814 ppccc
+3795,3814 + # fade-out
 
 3815,4669 cccpp # keyframe
 4670,4810 pcccp

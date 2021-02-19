@@ -341,6 +341,7 @@ $PP = 6;
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
+#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
 TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
@@ -354,6 +355,7 @@ if(!file_exists("$title.avs")) file_put_contents($title.'.avs', $avs);
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
+#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
 TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
@@ -423,6 +425,7 @@ file_put_contents("$title-bogussc.txt", implode(PHP_EOL, $bogussc));
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
+#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
 TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")

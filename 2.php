@@ -101,6 +101,8 @@ if(!empty($tune) && $tune != 'notune') $cmd[] = '-tune '.$tune;
 $cmd[] = '-aspect 4:3';
 $cmd[] = '-movflags +faststart';
 if(!empty($keyframes)) $cmd[] = '-force_key_frames '.$keyframes;
+$cmd[] = '-metadata:s title= ';
+$cmd[] = '-metadata description="https://github.com/gabest11/lexx-ivtc" ';
 $cmd[] = '"'.$dst.'"';
 
 // TODO: chapters for keyframes

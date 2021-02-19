@@ -1156,7 +1156,8 @@
 88273 u
 88274,88308 p
 88309,88413 c
-88273,88413 +
+88273,88313 -
+88314,88413 +
 88273,88413 Q 5
 88414,88670 pcccp
 88671,88725 ccppc
@@ -1425,7 +1426,7 @@
 107803 u # skip
 107804,107858 pcccp # swapped fields
 107859,107867 ccppc
-107667,107867 + # MIC high
+107667,107867 - # MIC high
 #107667,107867 Q 5 # field problems could be solved with a blend, then it does not matter...
 107868,108034 cccpp
 108035,108126 ppccc

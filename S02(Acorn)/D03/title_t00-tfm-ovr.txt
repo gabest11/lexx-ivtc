@@ -1712,8 +1712,12 @@
 164970,164980 +-+--
 #164981,164994 lhhhl # pcccp + cppcc + ccppc
 #164981,164994 +
-164981,164994 uphcl # pcccp + cppcc + ccppc # without the moth
-164981,164994 --+-+
+# last sequence ends with a h, next starts on u, there is a lost p between them
+# skip the first in uphcl, replace u with h, and deinterlace because there are other layers
+164981,164985 hphcl # pcccp + cppcc + ccppc # without the moth
+164981,164985 +-+-+
+164986,164994 uphcl # pcccp + cppcc + ccppc # without the moth
+164986,164994 --+-+
 #164995,165005 cluph # cppcc + ccppc + cccpp
 #164995,165005 -+--+
 164995,165005 cuppc # cppcc + ccppc + cccpp # without the moth
@@ -1727,8 +1731,11 @@
 #165041,165051 +
 165041,165051 hclup # pcccp + cppcc + ccppc # just the body and the moth
 165041,165051 +-+--
-165052,165065 uphcl # pcccp + ppccc + cppcc # outline's pp in the middle, makes no difference in the pattern
-165052,165065 --+-+
+# same problem with h end, u start
+165052,165056 hphcl # pcccp + ppccc + cppcc # outline's pp in the middle, makes no difference in the pattern
+165052,165056 +-+-+
+165057,165065 uphcl # pcccp + ppccc + cppcc # outline's pp in the middle, makes no difference in the pattern
+165057,165065 --+-+
 165066,165076 cuppc # cppcc + cppcc + ccppc
 # body gone (almost)
 165077,165087 cppcc # cppcc + ppccc + cppcc 
