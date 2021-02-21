@@ -14,7 +14,11 @@ Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
 Planing to do newer releases if I can get them and are better quality.
 
-S03 Alliance release has a higher bitrate than Acorn, but they increased the brightness and clamped about 10% of the top values to the TV level (16-235). It is not possible to restore the image detail in that range, it will either look too bright or flat.
+S03 Alliance release has a higher bitrate than Acorn, but they increased the brightness and clamped about 10% of the top values to the TV level (16-235). It is not possible to restore the image detail in that range, it will either look too bright or flat. Not all episodes have this problem fortunatelly.
+
+A few more interesting findings about S03. There are episodes that are all progressive, except the intro, but the top field is actually a fake interpolated image of the bottom field. The best idea is to just throw it away and properly upscale the good field, then you won't see stairsteps on the edges. To make life a bit more miserable, there are a few 59.94i scenes inserted and sometimes the night sky in the background has the stars split 50-50 between the fields, suggesting more naughtiness.
+
+Because it is not proper NTSC, there are hybrid scenes where the background moves at 29.97 fps and the foreground only has 23.976 with a dup frame, not cccpp, just cccc and the repeat of the last c.
 
 ## Encoding
 
