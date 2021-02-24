@@ -1,1 +1,1 @@
-"e:\tmp\media\util\ffmpeg_x86\bin\ffmpeg.exe" -hide_banner -i S01E01.avs -map 0:v -c:v huffyuv -aspect 720:480 "S01E01-huffyuv.mkv"
+php _.php S01E01.avs
