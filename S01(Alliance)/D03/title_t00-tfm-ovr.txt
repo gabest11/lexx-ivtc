@@ -1,6 +1,6 @@
 #S01E03
 
-# difference to Koch, +35
+# difference to Koch, +35, and the end credits are a bit longer with fade-out
 
 0,989 cccpp
 #0,989 ---++ # text runs at 29.97 and should be deinterlaced on p frames, TODO: pick only the most obvious cases

@@ -3,7 +3,7 @@
 c1 = MPEG2Source("..\S01(Alliance)\D02\title_t00.d2v",cpu=4)
 c2 = MPEG2Source("..\S01(Koch)\D02\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
 
-Trim(c1, 15, 107681) + Trim(c2, 107667, 108034) + Trim(c1, 108048, 168058)
+Trim(c1, 15, 30369) + Trim(c2, 30355, 30538) + Trim(c1, 30554, 107681) + Trim(c2, 107667, 108034) + Trim(c1, 108048, 168058)
 
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
