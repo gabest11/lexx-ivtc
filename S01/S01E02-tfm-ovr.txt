@@ -572,15 +572,17 @@
 # this part is in S01E01 with better quality and a single pattern
 # when Kai flies inside the Lexx 136103-136176 1:15:40
 
-45031,45043 ccppc
-45044,45059 ccppc
-45060 u
-45061,45076 cccpp
-45077 u
-45078,45094 pcccp
-45095 u
-45096,45111 pcccp
-45112,45119 pcccp
+#45031,45043 ccppc
+#45044,45059 ccppc
+#45060 u
+#45061,45076 cccpp
+#45077 u
+#45078,45094 pcccp
+#45095 u
+#45096,45111 pcccp
+#45112,45119 pcccp
+
+45031,45119 ccppc
 
 45120,45311 ccppc
 45312,45723 cppcc
@@ -722,12 +724,13 @@
 54894,55214 ccppc
 55215,55289 c # still image
 # this scene is almost the same as 45046,45134
-55290,55311 cppcc
-55313,55324 cppcc
-55325,55337 ccppc
-55338,55350 ccppc
-55351,55363 ccppc
-55364,55378 ccppc
+#55290,55311 cppcc
+#55313,55324 cppcc
+#55325,55337 ccppc
+#55338,55350 ccppc
+#55351,55363 ccppc
+#55364,55378 ccppc
+55290,55378 ccppc
 #
 55379,55684 ccppc
 55685,55988 ccppc
@@ -1355,10 +1358,7 @@
 104425,104584 ppccc
 104585,104734 cppcc
 104735,104803 pcccp
-104804 n
-104805,104879 p # same half res picture in both fields, at least stop it bobbing
-104804,104879 +
-104804,104879 Q 5
+104804,104879 upupuppupu # close enough
 104880,104944 cccpp
 104945,105084 cccpp
 105085,105143 pcccp

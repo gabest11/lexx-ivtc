@@ -1361,10 +1361,7 @@
 104440,104599 ppccc
 104600,104749 cppcc
 104750,104818 pcccp
-104819 n
-104820,104894 p # same half res picture in both fields, at least stop it bobbing
-104819,104894 +
-104819,104894 Q 5
+104819,104894 upupuppupu # close enough
 104895,104959 cccpp
 104960,105099 cccpp
 105100,105158 pcccp

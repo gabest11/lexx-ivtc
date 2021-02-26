@@ -1379,10 +1379,7 @@
 104486 - # MIC = 229
 104585,104734 cppcc
 104735,104803 pcccp
-104804 n
-104805,104879 p # same half res picture in both fields, at least stop it bobbing
-104804,104879 +
-104804,104879 Q 5
+104804,104879 upupuppupu # close enough
 104880,104944 cccpp
 104945,105084 cccpp
 105085,105143 pcccp
