@@ -80,6 +80,8 @@
 6428,6507 ccppc
 6508,6582 ppccc
 6583,6665 cccpp
+6665 + # MIC = 115, a bit too combed
+6665 Q 5
 6666,6730 cccpp
 6731,6842 ppccc
 6843,6876 cppcc
@@ -168,13 +170,13 @@
 15752,15772 +
 15752,15772 Q 6 # looks better than yadif here
 15773,15830 ccppc
-15825 - # MIC = 82
+15825,15830 - # the right side of the picture is combed, nice
 15831,15934 ccppc
 15935,15983 pcccp
 15945 - # MIC = 100
 15973 - # MIC = 81
 15984,16050 c
-16050 - # the right side of the picture is combed, nice
+16050 - # right side again
 16051,16424 cccpp
 16425,16531 cppcc
 16532,16601 cccpp
