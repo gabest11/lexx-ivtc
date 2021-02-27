@@ -4,7 +4,8 @@
 0,150 - # MIC high
 151,301 c
 302,482 cppcc
-483,622 cccpp
+483,622 ppccc # phclu # fg cccpp, bg ppccc # phclu does not work here, the edge of the tiles need both fields, and that's what needs to be fixed the most here
+483,622 - # -+-+- # ignore the steal columns in the fg
 623,688 ccppc
 689,875 ppccc
 876,984 ppccc
@@ -104,7 +105,7 @@
 8770,8774 - #MIC high
 8935,9048 cppcc
 9049,9947 cppcc
-9948,10037 ppcccppcc # watch the horizontal edge of the tiles on the wall
+9948,10037 ppcccppcc # fg cccpp, bg ppcccppcc ?
 10038,10422 pcccp
 10423,10598 ccppc
 10599,10656 ppccc
