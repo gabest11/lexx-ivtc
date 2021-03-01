@@ -1,0 +1,48 @@
+#S04E07
+
+
+4211,5065 cccpp # keyframe
+5066,5206 pcccp
+5067,5206 - # MIC high
+5207,5308 cccpp
+5207,5308 - # MIC high
+5309,5341 pcccp
+5342,5391 cccpp
+5392,5424 pcccp
+5422 +
+5422 Q 2
+5425,5443 c # single field
+5425,5443 +
+5425,5443 Q 6
+5444,5465 cccpp
+5466,5496 cccpp
+5497,5517 c # progressive, also very low res, but not blocky
+5518,5548 c # same
+5549,5577 ppccc
+5578,5599 c # single field
+5578,5599 +
+5578,5599 Q 6
+5600,5625 c
+5626,5644 c
+5645,5688 c
+5689,5719 ppccc
+5689,5719 ++---
+5720,5749 cccpp
+5720,5749 ---++
+5750,5782 cppcc
+5750,5782 -++--
+5783,5845 ppccc
+5783,5845 ++---
+5846,5892 pcccp
+5846,5892 +---+
+5893,6011 c
+6001,6011 + # fade-out
+
+
+78545,81058 c # keyframe
+81059,81150 c # 59.94i, this is the third variation of this logo
+81059,81116 +
+81059,81116 Q 5
+81151,81247 c
+81151,81247 +
+
