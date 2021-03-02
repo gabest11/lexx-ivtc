@@ -92,6 +92,7 @@ foreach($audio as $a) $cmd[] = '-i "'.$a['fn'].'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
+$cmp[] = '-map_chapters -1';
 $cmd[] = '-c copy';
 foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
 if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
