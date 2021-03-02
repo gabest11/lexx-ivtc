@@ -249,11 +249,7 @@
 10932,10988 ppccc
 10989,11189 c
 11190,11209 + # crossfade
-11210,11331 cccpppccccpppcc # ? make this smoother 
-# S04E06 70899-71004, but all c frames and shorter
-# also S04E08 18382-18534 as ppccc, might be a better match
-11210,11331 - # ---+++----+++--
-11210,11331 Q 5
+11210,11331 ccppc # few frames shorter than the original, but smooth
 11332,11361 cppcc
 11362,11423 ppccc
 11424,11772 cccpp
