@@ -1759,7 +1759,7 @@
 141691,141731 cppcppccpccppccpccpccpccpccppcppcppcppcpp
 141732,141772 cppcppccpccppccpccpccpccpccppcppcppcppcpp
 141773,141813 cppccpccpccppccpccpccpccpccppcppcppcppcpp
-141814,141854 cppccpccpcccppcpccpccpccpccppcppcppcppcpp
+141814,141854 cppccpccpcccpccpccpccpccpccppcppcppcppcpp
 141855,141857 cpp
 141651,141857 - # MIC high
 

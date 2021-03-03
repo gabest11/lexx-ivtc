@@ -1,0 +1,50 @@
+# S04E10 Magic Baby
+
+0
+
+5219,6073 cccpp # keyframe
+6074,6214 pcccp
+6075,6214 - # MIC high
+6215,6316 cccpp
+6215,6316 - # MIC high
+6317,6349 pcccp
+6337 - # MIC = 88
+6350,6399 cccpp
+6400,6432 pcccp
+6430 +
+6430 Q 2
+6433,6451 c # single field
+6433,6451 +
+6433,6451 Q 6
+6452,6473 cccpp
+6474,6504 cccpp
+6505,6525 c # progressive, also very low res, but not blocky
+6526,6556 c # same
+6557,6585 ppccc
+6586,6607 c # single field
+6586,6607 +
+6586,6607 Q 6
+6608,6633 c
+6634,6652 c
+6653,6696 c
+6697,6727 ppccc
+6697,6727 ++---
+6728,6757 cccpp
+6728,6757 ---++
+6758,6790 cppcc
+6758,6790 -++--
+6791,6853 ppccc
+6791,6853 ++---
+6854,6900 pcccp
+6854,6900 +---+
+6901,7019 c
+7009,7019 + # fade-out
+
+
+
+74190,76705 c # keyframe
+76706,76797 c # 59.94i, this is the third variation of this logo
+76706,76763 +
+76706,76763 Q 5
+76798,76894 c
+76798,76894 +
