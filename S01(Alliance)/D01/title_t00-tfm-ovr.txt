@@ -1,4 +1,4 @@
-#S01E01
+# S01E01 I Worship His Shadow
 
 # difference to the Koch release
 # 0-107818 +5 frames

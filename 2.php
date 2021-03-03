@@ -10,7 +10,9 @@ $tune = !empty($argv[7]) ? $argv[7] : 'grain';
 $keyframes = '';
 $timecodes = '';
 $audio = [];
+$subtitle = [];
 $about = dirname(__FILE__).'/about.txt';
+$title = '';
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
@@ -80,6 +82,34 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 				$audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
 			}
 		}
+		
+		foreach(['mks', 'srt', 'sub', 'ssa', 'ass'] as $format)
+		{
+			$fn = $fn2.'_'.$lang.'.'.$format;
+
+			if(file_exists($fn)) $subtitle[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
+		
+			for($i = 1; ; $i++)
+			{
+				$fn = $fn2.'_'.$lang.$i.'.'.$format;
+			
+				if(!file_exists($fn)) break;
+			
+				$subtitle[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
+			}
+		}
+	}
+}
+
+if(!empty($tfm_ovr) && file_exists($tfm_ovr))
+{
+	foreach(explode("\n", file_get_contents($tfm_ovr)) as $row)
+	{
+		if(!preg_match('/^# *S([0-9]+)E([0-9]+) +-?(.+)$/i', $row, $m)) continue;
+		
+		$title = sprintf("S%02dE%02d - %s", (int)$m[1], (int)$m[2], trim($m[3]));
+		
+		break;
 	}
 }
 
@@ -89,12 +119,15 @@ $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 $cmd[] = '-i "'.$src.'"';
 foreach($audio as $a) $cmd[] = '-i "'.$a['fn'].'"';
+foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
+foreach($subtitle as $index => $s) $cmd[] = '-map '.($index + count($audio) + 1).':s';
 $cmp[] = '-map_chapters -1';
 $cmd[] = '-c copy';
 foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
+foreach($subtitle as $index => $s) {$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];}
 if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
@@ -103,7 +136,7 @@ if(!empty($tune) && $tune != 'notune') $cmd[] = '-tune '.$tune;
 $cmd[] = '-aspect 4:3';
 $cmd[] = '-movflags +faststart';
 if(!empty($keyframes)) $cmd[] = '-force_key_frames '.$keyframes;
-$cmd[] = '-metadata:s title= ';
+$cmd[] = '-metadata title="'.$title.'"';
 $cmd[] = '-metadata description="https://github.com/gabest11/lexx-ivtc" ';
 $cmd[] = '"'.$dst.'"';
 

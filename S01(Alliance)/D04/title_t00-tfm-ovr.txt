@@ -1,4 +1,4 @@
-#S01E04
+# S01E04 Giga Shadow
 
 # TODO: 102405,102457 128711,129054 water randomly combed
 # TODO: ?

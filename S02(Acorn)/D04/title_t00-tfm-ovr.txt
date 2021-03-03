@@ -1,4 +1,4 @@
-# S02E07
+# S02E07 Love Grows
 
 0,555 cppcc
 0,555 -
@@ -730,7 +730,7 @@
 85984,86099 c
 85984,86099 +
 
-# S02E08
+# S02E08 White Trash
 
 86100,87271 pcccp # keyframe
 87165 +

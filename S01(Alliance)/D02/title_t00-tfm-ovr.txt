@@ -1,4 +1,4 @@
-#S01E02
+# S01E02 Super Nova
 
 # Koch difference
 #

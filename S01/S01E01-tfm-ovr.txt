@@ -1,4 +1,4 @@
-#S01E01
+# S01E01 I Worship His Shadow
 
 0,954 cccpp
 #0,954 ---++ # text runs at 29.97 and should be deinterlaced on p frames, TODO: pick only the most obvious cases
