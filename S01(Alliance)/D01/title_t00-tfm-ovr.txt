@@ -1528,8 +1528,6 @@
 117432,117446 --+-+
 117432,117446 Q 6
 
-# not working smoothly, some objects seem to have other than c/p, but better then blurring everything
-
 117447,117473 hhllh # fg1 & bg ccppc, fg2 pcccp, fg3 ppccc
 117447,117473 +
 117447,117473 Q 6 # so blurred, yadif would actually make it annoyingly sharp
@@ -1734,9 +1732,37 @@
 138620,141091 cccpp
 141092,141195 cppcc
 141196,141649 uppcc # fg cppcc, overlay ppccc
-141650,141857 c
-141650,141857 +
-141650,141857 Q 5
+
+#c
+#141650,141684 pcpccccppccpcccccccccccccccpccpccpp
+#141685,141719 cppcppcppcppccpccpcccccccccccccccpc
+#141720,141754 cpccppcppcppcppcppccpccpccccccccccc
+#141755,141789 ccccpccpccppcppcppcppccpccpccpccccc
+#141790,141824 cccccccpccpccppcppcppcppcppccpccpcc
+#141825,141857 cccccccccccccpccpccppcppcppcppcpp
+#p
+#141650,141684 ppppcccpppcppccpccpccpccpccppcppcpp
+#141685,141719 pppppppppppppcppcppccpccpccpccpccpp
+#141720,141754 cppcpppppppppppppppcppcppccpccpccpc
+#141755,141789 cpccppcppcppppppppppppcppcppcppccpc
+#141790,141824 cpccpccppcppcpppppppppppppppcppcppc
+#141825,141857 cppcpccpccpccppcppcpppppppppppppp
+#c+p
+#141650,141684 p?p?cccpp?cp?cc?cc?cc?cc?ccp?cp?cpp
+#141685,141719 ?pp?pp?pp?pp?cp?cp?cc?cc?cc?cc?ccp?
+#141720,141754 cp?cpp?pp?pp?pp?pp?cp?cp?cc?cc?cc?c
+#141755,141789 c?ccp?cp?cpp?pp?pp?pp?cp?cp?cp?cc?c
+#141790,141824 c?cc?ccp?cp?cpp?pp?pp?pp?pp?cp?cp?c
+#141825,141857 c?pc?cc?cc?ccp?cp?cpp?pp?pp?pp?pp
+#combined, with only a few irregularities
+141650,141690 pppccccppccppccpccpccpccpccppcppcppcppcpp
+141691,141731 cppcppccpccppccpccpccpccpccppcppcppcppcpp
+141732,141772 cppcppccpccppccpccpccpccpccppcppcppcppcpp
+141773,141813 cppccpccpccppccpccpccpccpccppcppcppcppcpp
+141814,141854 cppccpccpcccppcpccpccpccpccppcppcppcppcpp
+141855,141857 cpp
+141651,141857 - # MIC high
+
 141858,141927 ppccc
 141928,142077 pcccp
 142078,142245 c # blurry low res, 3rd dup
@@ -2311,6 +2337,7 @@
 135893 Q 3 # ppccc p
 136921 Q 3 # pcccp p
 137728 Q 3 # ppccc p
+141650 Q 3
 141858 Q 3 # ppccc p
 141928 Q 3 # pcccp p
 142623 Q 3 # pcccp p

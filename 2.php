@@ -160,6 +160,7 @@ E:\\tmp\\media\\util\\mkvtoolnix\\mkvmerge.exe ^
 --output "$dstvfr" ^
 --language 0:und ^
 --default-track 0:yes ^
+--default-track 1:yes ^
 --timestamps "0:$timecodes" ^
 --fix-bitstream-timing-information 0:1 ^
 --attachment-description "VFR timecodes" ^
@@ -167,6 +168,11 @@ E:\\tmp\\media\\util\\mkvtoolnix\\mkvmerge.exe ^
 --attach-file "$timecodes" ^
 
 EOT;
+
+foreach($subtitle as $index => $s) 
+{
+	$cmd .= '--default-track '.($index + count($audio) + 1).':no ^'.PHP_EOL;
+}
 
 if(file_exists($tfm_ovr))
 {
@@ -197,7 +203,6 @@ $cmd .= <<<EOT
 
 EOT;
 }
-
 
 $cmd .= '"'.$dst.'"';
 
