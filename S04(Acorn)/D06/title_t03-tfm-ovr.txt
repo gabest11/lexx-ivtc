@@ -1,0 +1,54 @@
+# S04E11 A Midsummer's Nightmare
+
+4943,5797 cccpp # keyframe
+5798,5938 pcccp
+5799,5938 - # MIC high
+5939,6040 cccpp
+5939,6040 - # MIC high
+6041,6073 pcccp
+6046 - # MIC = 94
+6074,6123 cccpp
+6124,6156 pcccp
+6154 +
+6154 Q 2
+6157,6175 c # single field
+6157,6175 +
+6157,6175 Q 6
+6176,6197 cccpp
+6198,6228 cccpp
+6229,6249 c # progressive, also very low res, but not blocky
+6250,6280 c # same
+6281,6309 ppccc
+6310,6331 c # single field
+6310,6331 +
+6310,6331 Q 6
+6332,6357 c
+6358,6376 pcccp
+6377,6420 c
+6421,6451 ppccc
+6421,6451 ++---
+6452,6481 cccpp
+6452,6481 ---++
+6482,6514 cppcc
+6482,6514 -++--
+6515,6577 ppccc
+6515,6577 ++---
+6578,6624 pcccp
+6578,6624 +---+
+6625,6743 c
+6733,6743 + # fade-out
+
+6744,6812 # keyframe
+6744,6775 + # fade-in
+6813
+
+
+76885,77034 cccpp
+77020,77045 + # crossfade
+
+77035,79422 c # keyframe
+79423,79510 c # 59.94i, this is the third variation of this logo
+79423,79480 +
+79423,79480 Q 5
+79511,79630 c
+79511,79630 +

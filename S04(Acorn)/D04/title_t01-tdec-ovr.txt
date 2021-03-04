@@ -1,6 +1,12 @@
 0,143 v
 2260,2346 v
-2347,2668 v
+2260,2346 f
+2260,2346 ++++-
+2347,2399 f # first part of the scene
+2347,2399 ++++-
+# ...swirling transitions...
+2620,2668 f # last part of the scene
+2620,2668 ++-++
 
 4766,4784 v
 4838,4858 v

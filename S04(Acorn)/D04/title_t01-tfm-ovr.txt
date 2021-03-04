@@ -22,8 +22,8 @@
 1890,2036 ppccc
 2037,2092 cppcc
 2093,2259 ccppc
-2260,2346 c
-2347,2668 c
+2260,2346 c # single field, 5th is a dup
+2347,2668 c # single field, crossfades with different dups 1/2 3/4 4/5 3/4 2/3 1/2 and also swirling at 29.97, cannot make it smooth with one field only
 2669,3552 ppccc
 3513,3552 + # fade-out
 

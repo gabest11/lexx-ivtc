@@ -5,7 +5,7 @@ $dst = $argv[2];
 $codec = $argv[3];
 $preset = $argv[4];
 $resolution = !empty($argv[5]) ? $argv[5] : 720;
-$crf = !empty($argv[6]) ? $argv[6] : ($codec == 'h265' ? 20 : 17);
+$crf = !empty($argv[6]) ? $argv[6] : ($codec == 'h265' ? 19 : 17);
 $tune = !empty($argv[7]) ? $argv[7] : 'grain';
 $keyframes = '';
 $timecodes = '';
@@ -63,7 +63,7 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 	
 	if(file_exists($fn)) $tdec_ovr = $fn;
 	
-	foreach(['eng', 'hun', 'rus'] as $lang)
+	foreach(['eng', 'hun', 'fra', 'rus'] as $lang)
 	{
 		$fn2 = rtrim($m[1], '-');
 		
