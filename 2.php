@@ -107,7 +107,7 @@ if(!empty($tfm_ovr) && file_exists($tfm_ovr))
 	{
 		if(!preg_match('/^# *S([0-9]+)E([0-9]+) +-?(.+)$/i', $row, $m)) continue;
 		
-		$title = sprintf("S%02dE%02d - %s", (int)$m[1], (int)$m[2], trim($m[3]));
+		$title = sprintf("Lexx S%02dE%02d - %s", (int)$m[1], (int)$m[2], trim($m[3]));
 		
 		break;
 	}
