@@ -124,7 +124,7 @@ $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
 foreach($subtitle as $index => $s) $cmd[] = '-map '.($index + count($audio) + 1).':s';
-$cmp[] = '-map_chapters -1';
+$cmd[] = '-map_chapters -1';
 $cmd[] = '-c copy';
 foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
 foreach($subtitle as $index => $s) {$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];}

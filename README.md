@@ -228,3 +228,21 @@ Examples: (there are many, easy to find, just few of the ugliest looking)
 * S02E09 791, when 791 is about to be sucked out through the gate towards the end
 
 When a green screen is involved, some of the combed parts are lost and the sides are missing in the direction of motion.
+
+### missing field
+
+    1t 2t 3t 4t 5t
+    1t 2t 3t 4t 5t
+
+    tfm: c, +, Q 6 or yadif or anything that looks better
+    tdec: v
+
+Rare and short scenes, it can be found throughout the whole series.
+
+    1t 2t 3t 3t 4t
+    1t 2t 3t 3t 4t (fake second field)
+
+    tfm: c, -
+    tdec: f, ++-++ or +++-+
+
+Third season, few episodes from the fourth. The second field is just interpolated, no more information can be extracted to increase the halved resolution. Edges are blocky, stairstep effect. Very sad. Maybe it was recorded in PAL somewhere in Europe and converted to NTSC this way.
