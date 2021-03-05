@@ -74,9 +74,7 @@
 6505,6525 c # progressive, also very low res, but not blocky
 6526,6556 c # same
 6557,6585 ppccc
-6586,6607 c # single field
-6586,6607 +
-6586,6607 Q 6
+6586,6607 ccppc
 6608,6633 c
 6634,6652 pcccp
 6653,6696 c
