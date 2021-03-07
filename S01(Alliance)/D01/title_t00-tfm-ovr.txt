@@ -1578,14 +1578,15 @@
 123638,123724 pcccp
 123725,123792 cccpp
 123793,123850 pcccp
-123851,123896 cccpp
+123851,123896 cluph # cppcc (left) + cccpp (right)
+123851,123896 -+--+
 123897,123942 ccppc
 123943,123974 cccpp
-123975,124011 ppccc
+123975,124011 uppcc # cppcc (left) + ppccc (right)
 124012,124058 ccppc
-124059,124142 pcccp
+124059,124142 ppccu # cppcc (left) + pcccp (right)
 124143,124276 cppcc
-124277,124579 ccppc
+124277,124579 ccupp # cccpp (left) + ccppc (right)
 124580,124815 ccppc
 124816,124968 cppcc
 124969,125208 ccppc

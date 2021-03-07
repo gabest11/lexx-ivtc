@@ -350,6 +350,19 @@ EOT;
 
 if(!file_exists("$title.avs")) file_put_contents($title.'.avs', $avs);
 
+$avs = <<<EOT
+c1 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=200000)
+c2 = FFVideoSource("$title-huffyuv.mkv").ConvertToRGB24()
+c1 = c1.Trim(0, c2.FrameCount)
+#c1 = c1.Spline64Resize(c1.Height * 4 / 3, c1.Height)
+c2 = c2.Spline64Resize(c1.Width, c1.Height)
+Merge(c1, c2, 0.15)
+#StackHorizontal(c1, last)
+ConvertToYUV444(matrix="rec709")
+EOT;
+
+if(!file_exists("$title-topaz.avs")) file_put_contents($title.'-topaz.avs', $avs);
+
 // 1st pass
 
 $avs = <<<EOT

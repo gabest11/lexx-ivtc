@@ -28,7 +28,8 @@ if(count($resolution) == 1 && is_numeric($resolution[0]))
 	}
 	else
 	{
-		$resolution = [$h * 4 / 3, $h];
+		//$resolution = [$h * 4 / 3, $h];
+		$resolution = [-1, $h];
 	}
 }
 
