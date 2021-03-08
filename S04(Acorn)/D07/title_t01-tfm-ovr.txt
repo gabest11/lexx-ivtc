@@ -1,0 +1,1089 @@
+# S04E14 Prime Ridge
+
+0,648 cccpp
+0,39 + # fade-in
+649,801 pcccp
+724 -
+802,1091 pcccp # TODO
+1092,1149 cppcc # TODO
+1150,1215 pcccp # TODO
+1216,1488 ppccc # TODO
+1489,1536 cccpp # TODO
+1537,1615 cppcc # TODO
+1616,1831 cppcc
+1832,1970 cppcc # TODO
+1971,2120 pcccp # TODO
+2121,2273 pcccp # TODO
+2274,2386 cppcc # TODO
+2387,2496 c
+2387,2403 +
+2395,2403 Q 5
+2497,2554 cppcc
+2555,2631 cccpp
+2632,2675 cppcc # TODO
+
+2676,2738 c # bg cppcc
+2676,2706 -++--
+2739,2900 c # 59.94i
+2739,2900 +
+2739,2900 Q 5
+2901,2962 ppccc # TODO
+2963,3092 c
+2977,2984 + # 59.94i
+2977,2984 Q 5
+3062,3071 + # 59.94i
+3072,3092 + # 59.94i + ccppc
+3093,3110 cppcc
+3100 - # MIC = 88
+3111,3239 c
+3111,3239 +
+3240,3287 cppcc
+3288,3334 c
+
+3335,3410 cccpp # TODO
+3411,3451 cccpp # TODO
+3452,3513 cccpp
+3514,3548 ppccc # TODO
+3549,3692 cppcc
+3693,3756 ccppc # TODO
+3757,3806 cccpp
+3807,3930 pcccp # TODO
+3931,4060 ppccc # TODO
+4061,4272 c
+4244,4272 + # fade-out
+
+4273,5127 cccpp # keyframe
+5128,5268 pcccp
+5129,5268 - # MIC high
+5269,5370 cccpp
+5269,5370 - # MIC high
+5371,5403 pcccp
+5404,5453 cccpp
+5413 -
+5454,5486 pcccp
+5484 +
+5484 Q 2
+5487,5505 c # single field
+5487,5505 +
+5487,5505 Q 6
+5506,5527 cccpp
+5528,5558 cccpp
+5559,5579 c # progressive, also very low res, but not blocky
+5580,5610 c # same
+5611,5639 ppccc
+5640,5661 ccppc
+5662,5687 c
+5688,5706 pcccp
+5707,5750 ccppc
+5751,5781 ppccc
+5751,5781 ++---
+5782,5811 cccpp
+5782,5811 ---++
+5812,5844 cppcc
+5812,5844 -++--
+5845,5907 ppccc
+5845,5907 ++---
+5908,5954 pcccp
+5908,5954 +---+
+5955,6072 c
+6063,6072 + # fade-out
+
+6073,6177 pcccp # keyframe
+6072,6177 - # MIC high
+6073,6102 + # fade-in
+6178,6206 c
+6178,6206 + # crossfade
+6207,6328 cccpp
+6316 - # MIC = 82
+6329,6358 c
+6329,6358 + # crossfade
+6359,6902 cccpp
+6903,7203 ppccc # TODO
+7204,7306 cppcc # TODO
+7307,7415 pcccp # TODO
+7416,7513 ppccc # TODO
+7514,7595 pcccp # TODO
+7596,7657 ppccc # TODO
+7658,7700 ccppc # TODO
+7701,7822 ppccc
+7823,7864 pcccp # TODO
+7865,7916 ccppc # TODO
+7917,7972 ppccc # TODO
+7973,8009 ppccc # TODO
+8010,8092 ccppc # TODO
+8093,8247 pcccp # TODO
+8248,8295 ccppc # TODO
+8296,8483 ppccc # TODO
+8484,8512 c
+8484,8512 + # crossfade
+8513,8699 ccppc # TODO
+8700,8924 cccpp # TODO
+8925,8954 c
+8925,8954 + # crossfade
+8955,9134 cccpp # TODO
+9135,9174 cppcc # TODO
+9175,9269 ppccc
+9270,9347 ccppc # TODO
+9348,9413 ccppc # TODO
+9414,9452 cccpp # TODO
+9453,9528 cppcc # TODO
+9529,9554 ppccc # TODO
+9555,9669 ppccc # TODO
+9670,9722 ppccc # TODO
+9723,9804 ccppc # TODO
+9805,9871 ccppc # TODO
+9872,9947 ppccc
+9948,10127 cccpp
+10128,10164 ccppc # TODO
+10165,10241 pcccp # TODO
+10242,10385 pcccp # TODO
+10386,10534 ppccc # TODO
+10535,10638 c
+10639,10667 c
+10639,10667 + # crossfade
+10668,10773 c
+10668,10773 +
+10774,10802 c
+10774,10802 + # crossfade (omg, stop the swipes)
+10803,10864 cccpp
+10865,10894 c
+10865,10894 + # crossfade
+10895,11091 ppccc # TODO
+11092,11120 c
+11092,11120 + # crossfade
+11121,11151 pcccp # TODO
+11152,11208 ccppc # TODO
+11209,11365 ppccc # TODO
+11366,11480 cccpp # TODO
+11481,11543 cccpp
+11544,11662 ccppc # TODO
+11663,11758 cccpp # TODO
+11759,11837 pcccp # TODO
+11838,11892 ccppc # TODO
+11893,12046 ccppc # TODO
+12047,12120 ccppc # TODO
+12121,12153 ppccc # TODO
+12154,12226 pcccp # TODO
+12227,12256 c
+12227,12256 + # crossfade
+12257,12362 c # 59.94i
+12257,12362 +
+12363,12391 c
+12363,12391 + # crossfade
+12392,12455 c # 59.94i
+12392,12455 +
+12456,12484 c
+12456,12484 + # crossfade
+12485,12532 c # 59.94i
+12485,12532 +
+12533,12561 c
+12533,12561 + # crossfade
+12562,12615 ccppc # TODO
+12616,12644 c
+12616,12644 + # crossfade
+12645,13074 cccpp # TODO
+12814 - # MIC = 87
+13075,13266 pcccp # TODO
+13267,13313 ppccc # TODO
+13314,13352 ppccc
+13353,13405 pcccp # TODO
+13406,13440 cppcc # TODO
+13441,13513 ppccc # TODO
+13514,13590 ppccc # TODO
+13591,13691 ccppc
+13692,13825 ccppc # TODO
+
+#TODO
+#13826,13849 pcccp
+#13852,13883 ppccc
+#13884,13898 ppccc
+#13899,13914 cppcc
+#13915,13925 cppcc
+#13926,13941 cppcc
+#13942,14054 pcccp # TODO
+13826,13941 c
+13826,13941 +
+13826,13941 Q 5
+
+14055,14106 cppcc # TODO
+14107,14183 pcccp
+14184,14241 hclup # crossfade, ccppc + pcccp
+14184,14241 +-+--
+14242,14327 cppcc
+14328,14384 ppccu # crossfade, ppccc + pcccp
+14385,14517 ccppc
+14518,14547 pccup # crossfade, pcccp + cccpp
+14548,14637 cccpp
+14638,14667 + # crossfade, cccpp + ccppc + brightness level change
+14668,14803 ccppc
+14804,14833 cuppc # crossfade, cppcc + ccppc
+14834,14884 ccppc
+14885,14913 uphcl # crossfade, cppcc + pcccp
+14885,14913 --+-+
+14914,15030 ppccc
+15031,15060 cluph # crossfade, cccpp + cppcc
+15031,15060 -+--+
+15061,15153 cppcc
+15154,15183 phclu # crossfade, cccpp + ppccc
+15154,15183 -+-+-
+15184,15236 ppccc
+15237,15293 ccupp # crossfade, ccppc + cccpp
+15294,15336 cppcc
+15337,15404 cppcc # TODO
+15405,15465 ppccc
+15466,15610 pcccp # TODO
+15611,15651 ccppc # TODO
+15652,15712 cccpp # TODO
+15713,15784 pcccp
+15785,15973 pcccp # TODO
+15974,16046 cppcc # TODO
+16047,16117 cccpp # TODO
+16118,16249 ccppc # TODO
+16250,16414 pcccp # TODO
+16415,16475 ccppc # TODO
+16476,16701 ccppc # TODO
+16702,16822 cccpp
+16823,16906 cccpp # TODO
+16907,16983 ccppc # TODO
+16984,17175 ccppc # TODO
+17176,17240 cppcc # TODO
+17241,17326 pcccp
+17327,17517 ccppc
+17327,17517 - # MIC high
+17518,17615 pcccp # TODO
+17616,17686 cppcc # TODO
+17687,17752 cccpp # TODO
+17753,18024 cppcc # TODO
+18025,18083 ppccc
+18084,18154 cccpp
+18155,18244 pcccp # TODO
+18245,18359 ccppc # TODO
+18360,18465 pcccp
+18466,18501 ppccc
+18502,18546 pcccp # TODO
+18547,18745 cccpp # TODO
+18746,18831 pcccp # TODO
+18832,19102 cccpp # TODO
+19103,19150 cccpp # TODO
+19151,19243 cccpp # TODO
+19244,19416 cccpp # TODO
+19417,19539 cppcc # TODO
+19540,19613 cccpp # TODO
+19614,19809 ccppc # TODO
+19810,19907 ppccc
+19908,20004 cccpp # TODO
+20005,20101 pcccp
+20102,20289 cccpp # TODO
+20177,20188 +
+20222,20233 +
+20249,20269 +
+20290,20448 pcccp # TODO
+20449,20691 ppccc # TODO
+20578,20608 +
+20692,20770 cppcc # TODO
+20771,20861 cccpp # TODO
+20862,20992 cccpp # TODO
+20993,21086 ccppc # TODO
+21087,21114 cccpp # TODO
+21115,21170 pcccp # TODO
+21171,21241 pcccp # TODO
+21242,21344 cppcc # TODO
+21345,21409 # cannot see
+21410,21485 ccppc # TODO
+21486,21541 pcccp # TODO
+21542,21766 pcccp
+21767,21894 cccpp # TODO
+21895,21963 ppccc # TODO
+21896,21963 - # MIC high
+21964,22155 cccpp # TODO
+22156,22954 ccppc # TODO
+22955,23044 c
+23045,23086 cppcc
+23087,23185 pcccp # TODO
+23186,23308 cppcc
+23309,23452 ccppc # TODO
+23453,23507 cppcc # TODO
+23508,23583 cccpp # TODO
+23584,23639 ppccc # TODO
+23640,23679 cppcc # TODO
+23680,23735 cccpp # TODO
+23736,23775 ccppc # TODO
+23776,23835 cppcc
+23836,24001 ppccc # TODO
+23967,24031 + # crossfade
+24002,24076 cccpp # TODO
+24077,24107 cppcc # TODO
+24108,24138 pcccp # TODO
+24139,24265 ccppc # TODO
+24266,24630 cccpp # TODO
+24631,24728 cccpp # TODO
+24729,24773 pcccp
+24774,24825 ppccc # TODO
+24826,24946 cccpp # TODO
+24947,24973 ccppc # TODO
+24974,25025 cppcc # TODO
+25026,25060 cppcc # TODO
+25061,25109 cppcc # TODO
+25110,25229 pcccp
+25230,25273 pcccp
+25274,25301 ppccc # TODO
+25302,25337 cppcc # TODO
+25338,25396 ccppc # TODO
+25397,25503 pcccp
+25504,25616 ccppc # TODO
+25617,25730 cccpp # TODO
+25731,25834 cccpp # TODO
+25835,25972 ppccc # TODO
+25973,26027 cppcc
+26028,26478 ppccc # TODO
+26479,27283 pcccp # TODO
+27284,27483 ccppc # TODO
+27484,27502 cccpp # TODO
+27503,27624 pcccp # TODO
+27625,27671 ppccc # TODO
+27672,27761 pcccp # TODO
+27762,27797 ccppc # TODO
+27798,27914 cppcc # TODO
+27915,27982 pcccp
+27983,28087 cppcc # TODO
+28088,28110 cppcc
+28111,28266 ccppc # TODO
+28267,28323 cppcc # TODO
+28324,28507 cppcc # TODO
+28508,28595 ccppc # TODO
+28596,28796 pcccp # TODO
+28797,28936 ppccc # TODO
+28937,29061 ppccc # TODO
+29062,29250 pcccp # TODO
+29251,29415 cccpp # TODO
+29416,29533 cppcc # TODO
+29534,29754 cccpp # TODO
+29755,29801 ppccc # TODO
+29802,29846 ppccc # TODO
+29847,30051 cccpp # TODO
+30052,30116 ccppc # TODO
+30117,30221 pcccp # TODO
+30222,30266 pcccp # TODO
+30267,30308 c # ? ppccc
+30309,30412 cccpp
+30413,30469 cppcc # TODO
+30470,30619 c
+30470,30619 +
+30470,30619 Q 5
+30620,30675 ccppc
+30676,30767 pcccp # TODO
+30768,31006 cccpp # TODO
+31007,31047 cppcc # TODO
+31048,31111 cccpp # TODO
+31112,31189 pcccp # TODO
+31190,31288 cppcc # TODO
+31289,31360 ccppc # TODO
+31361,31431 ppccc
+31432,31466 ppccc # TODO
+31467,31493 ccppc
+31494,31540 ppccc # TODO
+31541,31772 cccpp
+31773,31888 cppcc # TODO
+31889,32094 ppccc # TODO
+32095,32157 ccppc # TODO
+32158,32224 pcccp # TODO
+32225,32304 cccpp # TODO
+32305,32409 ccppc
+32410,32527 pcccp
+32528,32637 pcccp # TODO
+32638,32703 pcccp # TODO
+32704,32754 cccpp # TODO
+32755,32854 pcccp # TODO
+32855,32987 ccppc # TODO
+32988,33111 ccppc # TODO
+33112,33247 cccpp # TODO
+33248,33316 cccpp
+33317,33465 ccppc # TODO
+33466,33534 ccppc # TODO
+33535,33778 cppcc # TODO
+33779,33856 ccppc # TODO
+33857,34013 pcccp # TODO
+34014,34071 pcccp
+34072,34179 pcccp # TODO
+34180,34320 ppccc # TODO
+34321,34356 pcccp # TODO
+34357,34437 cppcc # TODO
+34438,34483 ccppc # TODO
+34484,34531 cppcc # TODO
+34532,34670 cppcc # TODO
+34671,34796 cppcc # TODO
+34797,34880 cccpp # TODO
+34881,35018 cppcc # TODO
+35019,35198 pcccp
+35199,35308 cccpp # TODO
+35309,35504 cccpp # TODO
+35505,35636 cppcc # TODO
+35637,35776 cccpp
+35777,35986 cccpp # TODO
+35987,36174 pcccp
+36175,36266 pcccp # TODO
+36267,36324 pcccp # TODO
+36325,36441 cppcc # TODO
+36442,36520 ccppc # TODO
+36521,36691 ccppc # TODO
+36692,36768 cccpp # TODO
+36769,36927 pcccp # TODO
+36928,37022 ccppc # TODO
+37023,37110 ccppc # TODO
+37111,37194 ppccc # TODO
+37195,37248 ppccc # TODO
+37249,37364 ppccc # TODO
+37365,37407 c # ?
+37408,37469 cppcc # TODO
+37470,37515 cccpp
+37516,37600 ccppc # TODO
+37601,37644 ppccc # TODO
+37645,37749 ppccc # TODO
+37750,37797 ppccc # TODO
+37798,37911 cppcc # TODO
+37912,38038 ppccc # TODO
+38039,38087 ccppc # TODO
+38088,38163 ccppc # TODO
+38164,38827 cccpp # TODO
+38828,38942 cppcc
+38943,39073 cccpp # TODO
+39074,39143 pcccp # TODO
+39144,39349 pcccp # TODO
+39350,39393 cccpp # TODO
+39394,39424 cppcc
+39425,39477 cppcc
+39478,39544 cccpp # TODO
+39545,39642 cccpp # TODO
+39643,39721 cccpp # TODO
+39722,39775 c
+39776,39821 ppccc
+39822,39887 c
+39888,39989 pcccp # TODO
+39990,40583 cppcc # TODO
+39990,40583 - # MIC high
+40584,40762 cppcc # TODO
+40763,40895 c # 59.94i (previous two clips look like 29.97)
+40763,40895 +
+40763,40895 Q 5
+40896,41156 ccppc # TODO
+41121,41186 + # crossfade
+41157,41276 c
+41277,41532 ppccc # TODO
+41533,41928 cccpp # TODO
+41929,42004 ccppc # TODO
+42005,42065 ccppc # TODO
+42066,42266 ppccc # TODO
+42267,42365 cppcc # TODO
+42366,42548 cppcc # TODO
+42549,42667 cccpp # TODO
+42668,42731 cppcc # TODO
+42732,42848 pcccp
+42849,42946 ccppc # TODO
+42947,43006 cccpp # TODO
+43007,43433 ccppc # TODO
+43434,43519 cccpp # TODO
+43520,43808 ccppc # TODO
+43612 + # monitor off
+43612 Q 5
+43809,43871 ccppc # TODO
+43872,43946 ppccc # TODO
+43947,43995 ccppc # TODO
+43996,44073 cppcc # TODO
+44074,44222 cppcc # TODO
+44223,44467 pcccp # TODO
+44468,44635 ppccc
+44636,44678 ccppc # TODO
+44679,44767 cccpp
+44768,45195 ccppc # TODO
+45196,45231 ppccc # TODO
+45232,45293 cccpp # TODO
+45294,45360 ccppc # TODO
+45361,45464 pcccp
+45465,45544 cppcc # TODO
+45545,45608 ppccc # TODO
+45609,45649 ccppc # TODO
+45650,45694 ppccc # TODO
+45695,45766 cppcc
+45767,45857 pcccp # TODO
+45787 - # MIC = 94
+45858,45945 pcccp # TODO
+45946,45975 ppccc # TODO
+45976,46022 cccpp # TODO
+46023,46095 ppccc # TODO
+46096,46756 cccpp # TODO
+46757,46826 c # 59.94i
+46757,46826 +
+46827,47079 pcccp # pcccp + 29.97 (tv)
+46827,47079 +---+
+47080,47180 c # 59.94i
+47080,47180 +
+47080,47180 Q 5
+47181,47243 cccpp # cccpp + 29.97 (tv)
+47181,47243 ---++
+47244,47356 ccppc # TODO
+47357,47473 c
+47357,47473 +
+47357,47473 Q 5
+47474,47570 ccppc # TODO
+47571,47998 c
+47571,47998 +
+47571,47998 Q 5
+47999,48249 ccppc
+48250,48405 chlcc # cppcc + 29.97 (tv), pp is already deinterlaced, sneaky
+48250,48405 -++--
+48406,48471 c # single field
+48406,48471 +
+48406,48471 Q 6
+48472,48519 ccppc # TODO
+48520,48631 ppccc # TODO
+48632,48747 ccppc # TODO
+48748,48775 ppccc # TODO
+48776,48885 ppccc # TODO
+48886,48916 ppccc # TODO
+48917,48969 ppccc # TODO
+48970,49163 ppccc # TODO
+49164,49390 ppccc # TODO
+49391,49595 cccpp # TODO
+49596,49622 cppcc
+49623,49713 ccppc # TODO
+49714,49778 + # crossfade
+49750,49886 cppcc # TODO
+49887,50080 ccppc # TODO
+50081,50314 cccpp # TODO
+50315,50502 ccppc # TODO
+50503,50716 pcccp # TODO
+50717,51161 cccpp # TODO
+51162,51206 ccppc # TODO
+51207,51297 cppcc # TODO
+51298,51420 ppccc # TODO
+51421,51618 pcccp # TODO
+51619,51694 cppcc # TODO
+51695,51781 pcccp # TODO
+51782,51866 pcccp # TODO
+51867,52117 cccpp
+52118,52155 pcccp # TODO
+52156,52207 pcccp
+52208,52250 pcccp # TODO
+52251,52325 cccpp # TODO
+52326,52403 cppcc # TODO
+52404,52521 ppccc
+52522,52636 ppccc # TODO
+52637,52792 ccppc # TODO
+52793,52917 ccppc # TODO
+52918,53007 cccpp # TODO
+53008,53064 cppcc
+53065,53135 ccppc # TODO
+53136,53369 cccpp # TODO
+53370,53430 pcccp # TODO
+53431,53646 cccpp # TODO
+53647,53778 ccppc # TODO
+53779,53815 pcccp
+53816,53881 cppcc # TODO
+53882,53927 cccpp # TODO
+53928,53956 cccpp # TODO
+53957,53996 ppccc # TODO
+53997,54067 ccppc # TODO
+54068,54111 cccpp # TODO
+54112,54444 cppcc # TODO
+54445,54540 ccppc # TODO
+54541,54794 ccppc # TODO
+54795,54847 # still image
+54848,55109 pcccp # TODO
+55110,55258 pcccp # TODO
+55259,55516 cccpp # TODO
+55517,55730 cccpp # TODO
+55731,56040 cppcc
+56041,56335 ppccc # TODO
+56336,56408 pcccp
+56409,56490 cppcc
+56491,56536 pcccp # TODO
+56537,56608 cccpp # TODO
+56609,56631 ppccc # TODO
+56632,56668 ppccc # TODO
+56669,56797 cccpp # TODO
+56798,56850 pcccp # TODO
+56851,56906 pcccp
+56907,56999 pcccp # TODO
+57000,57268 pcccp
+57269,57376 pcccp # TODO
+57377,57821 ccppc # TODO
+57822,57888 cccpp # TODO
+57889,58011 cppcc
+58012,58446 cppcc
+58447,58562 pcccp # TODO
+58563,58678 cccpp # TODO
+58679,58748 pcccp # TODO
+58749,58816 pcccp # TODO
+58817,59106 pcccp # TODO
+59070,59134 + # crossfade
+59107,59171 ppccc # TODO
+59172,59388 cppcc # TODO
+59389,59444 ppccc # TODO
+59445,59485 pcccp
+59486,59698 cppcc # TODO
+59699,60192 pcccp # TODO
+60193,60284 ppccc
+60285,60389 ppccc # TODO
+60390,60576 cccpp # TODO
+60577,60708 ppccc # TODO
+60709,60866 pcccp # TODO
+60867,60983 ppccc # TODO
+60984,61061 cppcc # TODO
+61062,61087 cccpp # TODO
+61088,61198 cppcc # TODO
+61199,61306 pcccp
+61307,61470 ccppc # TODO
+61471,61806 cccpp # TODO
+61807,61905 cppcc
+61906,61974 cccpp # TODO
+61975,62050 cccpp # TODO
+62051,62163 ccppc # TODO
+62164,62340 pcccp
+62341,62425 ppccc
+62426,62527 pcccp
+62528,62605 ppccc # TODO
+62606,62677 cccpp
+62678,62781 cppcc # TODO
+62782,62862 pcccp # TODO
+62863,62913 pcccp # TODO
+62914,63038 ccppc # TODO
+63039,63137 ppccc # TODO
+63138,63247 cccpp # TODO
+63248,63428 ppccc # TODO
+63429,63496 cccpp # TODO
+63497,63573 ccppc # TODO
+63574,63612 ccppc # TODO
+63613,63656 pcccp # TODO
+63657,63691 ppccc # TODO
+63692,63726 ppccc # TODO
+63727,63758 pcccp # TODO
+63759,63784 cppcc # TODO
+63785,63819 pcccp
+63820,63853 pcccp # TODO
+63854,63891 pcccp
+63892,63927 ppccc # TODO
+63928,63953 pcccp # TODO
+63954,64275 ccppc # TODO
+64276,64353 ccppc # TODO
+64354,64793 ccppc # TODO
+64794,64834 pcccp # TODO
+64835,64909 pcccp # TODO
+64910,64937 cccpp # TODO
+64938,65006 ppccc # TODO
+65007,65081 cccpp # TODO
+65082,65168 cccpp # TODO
+65169,65242 pcccp # TODO
+65243,65338 ccppc # TODO
+65339,65420 pcccp
+65421,65564 ccppc # TODO
+65565,65613 cppcc # TODO
+65614,65848 ppccc # TODO
+65849,65918 ppccc # TODO
+65919,66008 pcccp # TODO
+66009,66095 cppcc # TODO
+66096,66128 ppccc # TODO
+66129,66177 ccppc # TODO
+66178,66211 cppcc
+66212,66279 cccpp # TODO
+66280,66328 ppccc # TODO
+66329,66388 cppcc # TODO
+66389,66430 ppccc # TODO
+66431,66467 ppccc # TODO
+66468,66535 ccppc # TODO
+66536,66773 cppcc # TODO
+66774,66783 ccppc # TODO
+66784,66801 ccppc # TODO
+66802,66818 pcccp
+66819,66837 pcccp # TODO
+66838,66898 cccpp # TODO
+66899,66918 ccppc # TODO
+66901 + # brighness level change
+66919,66971 ccppc # TODO
+66921 + # same
+66972,67003 pcccp # TODO
+67004,67034 ccppc # TODO
+67007 + # same
+67035,67078 cppcc # TODO
+67079,67129 ccppc # TODO
+67130,67159 pcccp # TODO
+67160,67216 cppcc # TODO
+67217,67268 pcccp # TODO
+67269,67331 pcccp # TODO
+67332,67614 ppccc # TODO
+67615,67694 cccpp # TODO
+67695,67753 cppcc # TODO
+67754,67843 cppcc # TODO
+67844,67873 cccpp # TODO
+67874,67943 cccpp # TODO
+67944,67957 cccpp # TODO
+67958,67970 pcccp # TODO
+67971,68009 cppcc # TODO
+68010,68044 pcccp # TODO
+68045,68091 ccppc # TODO
+68092,68151 ccppc
+68152,68225 cppcc # TODO
+68226,68249 c
+68250,68297 ppccc # TODO
+68298,68340 c
+68341,68460 ppccc
+68461,68525 ppccc # TODO
+68526,68555 cppcc # TODO
+68556,68632 ppccc # TODO
+68633,68708 cppcc
+68709,68797 cccpp # TODO
+68798,68838 pcccp # TODO
+68839,68870 c
+68871,68910 pcccp # TODO
+68911,69011 cppcc # TODO
+69012,69035 cppcc # TODO
+69036,69067 pcccp # TODO
+69068,69092 pcccp # TODO
+69093,69138 ppccc # TODO
+69139,69180 ppccc
+69181,69231 ccppc # TODO
+69232,69383 ppccc # TODO
+69384,69443 ccppc # TODO
+69444,69490 pcccp # TODO
+69491,69514 ccppc # TODO
+69515,69601 cccpp
+69602,69716 ccppc # TODO
+69717,69781 ccppc # TODO
+69782,69806 ccppc # TODO
+69807,69885 cppcc # TODO
+69886,70014 ccppc # TODO
+70015,70034 ccppc # TODO
+70035,70057 cppcc # TODO
+70058,70130 ccppc # TODO
+70131,70159 ccppc
+70160,70214 cppcc # TODO
+70215,70243 pcccp
+70244,70403 ppccc # TODO
+70404,70442 ppccc # TODO
+70443,70744 ccppc # TODO
+70745,70947 ccppc # TODO
+70948,70998 cppcc # TODO
+70999,71081 ppccc
+71082,71215 pcccp # TODO
+71197 - # MIC high
+71216,71306 ppccc # TODO
+71307,71431 cppcc
+71432,71460 cppcc # TODO
+71461,71531 ccppc # TODO
+71532,71598 pcccp
+71599,71639 pcccp
+71640,71678 # still image
+71679,71714 cppcc # TODO
+71715,71860 ppccc
+71861,71941 ppccc # TODO
+71942,71998 ppccc # TODO
+71999,72053 cppcc # TODO
+72054,72135 ppccc # TODO
+72136,72214 pcccp # TODO
+72215,72254 pcccp # TODO
+72255,72344 c # 3rd is a dup, minor sfx on the eyes 29.97, drop it
+72345,72390 ccppc # TODO
+72391,72427 cppcc
+72428,72517 ppccc # TODO
+72518,72575 ppccc # TODO
+72576,72613 ppccc # TODO
+72614,72644 ppccc
+72645,72682 ppccc # TODO
+72683,72896 cppcc # TODO
+72897,72921 ppccc
+72922,72946 cppcc # TODO
+72947,73816 ppccc # TODO
+73817,73891 cccpp # TODO
+73892,73950 cppcc # TODO
+73951,74051 pcccp # TODO
+74052,74147 cccpp
+74148,74363 ppccc
+74364,74513 ppccc # TODO
+74514,74645 cccpp # TODO
+74646,74686 pcccp
+74687,74858 ppccc # TODO
+74859,74916 ccppc # TODO
+74917,74950 # still image
+74951,75442 ppccc
+74951,75442 - # MIC high
+75443,75582 ppccc # TODO
+75427 - # MIC = 84
+75583,75874 ppccc # TODO
+75875,76137 ppccc # TODO
+76138,76207 pcccp # TODO
+76208,76510 cccpp # TODO
+76511,76721 ppccc
+76722,78381 ccppc # TODO
+78382,78547 cccpp
+78517,78562 + # crossfade
+
+78548,81063 c # keyframe
+81067,81156 c # 59.94i, this is the third variation of this logo
+81067,81124 +
+81067,81124 Q 5
+81157,81245 c
+81157,81245 +
+
+
+649 Q 3 # pcccp p
+802 Q 3 # pcccp p
+1150 Q 3 # pcccp p
+1216 Q 3 # ppccc p
+1971 Q 3 # pcccp p
+2121 Q 3 # pcccp p
+2901 Q 3 # ppccc p
+3514 Q 3 # ppccc p
+3807 Q 3 # pcccp p
+3931 Q 3 # ppccc p
+5128 Q 3 # pcccp p
+5371 Q 3 # pcccp p
+5454 Q 3 # pcccp p
+5611 Q 3 # ppccc p
+5688 Q 3 # pcccp p
+6903 Q 3 # ppccc p
+7307 Q 3 # pcccp p
+7416 Q 3 # ppccc p
+7514 Q 3 # pcccp p
+7596 Q 3 # ppccc p
+7701 Q 3 # ppccc p
+7823 Q 3 # pcccp p
+7917 Q 3 # ppccc p
+7973 Q 3 # ppccc p
+8093 Q 3 # pcccp p
+8296 Q 3 # ppccc p
+9175 Q 3 # ppccc p
+9529 Q 3 # ppccc p
+9555 Q 3 # ppccc p
+9670 Q 3 # ppccc p
+9872 Q 3 # ppccc p
+10165 Q 3 # pcccp p
+10242 Q 3 # pcccp p
+10386 Q 3 # ppccc p
+11209 Q 3 # ppccc p
+11759 Q 3 # pcccp p
+12121 Q 3 # ppccc p
+12154 Q 3 # pcccp p
+13075 Q 3 # pcccp p
+13267 Q 3 # ppccc p
+13314 Q 3 # ppccc p
+13353 Q 3 # pcccp p
+13441 Q 3 # ppccc p
+13514 Q 3 # ppccc p
+14107 Q 3 # pcccp p
+15405 Q 3 # ppccc p
+15466 Q 3 # pcccp p
+15713 Q 3 # pcccp p
+15785 Q 3 # pcccp p
+16250 Q 3 # pcccp p
+17241 Q 3 # pcccp p
+17518 Q 3 # pcccp p
+18025 Q 3 # ppccc p
+18155 Q 3 # pcccp p
+18360 Q 3 # pcccp p
+18466 Q 3 # ppccc p
+18502 Q 3 # pcccp p
+18746 Q 3 # pcccp p
+19810 Q 3 # ppccc p
+20005 Q 3 # pcccp p
+20290 Q 3 # pcccp p
+20449 Q 3 # ppccc p
+21115 Q 3 # pcccp p
+21171 Q 3 # pcccp p
+21486 Q 3 # pcccp p
+21542 Q 3 # pcccp p
+21895 Q 3 # ppccc p
+23087 Q 3 # pcccp p
+23584 Q 3 # ppccc p
+23836 Q 3 # ppccc p
+24108 Q 3 # pcccp p
+24729 Q 3 # pcccp p
+24774 Q 3 # ppccc p
+25110 Q 3 # pcccp p
+25230 Q 3 # pcccp p
+25274 Q 3 # ppccc p
+25397 Q 3 # pcccp p
+25835 Q 3 # ppccc p
+26028 Q 3 # ppccc p
+26479 Q 3 # pcccp p
+27503 Q 3 # pcccp p
+27625 Q 3 # ppccc p
+27672 Q 3 # pcccp p
+27915 Q 3 # pcccp p
+28596 Q 3 # pcccp p
+28797 Q 3 # ppccc p
+28937 Q 3 # ppccc p
+29062 Q 3 # pcccp p
+29755 Q 3 # ppccc p
+29802 Q 3 # ppccc p
+30117 Q 3 # pcccp p
+30222 Q 3 # pcccp p
+30676 Q 3 # pcccp p
+31112 Q 3 # pcccp p
+31361 Q 3 # ppccc p
+31432 Q 3 # ppccc p
+31494 Q 3 # ppccc p
+31889 Q 3 # ppccc p
+32158 Q 3 # pcccp p
+32410 Q 3 # pcccp p
+32528 Q 3 # pcccp p
+32638 Q 3 # pcccp p
+32755 Q 3 # pcccp p
+33857 Q 3 # pcccp p
+34014 Q 3 # pcccp p
+34072 Q 3 # pcccp p
+34180 Q 3 # ppccc p
+34321 Q 3 # pcccp p
+35019 Q 3 # pcccp p
+35987 Q 3 # pcccp p
+36175 Q 3 # pcccp p
+36267 Q 3 # pcccp p
+36769 Q 3 # pcccp p
+37111 Q 3 # ppccc p
+37195 Q 3 # ppccc p
+37249 Q 3 # ppccc p
+37601 Q 3 # ppccc p
+37645 Q 3 # ppccc p
+37750 Q 3 # ppccc p
+37912 Q 3 # ppccc p
+39074 Q 3 # pcccp p
+39144 Q 3 # pcccp p
+39776 Q 3 # ppccc p
+39888 Q 3 # pcccp p
+41277 Q 3 # ppccc p
+42066 Q 3 # ppccc p
+42732 Q 3 # pcccp p
+43872 Q 3 # ppccc p
+44223 Q 3 # pcccp p
+44468 Q 3 # ppccc p
+45196 Q 3 # ppccc p
+45361 Q 3 # pcccp p
+45545 Q 3 # ppccc p
+45650 Q 3 # ppccc p
+45767 Q 3 # pcccp p
+45858 Q 3 # pcccp p
+45946 Q 3 # ppccc p
+46023 Q 3 # ppccc p
+48520 Q 3 # ppccc p
+48748 Q 3 # ppccc p
+48776 Q 3 # ppccc p
+48886 Q 3 # ppccc p
+48917 Q 3 # ppccc p
+48970 Q 3 # ppccc p
+49164 Q 3 # ppccc p
+50503 Q 3 # pcccp p
+51298 Q 3 # ppccc p
+51421 Q 3 # pcccp p
+51695 Q 3 # pcccp p
+51782 Q 3 # pcccp p
+52118 Q 3 # pcccp p
+52156 Q 3 # pcccp p
+52208 Q 3 # pcccp p
+52404 Q 3 # ppccc p
+52522 Q 3 # ppccc p
+53370 Q 3 # pcccp p
+53779 Q 3 # pcccp p
+53957 Q 3 # ppccc p
+54848 Q 3 # pcccp p
+55110 Q 3 # pcccp p
+56041 Q 3 # ppccc p
+56336 Q 3 # pcccp p
+56491 Q 3 # pcccp p
+56609 Q 3 # ppccc p
+56632 Q 3 # ppccc p
+56798 Q 3 # pcccp p
+56851 Q 3 # pcccp p
+56907 Q 3 # pcccp p
+57000 Q 3 # pcccp p
+57269 Q 3 # pcccp p
+58447 Q 3 # pcccp p
+58679 Q 3 # pcccp p
+58749 Q 3 # pcccp p
+58817 Q 3 # pcccp p
+59389 Q 3 # ppccc p
+59445 Q 3 # pcccp p
+59699 Q 3 # pcccp p
+60193 Q 3 # ppccc p
+60285 Q 3 # ppccc p
+60577 Q 3 # ppccc p
+60709 Q 3 # pcccp p
+60867 Q 3 # ppccc p
+61199 Q 3 # pcccp p
+62164 Q 3 # pcccp p
+62341 Q 3 # ppccc p
+62426 Q 3 # pcccp p
+62528 Q 3 # ppccc p
+62782 Q 3 # pcccp p
+62863 Q 3 # pcccp p
+63039 Q 3 # ppccc p
+63248 Q 3 # ppccc p
+63613 Q 3 # pcccp p
+63657 Q 3 # ppccc p
+63692 Q 3 # ppccc p
+63727 Q 3 # pcccp p
+63785 Q 3 # pcccp p
+63820 Q 3 # pcccp p
+63854 Q 3 # pcccp p
+63892 Q 3 # ppccc p
+63928 Q 3 # pcccp p
+64794 Q 3 # pcccp p
+64835 Q 3 # pcccp p
+64938 Q 3 # ppccc p
+65169 Q 3 # pcccp p
+65339 Q 3 # pcccp p
+65614 Q 3 # ppccc p
+65849 Q 3 # ppccc p
+65919 Q 3 # pcccp p
+66096 Q 3 # ppccc p
+66280 Q 3 # ppccc p
+66389 Q 3 # ppccc p
+66431 Q 3 # ppccc p
+66819 Q 3 # pcccp p
+67130 Q 3 # pcccp p
+67217 Q 3 # pcccp p
+67269 Q 3 # pcccp p
+67332 Q 3 # ppccc p
+67958 Q 3 # pcccp p
+68010 Q 3 # pcccp p
+68250 Q 3 # ppccc p
+68341 Q 3 # ppccc p
+68461 Q 3 # ppccc p
+68556 Q 3 # ppccc p
+68798 Q 3 # pcccp p
+68871 Q 3 # pcccp p
+69036 Q 3 # pcccp p
+69068 Q 3 # pcccp p
+69093 Q 3 # ppccc p
+69139 Q 3 # ppccc p
+69232 Q 3 # ppccc p
+69444 Q 3 # pcccp p
+70215 Q 3 # pcccp p
+70244 Q 3 # ppccc p
+70404 Q 3 # ppccc p
+70999 Q 3 # ppccc p
+71082 Q 3 # pcccp p
+71216 Q 3 # ppccc p
+71532 Q 3 # pcccp p
+71599 Q 3 # pcccp p
+71715 Q 3 # ppccc p
+71861 Q 3 # ppccc p
+71942 Q 3 # ppccc p
+72054 Q 3 # ppccc p
+72136 Q 3 # pcccp p
+72215 Q 3 # pcccp p
+72428 Q 3 # ppccc p
+72518 Q 3 # ppccc p
+72576 Q 3 # ppccc p
+72614 Q 3 # ppccc p
+72645 Q 3 # ppccc p
+72897 Q 3 # ppccc p
+72947 Q 3 # ppccc p
+73951 Q 3 # pcccp p
+74148 Q 3 # ppccc p
+74364 Q 3 # ppccc p
+74646 Q 3 # pcccp p
+74687 Q 3 # ppccc p
+74951 Q 3 # ppccc p
+75443 Q 3 # ppccc p
+75583 Q 3 # ppccc p
+75875 Q 3 # ppccc p
+76138 Q 3 # pcccp p
+76511 Q 3 # ppccc p
