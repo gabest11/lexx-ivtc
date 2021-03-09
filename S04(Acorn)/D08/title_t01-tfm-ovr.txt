@@ -9,7 +9,8 @@
 250,339 # still image
 340,547 ccppc
 548,575 ppccu # crossfade, pcccp + ppccc
-576,951 ccppc
+576,580 ccppc
+581,951 ccppc
 952,980 cluph # crossfade, cppcc + cccpp
 952,980 -+--+
 981,1069 pcccp
