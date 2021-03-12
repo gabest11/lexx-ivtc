@@ -33,6 +33,13 @@ if(count($resolution) == 1 && is_numeric($resolution[0]))
 	}
 }
 
+function is51($fn)
+{
+	$str = shell_exec('ffprobe -hide_banner -show_streams "'.$fn.'" -print_format json');
+	$obj = json_decode($str, true);
+	return $obj['streams'][0]['channels'] == 6;
+}			
+
 if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 || preg_match('/(.+S[0-9]+E[0-9]+-)/i', $src, $m))
 {
@@ -71,16 +78,16 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 		foreach(['mka', 'wav'] as $format)
 		{
 			$fn = $fn2.'_'.$lang.'.'.$format;
-
-			if(file_exists($fn)) $audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
+			
+			if(file_exists($fn)) $audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format, 'is51' => $format == 'wav' && is51($fn)];
 		
 			for($i = 1; ; $i++)
 			{
 				$fn = $fn2.'_'.$lang.$i.'.'.$format;
 			
 				if(!file_exists($fn)) break;
-			
-				$audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format];
+				
+				$audio[] = ['fn' => $fn, 'lang' => $lang, 'format' => $format, 'is51' => $format == 'wav' && is51($fn)];
 			}
 		}
 		
@@ -119,7 +126,7 @@ $cmd = [];
 $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 $cmd[] = '-i "'.$src.'"';
-foreach($audio as $a) $cmd[] = '-i "'.$a['fn'].'"';
+foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
 foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
 $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';

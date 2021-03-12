@@ -4,6 +4,11 @@ if(!file_exists($argv[1])) die('check file name');
 
 $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
+$tfmframes = [];
+$tdecframes = [];
+$ovrframes = [];
+$ovrscenes = [];
+
 function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
 {
 	#TODO: check if the wrong frame is dropped in the override file for known patterns
@@ -12,8 +17,10 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
 	$bogusframes = [];
 	$bogusscenes = [];
 
+	global $tfmframes;
+	
 	$tfmframes = [];
-		
+
 	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
 	{
 		$row = trim($row);
@@ -51,6 +58,9 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
 			$tfmframes[$i]['micmin'] = ['t' => $mint, 'v' => $minv];
 		}
 	}
+
+	global $ovrframes;
+	global $ovrscenes;
 
 	$ovrframes = [];
 	$ovrscenes = [];
@@ -332,6 +342,57 @@ print_r([$i, $tfm, $f]);
 	}
 }
 
+function sanitycheck2($title, &$bogusdups)
+{
+	#TODO: check if the wrong frame is dropped in the override file for known patterns
+	#TODO: scene begins with p/b, ends on u/n and blended
+
+	global $tdecframes;
+	
+	$tdecframes = [];
+	
+	if(file_exists("$title-tdec-debug.txt"))
+	foreach(explode("\n", file_get_contents("$title-tdec-debug.txt")) as $row)
+	{
+		$row = trim($row);
+		
+		if(!preg_match('/TDecimate: +inframe = ([0-9]+) +useframe = ([0-9]+)/i', $row, $m)) continue;
+		
+		$tdecframes[(int)$m[2]] = (int)$m[1];
+	}
+	
+	global $ovrframes;
+	global $ovrscenes;
+	
+	//print_r($tdecframes);
+	//exit;
+	
+	// check if two frames were dropped during a scene in a sequence of 5 frames
+	
+	foreach($ovrscenes as $scene)
+	{
+		for($i = $scene['s'], $j = 0, $skipped = []; $i < $scene['e']; $i++)
+		{
+			if(!isset($tdecframes[$i]))
+			{
+				$skipped[] = $i;
+			}
+			
+			if(++$j == 5)
+			{
+				$j = 0;
+				
+				if(count($skipped) > 1)
+				{
+					$bogusdups[] = ['scene' => $scene, 'pos' => $i - 4, 'skipped' => $skipped];
+				}
+				
+				$skipped = [];
+			}
+		}
+	}
+}
+
 $cthresh = 9;
 $MI = 80;
 $PP = 6;
@@ -444,7 +505,7 @@ deint3=yadifmod2(order=1)
 TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 # If your source is not anime or cartoon then add
 # vfrDec=0  into the line below
-TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",ovr="$title-tdec-ovr.txt")
+TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
 if(!file_exists("$title-2.avs")) file_put_contents("$title-2.avs", $avs);
@@ -595,6 +656,31 @@ for($i = 0; $i < count($m[0]); $i++)
 }
 
 file_put_contents("$title-keyframes.txt", implode(PHP_EOL, $keyframes));
+
+//
+
+$bogusdups = [];
+
+sanitycheck2($title, $bogusdups);
+
+if(!empty($bogusdups))
+{
+	$fp = fopen("$title-bogusscenes.txt", 'a');
+
+	fprintf($fp, "\n\n");
+
+	foreach($bogusdups as $dups)
+	{
+		fprintf($fp, "%s\n", $dups['scene']['row']);
+	
+		foreach($dups['skipped'] as $skipped)
+		{
+			fprintf($fp, "- %d\n", $skipped);
+		}
+	}
+
+	fclose($fp);
+}
 
 //
 
