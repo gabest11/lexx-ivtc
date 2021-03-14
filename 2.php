@@ -146,6 +146,7 @@ $cmd[] = '-movflags +faststart';
 if(!empty($keyframes)) $cmd[] = '-force_key_frames '.$keyframes;
 $cmd[] = '-metadata title="'.$title.'"';
 $cmd[] = '-metadata description="https://github.com/gabest11/lexx-ivtc" ';
+$cmd[] = '-metadata:s title= ';
 $cmd[] = '"'.$dst.'"';
 
 // TODO: chapters for keyframes
@@ -220,9 +221,11 @@ echo $cmd.PHP_EOL;
 	
 $ret = 0;
 passthru($cmd, $ret);
-if(!empty($ret)) die($ret);
+if(!empty($ret)) die(sprintf("%d\n", $ret));
 
-unlink($dst);
+echo 'del '.$dst.PHP_EOL;
+
+if(!unlink($dst)) echo 'cannot delete...'.PHP_EOL;
 }
 
 ?>

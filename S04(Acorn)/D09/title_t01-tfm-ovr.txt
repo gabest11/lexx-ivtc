@@ -376,7 +376,9 @@
 27664,27697 ccppc
 27698,27743 ccppc
 27744,27864 cppcc
-27865,27920 ppccc
+27865,27920 phclu # ppccc + cccpp (2nd Stan)
+27865,27920 -+-+-
+27865 + # starts on p
 27921,27959 ppccc
 27960,28045 phclu # ppccc + cccpp (2nd Stan)
 27960,28045 -+-+-
@@ -431,7 +433,7 @@
 31814,31881 ppccc
 31882,31930 cccpp
 31931,31983 ppccc
-31984,32115 cccpp
+31984,32115 cccpp # lol, made in ms paint
 32116,32173 ccppc
 32174,32245 cccpp
 32246,32493 ccppc
@@ -445,7 +447,7 @@
 32709,32757 +
 32774,32836 ppccc
 32837,32883 ppccc
-32884,32912 ppccc
+32884,32912 ppccc # two Stans are in sync
 32913,32943 pcccp
 32944,33107 ccppc
 33108,33152 ccppc
@@ -458,27 +460,33 @@
 33456,33460 ++--- # bloom
 33462,33489 ppccc
 33490,33683 pcccp
-33684,33774 pcccp
+33684,33774 hclup # pcccp + ccppc (2nd Stan)
+33684,33774 +-+--
 33775,33836 cppcc
 33837,33864 cppcc
-33844,33848 + # tile opens at 59.94i
+33844,33849 + # tile opens at 59.94i
 33865,33868 c # 33864 frozen in a combed state
 33865,33868 +
 33865,33868 Q 5
 33869,33919 pcccp
-33920,34007 cppcc
+33920,34006 cluph # cppcc + cccpp (2nd Stan)
+33920,34006 -+--+
+34007 l # ends on u
+34007 +
 34008,34108 pcccp
 34109,34168 cccpp
 34109,34118 ---++ # bloom
 34144,34153 ---++
 34169,34225 cppcc
-34226,34307 cppcc
+34226,34307 cluph # cppcc + cccpp (2nd Vlad)
+34226,34307 -+--+
 34308,34367 ccppc
 34368,34410 clcpp # 2nd frame has temporal difference between the fields (only fg, sky stays still)
 34368,34410 -+---
 34411,34465 cppcc
 34466,34540 ppccc
 34541,34590 cppcc
+34541,34560 -++--
 34591,34619 pcccp
 34620,34661 cppcc
 34662,34731 cccpp

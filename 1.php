@@ -152,6 +152,52 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
 			}
 		}
 	}
+	
+	foreach(explode("\n", file_get_contents("$title-tdec-ovr.txt")) as $row)
+	{
+		$row = trim($row);
+
+		$s = $row;
+		
+		if(($i = strpos($row, '#')) !== false)
+		{
+			$s = trim(substr($row, 0, $i));
+		}
+		
+		if(preg_match('/^([0-9]+)(,([0-9]+))? +([fvc])$/i', $s, $m))
+		{
+			if(isset($m[3]) && is_numeric($m[3])) 
+			{
+				if((int)$m[1] >= (int)$m[3]) {echo 'check row '.$row.PHP_EOL;}
+			}
+			
+			if(empty($m[3])) $m[3] = $m[1];
+
+			if($m[4] == 'c') {echo 'check row '.$row.PHP_EOL;}
+			
+			for($i = (int)$m[1], $j = (int)$m[3]; $i <= $j; $i++)
+			{
+				$ovrframes[$i]['rate'] = $m[4];
+			}
+		}
+		else if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)$/i', $s, $m))
+		{
+			if(is_numeric($m[3])) 
+			{
+				if((int)$m[1] >= (int)$m[3]) {echo 'check row '.$row.PHP_EOL;}
+			}
+			
+			if(empty($m[3])) $m[3] = $m[1];
+		
+			for($i = (int)$m[1], $j = (int)$m[3], $k = 0; $i <= $j; $i++)
+			{
+				$ovrframes[$i]['dec']['value'] = $m[4][$k];
+				$ovrframes[$i]['dec']['row'] = $row;
+		
+				if(++$k == strlen($m[4])) $k = 0;
+			}
+		}
+	}
 
 	foreach($tfmframes as $i => $tfm)
 	{
@@ -360,7 +406,8 @@ function sanitycheck2($title, &$bogusdups)
 		
 		$tdecframes[(int)$m[2]] = (int)$m[1];
 	}
-	
+
+	global $tfmframes;
 	global $ovrframes;
 	global $ovrscenes;
 	
@@ -368,8 +415,11 @@ function sanitycheck2($title, &$bogusdups)
 	//exit;
 	
 	// check if two frames were dropped during a scene in a sequence of 5 frames
+	// or none for regular sequences
 	
-	foreach($ovrscenes as $scene)
+	$zerodrops = [];
+
+	foreach($ovrscenes as $index => $scene)
 	{
 		for($i = $scene['s'], $j = 0, $skipped = []; $i < $scene['e']; $i++)
 		{
@@ -386,10 +436,43 @@ function sanitycheck2($title, &$bogusdups)
 				{
 					$bogusdups[] = ['scene' => $scene, 'pos' => $i - 4, 'skipped' => $skipped];
 				}
+				else if(count($skipped) == 0 && strlen($scene['t']) == 5 
+				&& (!isset($ovrframes[$i]['rate']) || $ovrframes[$i]['rate'] == 'f')
+				&& !($i == $scene['s'] + 4 && substr($scene['t'], 0, 2) == 'pp'))
+				{
+					$keep = 0;
+					$deint = 0;
+					
+					for($k = $i - 4; $k <= $i; $k++)
+					{
+						if(isset($ovrframes[$i]['dec']) && $ovrframes[$i]['dec']['value'] == '+')
+						{
+							$keep++;
+						}
+
+						//if(isset($ovrframes[$i]['deint']) && $ovrframes[$i]['deint']['value'] == '+')
+						if(isset($tfmframes[$i]['deint']) && $tfmframes[$i]['deint'] == '+')						
+						{
+							$deint++;
+						}
+					}
+					
+					// don't record if the override keeps every frame or all are deinterlaced
+					
+					if($keep < 5 && $deint < 5)
+					{
+						$zerodrops[] = ['scene' => $scene, 'pos' => $i - 4, 'skipped' => $skipped];
+					}
+				}
 				
 				$skipped = [];
 			}
 		}
+	}
+	
+	foreach($zerodrops as $s)
+	{
+		$bogusdups[] = $s;
 	}
 }
 
@@ -671,7 +754,7 @@ if(!empty($bogusdups))
 
 	foreach($bogusdups as $dups)
 	{
-		fprintf($fp, "%s\n", $dups['scene']['row']);
+		fprintf($fp, "%s @ %d\n", $dups['scene']['row'], $dups['pos']);
 	
 		foreach($dups['skipped'] as $skipped)
 		{
