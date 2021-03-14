@@ -1,5 +1,12 @@
 # S04E18 The Game
 
+# in many scenes, the second field has a faint ghost image of the first
+# it could be a motion blur or bloom effect, more visible on brighter objects
+# no ghosting between frames, only fields
+#
+# the solution is to keep the first field of p frames
+# tdecimate is unable to detect duplicates, must use overrides
+
 0,129 ccppc
 0,39 + # fade-in
 0,39 Q 5
@@ -122,7 +129,7 @@
 10645,10659 --++- # original + shadow image
 10660,10882 pcccp
 10883,10972 cccpp
-10973,11073 cppcc
+10973,11073 cuucc # cppcc
 11074,11354 ccppc
 11355,11452 ccppc
 11453,11532 cppcc
@@ -138,55 +145,55 @@
 12366,12575 pcccp
 12576,12684 cccpp
 12685,13091 ccppc
-12685,12949 --++- # bloom
+12685,12949 --++- # blur
 13092,13278 ccppc
-13182,13186 --++- # bloom
+13182,13186 --++- # blur
 13279,13435 pcccp
 13436,13680 ccppc
 13681,13792 cppcc
-13726,13792 -++-- # bloom
+13726,13792 -++-- # blur
 13773 i 1111
 13793,13957 ppccc
 13794,13957 - # more combed frame in the blurred foreground, not very visible
-13858,13867 ++--- # bloom (makes dups less similar, confuses tdec, must override drops)
+13858,13867 ++--- # blur (makes dups less similar, confuses tdec, must override drops)
 #13859 Q 5
 13958,14018 cccpp
 14019,14098 c
 14099,14687 ppccc
 14688,14736 ppccc
-14768,14772 ++--- # bloom
+14768,14772 ++--- # blur
 14737,14817 ppccc
 14818,14948 ppccc
 14949,15104 pcccp
-14949,14969 +---+ # bloom
+14949,14969 +---+ # blur
 14989,14994 +---+
 15034,15074 +---+
 15105,15136 ccppc
 15137,15324 ppccc
-15267,15324 ++--- # bloom
+15267,15324 ++--- # blur
 15325,15408 pcccp
 15409,15487 cppcc
-15464,15487 -++-- # bloom
+15464,15487 -++-- # blur
 15488,15671 pcccp
-15488,15607 +---+ # bloom
+15488,15607 +---+ # blur
 15672,15761 ppccc
-15672,15751 ++--- # bloom
+15672,15751 ++--- # blur
 15672,15751 PP 3 # flashing
 15762,15814 pcccp
-15762,15814 +---+ # bloom
+15762,15814 +---+ # blur
 15762,15814 PP 3
 15815,15871 ccppc
-15815,15871 --++- # bloom
+15815,15871 --++- # blur
 15872,15921 cccpp
 15922,15963 ccppc
 15964,16016 ccppc
-15964,16007 --++- # bloom
+15964,16007 --++- # blur
 16017,16130 ccppc
 16131,16354 ccppc
 16355,16403 cccpp
 16404,16440 pcccp
 16441,16483 pcccp
-16441,16483 +---+ # bloom
+16441,16483 +---+ # blur
 16484,16536 ccppc
 16537,16590 pcccp
 16591,16666 ccppc
@@ -195,47 +202,47 @@
 16854,16947 pcccp
 16897 - # MIC = 88 ?
 16948,17084 pcccp
-16977,16978 + # bloom
-17002,17003 + # bloom
+16977,16978 + # blur
+17002,17003 + # blur
 17085,17196 cppcc
 17197,17241 pcccp
 17242,17366 ccppc
-17255 + # bloom
+17255 + # blur
 17330 +
 17365 +
 17367,17399 cccpp
 17400,17462 pcccp
 17463,17532 cccpp
 17533,17626 cppcc
-17533,17626 -++-- # bloom
+17533,17626 -++-- # blur
 17627,17679 ccppc
 17680,17740 cccpp
 17741,17872 ccppc
-17766,17872 --++- # bloom
+17766,17872 --++- # blur
 17873,18016 pcccp
 18017,18262 ccppc
-18062,18066 --++- # bloom
+18062,18066 --++- # blur
 18263,18319 cccpp
-18263,18292 ---++ # bloom
+18263,18292 ---++ # blur
 18320,18353 ccppc
 18354,18511 ccppc
 18512,18549 ccppc
-18527,18531 --++- # bloom
+18527,18531 --++- # blur
 18542,18546 --++-
 18550,18583 cppcc
-18550,18583 -++-- # bloom
+18550,18583 -++-- # blur
 18584,18638 pcccp
 18639,18667 ccppc
-18639,18667 --++- # bloom
+18639,18667 --++- # blur
 18668,18717 cppcc
 18673,18686 -++--
 18718,18758 ccppc
 18759,18790 cccpp
-18759,18790 ---++ # bloom
+18759,18790 ---++ # blur
 18791,18826 ppccc
 18827,18871 cccpp
 18872,18920 ppccc
-18877,18914 ++--- # bloom
+18877,18914 ++--- # blur
 18921,18948 cppcc
 18949,18979 ppccc
 18980,19061 cccpp
@@ -250,19 +257,19 @@
 19750,19806 ccppc
 19807,19878 cccpp
 19879,19921 cppcc
-19879,19898 -++-- # bloom
+19879,19898 -++-- # blur
 19922,19959 cccpp
 19960,20344 pcccp
 20345,20389 pcccp
 20379,20382 ++--- # tile opens
 20390,20448 ccppc
-20390,20448 --++- # bloom
+20390,20448 --++- # blur
 20449,20623 ccppc
 20588,20597 ---++ # tile opens
 20624,20754 ccppc
 20755,20942 cppcc
 20943,20992 ccppc
-20953,20967 --++- # bloom
+20953,20967 --++- # blur
 20973,20992 --++-
 20993,21049 ccppc
 21050,21155 ccppc
@@ -271,20 +278,20 @@
 21321,21416 ppccu # pcccp + ppccc (blinking led)
 21417,21453 cccpp
 21454,21551 cppcc
-21454,21461 -++-- # bloom
+21454,21461 -++-- # blur
 21534,21551 -++--
 21552,21646 pcccp
-21552,21601 +---+ # bloom
+21552,21601 +---+ # blur
 21647,21851 cppcc
 21852,21904 cppcc
-21852,21894 -++-- # bloom
+21852,21894 -++-- # blur
 21905,21988 cccpp
-21925,21974 ---++ # bloom
+21925,21974 ---++ # blur
 21989,22039 ppccc
 22040,22120 cccpp
 22121,22166 cppcc
 22167,22228 ppccc
-22177,22213 ++--- # bloom
+22177,22213 ++--- # blur
 22229,22290 ccppc
 22291,22344 pcccp
 22345,22419 cppcc
@@ -298,7 +305,7 @@
 22941,22974 c # no combed frames (?)
 22975,23006 cccpp
 23007,23031 cppcc
-23027,23031 -++-- # bloom
+23027,23031 -++-- # blur
 23032,23095 cppcc
 23042,23046 -++--
 23096,23248 uphcl # cppcc + pcccp (blinking led)
@@ -308,13 +315,13 @@
 23419,23583 cluph # cccpp + cppcc (blinking led)
 23419,23583 -+--+
 23584,23761 pcccp
-23584,23598 +---+ # bloom
+23584,23598 +---+ # blur
 23762,23838 ccppc
 23839,23895 pcccp
-23893,23894 + # bloom
+23893,23894 + # blur
 23896,24083 pcccp
 24084,24212 ppccc
-24089,24103 ++--- # bloom
+24089,24103 ++--- # blur
 24144,24148 ++---
 24159,24168 ++---
 24169,24198 ++---
@@ -351,18 +358,18 @@
 26439,26491 pcccp
 26492,26528 cppcc
 26529,26567 cppcc
-26544,26567 -++-- # bloom
+26544,26567 -++-- # blur
 26568,26624 cppcc
 26625,26671 cccpp
 26672,26771 ppccc
 26772,26865 ccppc
-26772,26786 --++- # bloom
+26772,26786 --++- # blur
 26866,26905 cppcc
 26906,26932 cccpp
 26933,26972 pcccp
 26973,27008 cccpp
 27009,27049 ccppc
-27039,27049 --++- # bloom
+27039,27049 --++- # blur
 27050,27111 ccppc
 27112,27257 cccpp
 27258,27287 cccpp
@@ -426,7 +433,7 @@
 31402,31427 cppcc
 31428,31489 cppcc
 31490,31534 ccppc
-31490,31534 --++- # bloom
+31490,31534 --++- # blur
 31535,31590 ccppc
 31591,31655 cppcc
 31656,31813 cccpp
@@ -437,7 +444,7 @@
 32116,32173 ccppc
 32174,32245 cccpp
 32246,32493 ccppc
-32306,32368 --++- # bloom
+32306,32368 --++- # blur
 32416,32420 --++-
 32476,32480 --++-
 32494,32617 ccppc
@@ -454,10 +461,10 @@
 33153,33204 ccppc
 33205,33233 ccppc
 33234,33378 ccppc
-33234,33248 --++- # bloom
+33234,33248 --++- # blur
 33379,33435 cppcc
 33436,33461 ppccc
-33456,33460 ++--- # bloom
+33456,33460 ++--- # blur
 33462,33489 ppccc
 33490,33683 pcccp
 33684,33774 hclup # pcccp + ccppc (2nd Stan)
@@ -475,7 +482,7 @@
 34007 +
 34008,34108 pcccp
 34109,34168 cccpp
-34109,34118 ---++ # bloom
+34109,34118 ---++ # blur
 34144,34153 ---++
 34169,34225 cppcc
 34226,34307 cluph # cppcc + cccpp (2nd Vlad)
@@ -486,26 +493,28 @@
 34411,34465 cppcc
 34466,34540 ppccc
 34541,34590 cppcc
-34541,34560 -++--
+34541,34560 -++-- # blur
 34591,34619 pcccp
 34620,34661 cppcc
 34662,34731 cccpp
 34732,34765 ppccc
-34732,34765 ++--- # bloom
+34732,34765 ++--- # blur
 34766,34854 cppcc
 34855,34907 cppcc
 34908,35078 pcccp
-34908,34993 +---+ # bloom
+34908,34993 +---+ # blur
 35003 +
 35079,35119 ccppc
 35120,35267 cppcc
 35268,35315 cccpp
 35268,35315 - # MIC high (?)
 35316,35339 cccpp
-35316,35325 ---++ # bloom
+35316,35325 ---++ # blur
 35340,35379 ppccc
-35345,35379 ++--- # bloom
+35345,35379 ++--- # blur
 35380,35422 cppcc
+35408 - # MIC = 94 ?
+35411 - # MIC = 91 ?
 35423,35463 pcccp
 35464,35542 cppcc
 35543,35712 pcccp
@@ -524,94 +533,124 @@
 37286,37349 + # crossfade
 37320,37394 pcccp
 37395,37457 cccpp
-37395,37457 ---++ # bloom
+37395,37457 ---++ # blur
 37458,37509 ppccc
 37510,37544 pcccp
 37545,37795 cccpp
 37796,37878 ppccc
-37851,37855 ++--- # bloom
+37851,37855 ++--- # blur
 37879,37924 ppccc
-37879,37924 ++--- # bloom
+37879,37924 ++--- # blur
 37925,37962 ccppc
-37925,37952 --++- # bloom
+37925,37952 --++- # blur
 37963,37982 ccppc
 37963,37982 --++-
 
 # TODO
 
-37983,38014 ppccc # TODO
-38015,38038 ccppc # TODO
-38039,38069 ccppc # TODO
-38070,38097 
-38098,38144 ccppc # TODO
-38145,38205 
-38206,38258 
-38259,38319 cppcc # TODO
-38320,38397 
-38398,38412 cppcc # TODO
-38413,38424 ppccc # TODO
-38425,38465 
-38466,38486 pcccp # TODO
-38487,38518 
-38519,38575 cppcc # TODO
-38576,38633 
-38634,38661 
-38662,38815 pcccp # TODO
-38816,38899 cccpp # TODO
-38900,39079 pcccp # TODO
-39080,39121 ppccc # TODO
-39122,39162 
-39163,39285 ccppc # TODO
-39286,39309 cppcc # TODO
-39310,39333 ppccc # TODO
-39334,39423 cccpp # TODO
-39424,39529 cccpp # TODO
-39530,39580 
-39581,39692 ccppc # TODO
-39693,39764 pcccp # TODO
-39765,39841 cccpp # TODO
-39842,40016 ppccc # TODO
-40017,40039 
-40040,40113 pcccp # TODO
-40114,40211 pcccp # TODO
-40212,40261 cccpp # TODO
-40262,40382 pcccp # TODO
-40383,40481 cccpp # TODO
-40482,40599 
-40600,40689 
-40690,40769 ccppc # TODO
-40770,40845 ccppc # TODO
-40846,40892 ccppc # TODO
-40893,40961 ccppc # TODO
-40962,40989 ccppc # TODO
-40990,41035 ccppc # TODO
-41036,41062 cppcc # TODO
-41063,41082 ppccc # TODO
-41083,41121 ppccc # TODO
-41122,41179 
-41180,41228 
-41229,41334 
-41335,41458 cppcc # TODO
-41459,41549 cccpp # TODO
-41550,41763 
-41764,41783 cccpp # TODO
-41784,41815 ppccc # TODO
-41816,41839 cccpp # TODO
-41840,41875 cppcc # TODO
-41876,41995 ccppc # TODO
-41996,42039 pcccp # TODO
-42040,42092 ccppc # TODO
-42093,42142 ppccc # TODO
-42143,42166 
-42167,42218 ccppc # TODO
-42219,42243 
-42244,42264 ccppc # TODO
-42265,42289 
-42290,42309 ppccc # TODO
-42310,42353 ccppc # TODO
-42354,42412 
-42413,42470 ccppc # TODO
-42471,42554 ccppc # TODO
+37983,38014 ppccc
+37983,38014 ++--- # blur
+38015,38038 ccppc
+38015,38038 --++- # blur
+38039,38069 ccppc
+38039,38053 --++- # blur
+38070,38097 ccppc
+38098,38144 ccppc
+38145,38205 ccppc
+38206,38258 pcccp
+38213,38218 + # 59.94i
+38259,38319 cppcc
+38320,38397 cccpp
+38398,38412 cppcc
+38398,38412 -++-- # blur
+38413,38424 ppccc
+38425,38465 cppcc
+38430,38434 -++-- # blur
+38450,38465 -++--
+38466,38486 pcccp
+38487,38518 cccpp
+38519,38575 cppcc
+38576,38633 cccpp
+38634,38661 cccpp
+38662,38815 pcccp
+38816,38899 cccpp
+38900,39079 pcccp
+39080,39121 ppccc
+39080,39109 ++--- # blur
+39122,39162 ppccc
+39163,39285 ccppc
+39213,39285 --++- # blur
+39286,39309 cppcc
+39310,39333 ppccc
+39310,39324 ++--- # blur
+39334,39423 cccpp
+39334,39393 ---++ # blur
+39424,39529 c # ? many p's in random places, 3 or 4 in a row, some are dups
+39424,39529 +
+39530,39580 cccpp
+39581,39692 ccppc
+39693,39764 pcccp
+39765,39841 cccpp
+39765,39841 ---++ # blur
+39842,40016 ppccc
+40017,40039 pcccp
+40040,40113 pcccp
+40114,40211 pcccp
+40212,40261 cccpp
+40262,40382 pcccp
+40383,40481 cccpp
+40482,40599 ppccc
+40482,40506 ++--- # blur
+40600,40689 cppcc
+40600,40689 -++-- # blur
+40690,40769 ccppc
+40770,40845 ccppc
+40846,40892 ccppc
+40893,40961 ccppc
+40962,40989 ccppc
+40962,40989 --++- # blur
+40990,41035 ccppc
+41036,41062 cppcc
+41036,41062 -++-- # blur
+41063,41082 ppccc
+41083,41121 ppccc
+41083,41121 ++--- # blur
+41122,41179 uppcc # ppccc + cppcc (multiple characters)
+41180,41228 ppccc
+41180,41228 ++--- # blur
+41229,41334 cccpp
+41335,41458 cppcc
+41459,41549 cccpp
+41550,41763 ccppc # tfm finds ccpcc, just guessing the second p, it's not moving anyway
+41764,41783 cccpp
+41764,41783 ---++ # blur
+41784,41815 ppccc
+41784,41815 ++--- # blur
+41816,41839 cccpp
+41816,41839 ---++ # blur
+41840,41875 cppcc
+41840,41875 -++-- # blur
+41876,41995 ccppc
+41996,42039 pcccp
+42040,42092 ccppc
+42040,42092 --++- # blur
+42093,42142 ppccc
+42143,42166 c
+42167,42218 ccppc
+42219,42243 pcccp
+42233,42243 +---+ # blur
+42244,42264 ccppc
+42244,42253 --++- # blur
+42265,42289 cppcc
+42290,42309 ppccc
+42290,42309 ++--- # blur
+42310,42353 ccppc
+42354,42412 ppccc
+42413,42470 ccppc
+42471,42554 ccppc
+
+# TODO
+
 42555,42841 
 42842,42900 
 42901,42952 
