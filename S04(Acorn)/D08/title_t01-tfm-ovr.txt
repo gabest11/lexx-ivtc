@@ -308,8 +308,10 @@
 40105,40314 ppccc
 40315,40370 ppccc
 40371,40385 pcccp
-40386,40439 hclup # crossfade, pcccp + ccppc
-40386,40439 +-+--
+40386,40438 hclup # crossfade, pcccp + ccppc
+40386,40438 +-+--
+40439 l # ends on u
+40439 +
 
 # this section has a crazy motion blur and noise over the regular ccppc pattern and everything looks a bit combed
 
@@ -322,42 +324,32 @@
 40795,40939 cccpp
 40940,40996 ppccc
 40997,40999 + # crossfade
-40997,40999 Q 5
 41000,41038 cccpp
 41039,41040 + # crossfade
-41039,41040 Q 5
 41041,41083 cppcc
 41084,41188 ppccc
 41189,41316 cccpp
 41317,41318 + # crossfade
-41317,41318 Q 5
 41319,41432 cccpp
 41433,41465 cccpp
 41466,41467 + # crossfade
-41466,41467 Q 5
 41468,41497 pcccp
 41498,41499 + # crossfade
-41498,41499 Q 5
 41500,41530 ccppc
 41531,41553 cppcc
 41554,41556 + # crossfade
-41554,41556 Q 5
-41557,41593 pcccp
-41594,41616 pcccp
+41557,41593 ucccu # pcccp # continuity
+41594,41616 ucccu # pcccp # continuity
 41617,41618 + # crossfade
-41617,41618 Q 5
 41619,41662 ccppc
 41663,41680 ccppc
 41681,41683 + # crossfade
-41681,41683 Q 5
 41684,41706 cccpp
 41707,41748 ppccc
 41749,41793 cppcc
-41794,41824 ppccc
+41794,41824 uuccc # ppccc # continuity
 41825,41945 cppcc
-41946 + # crossfade
-41946 Q 5
-41947,42199 pcccp
+41946,42199 ppccc
 
 42200,42253 cuppc # crossfade, cppcc + ccppc
 42254,42801 cccpp

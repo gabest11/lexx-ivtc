@@ -7,6 +7,11 @@
 # the solution is to keep the first field of p frames
 # tdecimate is unable to detect duplicates, must use overrides
 
+#TODO: 
+# change blurred scenes to ccupc (to make sure two frames are always identical) 
+# where it does not end on u
+# then remove the tdec overrides
+
 0,129 ccppc
 0,39 + # fade-in
 0,39 Q 5
@@ -554,6 +559,7 @@
 38015,38038 --++- # blur
 38039,38069 ccppc
 38039,38053 --++- # blur
+38068 + # random combed frame
 38070,38097 ccppc
 38098,38144 ccppc
 38145,38205 ccppc
@@ -571,7 +577,8 @@
 38487,38518 cccpp
 38519,38575 cppcc
 38576,38633 cccpp
-38634,38661 cccpp
+38634,38661 hccpp
+38634,38661 +---- # 1st is a u frame and missing its field pair
 38662,38815 pcccp
 38816,38899 cccpp
 38900,39079 pcccp
@@ -598,6 +605,7 @@
 40114,40211 pcccp
 40212,40261 cccpp
 40262,40382 pcccp
+40262,40382 +---+ # blur
 40383,40481 cccpp
 40482,40599 ppccc
 40482,40506 ++--- # blur
@@ -631,6 +639,8 @@
 41840,41875 cppcc
 41840,41875 -++-- # blur
 41876,41995 ccppc
+41908 + # picture shakes sideways
+41957,41959 + # white bishop combed
 41996,42039 pcccp
 42040,42092 ccppc
 42040,42092 --++- # blur
@@ -648,69 +658,102 @@
 42354,42412 ppccc
 42413,42470 ccppc
 42471,42554 ccppc
+42555,42841 pcccp
+42555,42769 +---+ # blur
+42842,42900 cccpp
+42901,42952 cccpp
+42953,42983 c # no combed frames
+42984,43046 cccpp # tfm cccpc, guessing again
+43047,43107 cppcc
+43108,43175 hclup # pcccp + ccppc (2nd Stan)
+43108,43175 +-+--
+43176,43210 ccppc
+#43176,43210 --++- # blur
+43211,43272 pcccp
+43273,43323 cccpp
+43324,43394 cppcc
+#43324,43394 -++-- # blur
+43395,43439 pcccp
+43440,43553 cccpp
+43554,43633 ccppc
+43634,43801 pcccp
+43689,43801 +---+ # blur
+43802,43866 pcccp
+43802,43866 +---+ # blur
+43802,43866 Q 5
+43805 + # tiles flashing
+43810 +
+43815 +
+43867,43918 cppcc
+#43867,43918 -++-- # blur
+43919,44012 phclu # ppccc + cccpp (2nd Stan)
+43919,44012 -+-+-
+43919 +
+44013,44135 ppccc
+44136,44272 cluph # cppcc + cccpp (2nd Stan)
+44136,44272 -+--+
+44273,44311 pcccp
+44273,44311 +---+
+44312,44352 cppcc
+44353,44399 ppccc
+44400,44481 ccppc
+44482,44506 pcccp
+44507,44559 ppccc
+44507,44559 ++--- # blur
+44560,44618 pcccp
+44619,44674 cccpp
+44675,44751 cccpp
+44752,44884 cppcc
+44752,44884 -++-- # blur
+44885,45019 ppccc
+44885,45019 ++--- # blur
+45020,45156 pcccp
+45157,45219 ppccc
+#45157,45219 ++--- # blur
+45220,45357 ppccc
+45220,45357 ++--- # blur
+45358,45509 cppcc
+45358,45509 +-+++
+45510,45693 ccppc
+45694,46057 cppcc # 45810 45896
+46058,46142 cppcc
+46058,46142 -++-- # blur
+46143,46429 ccupp # ccppc + cccpp (2nd Stan)
+46143,46429 --+++ # blur
+46430,46500 ccppc
+46501,46546 ccppc
+46547,46612 cppcc
+46547,46612 -++-- # blur
+46613,46672 cccpp
+46673,46719 cppcc
+46673,46719 -++-- # blur
+46720,46748 ppccc
+46749,46788 cccpp # tfm cccpc
+46789,46930 pcccp
+46789,46930 +---+ # blur
+46931,47071 ccppc
+47072,47146 ppccc
+47147,47301 ppccc # tfm pcccc
+47302,47326 ccppc
+47302,47326 --++- # blur
+47327,47364 cccpp
+47327,47364 ---++ # blur
+47365,47405 cppcc
+47406,47437 ccppc
+47438,47520 cppcc
+47438,47520 -++-- # blur
+47521,47551 ccppc
+47521,47551 --++- # blur
+47552,47590 c # no combed frames
+47591,47619 cccpp
+47591,47619 ---++ # blur
+47620,47675 ccppc
+47620,47675 --++- # blur
+47676,47711 cccpp
+47676,47711 ---++ # blur
 
 # TODO
 
-42555,42841 
-42842,42900 
-42901,42952 
-42953,42983 
-42984,43046 
-43047,43107 
-43108,43175 pcccp # TODO
-43176,43210 ccppc # TODO
-43211,43272 pcccp # TODO
-43273,43323 cccpp # TODO
-43324,43394 cppcc # TODO
-43395,43439 pcccp # TODO
-43440,43553 cccpp # TODO
-43554,43633 ccppc # TODO
-43634,43801 
-43802,43866 
-43867,43918 cppcc # TODO
-43919,44012 ppccc # TODO
-44013,44135 ppccc # TODO
-44136,44272 cppcc # TODO
-44273,44311 pcccp # TODO
-44312,44352 
-44353,44399 ppccc # TODO
-44400,44481 ccppc # TODO
-44482,44506 pcccp # TODO
-44507,44559 ppccc # TODO
-44560,44618 pcccp # TODO
-44619,44674 cccpp # TODO
-44675,44751 cccpp # TODO
-44752,44884 cppcc # TODO
-44885,45019 ppccc # TODO
-45020,45156 pcccp # TODO
-45157,45219 
-45220,45357 ppccc # TODO
-45358,45509 
-45510,45693 ccppc # TODO
-45694,46057 
-46058,46142 cppcc # TODO
-46143,46429 ccppc # TODO
-46430,46500 ccppc # TODO
-46501,46546 ccppc # TODO
-46547,46612 cppcc # TODO
-46613,46672 
-46673,46719 cppcc # TODO
-46720,46748 
-46749,46788 
-46789,46930 pcccp # TODO
-46931,47071 
-47072,47146 ppccc # TODO
-47147,47301 
-47302,47326 ccppc # TODO
-47327,47364 cccpp # TODO
-47365,47405 cppcc # TODO
-47406,47437 ccppc # TODO
-47438,47520 cppcc # TODO
-47521,47551 ccppc # TODO
-47552,47590 
-47591,47619 cccpp # TODO
-47620,47675 ccppc # TODO
-47676,47711 cccpp # TODO
 47712,47759 
 47760,47828 
 47829,47863 cccpp # TODO
@@ -1099,3 +1142,5 @@
 
 
 27960 Q 3
+43802 Q 3
+43919 Q 3
