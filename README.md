@@ -20,7 +20,7 @@ S03 Alliance release has a higher bitrate than Acorn, but they increased the bri
 
 A few more interesting findings about S03. There are episodes that are all progressive, except the intro, but the top field is actually a fake interpolated image of the bottom field. The best idea is to just throw it away and properly upscale the good field, then you won't see stairsteps on the edges. There are a few 59.94i scenes, small features like stars are on different fields, cannot use single field deinterlacers there. Because it is not proper NTSC, in hybrid scenes, where the background moves at 29.97 fps and the foreground is only 23.976, there is a dup frame overlayed, not two extra fields distributed.
 
-All Acorn/Koch episodes seem to start with two B frames before the first I, this is ignored by DGIndex and also my override files. To sync a/v, skip the first two frames when encoding.
+All Acorn/Koch episodes seem to start with two B frames before the first I, this is NOT ignored by DGIndex and also included in my override files, but the audio starts at the I frame. To sync a/v, skip the first two frames when encoding.
 
 ## Encoding
 
