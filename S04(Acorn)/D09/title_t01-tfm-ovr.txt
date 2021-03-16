@@ -11,6 +11,9 @@
 # change blurred scenes to ccupc (to make sure two frames are always identical) 
 # where it does not end on u
 # then remove the tdec overrides
+# (this may still not work however)
+#
+# recheck every scene for ghosting with separatefields
 
 0,129 ccppc
 0,39 + # fade-in
@@ -771,116 +774,181 @@
 #48396,48449 ++--- # blur
 48450,48560 ccppc # TODO
 48450,48560 --++- # blur
-
-# TODO
-
 48561,48690 ppccc # TODO
-48691,48716 pcccp # TODO
+48561,48690 ++--- # blur
+48691,48716 hclup # pcccp + ccppc (time prophet)
+48691,48716 +-+--
 48717,48760 ppccc # TODO
 48761,48790 ccppc # TODO
 48791,48804 ppccc # TODO
 48805,48878 cppcc # TODO
+48805,48878 -++-- # blur
 48879,48901 cccpp # TODO
 48902,48941 cccpp # TODO
 48942,49021 cccpp # TODO
 49022,49081 pcccp # TODO
+49022,49081 +---+ # blur
 49082,49133 ccppc # TODO
 49134,49176 pcccp # TODO
-49177,49272 
+49134,49176 +---+ # blur
+49177,49272 cccpp
+49252,49272 ---++ # blur
 49273,49310 pcccp # TODO
-49311,49342 
-49343,49378 
+49311,49342 cccpp
+49343,49378 ccppc
 49379,49452 ppccc # TODO
+49379,49452 ++--- # blur
 49453,49497 ccppc # TODO
-49498,49550 
+49498,49550 pcccp
 49551,49581 cccpp # TODO
 49582,49688 ppccc # TODO
-49689,49729 
-49730,49865 
+49632,49688 ++--- # blur
+49689,49729 cppcc
+49689,49729 -++-- # blur
+49697,49719 + # combed as it moves across Vlad
+49730,49865 ppccc
+49730,49865 ++--- # blur
 49866,49914 pcccp # TODO
 49915,50040 cppcc # TODO
+49915,50040 -++-- # blur
 50041,50122 cccpp # TODO
-50123,50185 
-50186,50226 
-50227,50267 
-50268,50306 
-50307,50339 
-50340,50371 
+50123,50185 pcccp
+50186,50226 c # can't find any combed frames
+50227,50267 cccpp
+50268,50306 cccpp
+50307,50339 # hard to see, cccpp ?
+50340,50371 pcccp
 50372,50534 cppcc # TODO
-50535,50561 
-50562,50581 
+50372,50534 -++-- # blur
+50535,50561 pcccp
+50535,50561 +---+ # blur
+50562,50581 c
 50582,50627 cccpp # TODO
-50628,50659 
+50628,50659 cppcc
 50660,50797 pcccp # TODO
 50798,50827 ccppc # TODO
-50828,50873 
+50798,50827 --++- # blur
+50828,50873 pcccp
+50828,50873 +---+ # blur
 50874,50903 cppcc # TODO
+50874,50903 -++-- # blur
 50904,50924 cppcc # TODO
-50925,50989 
+50925,50989 ppccc
+#50925,50989 ++--- # blur
 50990,51070 ppccc # TODO
-51071,51147 
+50990,51070 ++--- # blur
+51071,51147 ccppc
 51148,51232 ccppc # TODO
+51148,51232 --++- # blur
 51233,51318 ccppc # TODO
 51319,51377 ccppc # TODO
 51378,51440 cccpp # TODO
+51378,51440 ---++ # blur
 51441,51612 cccpp # TODO
-51613,51919 pcccp # TODO
+51613,51623 uphcl # pcccp + cppcc (tile closing)
+51613,51623 + # --+-+ # still combed
+51624,51919 cccpp # TODO
+#51624,51919 ---++ # blur
 51920,51945 pcccp # TODO
 51946,51982 ppccc # TODO
 51983,52023 cccpp # TODO
-52024,52063 
+52024,52063 ppccc
 52064,52194 cccpp # TODO
+52064,52194 ---++
 52195,52242 cccpp # TODO
-52243,52294 
+52243,52294 cccpp
 52295,52329 pcccp # TODO
 52330,52352 cppcc # TODO
 52353,52372 cppcc # TODO
-52373,52420 
+52353,52372 -++--
+52373,52420 pcccp
 52421,52471 cppcc # TODO
 52472,52570 cppcc # TODO
+52472,52570 -++--
 52571,52645 ccppc # TODO
 52646,52690 ccppc # TODO
-52691,52745 
+52646,52690 --++-
+52691,52745 ppccc
 52746,52775 ccppc # TODO
 52776,52869 pcccp # TODO
 52870,52900 cppcc # TODO
-52901,52925 
-52926,52985 
-52986,53067 
+52901,52925 cppcc
+52926,52985 ppccc
+52986,53067 ppccc
 53068,53195 ppccc # TODO
+53068,53195 ++---
 53196,53292 cppcc # TODO
-53293,53400 
+53196,53292 -++---
+53293,53400 cppcc
 53401,53477 ccppc # TODO
-53478,53562 
+53478,53562 cccpp
+53478,53562 Q 5
+53480,53481 + # tiles flashing
+53485,53486 +
+53489 +
+53494 +
+53505,53506 +
+53510,53511 +
+53535,53536 +
+53540,53541 +
+53543 +
+53548 +
 53563,53592 ppccc # TODO
-53593,53668 
+53593,53668 pcccp
 53669,53744 cccpp # TODO
 53745,53804 ccppc # TODO
 53805,53921 ccppc # TODO
-53922,53952 
-53953,54016 
+53922,53952 cccpp
+53953,54016 # not moving
 54017,54055 pcccp # TODO
 54056,54166 pcccp # TODO
 54167,54230 cppcc # TODO
+54167,54230 Q 5
+54169 + # tiles flashing
+54174 +
+54176 +
+54197,54198 +
+54203 +
+54205 +
+54210 +
+54214 +
+54219 +
 54231,54289 ccppc # TODO
-54290,54364 
+54290,54364 ppccc
+54290,54364 ++---
 54365,54425 cppcc # TODO
+54365,54425 i 1111
+54365,54425 Q 5
+54365 + # tiles flashing
+54371 +
+54373 +
+54382 +
+54387 +
+54414 +
 54426,54484 ccppc # TODO
-54485,54610 
-54611,54634 
-54635,54790 
+54485,54610 pcccp # 2nd Stan?
+54611,54634 cccpp
+54635,54789 uphcl # pcccp + cppcc (2nd Stan)
+54635,54789 --+-+
+54790 l # ends on u
+54790 +
 54791,54915 ppccc # TODO
+54791,54915 ++--- # blur
 54916,54951 cppcc # TODO
-54952,55056 ccppc # TODO
-55057,55104 
+54952,55056 ccupp # ccppc + cccpp (2nd Stan)
+55057,55104 pcccp
 55105,55136 cccpp # TODO
 55137,55403 pcccp # TODO
 55404,55845 pcccp # TODO
 55804,55873 + # crossfade
 55846,55906 cppcc # TODO
-55907,55973 
-55974,56015 
+55907,55973 pcccp
+55974,56015 ppccc
 56016,56059 ccppc # TODO
+56016,56059 --++-
+
+# TODO
+
 56060,56101 
 56102,56136 ppccc # TODO
 56137,56523 cccpp # TODO
