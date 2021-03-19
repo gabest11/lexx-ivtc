@@ -505,9 +505,11 @@
 41178,41192 cppcc
 41193,41232 cppcc
 #41233,41302 cppcccpcppcccpcppccccccp
-41233,41302 ccpcuccccpcuccccpcuccucc # make it smooth
-41233,41302 -+--+-+-+--+-+-+--+--+-+
-41233,41302 Q 5
+41233,41301 ccpcuccccpcuccccpcuccucc # make it smooth
+41233,41301 -+--+-+-+--+-+-+--+--+-+
+41233,41301 Q 5
+41302 h # ends on u
+41302 +
 41303,41470 cccpp
 41471,41820 ccppc
 41821,41911 pcccp

@@ -501,9 +501,11 @@
 41173,41187 cppcc
 41188,41227 cppcc
 #41228,41297 cppcccpcppcccpcppccccccp
-41228,41297 ccpcuccccpcuccccpcuccucc # make it smooth
-41228,41297 -+--+-+-+--+-+-+--+--+-+
-41228,41297 Q 5
+41228,41296 ccpcuccccpcuccccpcuccucc # make it smooth
+41228,41296 -+--+-+-+--+-+-+--+--+-+
+41228,41296 Q 5
+41297 h # ends on u
+41297 +
 41298,41465 cccpp 
 41466,41815 ccppc
 41816,41906 pcccp 
@@ -2020,6 +2022,7 @@
 43719 Q 3 # pcccp
 43985 Q 3 # pcccp
 44233 Q 3 # ppccc
+44399 Q 3
 44669 Q 3 # ppccc
 45069 Q 3 # ppccc
 45152 Q 3 # ppccc
@@ -2082,6 +2085,7 @@
 68664 Q 3 # pcccp
 69766 Q 3 # ppccc
 70256 Q 3 # ppccc
+70334 Q 3
 70388 Q 3 # pcccp
 70458 Q 3 # ppccc
 70592 Q 3 # pcccp
@@ -2099,13 +2103,17 @@
 73034 Q 3 # ppccc
 73080 Q 3 # ppccc
 73242 Q 3 # ppccc
+73324 Q 3
 74073 Q 3 # pcccp
 74350 Q 3 # ppccc
 74415 Q 3 # pcccp
 74649 Q 3 # ppccc
 75215 Q 3 # pcccp
 75449 Q 3 # pcccp
+75598 Q 3
 75864 Q 3 # ppccc
+75963 Q 3
+76156 Q 3
 76447 Q 3 # ppccc
 76535 Q 3 # ppccc
 76914 Q 3 # pcccp

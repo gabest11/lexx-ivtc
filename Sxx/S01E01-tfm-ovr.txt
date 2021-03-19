@@ -500,9 +500,11 @@
 41173,41187 cppcc
 41188,41227 cppcc
 #41228,41297 cppcccpcppcccpcppccccccp
-41228,41297 ccpcuccccpcuccccpcuccucc # make it smooth
-41228,41297 -+--+-+-+--+-+-+--+--+-+
-41228,41297 Q 5
+41228,41296 ccpcuccccpcuccccpcuccucc # make it smooth
+41228,41296 -+--+-+-+--+-+-+--+--+-+
+41228,41296 Q 5
+41297 h # ends on u
+41297 +
 41298,41465 cccpp
 41466,41815 ccppc
 41816,41906 pcccp
