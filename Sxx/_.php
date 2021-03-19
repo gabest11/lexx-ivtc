@@ -10,7 +10,7 @@ $cmd = <<<EOT
 -map 0:v
 -c:v huffyuv
 -aspect 720:480
-"$title-huffyuv.mkv"
+"$title-huffyuv.avi"
 EOT;
 
 $cmd = preg_replace('/[\r\n]+/', ' ', $cmd);

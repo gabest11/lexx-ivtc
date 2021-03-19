@@ -34,9 +34,9 @@ First step is to rip every disc with mkvmerge.
 
 0.bat title_tNN.mkv will demux the video elementary streams and call dgindex to produce the corresponding .d2v file. I work on elementary streams because the timestamps are stripped and if the disc is damaged the audio is easier to resync. There is a certain version floating on the internet which has a problem with S02E02. But this project isn't for that.
 
-php 1.php title_tNN.mkv will do a two pass tfm/tdec run and output a huffyuv compressed mkv.
+php 1.php title_tNN.mkv will do a two pass tfm/tdec run and output a huffyuv compressed avi.
 
-php 2.php input output h265/h264 preset vertical_res cfr will encode it into a usable file for further muxing with the audio. The input can be the huffyuv mkv or %06d.png if you created those with Topaz AI.
+php 2.php input output h265/h264 preset vertical_res cfr will encode it into a usable file for further muxing with the audio. The input can be the huffyuv avi or %06d.png if you created those with Topaz AI.
 
 ## Topaz AI
 

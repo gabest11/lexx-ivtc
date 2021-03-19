@@ -602,13 +602,13 @@ $cmd = <<<EOT
 -map 0:v
 -c:v huffyuv
 -aspect 720:480
-"$title-huffyuv.mkv"
+"$title-huffyuv.avi"
 EOT;
 
 $cmd = preg_replace('/[\r\n]+/', ' ', $cmd);
 
 if(file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") 
-&& (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.mkv")))
+&& (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
 {
 	echo $cmd.PHP_EOL;
 	
