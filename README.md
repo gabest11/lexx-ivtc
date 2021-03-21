@@ -10,17 +10,9 @@ Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
 * S03 (these episodes are terrible quality, one field is simply missing in many places)
 
-* S04/E01-17 done (Acorn)
+* S04/E01-21 done (Acorn)
 
 Planing to do newer releases if I can get them and are better quality.
-
-Sxx directory contains mixed episodes, best quality parts put together from different releases.
-
-S03 Alliance release has a higher bitrate than Acorn, but they increased the brightness and clamped about 10% of the top values to the TV level (16-235). It is not possible to restore the image detail in that range, it will either look too bright or flat. Not all episodes have this problem fortunatelly.
-
-A few more interesting findings about S03. There are episodes that are all progressive, except the intro, but the top field is actually a fake interpolated image of the bottom field. The best idea is to just throw it away and properly upscale the good field, then you won't see stairsteps on the edges. There are a few 59.94i scenes, small features like stars are on different fields, cannot use single field deinterlacers there. Because it is not proper NTSC, in hybrid scenes, where the background moves at 29.97 fps and the foreground is only 23.976, there is a dup frame overlayed, not two extra fields distributed.
-
-All Acorn/Koch episodes seem to start with two B frames before the first I, this is NOT ignored by DGIndex and also included in my override files, but the audio starts at the I frame. To sync a/v, skip the first two frames when encoding.
 
 ## Encoding
 
