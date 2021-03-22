@@ -190,7 +190,7 @@
 4551,4609 c
 4610,4636 c
 4610,4636 -
-4637 u
+4637 h
 4637 -
 4638,4660 pcccp
 4638,4660 -
@@ -861,8 +861,8 @@
 
 # S02E06 Stan's Trial
 
-86158,86715 cccpp # keyframe
-86158,86715 -
+86160,86715 cppcc # keyframe
+86160,86715 -
 # mini intro
 86791,86800 cppcc
 86791,86800 -++--
@@ -1027,7 +1027,7 @@
 # 1st frame on the displays is the dup, but all progressive and 1-2 aren't p frames
 # we have to choose between a jerky display and two blurry pp's, I vote for smoothness
 98741,98950 cppcc
-98851,98950 -++-- 
+98851,98950 -++--
 
 98951,99272 ccppc
 99273,99319 ppccc
@@ -1087,8 +1087,8 @@
 106224,106330 ccppc
 106331,106434 ccppc
 106435,106741 cppcc
-106742,106817 ppccc
-106742,106817 ++--- # still combed
+106742,106817 c
+106742,106817 ++--- # pp badly deinterlaced
 106818,106857 ccppc
 106858,106943 pcccp
 106944,107119 ppccc
@@ -1096,8 +1096,8 @@
 107195,107408 ppccc
 107409,107556 ppccc
 107557,107625 ccpcc
-107626,107715 ccppc
-107626,107715 --++- # still combed
+107626,107715 c
+107626,107715 --++- # pp badly deinterlaced
 107716,107804 ppccc
 107805,107850 ppccc
 107851,107879 cccpp
@@ -1138,7 +1138,7 @@
 111736,111849 pcccp
 111850,111961 c
 111962,112068 ppccc
-112069,112206 cccpp 
+112069,112206 cccpp
 112207,112425 c
 112426,112553 pcccp
 112554,112743 ccppc
@@ -1516,7 +1516,7 @@
 #147399 c
 #147400,147426 ppccc
 #147400,147426 ++---
-# shame the outline is combed, against the background 
+# shame the outline is combed, against the background
 #147291,147426 +
 #147291,147426 Q 5
 
@@ -1724,7 +1724,7 @@
 165006,165016 cuppc # cppcc + cppcc + ccppc
 165017,165029 uppcc # cppcc + ppccc + cppcc
 # combed outline not visible anymore
-#165030,165040 hclup # pcccp + ccppc + cccpp 
+#165030,165040 hclup # pcccp + ccppc + cccpp
 #165030,165040 +-+--
 165030,165040 pccup # pcccp + ccppc + cccpp # just the body and the moth
 #165041,165051 lhhhl # pcccp + cppcc + ccppc
@@ -1738,7 +1738,7 @@
 165057,165065 --+-+
 165066,165076 cuppc # cppcc + cppcc + ccppc
 # body gone (almost)
-165077,165087 cppcc # cppcc + ppccc + cppcc 
+165077,165087 cppcc # cppcc + ppccc + cppcc
 
 # deinterlaced 20 out of 141
 

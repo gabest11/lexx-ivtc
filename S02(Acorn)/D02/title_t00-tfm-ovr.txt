@@ -745,10 +745,11 @@
 87763,87955 c
 
 87956,88462 cppcc # keyframe
-88463,88813 c
-88814,88993 pcccp
-88994,89128 ppccc
-89129,89813 c
+88463,88809 c
+88810,88979 cccpp
+88980,89009 pccup # crossfade, cccpp + pcccp, mildly combed, as the brightness changes
+89010,89129 ppccc
+89130,89813 c
 89814,90247 ppccc
 90248,90661 cppcc
 90407 - # MIC = 82

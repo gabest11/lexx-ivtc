@@ -1,6 +1,6 @@
 # S02E06 Stan's Trial
 
-0,555 cccpp # keyframe
+0,555 cppcc # keyframe
 0,555 -
 # mini intro
 631,640 cppcc
@@ -226,8 +226,8 @@
 20064,20170 ccppc
 20171,20274 ccppc
 20275,20581 cppcc
-20582,20657 ppccc
-20582,20657 ++--- # still combed
+20582,20657 c
+20582,20657 ++--- # pp badly deinterlaced
 20658,20697 ccppc
 20698,20783 pcccp
 20784,20959 ppccc
@@ -235,8 +235,8 @@
 21035,21248 ppccc
 21249,21396 ppccc
 21397,21465 ccpcc
-21466,21555 ccppc
-21466,21555 --++- # still combed
+21466,21555 c
+21466,21555 --++- # pp badly deinterlaced
 21556,21644 ppccc
 21645,21690 ppccc
 21691,21719 cccpp

@@ -57,10 +57,11 @@
 1663,1855 c
 
 1856,2362 cppcc # keyframe
-2363,2713 c
-2714,2893 pcccp
-2894,3028 ppccc
-3029,3713 c
+2363,2709 c
+2710,2879 cccpp
+2880,2909 pccup # crossfade, cccpp + pcccp, mildly combed, as the brightness changes
+2910,3029 ppccc
+3030,3713 c
 3714,4147 ppccc
 4148,4561 cppcc
 4307 - # MIC = 82
