@@ -947,7 +947,7 @@
 126089,126179 ---++ # deinterlace the eyes, smaller area
 126180,126255 c
 126256,126323 c # pcccp # same
-126256,126323 +---+ 
+126256,126323 +---+
 126324,126393 c
 126394,128008 c
 128009,128586 c
@@ -991,7 +991,7 @@
 135277,135325 cppcc
 135326,135414 c
 135415,135569 c
-135570,135678 cccch # cccpp, only a single usable field in pp, deinterlace and crop the other p
+135570,135678 cccph # cccpp, only a single usable field in pp, deinterlace and crop the other p
 135570,135678 ----+
 135679,136043 c
 136044,136099 c

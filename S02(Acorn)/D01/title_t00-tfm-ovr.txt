@@ -289,8 +289,12 @@
 33946,34068 pcccp
 34069,34159 cccpp
 34160,34265 pcccp
-34266,34381 ccppc
-34382,34463 c
+
+34266,34349 ccppc
+34350,34379 phclu # crossfade, cccpp + ppccc
+34350,34379 -+-+-
+34380,34463 ppccc
+
 34464,34578 pcccp # fg pcccp (snow), bg not sure, maybe 29.97
 34464,34578 +
 34579,35085 c

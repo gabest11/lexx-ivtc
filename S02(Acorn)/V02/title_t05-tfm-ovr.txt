@@ -259,7 +259,7 @@
 49177,49225 cppcc
 49226,49314 c
 49315,49469 c
-49470,49578 cccch # cccpp, only a single usable field in pp, deinterlace and crop the other p
+49470,49578 cccph # cccpp, only a single usable field in pp, deinterlace and crop the other p
 49470,49578 ----+
 49579,49943 c
 49944,49999 c
