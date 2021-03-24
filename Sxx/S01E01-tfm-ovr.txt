@@ -1576,7 +1576,8 @@
 123964,123995 cccpp
 123996,124032 uppcc # cppcc (left) + ppccc (right)
 124033,124079 ccppc
-124080,124163 ppccu # cppcc (left) + pcccp (right)
+124080,124163 uphcl # cppcc (left) + pcccp (right)
+124080,124163 --+-+
 124164,124297 cppcc
 124298,124600 ccupp # cccpp (left) + ccppc (right)
 124601,124836 ccppc

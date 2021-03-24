@@ -93,7 +93,8 @@
 7975,8006 cccpp
 8007,8043 uppcc # cppcc (left) + ppccc (right)
 8044,8090 ccppc
-8091,8174 ppccu # cppcc (left) + pcccp (right)
+8091,8174 uphcl # cppcc (left) + pcccp (right)
+8091,8174 --+-+
 8175,8308 cppcc
 8309,8611 ccupp # cccpp (left) + ccppc (right)
 8612,8847 ccppc

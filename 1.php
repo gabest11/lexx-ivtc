@@ -4,21 +4,29 @@ if(!file_exists($argv[1])) die('check file name');
 
 $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
+$cthresh = 9;
+$MI = 80;
+$PP = 6;
+
 $tfmframes = [];
 $tdecframes = [];
 $ovrframes = [];
 $ovrscenes = [];
 
-function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
+function sanitycheck1($title)
 {
-	#TODO: check if the wrong frame is dropped in the override file for known patterns
 	#TODO: scene begins with p/b, ends on u/n and blended
 
 	$bogusframes = [];
 	$bogusscenes = [];
+	$bogussc = [];
 
 	global $tfmframes;
-	
+	global $ovrframes;
+	global $ovrscenes;
+
+	$ovrframes = [];
+	$ovrscenes = [];
 	$tfmframes = [];
 
 	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
@@ -58,12 +66,6 @@ function sanitycheck($title, &$bogusframes, &$bogusscenes, &$bogussc)
 			$tfmframes[$i]['micmin'] = ['t' => $mint, 'v' => $minv];
 		}
 	}
-
-	global $ovrframes;
-	global $ovrscenes;
-
-	$ovrframes = [];
-	$ovrscenes = [];
 
 	foreach(explode("\n", file_get_contents("$title-tfm-ovr.txt")) as $row)
 	{
@@ -386,14 +388,47 @@ print_r([$i, $tfm, $f]);
 			}
 		}
 	}
+
+	//
+
+	$rows = [];
+
+	$typerow = '';
+
+	foreach($bogusframes as $i => $bf)
+	{
+		if($typerow != $bf['type']['row'])
+		{
+			if(!empty($rows)) $rows[] = '';
+			$rows[] = $bf['type']['row'].(isset($bf['deint']['row']) ? PHP_EOL.$bf['deint']['row'] : '');
+			$rows[] = '';
+		
+			$typerow = $bf['type']['row'];
+		}
+
+		$s = ' '.$i.' '.$bf['type']['value'];
+	
+		if(isset($bf['deint'])) $s .= ' '.$bf['deint']['value'];
+		if(isset($bf['MI'])) $s .= ' '.$bf['MI']['value'];
+	
+		$rows[] = $s;
+	}
+
+	file_put_contents("$title-bogusframes.txt", implode(PHP_EOL, $rows));
+	file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));
+	file_put_contents("$title-bogussc.txt", implode(PHP_EOL, $bogussc));
 }
 
-function sanitycheck2($title, &$bogusdups)
+function sanitycheck2($title)
 {
-	#TODO: check if the wrong frame is dropped in the override file for known patterns
 	#TODO: scene begins with p/b, ends on u/n and blended
 
+	$bogusdups = [];
+
+	global $tfmframes;
 	global $tdecframes;
+	global $ovrframes;
+	global $ovrscenes;
 	
 	$tdecframes = [];
 	
@@ -407,10 +442,6 @@ function sanitycheck2($title, &$bogusdups)
 		$tdecframes[(int)$m[2]] = (int)$m[1];
 	}
 
-	global $tfmframes;
-	global $ovrframes;
-	global $ovrscenes;
-	
 	//print_r($tdecframes);
 	//exit;
 	
@@ -421,14 +452,16 @@ function sanitycheck2($title, &$bogusdups)
 
 	foreach($ovrscenes as $index => $scene)
 	{
-		for($i = $scene['s'], $j = 0, $skipped = []; $i < $scene['e']; $i++)
+		for($i = $scene['s'], $j = 0, $skipped = []; $i <= $scene['e']; $i++)
 		{
+			$t = $scene['t'][($i - $scene['s']) % strlen($scene['t'])];
+			
 			if(!isset($tdecframes[$i]))
 			{
-				$skipped[] = $i;
+				$skipped[] = $i.' '.$t;
 			}
 			
-			if(++$j == 5)
+			if(++$j == 5 || $i == $scene['e'])
 			{
 				$j = 0;
 				
@@ -470,33 +503,226 @@ function sanitycheck2($title, &$bogusdups)
 		}
 	}
 	
+	// check for dropped frames that are not dups
+	
+	foreach($ovrscenes as $index => $scene)
+	{
+		if(strlen($scene['t']) != 5) continue;
+	
+		$len = strlen($scene['t']);
+		
+		$skipped = [];
+		
+		for($i = $scene['s'], $j = 0; $i <= $scene['e']; $i++, $j++)
+		{
+			if(!isset($tdecframes[$i]))
+			{
+				$t = [];
+				
+				$t[] = $scene['t'][($j - 1 + $len) % $len];
+				$t[] = $scene['t'][($j           ) % $len];
+				$t[] = $scene['t'][($j + 1       ) % $len];
+				
+				if($t[0] == 'l' && $t[1] == 'h' && $t[2] == 'h') continue;
+				
+				$tmp = $t[1];
+
+				foreach($t as $ti => $tt)
+				{
+					if($tt == 'l' || $tt == 'h') $t[$ti] = 'c';
+					else if($tt == 'b') $t[$ti] = 'p';
+					else if($tt == 'n') $t[$ti] = 'u';
+				}
+				
+				$prev = $t[0];
+				$cur = $t[1];
+				$next = $t[2];
+				
+				if($cur == 'c')
+				{
+					if(!($prev == 'u' && $i > $scene['s'] || $next == 'p' && $i < $scene['e']))
+					{
+						$skipped[] = $i.' '.$tmp;
+					}
+				}
+				else if($cur == 'p' && $i > $scene['s'])
+				{
+					if(!(($prev == 'c' || $prev == 'u') && $i > $scene['s']))
+					{
+						$skipped[] = $i.' '.$tmp;
+					}
+				}
+				else if($cur == 'u' && $i < $scene['e'])
+				{
+					if(!(($next == 'c' || $next == 'p') && $i < $scene['e']))
+					{
+						$skipped[] = $i.' '.$tmp;
+					}
+				}
+			}
+		}
+		
+		if(!empty($skipped)) 
+		{
+			$bogusdups[] = ['scene' => $scene, 'pos' => $scene['s'], 'skipped' => $skipped];
+		}
+	}
+
+	//
+	
 	foreach($zerodrops as $s)
 	{
 		$bogusdups[] = $s;
 	}
+
+	//
+
+	if(!empty($bogusdups))
+	{
+		$fp = fopen("$title-bogusscenes.txt", 'a');
+
+		fprintf($fp, "\n\n");
+
+		foreach($bogusdups as $dups)
+		{
+			fprintf($fp, "%s @ %d\n", $dups['scene']['row'], $dups['pos']);
+	
+			foreach($dups['skipped'] as $skipped)
+			{
+				fprintf($fp, "- %s\n", $skipped);
+			}
+		}
+
+		fclose($fp);
+	}
 }
 
-$cthresh = 9;
-$MI = 80;
-$PP = 6;
+function genranges($title)
+{
+	$s = file_get_contents("$title-timecodes.txt");
 
-// avs
+	$frames = [];
+
+	$pef = -1;
+
+	foreach(explode("\n", $s) as $row)
+	{
+		$row = trim($row);
+	
+		if(!preg_match('/^([0-9]+),([0-9]+),([0-9\\.]+)/i', $row, $m)) continue;
+	
+		$sf = (int)$m[1];
+		$ef = (int)$m[2];
+	
+		if($sf > $pef + 1)
+		{
+			$frames[] = ['sf' => $pef + 1, 'ef' => $sf - 1, 'fps_num' => 30000, 'row' => ''];
+		}
+
+		$pef = $ef;
+	
+		if($m[3] == '29.97') $fps_num = 30000;
+		else if($m[3] == '23.976024') $fps_num = 24000;
+		else if($m[3] == '17.982018') $fps_num = 18000;
+		else die('unknown fps '.$m[3]);
+	
+		$frames[] = ['sf' => $sf, 'ef' => $ef, 'fps_num' => $fps_num, 'row' => $row];
+	}
+
+	$frames[] = ['sf' => $pef + 1, 'ef' => 1000000, 'fps_num' => 30000, 'row' => '']; // TODO: last frame number?
+
+	//
+
+	$fp = fopen("$title-ranges.txt", 'w');
+
+	$tfc = 0;
+
+	foreach($frames as $f)
+	{
+		$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
+		
+		fprintf($fp, "%d,%d,%.3f # %s\n", (int)$tfc, (int)($tfc + $fc + 0.5), $f['fps_num'] / 1001, $f['row']);
+
+		$tfc += $fc;
+	}
+
+	fclose($fp);
+}
+
+function genkeyframes($title)
+{
+	$s = file_get_contents("$title-tfm.txt");
+
+	$keyframes = [];
+
+	preg_match_all('/([0-9]+),([0-9]+).*# *keyframe/im', $s, $m);
+
+	//print_r($m);
+
+	for($i = 0; $i < count($m[0]); $i++)
+	{
+		$frame = (int)$m[1][$i];
+
+		//echo $frame.' => ';
+	
+		$tfc = 0;
+
+		foreach($frames as $f)
+		{
+			$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
+		
+			//print_r($f);
+			//print_r([$tfc, $tfc + $fc, (int)($tfc + $fc + 0.5)]);
+	
+			if((int)$tfc <= $frame && $frame < (int)($tfc + $fc + 0.5))
+			{
+				$vfrframe = (int)($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000 + 0.5);
+				//$vfrframe = ceil($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000);
+				$vfrtime = $vfrframe / 25; // ffmpeg defaults to 25 fps for image seqs
+			
+				$ms = (int)(($vfrtime * 1000) % 1000);
+				$ss = $vfrtime % 60; $vfrtime /= 60;
+				$mm = $vfrtime % 60; $vfrtime /= 60;
+				$hh = $vfrtime;
+				$t = sprintf("%d:%02d:%02d.%03d", $hh, $mm, $ss, $ms);
+			
+				//print_r($f);
+				//print_r([$frame, $tfc, $tfc + $fc, (int)($tfc + $fc + 0.5), $f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000]);
+		
+				//echo $vfrframe.' '.$t.PHP_EOL;
+			
+				$keyframes[] = $t; //['f' => $vfrframe, 't' => $t];
+
+				break;
+			}
+	
+			$tfc += $fc;
+		}
+	}
+
+	file_put_contents("$title-keyframes.txt", implode(PHP_EOL, $keyframes));
+}
+
+//
+
+if(!file_exists("$title-tfm-ovr.txt")) file_put_contents("$title-tfm-ovr.txt", '');
+if(!file_exists("$title-tdec-ovr.txt")) file_put_contents("$title-tdec-ovr.txt", '');
+//if(!file_exists("$title-tdeint-ovr.txt")) file_put_contents("$title-tdeint-ovr.txt", '');
+
+// source
 
 $avs = <<<EOT
 d2vpath="$title.d2v"
 MPEG2Source(d2vpath,cpu=4)
-#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
-deint2=yadifmod2(order=0)
-deint3=yadifmod2(order=1)
-TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
-#TDecimate(mode=0,hybrid=1,denoise=true,ovr="$title-tdec-ovr.txt")
 EOT;
 
-if(!file_exists("$title.avs")) file_put_contents($title.'.avs', $avs);
+if(!file_exists("$title.avs")) file_put_contents("$title.avs", $avs);
+
+// topaz
 
 $avs = <<<EOT
 c1 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=200000)
-c2 = FFVideoSource("$title-huffyuv.mkv").ConvertToRGB24()
+c2 = FFVideoSource("$title-huffyuv.avi").ConvertToRGB24()
 c1 = c1.Trim(0, c2.FrameCount)
 #c1 = c1.Spline64Resize(c1.Height * 4 / 3, c1.Height)
 c2 = c2.Spline64Resize(c1.Width, c1.Height)
@@ -505,111 +731,58 @@ Merge(c1, c2, 0.15)
 ConvertToYUV444(matrix="rec709")
 EOT;
 
-if(!file_exists("$title-topaz.avs")) file_put_contents($title.'-topaz.avs', $avs);
+if(!file_exists("$title-topaz.avs")) file_put_contents("$title-topaz.avs", $avs);
 
-// 1st pass
+// test
 
 $avs = <<<EOT
-d2vpath="$title.d2v"
-MPEG2Source(d2vpath,cpu=4)
+Import("$title.avs")
 #showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
-TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
+#TDecimate(mode=0,hybrid=1,denoise=true,ovr="$title-tdec-ovr.txt")
+EOT;
+
+if(!file_exists("$title-virtualdub.avs")) file_put_contents("$title-virtualdub.avs", $avs);
+
+$avs_1pass = <<<EOT
+Import("$title.avs")
+deint2=yadifmod2(order=0)
+deint3=yadifmod2(order=1)
+TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=9,MI=80,PP=6,chroma=true,display=false,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+TDecimate(mode=3,hybrid=2,denoise=true,vfrDec=0,mkvOut="$title-timecodes.txt",output="$title-tdec.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
+EOT;
+
+if(!file_exists("$title-1pass.avs")) file_put_contents("$title-1pass.avs", $avs_1pass);
+
+$avs_2pass1st = <<<EOT
+Import("$title.avs")
+#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
+deint2=yadifmod2(order=0)
+deint3=yadifmod2(order=1)
+TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=4,denoise=true,output="$title-tdec.txt")
 crop(344,224,-344,-224)
 EOT;
 
-if(!file_exists("$title-1.avs")) file_put_contents("$title-1.avs", $avs);
-if(!file_exists("$title-tfm-ovr.txt")) file_put_contents("$title-tfm-ovr.txt", '');
-if(!file_exists("$title-tdec-ovr.txt")) file_put_contents("$title-tdec-ovr.txt", '');
-//if(!file_exists("$title-tdeint-ovr.txt")) file_put_contents("$title-tdeint-ovr.txt", '');
+if(!file_exists("$title-2pass1st.avs")) file_put_contents("$title-2pass1st.avs", $avs_2pass1st);
 
-$cmd = <<<EOT
-"e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe" -hide_banner
--i "$title-1.avs"
--c copy -f null -
-EOT;
-
-$cmd = preg_replace('/[\r\n]+/', ' ', $cmd);
-
-if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
-{
-	echo $cmd.PHP_EOL;
-	
-	$ret = 0;
-	passthru($cmd, $ret);
-	if(!empty($ret)) die($ret);
-}
-
-// sanity check
-
-$bogusframes = [];
-$bogusscenes = [];
-$bogussc = [];
-
-sanitycheck($title, $bogusframes, $bogusscenes, $bogussc);
-
-$rows = [];
-
-$typerow = '';
-
-foreach($bogusframes as $i => $bf)
-{
-	if($typerow != $bf['type']['row'])
-	{
-		if(!empty($rows)) $rows[] = '';
-		$rows[] = $bf['type']['row'].(isset($bf['deint']['row']) ? PHP_EOL.$bf['deint']['row'] : '');
-		$rows[] = '';
-		
-		$typerow = $bf['type']['row'];
-	}
-
-	$s = ' '.$i.' '.$bf['type']['value'];
-	
-	if(isset($bf['deint'])) $s .= ' '.$bf['deint']['value'];
-	if(isset($bf['MI'])) $s .= ' '.$bf['MI']['value'];
-	
-	$rows[] = $s;
-}
-
-file_put_contents("$title-bogusframes.txt", implode(PHP_EOL, $rows));
-file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));
-file_put_contents("$title-bogussc.txt", implode(PHP_EOL, $bogussc));
-
-// 2nd pass
-
-$avs = <<<EOT
-d2vpath="$title.d2v"
-MPEG2Source(d2vpath,cpu=4)
+$avs_2pass2nd = <<<EOT
+Import("$title.avs")
 #showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
-TFM(d2v=d2vpath,clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
-# If your source is not anime or cartoon then add
-# vfrDec=0  into the line below
+TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-if(!file_exists("$title-2.avs")) file_put_contents("$title-2.avs", $avs);
-if(!file_exists("$title-tfm-ovr.txt")) file_put_contents("$title-tfm-ovr.txt", '');
-if(!file_exists("$title-tdec-ovr.txt")) file_put_contents("$title-tdec-ovr.txt", '');
-//if(!file_exists("$title-tdeint-ovr.txt")) file_put_contents("$title-tdeint-ovr.txt", '');
+if(!file_exists("$title-2pass2nd.avs")) file_put_contents("$title-2pass2nd.avs", $avs_2pass2nd);
 
-$cmd = <<<EOT
-"e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe" -hide_banner
--i $title-2.avs
--map 0:v
--c:v huffyuv
--aspect 720:480
-"$title-huffyuv.avi"
-EOT;
-
-$cmd = preg_replace('/[\r\n]+/', ' ', $cmd);
-
-if(file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") 
-&& (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
+function ffmpeg($cmd)
 {
+	$cmd = '"e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe" -hide_banner '.$cmd;
+
 	echo $cmd.PHP_EOL;
 	
 	$ret = 0;
@@ -617,154 +790,34 @@ if(file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt")
 	if(!empty($ret)) die($ret);
 }
 
-// ranges
-/*
-$eFrame = 1000000; // TODO
-
-$cmd = <<<EOT
-"e:\\tmp\\media\\util\\TIVTC\\Retreive Ranges\\RetrieveRanges.exe" 
-"$title-timecodes.txt" 
-29.970 
-$eFrame
-EOT;
-
-$cmd = preg_replace('/[\r\n]+/', ' ', $cmd);
-
-$output = '';
-$ret = 0;
-exec($cmd, $output, $ret);
-if(!empty($ret)) die($ret);
-
-file_put_contents("$title-ranges.txt", implode(PHP_EOL, $output));
-*/
-
-$s = file_get_contents("$title-timecodes.txt");
-
-$frames = [];
-
-$pef = -1;
-
-foreach(explode("\n", $s) as $row)
+if(isset($argv[2]) && $argv[2] == '1pass')
 {
-	$row = trim($row);
-	
-	if(!preg_match('/^([0-9]+),([0-9]+),([0-9\\.]+)/i', $row, $m)) continue;
-	
-	$sf = (int)$m[1];
-	$ef = (int)$m[2];
-	
-	if($sf > $pef + 1)
+	if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		$frames[] = ['sf' => $pef + 1, 'ef' => $sf - 1, 'fps_num' => 30000, 'row' => ''];
+		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v -c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"');
 	}
 
-	$pef = $ef;
-	
-	if($m[3] == '29.97') $fps_num = 30000;
-	else if($m[3] == '23.976024') $fps_num = 24000;
-	else if($m[3] == '17.982018') $fps_num = 18000;
-	else die('unknown fps '.$m[3]);
-	
-	$frames[] = ['sf' => $sf, 'ef' => $ef, 'fps_num' => $fps_num, 'row' => $row];
+	sanitycheck1($title);
 }
-
-$frames[] = ['sf' => $pef + 1, 'ef' => 1000000, 'fps_num' => 30000, 'row' => '']; // TODO: last frame number?
-
-//
-
-$fp = fopen("$title-ranges.txt", 'w');
-
-$tfc = 0;
-
-foreach($frames as $f)
+else // if($argv[2] == '2pass')
 {
-	$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
-		
-	fprintf($fp, "%d,%d,%.3f # %s\n", (int)$tfc, (int)($tfc + $fc + 0.5), $f['fps_num'] / 1001, $f['row']);
-
-	$tfc += $fc;
-}
-
-fclose($fp);
-
-// keyframes
-
-$s = file_get_contents("$title-tfm-ovr.txt");
-
-$keyframes = [];
-
-preg_match_all('/([0-9]+),([0-9]+).*# *keyframe/im', $s, $m);
-
-//print_r($m);
-
-for($i = 0; $i < count($m[0]); $i++)
-{
-	$frame = (int)$m[1][$i];
-
-	//echo $frame.' => ';
-	
-	$tfc = 0;
-
-	foreach($frames as $f)
+	if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
-		
-		//print_r($f);
-		//print_r([$tfc, $tfc + $fc, (int)($tfc + $fc + 0.5)]);
-	
-		if((int)$tfc <= $frame && $frame < (int)($tfc + $fc + 0.5))
-		{
-			$vfrframe = (int)($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000 + 0.5);
-			//$vfrframe = ceil($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000);
-			$vfrtime = $vfrframe / 25; // ffmpeg defaults to 25 fps for image seqs
-			
-			$ms = (int)(($vfrtime * 1000) % 1000);
-			$ss = $vfrtime % 60; $vfrtime /= 60;
-			$mm = $vfrtime % 60; $vfrtime /= 60;
-			$hh = $vfrtime;
-			$t = sprintf("%d:%02d:%02d.%03d", $hh, $mm, $ss, $ms);
-			
-			//print_r($f);
-			//print_r([$frame, $tfc, $tfc + $fc, (int)($tfc + $fc + 0.5), $f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000]);
-		
-			//echo $vfrframe.' '.$t.PHP_EOL;
-			
-			$keyframes[] = $t; //['f' => $vfrframe, 't' => $t];
+		ffmpeg('-i "'.$title.'-2pass1st.avs" -c copy -f null -');
+	}
 
-			break;
-		}
-	
-		$tfc += $fc;
+	sanitycheck1($title);
+
+	if(file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
+	{
+		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v -c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"');
 	}
 }
 
-file_put_contents("$title-keyframes.txt", implode(PHP_EOL, $keyframes));
+sanitycheck2($title);
 
-//
+genranges($title);
 
-$bogusdups = [];
-
-sanitycheck2($title, $bogusdups);
-
-if(!empty($bogusdups))
-{
-	$fp = fopen("$title-bogusscenes.txt", 'a');
-
-	fprintf($fp, "\n\n");
-
-	foreach($bogusdups as $dups)
-	{
-		fprintf($fp, "%s @ %d\n", $dups['scene']['row'], $dups['pos']);
-	
-		foreach($dups['skipped'] as $skipped)
-		{
-			fprintf($fp, "- %d\n", $skipped);
-		}
-	}
-
-	fclose($fp);
-}
-
-//
+genkeyframes($title);
 
 ?>

@@ -53,10 +53,3 @@ FixSatellite(c1) + \
 Trim(c1, 104895, 107681) + \
 Trim(c2, 107667, 108034) + \
 Trim(c1, 108048, 168058)
-
-
-deint2=yadifmod2(order=0)
-deint3=yadifmod2(order=1)
-
-TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=9,MI=80,PP=6,chroma=true,display=false,ovr="S01E02-tfm-ovr.txt")
-TDecimate(mode=3,hybrid=2,denoise=true,vfrDec=0,mkvOut="S01E02-timecodes.txt",ovr="S01E02-tdec-ovr.txt")
