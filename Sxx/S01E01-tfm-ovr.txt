@@ -78,13 +78,13 @@
 11676,11930 cppcc
 11931,12087 cccpp
 
-# 64.94i and a random ccppc pattern on top of it
-# 12323
-# 7t3t5t5t8t10t11t13t13t...
-# 6b1b4b6b7b 9b 9b12b14b...
+# 59.94i and a random ccppc pattern on top of it
+# 12318
+# 2t3t5t5t8t10t11t13t13t...
+# 1b1b4b6b7b 9b 9b12b14b...
 # cppcc =>
-# 7t3t5t8t10t11t13t...
-# 6b4b6b7b 9b12b14b...
+# 2t3t5t8t10t11t13t...
+# 1b4b6b7b 9b12b14b...
 # then deinterlace with blend, since we cannot specify lhhll as a secondary pattern
 # ignore the additional random junk for now
 12088,12117 ccppc
@@ -120,7 +120,7 @@
 
 12530,12732 pcccp
 
-# repeats every 14 frames, sometimes a p is added or removed
+# repeats every 9 frames, sometimes a p is added or removed
 #12733,12750 cppcccpcc
 #12751,12804 cppcccppc
 #12805,12840 ccpcccppc
@@ -154,7 +154,7 @@
 #12841,12876 +-++++-+--+-+-+----+----------------
 #12877,12935 --+-+--+++-+++-------+-----------+-----------
 
-# 34.97 version
+# 29.97 version
 
 12733,12750 ccpcccccc
 #12733,12750 -+----+--
@@ -549,6 +549,7 @@
 44399,44468 ppccc
 44399,44468 +
 44399,44468 Q 5
+44399 Q 3
 44469,44566 c
 44469,44566 Q 5
 44469,44566 +
@@ -917,6 +918,7 @@
 70334,70387 ppccc
 70334,70387 +
 70334,70387 Q 5
+70334 Q 3
 70388,70429 pcccp
 70430,70457 cccpp
 70458,70523 ppccc
@@ -984,6 +986,7 @@
 73324,73427 ppccc
 73324,73427 +
 73324,73427 Q 5
+73324 Q 3
 73428,73501 cppcc
 73502,73558 cppcc
 73559,73717 c
@@ -1018,6 +1021,7 @@
 75598,75698 pcccp
 75598,75698 +
 75598,75698 Q 5
+75598 Q 3
 75699,75722 c
 75699,75722 +
 75699,75722 Q 5
@@ -1033,12 +1037,14 @@
 75963,76042 pcccp
 75963,76042 +
 75963,76042 Q 5
+75963 Q 3
 76043,76155 c
 76043,76155 +
 76043,76155 Q 5
 76156,76206 ppccc
 76156,76206 +
 76156,76206 Q 5
+76156 Q 3
 76207,76256 c
 76207,76256 +
 76207,76256 Q 5
@@ -1361,15 +1367,13 @@
 107571,107694 ccppc
 107695,107747 ccppc
 107748,107796 cppcc
-107797,107808 ppccc
-
+107797,107813 ppccc
 107814,107868 cbbcc
 107869,107887 bcccb 
 107888,107912 bcccb 
 107913,107929 bcccb 
 107930,107950 bbccc
 107951,108064 cbbcc 
-
 108065,108272 ccppc
 108273,108329 pcccp
 108330,108355 ccppc
@@ -1952,7 +1956,7 @@
 164425,167119 c # keyframe
 164425,167119 +
 164425,167119 Q 6
-167120,167326 c
+167120,167325 c
 
 3509 Q 3 # pcccp p
 3809 Q 3 # pcccp p
@@ -2027,7 +2031,6 @@
 40563 Q 3 # pcccp p
 40797 Q 3 # ppccc p
 41083 Q 3 # pcccp p
-41297 Q 3
 41816 Q 3 # pcccp p
 42313 Q 3 # pcccp p
 42421 Q 3 # pcccp p
@@ -2038,7 +2041,6 @@
 43719 Q 3 # pcccp p
 43985 Q 3 # pcccp p
 44233 Q 3 # ppccc p
-44399 Q 3
 44669 Q 3 # ppccc p
 45069 Q 3 # ppccc p
 45152 Q 3 # ppccc p
@@ -2101,7 +2103,6 @@
 68664 Q 3 # pcccp p
 69766 Q 3 # ppccc p
 70256 Q 3 # ppccc p
-70334 Q 3
 70388 Q 3 # pcccp p
 70458 Q 3 # ppccc p
 70592 Q 3 # pcccp p
@@ -2119,17 +2120,13 @@
 73034 Q 3 # ppccc p
 73080 Q 3 # ppccc p
 73242 Q 3 # ppccc p
-73324 Q 3
 74073 Q 3 # pcccp p
 74350 Q 3 # ppccc p
 74415 Q 3 # pcccp p
-74649 Q 3 # ppccc p
+74649 Q 3 # pcccp p
 75215 Q 3 # pcccp p
 75449 Q 3 # pcccp p
-75598 Q 3
 75864 Q 3 # ppccc p
-75963 Q 3
-76156 Q 3
 76447 Q 3 # ppccc p
 76535 Q 3 # ppccc p
 76914 Q 3 # pcccp p
@@ -2231,12 +2228,10 @@
 107191 Q 3 # ppccc p
 107383 Q 3 # ppccc p
 107797 Q 3 # ppccc p
-
-
-107802 Q 3 # ppccc p
-107884 Q 3 # pcccp p
-107909 Q 3 # pcccp p
-107926 Q 3 # ppccc p
+107869 Q 3 # bcccb b
+107888 Q 3 # bcccb b
+107913 Q 3 # bcccb b
+107930 Q 3 # bbccc b
 108273 Q 3 # pcccp p
 108376 Q 3 # pcccp p
 108394 Q 3 # pcccp p
@@ -2277,8 +2272,6 @@
 123601 Q 3 # ppccc p
 123659 Q 3 # pcccp p
 123814 Q 3 # pcccp p
-123996 Q 3 # ppccc p
-124080 Q 3 # pcccp p
 126082 Q 3 # pcccp p
 126854 Q 3 # pcccp p
 127295 Q 3 # pcccp p
@@ -2311,7 +2304,7 @@
 135914 Q 3 # ppccc p
 136942 Q 3 # pcccp p
 137749 Q 3 # ppccc p
-141671 Q 3
+141671 Q 3 # pppccccppccppccpccpccpccpccppcppcppcppcpp p
 141879 Q 3 # ppccc p
 141949 Q 3 # pcccp p
 142644 Q 3 # pcccp p
@@ -2374,4 +2367,3 @@
 161077 Q 3 # ppccc p
 162207 Q 3 # pcccp p
 163453 Q 3 # ppccc p
-

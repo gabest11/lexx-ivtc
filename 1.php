@@ -454,7 +454,9 @@ function sanitycheck2($title)
 	{
 		for($i = $scene['s'], $j = 0, $skipped = []; $i <= $scene['e']; $i++)
 		{
-			$t = $scene['t'][($i - $scene['s']) % strlen($scene['t'])];
+			$tlen = strlen($scene['t']);
+			
+			$t = $tlen > 0 ? $scene['t'][($i - $scene['s']) % $tlen] : '?';
 			
 			if(!isset($tdecframes[$i]))
 			{
@@ -491,8 +493,11 @@ function sanitycheck2($title)
 					}
 					
 					// don't record if the override keeps every frame or all are deinterlaced
+					// also don't when it is near the scene border, it might be forced because there is nothing to drop
 					
-					if($keep < 5 && $deint < 5)
+					if($keep < 5 && $deint < 5 
+					//&& $i - 4 > $scene['s'] && $i < $scene['e']
+					)
 					{
 						$zerodrops[] = ['scene' => $scene, 'pos' => $i - 4, 'skipped' => $skipped];
 					}
@@ -572,7 +577,10 @@ function sanitycheck2($title)
 	
 	foreach($zerodrops as $s)
 	{
-		$bogusdups[] = $s;
+		//if(count(s['skipped']) > 1)
+		{
+			$bogusdups[] = $s;
+		}
 	}
 
 	//
@@ -790,9 +798,11 @@ function ffmpeg($cmd)
 	if(!empty($ret)) die($ret);
 }
 
+$force = isset($argv[3]) && $argv[3] == 'force';
+
 if(isset($argv[2]) && $argv[2] == '1pass')
 {
-	if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
+	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
 		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v -c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"');
 	}
@@ -801,14 +811,14 @@ if(isset($argv[2]) && $argv[2] == '1pass')
 }
 else // if($argv[2] == '2pass')
 {
-	if(!file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
+	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
 		ffmpeg('-i "'.$title.'-2pass1st.avs" -c copy -f null -');
 	}
 
 	sanitycheck1($title);
 
-	if(file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
+	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
 	{
 		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v -c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"');
 	}
