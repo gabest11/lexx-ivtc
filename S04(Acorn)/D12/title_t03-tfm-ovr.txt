@@ -62,7 +62,7 @@
 5612 -
 5672,5699 + # fade-out
 
-5700,5863 c # keyframe
+5700,5863 c # random dups # keyframe
 5864,6153 ccppc
 5864,6153 - # MIC high
 6154,6198 cppcc
@@ -85,7 +85,7 @@
 8199,8302 cppcc
 8303,8332 c # crossfade
 8303,8332 +
-8303,8332 Q 5
+8303,8332 Q 5 # not perfect on the clouds, but better than the rest
 8333,8428 cppcc
 8429,8511 ccppc
 8512,8562 ccppc

@@ -655,17 +655,16 @@ function genranges($title)
 	}
 
 	fclose($fp);
-}
+	
+	//
 
-function genkeyframes($title)
-{
-	$s = file_get_contents("$title-tfm.txt");
+	$s = file_get_contents("$title-tfm-ovr.txt");
 
 	$keyframes = [];
 
 	preg_match_all('/([0-9]+),([0-9]+).*# *keyframe/im', $s, $m);
 
-	//print_r($m);
+	// print_r($m);
 
 	for($i = 0; $i < count($m[0]); $i++)
 	{
@@ -827,7 +826,5 @@ else // if($argv[2] == '2pass')
 sanitycheck2($title);
 
 genranges($title);
-
-genkeyframes($title);
 
 ?>
