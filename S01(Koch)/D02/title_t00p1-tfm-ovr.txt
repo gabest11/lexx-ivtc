@@ -330,9 +330,9 @@
 22524,22565 cluph # crossfade, cppcc + cccpp
 22524,22565 -+--+
 22566,22615 cppcc
-22616,22646 uphcl # crossfade, cppcc + pcccp
-22616,22646 --+-+
-22647,22776 cccpp
+22616,22647 uphcl # crossfade, cppcc + pcccp
+22616,22647 --+-+
+22648,22776 ccppc
 22777,22879 ccppc
 22880,23026 ccppc
 23027,23170 pcccp
@@ -1080,9 +1080,9 @@
 82787,82812 ppccu # crossfade
 82813,82982 cccpp
 82922 - # MIC high
-82983,83012 phclu # crossfade, cccpp + ppccc (only during crossfade, changes from 83013)
-82983,83012 -+-+-
-83013,83138 cccpp
+82983,83013 phclu # crossfade, cccpp + ppccc (only during crossfade, changes from 83013)
+82983,83013 -+-+-
+83014,83138 ccppc
 83139,83194 cuppc # crossfade
 83195,83347 ppccc
 83246 - # MIC high
@@ -1551,9 +1551,12 @@
 #116104,116675 c # crossfade, pp 01/56 34/89 01/56 23/78 12/67 45/90 45/90 12/67 01/56
 #idea: add macros to TIVTC to somehow convert these into the listing below
 116104,116116 cppcc
-116117,116178 cluph # crossfade, cccpp + cppcc
-116117,116178 -+--+
-116179,116224 pcccp
+#116117,116178 cluph # crossfade, cccpp + cppcc
+#116117,116178 -+--+
+#116179,116224 pcccp
+116117,116177 cluph # crossfade, cccpp + cppcc
+116117,116177 -+--+
+116178,116224 ppccc
 116225,116287 phclu # crossfade, cccpp + ppccc
 116225,116287 -+-+-
 116288,116289 ccppc

@@ -465,20 +465,20 @@ function sanitycheck2($title)
 			
 			if(++$j == 5 || $i == $scene['e'])
 			{
-				$j = 0;
+				$pos = $i - ($j - 1);
 				
 				if(count($skipped) > 1)
 				{
-					$bogusdups[] = ['scene' => $scene, 'pos' => $i - 4, 'skipped' => $skipped];
+					$bogusdups[] = ['scene' => $scene, 'pos' => $pos, 'skipped' => $skipped];
 				}
-				else if(count($skipped) == 0 && strlen($scene['t']) == 5 
+				else if($j == 5 && count($skipped) == 0 && strlen($scene['t']) == 5 
 				&& (!isset($ovrframes[$i]['rate']) || $ovrframes[$i]['rate'] == 'f')
-				&& !($i == $scene['s'] + 4 && substr($scene['t'], 0, 2) == 'pp'))
+				&& !($pos == $scene['s'] && substr($scene['t'], 0, 2) == 'pp'))
 				{
 					$keep = 0;
 					$deint = 0;
 					
-					for($k = $i - 4; $k <= $i; $k++)
+					for($k = $pos; $k <= $i; $k++)
 					{
 						if(isset($ovrframes[$i]['dec']) && $ovrframes[$i]['dec']['value'] == '+')
 						{
@@ -494,14 +494,16 @@ function sanitycheck2($title)
 					
 					// don't record if the override keeps every frame or all are deinterlaced
 					// also don't when it is near the scene border, it might be forced because there is nothing to drop
-					
-					if($keep < 5 && $deint < 5 
-					//&& $i - 4 > $scene['s'] && $i < $scene['e']
+
+					if($keep < $j && $deint < $j 
+					//&& $pos > $scene['s'] && $i < $scene['e']
 					)
 					{
-						$zerodrops[] = ['scene' => $scene, 'pos' => $i - 4, 'skipped' => $skipped];
+						$zerodrops[] = ['scene' => $scene, 'pos' => $pos, 'skipped' => $skipped];
 					}
 				}
+
+				$j = 0;
 				
 				$skipped = [];
 			}
@@ -797,18 +799,19 @@ function ffmpeg($cmd)
 	if(!empty($ret)) die($ret);
 }
 
+$out = strpos($argv[2], 'null') === false ? '-c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"' : '-f null -';
 $force = isset($argv[3]) && $argv[3] == 'force';
 
-if(isset($argv[2]) && $argv[2] == '1pass')
+if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v -c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"');
+		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v '.$out);
 	}
 
 	sanitycheck1($title);
 }
-else // if($argv[2] == '2pass')
+else // if(isset($argv[2]) && strpos($argv[2], '2pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
@@ -819,7 +822,7 @@ else // if($argv[2] == '2pass')
 
 	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
 	{
-		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v -c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"');
+		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v '.$out);
 	}
 }
 

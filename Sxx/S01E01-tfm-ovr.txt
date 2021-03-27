@@ -199,8 +199,8 @@
 13932,14000 cccpp
 14001,14270 ccppc
 14271,14570 ccppc
-14571,15262 pcccp
-15229,15262 -
+14571,15224 pcccp
+15225,15262 c # 59.94i
 15263,15634 c # 59.94i
 15263,15634 +
 15635,15912 cccpp
@@ -591,8 +591,33 @@
 46525,46761 cccpp
 46762,46846 ccppc
 
-46847,46966 c # TODO: find the correct patterns
-46847,46966 +
+#46847,46966 c # TODO: find the correct patterns
+#46847,46966 +
+
+46847,46866 clcclcphcpccccccpclp
+46847,46866 -+--+--+----------+-
+#           +++++++++++-++-+++++
+#           ccpccppccpcxccxcpccp
+46867,46886 chcphccclcccllhlpcpc
+46867,46886 -+--+---+---++++----
+#           +++++++++++-++++++++
+#           cpcpccpccpcxccpcpcpc
+46887,46906 cpccclccpcphcccccccl
+46887,46906 -----+-----+-------+
+#           +++++++++++++++-++++
+#           cpcpccpcpcpccpcxccpc
+46907,46926 pcccphcphlcclccplphc
+46907,46926 -----+--++--+---+-+-
+#           ++-++++++++++++++++-
+            pccxpccpccpccpcpcpcx
+46927,46946 ccpccclcclcphcpccccc
+46927,46946 ------+--+--+-------
+#           -+++++++++++++++-++-
+#           xcpccpcpccppccpcxccx
+46947,46966 cpclpcccphccclccclph
+46947,46966 ---+-----+---+---+-+
+#           ++++++-+++++++++-+++
+#           cpccpcxcpccpccpcxcpc
 
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
@@ -667,7 +692,7 @@
 52044,52223 +
 52044,52223 Q 5
 52224,52283 ppccc
-52284,52352 cppcc
+52284,52352 c
 52353,52423 cccpp
 52424,52471 ccppc
 52472,52690 c # 59.94i
@@ -894,8 +919,8 @@
 69080,69117 ccppc
 69118,69174 ccppc
 69175,69243 cccpp
-69244,69357 cccpp
-69337,69357 +
+69244,69336 cccpp
+69337,69357 ccppc
 69358,69493 c # ccppc
 69358,69493 +
 69358,69493 Q 5
@@ -1894,8 +1919,8 @@
 156789,156837 ppccc
 156838,156950 cppcc
 156951,157018 cppcc
-157019,157198 c
-157019,157198 +
+157019,157198 cpccc # 2nd can be dropped, but 4th is also combed, strange one
+157019,157198 ---+-
 157199,157408 ccppc
 157409,157617 ccppc
 157618,157889 c

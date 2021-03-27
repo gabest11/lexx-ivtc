@@ -10,7 +10,7 @@ Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
 * S03 (these episodes are terrible quality, one field is simply missing in many places)
 
-* S04/E01-21 done (Acorn)
+* S04/E01-24 done (Acorn)
 
 Planing to do newer releases if I can get them and are better quality.
 
@@ -26,7 +26,7 @@ First step is to rip every disc with mkvmerge.
 
 0.bat title_tNN.mkv will demux the video elementary streams and call dgindex to produce the corresponding .d2v file. I work on elementary streams because the timestamps are stripped and if the disc is damaged the audio is easier to resync. There is a certain version floating on the internet which has a problem with S02E02. But this project isn't for that.
 
-php 1.php title_tNN.mkv will do a two pass tfm/tdec run and output a huffyuv compressed avi.
+php 1.php title_tNN.mkv 1pass|2pass will do tfm/tdec run and output a huffyuv compressed avi.
 
 php 2.php input output h265/h264 preset vertical_res cfr will encode it into a usable file for further muxing with the audio. The input can be the huffyuv avi or %06d.png if you created those with Topaz AI.
 
@@ -240,3 +240,69 @@ Rare and short scenes, it can be found throughout the whole series.
     tdec: f, ++-++ or +++-+
 
 Third season, few episodes from the fourth. The second field is just interpolated, no more information can be extracted to increase the halved resolution. Edges are blocky, stairstep effect. Very sad. Maybe it was recorded in PAL somewhere in Europe and converted to NTSC this way.
+
+## Scene continuity
+
+TDecimate splits the video into segments of 5 frames by default and drops one of the two most similar. This does not line up with the scenes nicely, sometimes there is none, other times both scenes have a duplicate frame.
+
+### nothing to drop
+    
+    17832,17907 ccppc
+    17908,18045 pcccp
+
+    17900,17909 pcccp pcc|pc ccppc
+    17900,17909 ++++- +++|++ ++-++
+    
+There is a scene change without dups, TDecimate will may choose a frame it likes and drop it by mistake. The solution is to force video mode: 17905,17909 v.
+
+    21874,21951 c
+    21952,22019 pcccp
+    
+    21945,21959 ccccc cc|pcc cppcc
+
+Video and film scenes are next to each other. Also just force it to be video, 21950,21954 v.
+
+### two frames to drop
+
+    10,17 cppcc
+    18,24 cppcc
+    
+    10,19 cppcc cpp|cp pcccp
+    10,19 +-+++ +-+|+- ++++-
+
+We need to keep one of the dups unfortunatelly.
+
+### scene starts on a half frame
+
+    34046,34242 ccppc
+    34243,34474 ppccc
+    
+    34235,34244 cccpp ccc|pp cccpp
+    34235,34244 +++-+ +++|?+ +++-+
+
+The first field of the first p frame is paired with the last field of the previous frame. It will be a dup next time, but not the first time. TDecimate sees 5 different frames and will randomly drop one, and not necessarily the first p. We can force it by defining the second scene as f and -++++. Or if you want to preserve every frame, force the transition to be video, 34240,34244 v. 
+
+This half frame is not always the best looking frame, but Q 3 will make it acceptable.
+ 
+### drop the other dup frame
+
+    ccppc => ccppc
+    ++-++    +-+++
+          => ccuuc
+             +++-+
+          => ccuuc
+             ++++-
+
+This can have a ripple effect on following scenes. You may have to play whack-a-mole and fix several before everything lines up, or eventually run into an unsolvabe situation and have to force a video section anyway, and then you achieved nothing. 
+
+If you change between 0/9 or 5/4, the next group will be affected. If there was no mismatch before, now there is.
+
+If you change from p to the previous c, and the scene ends on that c, you lose a whole frame.
+
+u frames are also problematic at the end of the scene.
+
+### random dups
+
+    40063,40089 cccpccpccccpcpcccpccccpcccp
+
+Ignore and pray that TDecimate will sort it out.
