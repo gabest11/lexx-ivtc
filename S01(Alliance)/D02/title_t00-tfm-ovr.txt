@@ -327,9 +327,9 @@
 22539,22580 cluph # crossfade, cppcc + cccpp
 22539,22580 -+--+
 22581,22630 cppcc
-22631,22661 uphcl # crossfade, cppcc + pcccp
-22631,22661 --+-+
-22662,22791 cccpp
+22631,22662 uphcl # crossfade, cppcc + pcccp
+22631,22662 --+-+
+22663,22791 ccppc
 22792,22894 ccppc
 22895,23041 ccppc
 23042,23185 pcccp
@@ -362,6 +362,7 @@
 26682,26763 pcccp
 26682,26763 + # fields are shifted, but nothing is moving
 26682,26763 Q 5
+26682 Q 3
 26764,27032 cccpp
 27033,27218 ccppc
 27219,27301 c # 59.94i
@@ -371,6 +372,7 @@
 27448,27704 ppccc # bg 59.94i, changing so fast that a few dropped frames won't be noticeable
 27448,27704 +
 27448,27704 Q 5
+27448 Q 3
 27705,27800 cccpp
 27801,28090 ccppc
 28091,28159 ccppc
@@ -1067,9 +1069,9 @@
 82595,82801 ccppc
 82802,82827 ppccu # crossfade
 82828,82997 cccpp
-82998,83027 phclu # crossfade, cccpp + ppccc (only during crossfade, changes from 83013)
-82998,83027 -+-+-
-83028,83153 cccpp
+82998,83028 phclu # crossfade, cccpp + ppccc (only during crossfade, changes from 83013)
+82998,83028 -+-+-
+83029,83153 ccppc
 83154,83209 cuppc # crossfade
 83210,83362 ppccc
 83363,84041 ccppc
@@ -1540,9 +1542,12 @@
 #116117,116688 c # crossfade, pp 01/56 34/89 01/56 23/78 12/67 45/90 45/90 12/67 01/56
 #idea: add macros to TIVTC to somehow convert these into the listing below
 116117,116129 cppcc
-116130,116191 cluph # crossfade, cccpp + cppcc
-116130,116191 -+--+
-116192,116237 pcccp
+#116130,116191 cluph # crossfade, cccpp + cppcc
+#116130,116191 -+--+
+#116192,116237 pcccp
+116130,116190 cluph # crossfade, cccpp + cppcc
+116130,116190 -+--+
+116191,116237 ppccc
 116238,116300 phclu # crossfade, cccpp + ppccc
 116238,116300 -+-+-
 116301,116302 ccppc
@@ -1699,6 +1704,7 @@
 127904,127988 pcccp
 127964 +
 127904,127988 Q 5
+127904 Q 3
 127989,128098 ccppc
 127989,128098 - # MIC high
 128099,128215 pcccp
@@ -1837,6 +1843,7 @@
 136428,136685 pcccp
 136428,136685 + # still combed
 136428,136685 Q 5
+136428 Q 3
 136686,136772 ccppc
 136773,136965 pcccp
 136966,137036 cccpp
@@ -1885,6 +1892,7 @@
 139974,140042 pcccp
 139974,140042 + # low resolution
 139974,140042 Q 5
+139974 Q 3
 140043,140101 pcccp
 140102,140166 cppcc
 140167,140316 ccppc

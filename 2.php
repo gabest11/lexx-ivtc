@@ -148,12 +148,13 @@ if(!empty($keyframes)) $cmd[] = '-force_key_frames '.$keyframes;
 $cmd[] = '-metadata title="'.$title.'"';
 $cmd[] = '-metadata description="https://github.com/gabest11/lexx-ivtc" ';
 $cmd[] = '-metadata:s title= ';
-
+/*
+// does not work correctly, ffmpeg chops off the audio early, calculated from the vfr rate, do a 2pass
 if(!empty($timecodes) && preg_match('/# TDecimate Mode [0-9]+: +Last Frame = ([0-9]+)/i', file_get_contents($timecodes), $m))
 {
 	$cmd[] = '-frames:v '.($m[1] + 1);
 }
-
+*/
 $cmd[] = '"'.$dst.'"';
 
 // TODO: chapters for keyframes

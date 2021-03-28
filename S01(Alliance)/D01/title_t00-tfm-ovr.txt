@@ -83,13 +83,13 @@
 11681,11935 cppcc
 11936,12092 cccpp
 
-# 64.94i and a random ccppc pattern on top of it
-# 12323
-# 7t3t5t5t8t10t11t13t13t...
-# 6b1b4b6b7b 9b 9b12b14b...
+# 59.94i and a random ccppc pattern on top of it
+# 12318
+# 2t3t5t5t8t10t11t13t13t...
+# 1b1b4b6b7b 9b 9b12b14b...
 # cppcc =>
-# 7t3t5t8t10t11t13t...
-# 6b4b6b7b 9b12b14b...
+# 2t3t5t8t10t11t13t...
+# 1b4b6b7b 9b12b14b...
 # then deinterlace with blend, since we cannot specify lhhll as a secondary pattern
 # ignore the additional random junk for now
 12093,12122 ccppc
@@ -125,7 +125,7 @@
 
 12535,12737 pcccp
 
-# repeats every 14 frames, sometimes a p is added or removed
+# repeats every 9 frames, sometimes a p is added or removed
 #12738,12755 cppcccpcc
 #12756,12809 cppcccppc
 #12810,12845 ccpcccppc
@@ -159,7 +159,7 @@
 #12846,12881 +-++++-+--+-+-+----+----------------
 #12882,12940 --+-+--+++-+++-------+-----------+-----------
 
-# 34.97 version
+# 29.97 version
 
 12738,12755 ccpcccccc
 #12738,12755 -+----+--
@@ -204,8 +204,8 @@
 13937,14005 cccpp
 14006,14275 ccppc
 14276,14575 ccppc
-14576,15267 pcccp
-15234,15267 -
+14576,15229 pcccp
+15230,15267 c # 59.94i
 15268,15639 c # 59.94i
 15268,15639 +
 15640,15917 cccpp
@@ -554,6 +554,7 @@
 44404,44473 ppccc
 44404,44473 +
 44404,44473 Q 5
+44404 Q 3
 44474,44571 c
 44474,44571 Q 5
 44474,44571 +
@@ -595,8 +596,33 @@
 46530,46766 cccpp
 46767,46851 ccppc
 
-46852,46971 c # TODO: find the correct patterns
-46852,46971 +
+#46852,46971 c # TODO: find the correct patterns
+#46852,46971 +
+
+46852,46871 clcclcphcpccccccpclp
+46852,46871 -+--+--+----------+-
+#           +++++++++++-++-+++++
+#           ccpccppccpcxccxcpccp
+46872,46891 chcphccclcccllhlpcpc
+46872,46891 -+--+---+---++++----
+#           +++++++++++-++++++++
+#           cpcpccpccpcxccpcpcpc
+46892,46911 cpccclccpcphcccccccl
+46892,46911 -----+-----+-------+
+#           +++++++++++++++-++++
+#           cpcpccpcpcpccpcxccpc
+46912,46931 pcccphcphlcclccplphc
+46912,46931 -----+--++--+---+-+-
+#           ++-++++++++++++++++-
+pccxpccpccpccpcpcpcx
+46932,46951 ccpccclcclcphcpccccc
+46932,46951 ------+--+--+-------
+#           -+++++++++++++++-++-
+#           xcpccpcpccppccpcxccx
+46952,46971 cpclpcccphccclccclph
+46952,46971 ---+-----+---+---+-+
+#           ++++++-+++++++++-+++
+#           cpccpcxcpccpccpcxcpc
 
 46972,47050 cluph # top cccpp, center cppcc, bottom ccppc
 46972,47050 -+--+
@@ -671,7 +697,7 @@
 52049,52228 +
 52049,52228 Q 5
 52229,52288 ppccc
-52289,52357 cppcc
+52289,52357 c
 52358,52428 cccpp
 52429,52476 ccppc
 52477,52695 c # 59.94i
@@ -898,8 +924,8 @@
 69085,69122 ccppc
 69123,69179 ccppc
 69180,69248 cccpp
-69249,69362 cccpp
-69342,69362 +
+69249,69341 cccpp
+69342,69362 ccppc
 69363,69498 c # ccppc
 69363,69498 +
 69363,69498 Q 5
@@ -922,6 +948,7 @@
 70339,70392 ppccc
 70339,70392 +
 70339,70392 Q 5
+70339 Q 3
 70393,70434 pcccp
 70435,70462 cccpp
 70463,70528 ppccc
@@ -989,6 +1016,7 @@
 73329,73432 ppccc
 73329,73432 +
 73329,73432 Q 5
+73329 Q 3
 73433,73506 cppcc
 73507,73563 cppcc
 73564,73722 c
@@ -1023,6 +1051,7 @@
 75603,75703 pcccp
 75603,75703 +
 75603,75703 Q 5
+75603 Q 3
 75704,75727 c
 75704,75727 +
 75704,75727 Q 5
@@ -1038,12 +1067,14 @@
 75968,76047 pcccp
 75968,76047 +
 75968,76047 Q 5
+75968 Q 3
 76048,76160 c
 76048,76160 +
 76048,76160 Q 5
 76161,76211 ppccc
 76161,76211 +
 76161,76211 Q 5
+76161 Q 3
 76212,76261 c
 76212,76261 +
 76212,76261 Q 5
@@ -1524,8 +1555,9 @@
 117368,117421 c # ccppc + bg 29.97
 117368,117421 +
 
-117422,117431 pcccp # fg & bg pcccp
-
+117422,117430 pcccp # fg & bg pcccp
+117431 l # next scene follows with up, save this half one, drop one of those
+117431 +
 117432,117446 uphcl # fg pcccp, bg cppcc
 117432,117446 --+-+
 117432,117446 Q 6

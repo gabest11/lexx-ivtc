@@ -806,7 +806,7 @@ if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v '.$out);
+		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v '.($force ? '-y ' : '').$out);
 	}
 
 	sanitycheck1($title);
@@ -822,7 +822,7 @@ else // if(isset($argv[2]) && strpos($argv[2], '2pass') !== false)
 
 	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
 	{
-		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v '.$out);
+		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v '.($force ? '-y ' : '').$out);
 	}
 }
 
