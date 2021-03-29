@@ -1543,8 +1543,9 @@
 117389,117442 c # ccppc + bg 29.97
 117389,117442 +
 
-117443,117452 pcccp # fg & bg pcccp
-
+117443,117451 pcccp # fg & bg pcccp
+117452 l # next scene follows with up, save this half one, drop one of those
+117452 +
 117453,117467 uphcl # fg pcccp, bg cppcc
 117453,117467 --+-+
 117453,117467 Q 6
