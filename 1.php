@@ -215,12 +215,12 @@ function sanitycheck1($title)
 		
 			if((!empty($f['first_pb']) || !empty($f['last_un'])) && isset($f['deint']) && $f['deint']['value'] == '-')
 			{
-				$bogusframes[$i] = $f;
+				$bogusframes[$i] = ['f' => $f, 'note' => 'pb/un at sc -'];
 			}
 /*
 			else if($tfm['mic'] >= 30 && !isset($f['MI']) && !isset($f['deint']))
 			{
-				$bogusframes[$i] = $f;
+				$bogusframes[$i] = ['f' => $f, 'note' => ''];
 			}
 */
 		}
@@ -237,13 +237,13 @@ function sanitycheck1($title)
 			{
 				// still auto-deinterlaced by TFM, examine the reason
 
-				$bogusframes[$i] = $f;
+				$bogusframes[$i] = ['f' => $f, 'note' => 'auto-deint or MIC high '.$tfm['mic']];
 			}
 			else if((!empty($f['first_pb']) || !empty($f['last_un'])) && isset($f['Q']) && ($f['Q']['value'] == 2 || $f['Q']['value'] == 5))
 			{
 				// blended first/last half frame
 				
-				$bogusframes[$i] = $f;
+				$bogusframes[$i] = ['f' => $f, 'note' => 'first/last blended'];
 			}
 		}
 		
@@ -257,7 +257,17 @@ function sanitycheck1($title)
 			// recommendation by tfm is different
 			
 print_r([$i, $tfm, $f]);
-			$bogusframes[$i] = $f;
+			$bogusframes[$i] = ['f' => $f, 'note' => $tfm['micmin']['t'].'?'];
+		}
+	}
+	
+	foreach($ovrframes as $i => $f)
+	{
+		if(isset($f['rate']) && $f['rate'] == 'v' && isset($f['dec']['value']) && $f['dec']['value'] == '-')
+		{
+			// TDecimate will drop - regardless the v flag
+
+			$bogusframes[$i] = ['f' => $f, 'note' => 'v dropped'];
 		}
 	}
 	
@@ -397,19 +407,22 @@ print_r([$i, $tfm, $f]);
 
 	foreach($bogusframes as $i => $bf)
 	{
-		if($typerow != $bf['type']['row'])
+		$f = $bf['f'];
+		
+		if($typerow != $f['type']['row'])
 		{
 			if(!empty($rows)) $rows[] = '';
-			$rows[] = $bf['type']['row'].(isset($bf['deint']['row']) ? PHP_EOL.$bf['deint']['row'] : '');
+			$rows[] = $f['type']['row'].(isset($f['deint']['row']) ? PHP_EOL.$f['deint']['row'] : '');
 			$rows[] = '';
 		
-			$typerow = $bf['type']['row'];
+			$typerow = $f['type']['row'];
 		}
 
-		$s = ' '.$i.' '.$bf['type']['value'];
+		$s = ' '.$i.' '.$f['type']['value'];
 	
-		if(isset($bf['deint'])) $s .= ' '.$bf['deint']['value'];
-		if(isset($bf['MI'])) $s .= ' '.$bf['MI']['value'];
+		if(isset($f['deint'])) $s .= ' '.$f['deint']['value'];
+		if(isset($f['MI'])) $s .= ' '.$f['MI']['value'];
+		if(!empty($bf['note'])) $s .= ' ('.$bf['note'].')';
 	
 		$rows[] = $s;
 	}
@@ -421,8 +434,6 @@ print_r([$i, $tfm, $f]);
 
 function sanitycheck2($title)
 {
-	#TODO: scene begins with p/b, ends on u/n and blended
-
 	$bogusdups = [];
 
 	global $tfmframes;

@@ -1563,7 +1563,8 @@
 #117572,117680 Q 6
 
 117681,117895 cppcc # fg cppcc, drop 2nd, bg moves so slow that any frame we choose will be a dup
-117681,117895 --+-- # deinterlace 3rd for bg
+117681,117895 -++-- # deinterlace 3rd for bg
+117826 + # missing field ?
 117896,118030 cppcc
 118031,118188 c # just a still image zoom-in
 118189,118918 cccpp

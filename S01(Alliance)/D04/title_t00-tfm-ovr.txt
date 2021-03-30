@@ -955,7 +955,7 @@
 74412,74425 c
 74415,74425 +
 74415,74425 Q 5
-74426,74560 ccupp # ccppc (left eye) + cccpp (right eye)
+74426,74560 pccup # cccpp (left eye) + pcccp (right eye)
 74561,74611 pcccp
 74612,74666 pcccp
 74667,74722 cppcc

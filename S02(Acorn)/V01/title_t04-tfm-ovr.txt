@@ -108,7 +108,8 @@
 10497,11013 pcccp
 11014,11392 pcccp
 11014,11027 + # fade-in
-11393,11536 c
+11027 PP 3
+11393,11536 pcccp # white spot at 11467-11468 top right corner
 #11537,12129 pcccp
 #12130,13716 cppcc
 #12130,13716 -++--
@@ -378,6 +379,10 @@
 49485,49624 ---++
 49625,49883 ppccc
 49625,49883 ++---
+49777 + # 3rd frames are often combed where the hair and the bg meets
+49807 +
+49827 +
+49837 +
 49884,49935 cccpp
 49884,49935 ---++
 49936,50002 pcccp
@@ -454,6 +459,7 @@
 58172,58261 ++---
 58172,58261 Q 5
 58262 l # ends on u
+58262 +
 58263,58459 c # cppcc + 29.97 (window)
 #58263,58459 cupcc # cannot do this here
 #58263,58459 -++--
@@ -585,6 +591,7 @@
 71306,72894 pcccp
 72895,73261 pcccp
 73246,73273 + # crossfade
+73273 PP 3
 #73246,73273 Q 6
 73262,73614 ccppc
 73615,73687 pcccp
@@ -789,8 +796,12 @@
 42839 Q 3 # ppccc
 43922 Q 3 # pcccp
 45577 Q 3 # ppccc
+49379 Q 3
 49936 Q 3 # pcccp
+50003 Q 3
+50119 Q 3
 50897 Q 3 # ppccc
+51134 Q 3
 53212 Q 3 # pcccp
 53834 Q 3 # ppccc
 53902 Q 3 # ppccc
