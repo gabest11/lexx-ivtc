@@ -410,10 +410,10 @@
 51134,51273 ppccc
 51134,51273 +
 51274,51320 ccppc
-51321,51420 cccpp
+51321,51420 ccppc # not 1:1, fish eye distortion
 51321,51420 +
 51421,51468 c # ?
-51469,51811 ccppc
+51469,51811 ccppc # not 1:1, fish eye distortion
 51469,51811 +
 51812,51895 ccppc
 51896,51983 c # ?
@@ -711,6 +711,7 @@
 9287 Q 3 # ppccc
 9833 Q 3 # ppccc
 10002 Q 3 # pcccp
+11393 Q 3 # pcccp
 11537 Q 3 # pcccp
 13935 Q 3 # ppccc
 14047 Q 3 # pcccp
