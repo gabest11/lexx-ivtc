@@ -44,17 +44,17 @@
 1240,1286 -++-- # crossfade to all c
 1287,2244 c
 2245,2394 c
-2395,2521 c # ppccc
-2395,2521 ++---
+2395,2521 c # ppccc # not 1:1
+2395,2521 + # ++---
 2395,2521 Q 5
 2522,2599 c # cccpp
-2522,2599 ---++
+2522,2599 + # ---++
 2522,2599 Q 5
 2600,2650 c # cppcc
-2600,2650 -++--
+2600,2650 + # -++--
 2600,2650 Q 5
 2651,2706 c # cppcc
-2651,2706 -++--
+2651,2706 + # -++--
 2651,2706 Q 5
 2707,2936 c
 2937,3010 cccpp
@@ -95,10 +95,10 @@
 6505,6699 ppccc
 6505,6506 +
 6505 Q 3
-6530,6699 ++--- # cgi truck in the fg starts here
+6530,6699 ++--- # cgi truck in the fg starts here, 6630- 29.97
 6530,6699 M 3
 6700,7533 c
-6700,7533 + # cgi looks like 59.94i
+6700,7533 + # cgi looks like 59.94i (29.97 but combed)
 6774,6830 Q 5 # window reflection better with blend
 7526,7539 + # crossfade
 7534,7792 pcccp
@@ -148,19 +148,22 @@
 16651,16861 c
 16862,16940 pcccp
 16941,17032 pcccp
-17033,17206 ppccc # c (tv, pp fields already blended, drop one)
-17033,17206 ++---
+17033,17146 ppccc # tv, pp fields already blended, drop one
+17033,17146 ++---
+17147,17206 cppcc # changes to a different scene with more movement in pp, keep this part as video
+17147,17206 -++--
 17207,17375 c
 17376,18200 c
-18201,18268 ppccc
-18201,18268 ++---
+18201,18268 c # 29.97 + 59.94i (noise)
+18201,18268 +
+#18201,18268 Q 5
 18269,18334 c
-18335,18414 ccppc
-18335,18414 --++-
+18335,18414 c # 29.97 + 59.94i (noise)
+18335,18414 +
 18415,18776 c
 18777,18863 c
-18864,19110 ppccc
-18864,19110 ++---
+18864,19110 c # 29.97 + 59.94i (noise)
+18864,19110 +
 19111,19528 c
 19529,19748 c
 19749,19891 c
@@ -313,7 +316,7 @@
 30689,30789 Q 5
 30790,30879 ppccc
 30880,30927 ccppc # same but bg isn't moving much
-30880,30927 --++-
+30880,30927 + # --++- # fg combed in front of the green screen
 30880,30927 Q 5
 30928,30988 cccpp
 30989,31237 c # 1st frame different color tone
