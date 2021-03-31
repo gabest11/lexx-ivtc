@@ -1101,36 +1101,31 @@
 
 # extra c for every 35 frames, nice
 # 91136-91434 body rotates in front of the lexx and the outline is combed
-# 91215-91307 video visible on the legs, ccppc pattern
-91075 u
-91076,91110 ppccc
-91076,91110 ++---
-91111 c
-91112,91146 ppccc
-91112,91146 ++---
-91147 c
-91148,91182 ppccc
-91148,91182 ++---
-91183 c
-91184,91218 ppccc
-91184,91218 ++---
-91219 c
-91220,91254 luphc # ppccc + ccppc
-91220,91254 +--+-
-91255 c
-91256,91290 luphc # ppccc + ccppc
-91256,91290 +--+-
-91291 c
-91292,91326 luphc # ppccc + ccppc
-91292,91326 +--+-
-91327 c
-91328,91362 ppccc
-91328,91362 ++---
-91363 c
-91364,91398 ppccc
-91364,91398 ++---
-91399 c
-91400,91434 ppccc
+# 91215-91307 video visible on the legs, cccpp pattern
+
+91075,91434 -
+91075,91109 uppcc
+91110 c
+91111,91145 uppcc
+91146 c
+91147,91181 uppcc
+91182 c
+91183,91217 uppcc
+91218 c
+# cannot carry on uppcc because the display on the legs comes into view
+91219,91254 cluph # cppcc + cccpp
+91219,91254 -+--+
+91255,91290 cluph # cppcc + cccpp
+91255,91290 -+--+
+91291,91326 cluph # cppcc + cccpp
+91291,91326 -+--+
+# the display is gone
+91327,91361 uppcc
+91362 c
+91363,91397 uppcc
+91398 c
+91399,91433 uppcc
+91434 c
 
 91435,91587 ppccc
 91588,91781 pcccp
