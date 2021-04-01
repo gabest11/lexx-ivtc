@@ -87,8 +87,8 @@
 5814,5941 ppccc
 5942,6068 ccppc
 6069,6368 c # 59.94i, already deinterlaced
-6369,6506 pcccp
-6369,6506 +---+ # still combed
+6369,6506 c # fg pcccp, bg 29.97
+6369,6506 +---+
 6507,6651 ppccc
 6652,6775 ppccc
 6776,6894 cccpp
@@ -499,8 +499,13 @@
 57657,57765 c
 57766,58161 ccppc
 58162,58205 cppcc
-58206,58584 ccppc
-58296,58468 --++- # ccppc + 29.97
+
+58206,58295 ccppc
+58296,58468 cccpp # hidden scene cut
+58296,58468 ---++ # cccpp + 29.97
+58469,58584 pcccp # blob leaves, back to the previous pattern
+58469 + # first p field has no pair
+
 58585,58651 c
 58652,59017 ccppc
 58652,59017 --++-
@@ -621,7 +626,7 @@
 75471,75526 c#cccup
 75471,75526 ---++
 75471,75526 Q 5
-75527,75650 cccuu # it's cccpp but drop 1st for continuity
+75527,75650 cccpp
 75651,75790 ppccc
 75791,76044 pcccp
 76045,76250 c
@@ -649,7 +654,7 @@
 78077,78089 Q 5
 78090 h # ends on n
 78090 +
-78091,78098 cccuu
+78091,78098 cccpp
 78099,78278 cccup
 78099,78278 ---++
 78099,78278 Q 5
@@ -676,7 +681,7 @@
 79094,79222 Q 5
 79223 l # ends on u
 79223 +
-79224,79262 cccuu # continuity
+79224,79262 cccpp
 79263,79331 pcccu # starts with a p, ends with a u
 79263,79331 +---+
 79263,79331 Q 5
@@ -686,7 +691,7 @@
 79370,79460 pcccu
 79370,79460 +---+
 79370,79460 Q 5
-79461,79548 cccuu
+79461,79548 cccpp
 79461,79548 -
 79549,79603 c
 79604,79638 pcccp
@@ -744,7 +749,6 @@
 85864,85953 c
 85954,86043 c
 85954,86043 +
-
 
 1226 Q 3 # pcccp p
 1251 Q 3 # ppccc p

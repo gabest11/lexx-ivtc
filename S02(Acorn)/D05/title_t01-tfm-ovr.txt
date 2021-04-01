@@ -553,7 +553,7 @@
 76325,76534 ccppc
 76535,76658 ccppc
 76659,76726 cppcc
-76727,76840 c # ccppc # flying moth vs space again
+76727,76840 c # ccppc # flying moth vs space again, bg is in sync with pp, 3rd can be dropped
 76727,76840 --++-
 76841,76949 pcccp
 76950,77032 cccup
@@ -637,7 +637,7 @@
 83998,84295 ccppc
 83998,84295 --++-
 
-84296,85882 # keyframe
+84296,85882 c # keyframe
 85883,85953 c
 85954,86134 c
 85954,86134 +

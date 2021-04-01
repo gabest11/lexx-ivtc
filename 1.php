@@ -585,7 +585,39 @@ function sanitycheck2($title)
 			$bogusdups[] = ['scene' => $scene, 'pos' => $scene['s'], 'skipped' => $skipped];
 		}
 	}
+	
+	// ccppc/--++- are usually video, find dropped frames in those scenes
+	
+	foreach($ovrscenes as $index => $scene)
+	{
+		if(strlen($scene['t']) != 5) continue;
+		
+		$t = str_replace('b', 'p', $scene['t']);
+		
+		if($t != 'ppccc' && $t != 'cppcc' && $t != 'ccppc' && $t != 'cccpp' && $t != 'pcccp')
+			continue;
+		
+		$skipped = [];
+		
+		for($i = $scene['s'], $j = 0; $i <= $scene['e']; $i++)
+		{
+			if($t[$j] == 'p' 
+			&& isset($ovrframes[$i]['deint']['value']) && $ovrframes[$i]['deint']['value'] == '+' 
+			&& !(isset($ovrframes[$i]['dec']) && $ovrframes[$i]['dec']['value'] == '-')
+			&& !isset($tdecframes[$i]))
+			{
+				$skipped[] = $i.' '.$t[$j];
+			}
+			
+			if(++$j == 5) $j = 0;
+		}
 
+		if(!empty($skipped)) 
+		{
+			$bogusdups[] = ['scene' => $scene, 'pos' => $scene['s'], 'skipped' => $skipped];
+		}
+	}
+	
 	//
 	
 	foreach($zerodrops as $s)
