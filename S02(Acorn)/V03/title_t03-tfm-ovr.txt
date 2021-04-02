@@ -423,7 +423,8 @@
 42917,42973 pcccp
 42974,43023 ccppc
 43024,43333 c
-43024,43333 i 40 # too many layers are mixed, no idea
+43024,43333 i 1 # too many layers are mixed, no idea
+43024,43333 Q 5
 43307,43361 + # crossfade
 43334,43510 cppcc
 43511,43792 ccppc

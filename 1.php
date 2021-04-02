@@ -587,6 +587,7 @@ function sanitycheck2($title)
 	}
 	
 	// ccppc/--++- are usually video, find dropped frames in those scenes
+	// many are just crossfades
 	
 	foreach($ovrscenes as $index => $scene)
 	{
@@ -601,6 +602,8 @@ function sanitycheck2($title)
 		
 		for($i = $scene['s'], $j = 0; $i <= $scene['e']; $i++)
 		{
+			// deinterlaced p that was auto-dropped
+			
 			if($t[$j] == 'p' 
 			&& isset($ovrframes[$i]['deint']['value']) && $ovrframes[$i]['deint']['value'] == '+' 
 			&& !(isset($ovrframes[$i]['dec']) && $ovrframes[$i]['dec']['value'] == '-')
