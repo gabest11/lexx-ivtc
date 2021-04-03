@@ -8,17 +8,23 @@
 1893,2306 ppccc
 2307,2344 c
 2307,2344 + # fade-out
-2345,2790 c
+2345,2774 c
 
-2791,2952 c # keyframe
-2944,2977 + # crossfade, c + cccpp
-2953,3296 cccpp
-3289,3298 + # crossfade, cccpp + c
-3297,3343 c
-3344,3379 + # crossfade, c + cccpp
-3344,3403 cccpp
-3403,3440 + # crossfade, pcccp + ccppc
-3404,3570 cppcc
+2775,2945 pcccp # keyframe
+2946,2978 phclu # crossfade, cccpp + ppccc  ppccc + ccppc
+2946,2978 -+-+-
+2979,3288 ccppc
+3289,3298 hclup # crossfade, ccppc + pcccp
+3289,3298 +-+--
+3290,3295 + # fade-in (bit ugly)
+3290,3295 Q 5
+3299,3343 pcccp
+3344,3378 pccup # crossfade, pcccp + cccpp
+3379,3403 cccpp
+3404,3440 cluph # crossfade, cccpp + cppcc
+3404,3440 -+--+
+3404,3440 PP 3
+3441,3570 pcccp
 3571,3594 c
 3576,3585 +
 3576,3585 Q 5
@@ -557,7 +563,8 @@
 51513,51524 c # ?
 51513,51524 +
 51525,51582 cppcc
-51583,51597 cpcpp
+51583,51597 clcpp # fields without pairs
+51583,51597 -+--+
 51598,51607 cccpp
 51608,51640 cppppccpppcccppcppppcccppccpppccc # ?
 51641,51728 ppccc
@@ -580,9 +587,9 @@
 51991,52105 cppcc
 52018,52035 + # light flashing
 52102,52154 + # two phases crossfade
+52155,52735 ppccc
 52155,52735 + # zev's image on the ground fades-in and permanently combed
 52155,52735 Q 5
-52155,52735 ppccc
 52736,52846 ccppc
 52847,53149 ppccc
 53150,53270 ppccc

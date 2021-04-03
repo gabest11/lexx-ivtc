@@ -12,15 +12,21 @@
 2290,2310 + # fade-out
 2378,2755 c
 
-2756,2933 c # keyframe
-2925,2958 + # crossfade, c + cccpp
-2934,3277 cccpp
-3270,3279 + # crossfade, cccpp + c
-3278,3324 c
-3325,3360 + # crossfade, c + cccpp
-3325,3384 cccpp
-3384,3421 + # crossfade, pcccp + ccppc
-3385,3551 cppcc
+2756,2924 pcccp # keyframe
+2925,2959 luphc # crossfade, ppccc + ccppc
+2925,2959 +--+-
+2960,3269 ccppc
+3270,3279 hclup # crossfade, ccppc + pcccp
+3270,3279 +-+--
+3271,3276 + # fade-in (bit ugly)
+3271,3276 Q 5
+3280,3324 pcccp
+3325,3359 pccup # crossfade, pcccp + cccpp
+3360,3384 cccpp
+3385,3421 cluph # crossfade, cccpp + cppcc
+3385,3421 -+--+
+3385,3421 PP 3
+3422,3551 pcccp
 3552,3575 c
 3557,3566 +
 3557,3566 Q 5
@@ -1593,7 +1599,7 @@
 118368,118387 ppccc
 
 118388,118392 cccpp
-118393 u
+118393 u # last p repeats
 118394,118455 cccpp
 118417,118455 +
 
@@ -1629,7 +1635,7 @@
 120274,120728 ccppc
 120729,120749 ppccc
 120750,120751 c
-120752,120789 cppcc
+120752,120789 cppcc # uppcc (ppccc + cppcc) ? 4th also combed, drop 2nd
 120752,120789 +
 120752,120789 Q 6
 120790,120973 cppcc
@@ -1849,7 +1855,7 @@
 136320 +
 136320 Q 2
 136415,136672 pcccp
-136415,136672 + # still combed
+136415,136672 + # still combed (green screen?)
 136415,136672 Q 5
 136415 Q 3
 136673,136759 ccppc
@@ -2038,7 +2044,8 @@
 150965,151026 ccppc
 151027,151088 ccppc
 151089,151381 cppcc
-151382,151467 cccpp
+151382,151449 cccpp
+151450,151467 cppcc # hidden scene cut
 151468,151619 ccppc
 151620,151706 ccppc
 151707,151785 cppcc

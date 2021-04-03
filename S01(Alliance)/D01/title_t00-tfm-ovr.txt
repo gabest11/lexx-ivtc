@@ -206,8 +206,11 @@
 14276,14575 ccppc
 14576,15229 pcccp
 15230,15267 c # 59.94i
+15230,15267 +
+15230,15267 Q 5
 15268,15639 c # 59.94i
 15268,15639 +
+#15268,15639 Q 5
 15640,15917 cccpp
 15918,16194 cppcc
 16195,16444 ppccc
@@ -2189,7 +2192,7 @@ pccxpccpccpccpcpcpcx
 74078 Q 3 # pcccp p
 74355 Q 3 # ppccc p
 74420 Q 3 # pcccp p
-74654 Q 3 # ppccc p
+74654 Q 3 # pcccp p
 75220 Q 3 # pcccp p
 75454 Q 3 # pcccp p
 75603 Q 3
@@ -2340,8 +2343,6 @@ pccxpccpccpccpcpcpcx
 123580 Q 3 # ppccc p
 123638 Q 3 # pcccp p
 123793 Q 3 # pcccp p
-123975 Q 3 # ppccc p
-124059 Q 3 # pcccp p
 126061 Q 3 # pcccp p
 126833 Q 3 # pcccp p
 127274 Q 3 # pcccp p
@@ -2374,7 +2375,7 @@ pccxpccpccpccpcpcpcx
 135893 Q 3 # ppccc p
 136921 Q 3 # pcccp p
 137728 Q 3 # ppccc p
-141650 Q 3
+141650 Q 3 # pppccccppccppccpccpccpccpccppcppcppcppcpp p
 141858 Q 3 # ppccc p
 141928 Q 3 # pcccp p
 142623 Q 3 # pcccp p
