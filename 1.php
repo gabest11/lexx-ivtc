@@ -261,6 +261,8 @@ print_r([$i, $tfm, $f]);
 		}
 	}
 	
+	//
+	
 	foreach($ovrframes as $i => $f)
 	{
 		if(isset($f['rate']) && $f['rate'] == 'v' && isset($f['dec']['value']) && $f['dec']['value'] == '-')
@@ -270,6 +272,8 @@ print_r([$i, $tfm, $f]);
 			$bogusframes[$i] = ['f' => $f, 'note' => 'v dropped'];
 		}
 	}
+	
+	//
 	
 	foreach($ovrscenes as $scene)
 	{
@@ -426,6 +430,50 @@ print_r([$i, $tfm, $f]);
 	
 		$rows[] = $s;
 	}
+
+	// p/h then u/l means two skipped fields, or a whole frame
+	// only a problem during crossfades, scene changes are okay
+	// but sections of crossfades are defined as separate scenes...
+	// also acceptable when h/l is part of c frame, if the other field has errors
+	
+	$tp = '';
+	$ip = -1;
+	/*
+	foreach($ovrframes as $i => $f)
+	{
+		if(isset($ovrframes[$i]['type']['value']))
+		{
+			$t = $ovrframes[$i]['type']['value'];
+			
+			if($i == $ip + 1 && ($tp == 'p' || $tp == 'h') && ($t == 'u' || $t == 'l') && !isset($bogusframes[$i]))
+			{
+				$bogusframes[$i] = ['f' => $f, 'note' => 'p/h followed by u/l'];
+			}
+			
+			$tp = $t;
+			$ip = $i;
+		}
+	}
+	*/
+	foreach($ovrscenes as $scene)
+	{
+		$i = $scene['s'];
+		$f = $ovrframes[$i];
+		
+		if(isset($f['type']['value']))
+		{
+			$t = $f['type']['value'];
+			
+			if($i == $ip + 1 && ($tp == 'p' || $tp == 'h') && ($t == 'u' || $t == 'l'))
+			{
+				$bogusscenes[] = trim($scene['row']).' # '.'p/h followed by u/l';
+			}
+
+			$ip = $scene['e'];
+			$tp = $ovrframes[$ip]['type']['value'];
+		}
+	}
+	
 
 	file_put_contents("$title-bogusframes.txt", implode(PHP_EOL, $rows));
 	file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));

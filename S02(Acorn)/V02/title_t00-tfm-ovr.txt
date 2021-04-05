@@ -279,10 +279,11 @@
 8493,8502 Q 5 # moves too fast, blend it, the 3rd missing would be a large gap
 8525,8624 c
 8525,8624 ++---
-8625,8644 pcccp
-8645,8870 uphcl
-8645,8870 --+-+
-8870 + # ends on u, dropping it though
+8625,8645 pcccp
+8646,8869 phclu # pcccp + cppcc
+8646,8869 -+-+-
+8870 l # ends on u
+8870 +
 8871,8949 cccpp
 8871,8949 ---++
 8871,8949 Q 5
