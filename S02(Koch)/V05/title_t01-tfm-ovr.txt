@@ -392,9 +392,10 @@
 49635,49774 pcccp
 49775,49978 pcccp
 49979,50101 ppccc
-50102,50107 + # crossfade
+50102,50107 cuppc # crossfade, ccppc + cppcc
+50102,50107 +
 50102,50107 Q 2
-50102,50436 cppcc 
+50108,50436 ppccc
 50437,50548 ppccc
 50549,50718 ppccc
 50719,50779 cccpp
@@ -449,7 +450,7 @@
 57001 l # missing a field in a c frame
 57001 +
 57001 Q 3
-57002,57135 cppc
+57002,57135 cppcc
 57136,57249 ccppc
 57250,57376 cppcc
 57377,57863 pcccp
