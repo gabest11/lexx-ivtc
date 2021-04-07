@@ -80,7 +80,7 @@
 6695,6820 c
 6821,6949 cccpp
 6950,7039 c
-7040,7490 cccpp
+7040,7490 cccpp # S02E05 12742,13192 same scene without the mismatched bg frame rate, but also no "patches in the sky" and fade-in
 7040,7490 ---++ # bg 29.97
 7491,8421 pcccp
 8422,8633 cppcc
@@ -242,7 +242,6 @@
 41081,41250 pcccp
 41251,41471 pcccp
 41251,41471 +---+
-41251,41471 Q 5
 41472,41567 c
 41568,41625 c # bg 29.97, fg 59.94i
 41568,41625 +

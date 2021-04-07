@@ -63,7 +63,7 @@
 2541,2617 c
 2646,2726 ppccc
 2727,2952 cccpp
-2953,3367 pcccp
+2953,3367 pcccp # S02E19 2953=7039
 2953,3367 +---+ # bg 29.97
 3093,3154 -
 3368,3438 cccpp
@@ -158,7 +158,7 @@
 13434,13485 ccppc 
 13456,13516 + # crossfade
 13486,13913 cppcc
-13471,13913 -++--
+13571,13913 -++--
 13914,14212 ccppc 
 14213,14348 cccpp
 14213,14348 ---++
@@ -300,7 +300,7 @@
 22317,22477 ++---
 22478,22610 c
 22611,23906 cppcc 
-22611,22743 -++-- # 22744- robot is no longer 29.97
+22611,22743 -++-- # pp badly deinterlaced when the robot head is visible
 23907,24623 ccppc 
 24624,24719 cppcc 
 24720,25243 pcccp
@@ -361,9 +361,9 @@
 31886,33284 ppccc 
 33285,33370 c
 33371,34208 ccppc 
-34209,34286 cccpp 
+34209,34286 cccpp
 34257,34317 + # crossfade
-34287,34571 ppccc
+34287,34571 ppccc # pp badly deinterlaced
 34287,34571 ++---
 34287,34571 Q 6
 34572,34879 c # pp blended, drifts ahead three frames by the end of the scene
@@ -447,8 +447,8 @@
 43012,43063 cppcc
 43064,43234 ccppc 
 43235,43370 # nothing is moving
-43371,43556 cppcc 
-43557,43627 c
+43371,43554 cppcc 
+43555,43627 c
 43628,43729 c
 43730,43840 c
 43730,43840 +
@@ -648,7 +648,7 @@
 66288,66383 ppccc 
 66384,66688 ppccc 
 66658,66718 + # crossfade
-66689,66898 ccppc 
+66689,66898 ccppc
 66899,67008 c
 66899,67008 - # MIC high
 67009,67377 ppccc
@@ -765,7 +765,7 @@
 82205,82313 cccpp
 82314,82412 cppcc 
 82383,82443 + # crossfade
-82413,82703 cccpp 
+82413,82703 cccpp
 82704,82723 ccupp # crossfade, ccppc + cccpp (brightness change causes horizontal lines)
 82704,82723 +
 82704,82723 Q 5
