@@ -129,7 +129,7 @@
 8919,8976 pcccp
 8977,9025 pcccp
 9026,9108 ppccc
-9026,9108 + # combed
+9026,9108 + # shaky cam
 9109,9149 ccppc
 9150,9233 ccppc
 9234,9280 cppcc
@@ -189,34 +189,37 @@
 13613,13679 pcccp
 13680,13739 ccppc
 
-13740,13808 c#ccppc # investigate, something funny is going on here (ccppc over 59.94i?)
+# shaky cam inside the cockpit, 59.94i over ccppc
+# because the picture moves randomly, we need to force the drops
+
+13740,13808 c # ccppc
 13740,13808 +
-13809,13856 c#cccpp # same
+13809,13856 c # cccpp
 13809,13856 +
 13857,13908 cccpp
-13909,13950 c#cppcc # same
+13909,13950 c # cppcc
 13909,13950 +
 13951,13990 pcccp
 13991,14103 cppcc
-14104,14149 c#ccppc # same
+14104,14149 c # ccppc
 14104,14149 +
 14150,14234 cccpp
-14235,14265 c#ccppc # same
+14235,14265 c # ccppc
 14235,14265 +
-14266,14295 c#ccppc # same
+14266,14295 c # ccppc
 14266,14295 +
 14296,14341 c
-14342,14361 c#ccppc # same
+14342,14361 c # ccppc
 14342,14361 +
-14362,14403 c#ppccc # same
+14362,14403 c # ppccc
 14362,14403 +
-14404,14434 c#cccpp # same
+14404,14434 c # cccpp
 14404,14434 +
 14435,14467 cppcc
 14441 - # MIC = 141
-14468,14503 c#cccpp # same
+14468,14503 c # cccpp
 14468,14503 +
-14504,14540 c#ppccc
+14504,14540 c # ppccc
 14504,14540 +
 14541,14574 cppcc
 14575,14601 c
@@ -275,13 +278,13 @@
 16241,16317 ccppc
 16318,16427 cccpp
 16428,16540 ppccc
-16541,16631 c#cccpp # same
+16541,16631 c # cccpp
 16541,16631 +
 16632,16682 cccpp
-16683,16732 c#cppcc # same
+16683,16732 c # cppcc
 16683,16732 +
 16733,16771 cppcc
-16772,16861 c#ccppc # same
+16772,16861 c # ccppc
 16772,16861 +
 16862,16894 ppccc
 16895,16961 pcccp
@@ -592,8 +595,7 @@
 56886,57244 ppccc
 57245,57306 cccpp
 57307,57624 ccppc
-57625,57688 cppcc
-57660 + # lower lip combed
+57625,57688 ppccc
 57689,57769 ccppc
 57770,57874 ppccc
 57875,58054 ppccc

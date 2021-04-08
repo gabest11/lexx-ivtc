@@ -394,10 +394,10 @@
 38383,38472 ppccc
 38473,38494 c # ccpppppcppppppcppcpppc
 38473,38494 +
-38495,38532 c
+38495,38532 c # 5th is a dup
 38495,38532 +
 38533,38568 ccppc
-38569,38720 c
+38569,38720 c # 5th is a dup
 38569,38720 +
 38721,38794 cccpp
 38795,38915 pcccp
@@ -406,8 +406,8 @@
 39111,39162 cppcc
 39163,39191 cppcc
 39192,39277 cppcc
-39278,39356 c
-39278,39356 +
+39278,39356 lcppc # first field bad
+39278,39356 +----
 39357,39652 pcccp
 39653,39750 c
 39751,39790 cppcc
@@ -420,11 +420,11 @@
 40083,40121 cccpp
 40122,40243 ccppc
 40244,40321 cccpp
-40322,40400 c # cppcc
-40322,40400 +
+40322,40400 cppcc # field bad
+40322,40400 ++---
 40401,40428 cppcc
-40429,40479 c
-40429,40479 +
+40429,40479 ccppc
+40429,40479 -++-- # field bad
 40480,40562 ppccc
 40521,40583 + # crossfade
 40563,40785 ppccc
@@ -437,9 +437,7 @@
 41008,41246 pcccp
 41247,41338 cluph # cccpp + cppcc
 41247,41338 -+--+
-41339,41432 cccuu # cccpp # continuity
-41433 l # now ends on u...
-41433 +
+41339,41433 cccpp
 41434,41484 ppccc
 41485,41534 cluph # cccpp + cppcc
 41485,41534 -+--+
@@ -532,7 +530,7 @@
 48187 Q 6
 48231 + # same
 48231 Q 6
-48269,48304 + # fg moves a bit
+48269,48294 + # fg moves a bit
 48388,48434 cppcc
 48435,48589 pcccp
 48436,48589 - # spinnig star, flag combed a little, maybe deinterlace?
