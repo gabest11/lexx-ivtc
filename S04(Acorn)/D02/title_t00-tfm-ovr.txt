@@ -5,7 +5,7 @@
 151,301 c
 302,482 cppcc
 483,622 ppccc # phclu # fg cccpp, bg ppccc # phclu does not work here, the edge of the tiles need both fields, and that's what needs to be fixed the most here
-483,622 - # -+-+- # ignore the steal columns in the fg
+483,622 # -+-+- # ignore the steal columns in the fg
 623,688 ccppc
 689,875 ppccc
 876,984 ppccc
@@ -28,10 +28,11 @@
 2832,2910 ccppc
 2911,2954 cppcc
 2955,3066 cccpp
-3067,3181 ppccc
-3181 + # fade-out, just a single frame
+3067,3182 ppccc
+3181,3182 + # fade-out
+3181,3182 Q 5
 
-3182,4036 cccpp # keyframe
+3183,4036 ccppc # keyframe
 4037,4177 pcccp
 4038,4177 - # MIC high
 4178,4279 cccpp
