@@ -559,14 +559,12 @@
 78325,78562 c
 78520,78562 + # fade-out
 
-
 78563,81058 c # keyframe
 81059,81153 c # 59.94i, this is the third variation of this logo
 81059,81116 +
 81059,81116 Q 5
 81154,81246 c
 81154,81246 +
-
 
 826 Q 3 # pcccp p
 1350 Q 3 # ppccc p
