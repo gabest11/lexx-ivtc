@@ -77,7 +77,7 @@ Why would you want to do this when TIVTC can field-match and decimate automatica
     tfm: ccuup, -----
     tdec: f, +++-+ or ++++-
 
-One of the up pairs can be droped.
+One of the up pairs can be dropped.
 
 ### pp does not overlap, ccppc + pcccp
 
@@ -177,7 +177,12 @@ Otherwise, if ivtc is more important than smoothness.
 
 Not much to do here, deinterlace every frame. Or make interlaced h264. DVD extras are mostly 59.94i.
 
-In a few scenes, the fields are also further scrambled with a ccppc pattern (S01E01 Hands appearing on the display when Stanley wakes up at home).
+In a few scenes, the fields are also further scrambled over the ccppc pattern. To simulate shaking, the screen is frequently moved around field-by-field.
+
+Examples: 
+* S01E01 Hands appearing on the display when Stanley wakes up at home
+* S01E04 Every moth cockpit scene filmed from the front
+* S04E02 Fighter jet scenes
 
 ### ccppc, but already deinterlaced to 29.97 by blending
 
@@ -262,6 +267,8 @@ There is a scene change without dups, TDecimate will may choose a frame it likes
 
 Video and film scenes are next to each other. Also just force it to be video, 21950,21954 v.
 
+Note that TDecimate will not respect the v flag if - was already set in a previous f sequence, override it again with +.
+
 ### two frames to drop
 
     10,17 cppcc
@@ -270,7 +277,7 @@ Video and film scenes are next to each other. Also just force it to be video, 21
     10,19 cppcc cpp|cp pcccp
     10,19 +-+++ +-+|+- ++++-
 
-We need to keep one of the dups unfortunatelly.
+We need to keep one of the dups unfortunatelly. I usually choose to keep the one that is right next to the scene change, less noticeable.
 
 ### scene starts on a half frame
 
@@ -305,4 +312,6 @@ u frames are also problematic at the end of the scene.
 
     40063,40089 cccpccpccccpcpcccpccccpcccp
 
-Ignore and pray that TDecimate will sort it out.
+Ignore and pray that TDecimate will sort it out. 
+
+Sometimes it is worth turning p into c and blending the fields.
