@@ -4,7 +4,6 @@
 # this is embarrasing, there is a frame counter, should I drop dups...
 
 0,302 c # 3
-0,20 + # fade-in # noisy, just guessing the end
 303,369 c # 4
 370,530 c # 5
 531,590 c # 3
@@ -18,6 +17,17 @@
 1644,1750 c # 2
 1751,1826 cccpp # ?
 0,1826 - # MIC high
+# noise is 59.94i, only deinterlace the very noisy parts
+0,36 + # fade-in
+370,373 +
+622,624 +
+949,951 +
+1106,1109 +
+1280,1282 +
+1383,1385 +
+1644,1646 +
+1751,1754 +
+#0,1826 Q 5
 
 1827,1945 ccppc # they put one of the clips above on screen with the dups and added pp in a different place, double dups...
 1946,2000 pcccp
@@ -345,6 +355,7 @@
 39488,39640 cccpp
 39606,39669 + # crossfade
 39641,39836 cccpp
+39641,39669 Q 5
 39795 -
 39837,40422 cppcc
 40423,40492 cppcc
