@@ -129,7 +129,8 @@ if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1]; $cmd[] = '-start_n
 $cmd[] = '-i "'.$src.'"';
 foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
 foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
-$cmd[] = '-pix_fmt yuv420p';
+if(strpos($codec, 'p10') !== false) $cmd[] = '-pix_fmt yuv420p10le';
+else $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
 foreach($subtitle as $index => $s) $cmd[] = '-map '.($index + count($audio) + 1).':s';
@@ -138,7 +139,9 @@ $cmd[] = '-c copy';
 foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
 foreach($subtitle as $index => $s) {$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];}
 if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
+else if($codec == 'h264p10') $cmd[] = '-c:v libx264 -profile:v high10 -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
+else if($codec == 'h265p10') $cmd[] = '-c:v libx265 -profile:v main10';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
 $cmd[] = '-vf "scale='.implode(':', $resolution).':flags=lanczos"';
 if(!empty($tune) && $tune != 'notune') $cmd[] = '-tune '.$tune;

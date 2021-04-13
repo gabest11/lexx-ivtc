@@ -214,7 +214,9 @@
 14385,14517 ccppc
 14518,14547 pccup # crossfade, pcccp + cccpp
 14548,14637 cccpp
-14638,14667 + # crossfade, cccpp + ccppc + brightness level change
+14638,14667 ccupp # crossfade, cccpp + ccppc + brightness level change
+14638,14667 +
+14638,14667 Q 5
 14668,14803 ccppc
 14804,14833 cuppc # crossfade, cppcc + ccppc
 14834,14884 ccppc
@@ -226,8 +228,8 @@
 15061,15153 cppcc
 15154,15183 phclu # crossfade, cccpp + ppccc
 15154,15183 -+-+-
-15184,15236 ppccc
-15237,15293 ccupp # crossfade, ccppc + cccpp
+15184,15238 ppccc
+15239,15293 uppcc # crossfade, ppccc + cppcc
 15294,15336 cppcc
 15337,15404 cppcc
 15405,15465 ppccc
@@ -531,7 +533,7 @@
 47999,48249 ccppc
 48250,48405 chlcc # cppcc + 29.97 (tv), pp is already deinterlaced, sneaky
 48250,48405 -++--
-48406,48471 c # single field
+48406,48471 c # single field, 2nd is a dup
 48406,48471 +
 48406,48471 Q 6
 48472,48519 ccppc
@@ -804,7 +806,7 @@
 74859,74916 ccppc
 74917,74950 # still image
 74951,75442 ppccc
-74951,75442 - # MIC high
+74952,75442 - # MIC high
 75443,75582 ppccc
 75427 - # MIC = 84
 75583,75874 ppccc
@@ -822,7 +824,6 @@
 81067,81124 Q 5
 81157,81245 c
 81157,81245 +
-
 
 649 Q 3 # pcccp p
 802 Q 3 # pcccp p
