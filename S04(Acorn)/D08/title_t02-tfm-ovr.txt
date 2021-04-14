@@ -548,7 +548,10 @@
 46430,46545 ppccc
 46546,46586 pcccp
 46587,46762 cppcc
-46763,46905 ccupp # ccppc + cccpp (ghost image)
+46763,46904 ccupp # ccppc + cccpp (ghost image)
+46905 l # ends on u
+46905 +
+46905 Q 3
 46906,46955 cppcc
 46956,47045 cccpp
 47046,47171 pccup # cccpp + pcccp (ghost image)

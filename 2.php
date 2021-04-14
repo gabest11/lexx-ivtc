@@ -5,7 +5,7 @@ $dst = $argv[2];
 $codec = $argv[3];
 $preset = $argv[4];
 $resolution = !empty($argv[5]) ? $argv[5] : 720;
-$crf = !empty($argv[6]) ? $argv[6] : ($codec == 'h265' ? 19 : 17);
+$crf = !empty($argv[6]) ? $argv[6] : (strpos($codec, 'h265') !== false ? 19 : 17);
 $tune = !empty($argv[7]) ? $argv[7] : 'grain';
 $keyframes = '';
 $timecodes = '';
