@@ -23,8 +23,10 @@
 1727,1799 + # shaky cam
 1800,1894 ppccc
 1800,1894 + # shaky cam
+1800 Q 3
 1895,1984 pcccp
 1895,1984 + # shaky cam
+1895 Q 3
 1955,1984 + # fade-out
 
 1985,2839 cccpp # keyframe
@@ -62,11 +64,12 @@
 3557,3619 ++---
 3620,3666 ppccc
 3620,3666 ++---
-3667,3782 c
-3775,3782 + # fade-out
+3667,3784 c
+3775,3784 + # fade-out
 
-3783,3929 pcccp # keyframe
-3783,3808 + # fade-in
+3785,3929 cccpp # keyframe
+3785,3808 + # fade-in
+3786,3808 Q 5
 3930,4013 cppcc
 3930,4013 + # shaky cam
 4014,4074 pcccp
@@ -386,7 +389,7 @@
 32041,32217 cppcc
 32218,32297 cccpp # tfm suggests this
 32298,32400 pcccp
-32401,32484 ppccc # 
+32401,32484 ppccc
 32485,32667 ccppc
 32668,32709 ppccc
 32710,32813 pcccp
@@ -589,6 +592,7 @@
 51050,51138 c
 51108,51163 + # crossfade
 51139,51195 c
+51139,51163 Q 5
 51196,51321 c
 51196,51321 - # MIC high
 51322,51360 c
@@ -770,11 +774,11 @@
 68743,68781 ccppc
 68782,68861 ppccc
 68862,68916 cccpp
-68917,69142 pcccp
+68917,69144 pcccp
 69117,69172 + # crossfade
-69143,69288 c
-69143,69288 Q 5 # Lexx looks bad with yadif
-69210,69211igh - # MIC h
+69145,69288 c
+69145,69288 Q 5 # Lexx looks bad with yadif
+69210,69211 - # MIC high
 69289,69588 cppcc
 69589,69755 cppcc
 69756,69855 cccpp

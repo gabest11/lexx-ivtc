@@ -142,6 +142,7 @@ if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
 else if($codec == 'h264p10') $cmd[] = '-c:v libx264 -profile:v high10 -level:v 4.1';
 else if($codec == 'h265') $cmd[] = '-c:v libx265';
 else if($codec == 'h265p10') $cmd[] = '-c:v libx265 -profile:v main10';
+//if(strpos($codec, 'h265') !== false) $cmd[] = '-x265-params "strong-intra-smoothing=0"';
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
 $cmd[] = '-vf "scale='.implode(':', $resolution).':flags=lanczos"';
 if(!empty($tune) && $tune != 'notune') $cmd[] = '-tune '.$tune;
