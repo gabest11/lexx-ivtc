@@ -531,8 +531,9 @@
 47571,47998 +
 47571,47998 Q 5
 47999,48249 ccppc
-48250,48405 chlcc # cppcc + 29.97 (tv), pp is already deinterlaced, sneaky
+48250,48405 c # cppcc + 29.97 (tv), pp is already deinterlaced, sneaky
 48250,48405 -++--
+48250,48405 Q 5
 48406,48471 c # single field, 2nd is a dup
 48406,48471 +
 48406,48471 Q 6

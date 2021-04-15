@@ -67,7 +67,7 @@
 3667,3784 c
 3775,3784 + # fade-out
 
-3785,3929 cccpp # keyframe
+3785,3929 ccppc # keyframe
 3785,3808 + # fade-in
 3786,3808 Q 5
 3930,4013 cppcc

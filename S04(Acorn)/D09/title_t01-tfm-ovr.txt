@@ -160,7 +160,6 @@
 13436,13680 ccppc
 13681,13792 cppcc
 13726,13792 -++-- # blur
-13773 i 1111
 13793,13957 ppccc
 13794,13957 - # more combed frame in the blurred foreground, not very visible
 13858,13867 ++--- # blur (makes dups less similar, confuses tdec, must override drops)
@@ -815,7 +814,7 @@
 50186,50226 c # can't find any combed frames
 50227,50267 cccpp
 50268,50306 cccpp
-50307,50339 # hard to see, cccpp ?
+50307,50339 cccpp
 50340,50371 pcccp
 50372,50534 cppcc
 50372,50534 -++-- # blur
