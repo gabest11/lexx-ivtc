@@ -85,11 +85,13 @@
 5762,5824 ++---
 5825,5871 ppccc
 5825,5871 ++---
-5872,5987 c
-5961,5987 + # fade-out
+5872,5989 c
+5961,5989 + # fade-out
 
-5988,6121 pcccp # keyframe
-5988,6032 + # fade-in
+5990,6121 ccppc # keyframe
+5990,6032 + # fade-in
+5991,6032 Q 5
+5990 Q 3
 6122,6193 cppcc
 6194,6235 ccppc
 6236,6389 cccpp
@@ -722,7 +724,7 @@
 69553,69577 c
 69578,69820 ccppc
 69821,70122 cppcc
-70123,70176 cppcc
+70123,70176 ppccc
 70177,70626 cppcc
 70627,70720 cppcc
 70721,70855 ppccc
@@ -1015,6 +1017,7 @@
 69443 Q 3 # ppccc p
 69466 Q 3 # pcccp p
 69514 Q 3 # ppccc p
+70123 Q 3 # ppccc p
 70721 Q 3 # ppccc p
 70856 Q 3 # pcccp p
 71020 Q 3 # pcccp p
