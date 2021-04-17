@@ -41,10 +41,11 @@
 2835,3187 ccppc # two scenes with crossfade, same pattern
 1695,3078 + # fish eye stretches the fields at 59.94i, sides of the picture are combed
 1695,3078 Q 3
-3188,3227 c
+3188,3206 c
 3188,3227 + # crossfade
 3188,3227 Q 5
-3228,3807 c # 1st is a dup
+3207,3252 c # 1st is a dup
+3253,3807 c # 1st is a dup
 3228,3807 - # MIC high
 3808,3905 cccpp
 3843,3905 + # ---++ # noise is 59.94i
