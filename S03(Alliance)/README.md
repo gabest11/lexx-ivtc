@@ -7,6 +7,15 @@ Avisynth script to correct the levels:
 
     # better fill of the whole luma range
     ConvertBits(16).Levels(396, 1, 65280, 0, 63488, coring=false).ConvertBits(8, dither=1)
+    
+To combine the two, the fields must be swapped first. Acorn is BFF, Alliance is TFF, the second field is the same, but the first is shifted to the other direction.
+
+The script I use:
+
+    c = c.SeparateFields()
+    t = c.SelectEven().Crop(0,1,-0,-0).AddBorders(0,0,0,1)
+    b = c.SelectOdd()
+    c = Interleave(t, b).AssumeBFF().Weave()
 
 ### Acorn
 
@@ -16,11 +25,11 @@ Avisynth script to correct the levels:
 
 ![Alliance](./S03E01_06591_alliance.png)
 
-### Allince after levels correction
+### Alliance after levels correction
 
 ![Alliance levels](./S03E01_06591_alliance_levels.png)
 
-### Allince + clipped values from Acorn
+### Alliance + clipped values from Acorn
 
 ![Alliance lighten](./S03E01_06591_alliance_lighten.png)
 
