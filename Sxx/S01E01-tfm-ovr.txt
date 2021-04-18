@@ -1761,13 +1761,26 @@
 141113,141216 cppcc
 141217,141670 uppcc # fg cppcc, overlay ppccc
 
-141671,141711 pppccccppccppccpccpccpccpccppcppcppcppcpp
-141712,141752 cppcppccpccppccpccpccpccpccppcppcppcppcpp
-141753,141793 cppcppccpccppccpccpccpccpccppcppcppcppcpp
-141794,141834 cppccpccpccppccpccpccpccpccppcppcppcppcpp
-141835,141875 cppccpccpcccpccpccpccpccpccppcppcppcppcpp
-141876,141878 cpp
+# fields were probably spread out to make this slow motion
+# top/bottom order makes no sense
+# some frames have the same fields
+
 141672,141878 - # MIC high
+#141671,141711 cpppcccppccupccpccpccpccpccppcppcppcppupp
+#141671,141711 +----------------------------------------
+#141712,141752 uppcupcupccupcupccccccccpccpccppcppcppupp
+#141712,141752 -----------------------------------------
+#141753,141793 ccpcupcupccupcupcccccpccpccpccppcppcppcpp
+#141753,141793 -+---------------------------------------
+#141794,141834 ccpcupccuccupcupcccccpccpccppcppcppcppupp
+#141794,141834 -+---------------------------------------
+#141835,141875 ccpcupccuccupccccccccpccpccppcppcppuppupp
+#141835,141875 -+---------------------------------------
+#141876,141878 ccp
+#141876,141878 -+-
+141672,141878 c
+141672,141878 Q 5
+141672,141878 +
 
 141879,141948 ppccc
 141949,142098 pcccp
@@ -1926,10 +1939,12 @@
 156951,157018 cppcc
 157019,157198 c
 157019,157198 +
+157019,157198 Q 5
 157199,157408 ccppc
 157409,157617 ccppc
-157618,157889 c
+157618,157889 ccppc
 157618,157889 +
+#157618,157889 Q 5
 157890,158220 ccppc
 157890,158220 - # MIC high
 158221,158342 ppccc

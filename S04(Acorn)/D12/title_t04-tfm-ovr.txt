@@ -1,7 +1,8 @@
 # S04E24 Yo Way Yo
 
 0,129 ppccc
-0,39 + # fade-in
+0,56 + # fade-in
+0,56 Q 5
 130,1360 pcccp
 131,1360 - # MIC high
 1361,2139 c # fg 29.97, bg pcccp

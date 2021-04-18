@@ -53,6 +53,8 @@
 1605,1644 pcccp
 1605,1662 +---+
 1663,1855 c
+1716,1855 + # single field
+1716,1855 Q 6
 
 1858,2185 llccc # keyframe
 1858,2185 ++--- # top field already blended, we also drop the 2nd, so one half res per group

@@ -1795,13 +1795,34 @@ pccxpccpccpccpcpcpcx
 #141790,141824 c?cc?ccp?cp?cpp?pp?pp?pp?pp?cp?cp?c
 #141825,141857 c?pc?cc?cc?ccp?cp?cpp?pp?pp?pp?pp
 #combined, with only a few irregularities
-141650,141690 pppccccppccppccpccpccpccpccppcppcppcppcpp
-141691,141731 cppcppccpccppccpccpccpccpccppcppcppcppcpp
-141732,141772 cppcppccpccppccpccpccpccpccppcppcppcppcpp
-141773,141813 cppccpccpccppccpccpccpccpccppcppcppcppcpp
-141814,141854 cppccpccpcccpccpccpccpccpccppcppcppcppcpp
-141855,141857 cpp
-141651,141857 - # MIC high
+#141650,141690 pppccccppccppccpccpccpccpccppcppcppcppcpp
+#141691,141731 cppcppccpccppccpccpccpccpccppcppcppcppcpp
+#141732,141772 cppcppccpccppccpccpccpccpccppcppcppcppcpp
+#141773,141813 cppccpccpccppccpccpccpccpccppcppcppcppcpp
+#141814,141854 cppccpccpcccpccpccpccpccpccppcppcppcppcpp
+#141855,141857 cpp
+#141651,141857 - # MIC high
+
+# fields were probably spread out to make this slow motion
+# top/bottom order makes no sense
+# some frames have the same fields
+
+#141651,141857 - # MIC high
+#141650,141690 cpppcccppccupccpccpccpccpccppcppcppcppupp
+#141650,141690 +----------------------------------------
+#141691,141731 uppcupcupccupcupccccccccpccpccppcppcppupp
+#141691,141731 -----------------------------------------
+#141732,141772 ccpcupcupccupcupcccccpccpccpccppcppcppcpp
+#141732,141772 -+---------------------------------------
+#141773,141813 ccpcupccuccupcupcccccpccpccppcppcppcppupp
+#141773,141813 -+---------------------------------------
+#141814,141854 ccpcupccuccupccccccccpccpccppcppcppuppupp
+#141814,141854 -+---------------------------------------
+#141855,141857 ccp
+#141855,141857 -+-
+141651,141857 Q 5
+141651,141857 +
+141651,141857 c
 
 141858,141927 ppccc
 141928,142077 pcccp
@@ -1960,10 +1981,12 @@ pccxpccpccpccpcpcpcx
 156930,156997 cppcc
 156998,157177 c
 156998,157177 +
+156998,157177 Q 5
 157178,157387 ccppc
 157388,157596 ccppc
-157597,157868 c
+157597,157868 ccppc
 157597,157868 +
+#157597,157868 Q 5
 157869,158199 ccppc
 157869,158199 - # MIC high
 158200,158321 ppccc

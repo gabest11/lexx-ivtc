@@ -2,10 +2,11 @@
 
 0,249 pcccp
 0,40 + # fade-in
+0,40 Q 5
 250,468 cccpp
 469,592 cccpp
 593,829 c
-830,1201 c
+830,1201 c # double vision
 1202,2014 c
 1202,2014 - # MIC high
 2015,2070 c
