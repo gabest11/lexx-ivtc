@@ -482,12 +482,17 @@
 40833,40958 ccppc
 40959,41098 cccpp
 
-#41099,41283 c # drifting p
-41099,41117 ccppcccpccppcccpccp # first might be a p
-41118,41155 pcppcccpccppccpcccp # x2
-41156,41174 ccppcccpccppcppcccp
-41175,41192 ccppccpcccpc
-41193,41283 c # moth is getting too small at this point
+#looks annoying when upscaled
+#41099,41117 ccppcccpccppcccpccp # first might be a p
+#41118,41155 pcppcccpccppccpcccp # x2
+#41156,41174 ccppcccpccppcppcccp
+#41175,41192 ccppccpcccpc
+#41193,41283 c # moth is getting too small at this point
+
+41099,41283 c
+41099,41283 +
+41099,41283 Q 5
+
 41284,41460 ccppc
 
 41461,41610 uphcl # fg cppcc, bg pcccp
@@ -993,7 +998,7 @@
 93008,93155 phclu # or cccpp if you want the bad fields
 93008,93155 -+-+-
 93008 + # dropped anyway
-#93008,93155 Q 6
+93008,93155 Q 6
 93156,93282 luphc # ppccc (should be luphc, the same we used in this scene before, yay) + ccppc (sfx)
 93156,93283 +--+-
 93284,93461 ccppc # does not seem to be so bad towards the end, maybe just things are too small to notice

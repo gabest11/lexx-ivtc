@@ -1506,8 +1506,13 @@
 120020,120105 pcccp
 120106,120210 pcccp
 120211,120516 cppcc
-120319 - # MIC = 91
-120392 - # MIC = 83
+120211,120437 ++--- # shaky cam (cp are combed, not pp, and sometimes the c after pp)
+120214 +
+120299 +
+120319 +
+120334 +
+120359 +
+120211,120516 Q 6
 120517,120588 pcccp
 120589,120640 ccppc
 120641,120737 cppcc
@@ -1884,8 +1889,9 @@
 149269,149288 cppcc
 149289,149318 ppccc
 149319,149385 ppccc
-149386,149530 c # investigate
+149386,149530 c # one of those where the image shifts half pixel up and down
 149386,149530 +
+149386,149530 Q 5
 149531,149594 cccpp
 149595,149675 ppccc
 149596,149675 -

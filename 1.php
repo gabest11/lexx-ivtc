@@ -37,7 +37,7 @@ function sanitycheck1($title)
 		
 		$i = (int)$m[1];
 
-		$tfmframes[$i] = ['type' => $m[2], 'deint' => $m[3], 'mic' => (int)$m[4]];
+		$tfmframes[$i] = ['type' => $m[2], 'deint' => $m[3], 'mic' => (int)$m[4], 'dup' => ''];
 
 		if(!empty($m[5]))
 		{
@@ -48,7 +48,41 @@ function sanitycheck1($title)
 			$mics['n'] = (int)$m[8];
 			$mics['b'] = (int)$m[9];
 			$mics['u'] = (int)$m[10];
-						
+			
+			if($mics['c'] < 20)
+			{
+				$pb = $mics['p'] + $mics['b'];
+				$nu = $mics['n'] + $mics['u'];
+				
+				if($pb < 30 && $pb < $nu && $nu > 20)
+				{
+					$tfmframes[$i]['dup'] = 'p';
+					
+					if($i > 0 && $tfmframes[$i - 1]['dup'] != 'n')
+					{
+						$tfmframes[$i]['dup'] = 'c';
+					}
+				}
+				else if($nu < 30 && $nu < $pb && $pb > 20)
+				{
+					$tfmframes[$i]['dup'] = 'n';
+					
+					if($i > 0 && $tfmframes[$i - 1]['dup'] == 'n')
+					{
+						$tfmframes[$i - 1]['dup'] = 'c';
+					}
+				}
+				else
+				{
+					$tfmframes[$i]['dup'] = 'c';
+					
+					if($i > 0 && $tfmframes[$i - 1]['dup'] == 'n')
+					{
+						$tfmframes[$i - 1]['dup'] = 'c';
+					}
+				}
+			}
+
 			$tfmframes[$i]['mics'] = $mics;
 			
 			$mint = 'c';
@@ -66,6 +100,9 @@ function sanitycheck1($title)
 			$tfmframes[$i]['micmin'] = ['t' => $mint, 'v' => $minv];
 		}
 	}
+
+#foreach($tfmframes as $i => $f) echo $i.' '.$f['dup'].PHP_EOL;
+#exit;
 
 	foreach(explode("\n", file_get_contents("$title-tfm-ovr.txt")) as $row)
 	{
@@ -474,6 +511,31 @@ print_r([$i, $tfm, $f]);
 		}
 	}
 	
+	
+	foreach($ovrscenes as $scene)
+	{
+		$tdec = '';
+		$dups = 0;
+		
+		for($i = $scene['s'], $j = $scene['e']; $i <= $j; $i++)
+		{
+			$f = $tfmframes[$i];
+			
+			$tdec .= $f['dup'] == 'n' || $f['dup'] == 'p' ? '-' : '+';
+			
+			if(($f['dup'] == 'n' || $f['dup'] == 'p') && !(isset($ovrframes[$i]['rate']) && $ovrframes[$i]['rate'] == 'f'))
+			{
+				$dups++;
+			}
+		}
+
+		if($dups > 0)
+		{
+			$dupratio = $dups / ($scene['e'] - $scene['s']);
+			
+			if($dupratio > 0.3 && $dupratio < 0.6) $bogusscenes[] = trim($scene['row']).' # dup @ '.$tdec;
+		}
+	}
 
 	file_put_contents("$title-bogusframes.txt", implode(PHP_EOL, $rows));
 	file_put_contents("$title-bogusscenes.txt", implode(PHP_EOL, $bogusscenes));

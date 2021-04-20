@@ -125,7 +125,7 @@ $cmd = [];
 
 $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
-if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1]; $cmd[] = '-start_number '.$m[2];}
+if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1];} // $cmd[] = '-start_number '.$m[2];} // changing the start isn't compatible with the vfr timecode file
 $cmd[] = '-i "'.$src.'"';
 foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
 foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
