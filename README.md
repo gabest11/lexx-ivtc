@@ -16,7 +16,7 @@ Planing to do newer releases if I can get them and are better quality.
 
 ## Encoding
 
-Need a bunch of tools like avisynth, ffmpeg, dgindex, mpeg2dec, yadifmod2, php... Also, some paths point to locations on my hard disk.
+Need a bunch of tools like avisynth, ffmpeg, dgindex, mpeg2dec, yadifmod2, eedi3, php... Also, some paths point to locations on my hard disk.
 
 Use 32-bit avisynth, as the  64-bit port of mpeg2dec did not carry over the deblocking filters, they were written in assembly code and pretty messy.
 

@@ -53,8 +53,10 @@ function sanitycheck1($title)
 			{
 				$pb = $mics['p'] + $mics['b'];
 				$nu = $mics['n'] + $mics['u'];
-				
-				if($pb < 30 && $pb < $nu && $nu > 20)
+				$pnd = $mics['p'] - $mics['n'];
+				$bud = $mics['b'] - $mics['u'];
+
+				if($pb < 30 && $pb < $nu && $nu > 20 || $pnd < -200 && $bud < -200)
 				{
 					$tfmframes[$i]['dup'] = 'p';
 					
@@ -63,7 +65,7 @@ function sanitycheck1($title)
 						$tfmframes[$i]['dup'] = 'c';
 					}
 				}
-				else if($nu < 30 && $nu < $pb && $pb > 20)
+				else if($nu < 30 && $nu < $pb && $pb > 20 || $pnd > 200 && $bud > 200)
 				{
 					$tfmframes[$i]['dup'] = 'n';
 					
@@ -514,6 +516,8 @@ print_r([$i, $tfm, $f]);
 	
 	foreach($ovrscenes as $scene)
 	{
+		if($scene['e'] - $scene['s'] < 2) continue;
+		
 		$tdec = '';
 		$dups = 0;
 		
@@ -533,7 +537,10 @@ print_r([$i, $tfm, $f]);
 		{
 			$dupratio = $dups / ($scene['e'] - $scene['s']);
 			
-			if($dupratio > 0.3 && $dupratio < 0.6) $bogusscenes[] = trim($scene['row']).' # dup @ '.$tdec;
+			if($dupratio > 0.2 && $dupratio < 0.8) 
+			{
+				$bogusscenes[] = trim($scene['row']).' # dup '.sprintf("%.1f", $dupratio).' @ '.$tdec;
+			}
 		}
 	}
 
