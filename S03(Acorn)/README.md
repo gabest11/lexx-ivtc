@@ -1,7 +1,7 @@
 * Vxx official Acorn release
 * Dxx Russian bootleg, Russian audio instead of French, video is the same
 
-Season 3 episodes are mostly "progressive", the second field is just a fake interpolated image of the first field. One way to deal with this is to throw away the second field and upscale it with a better algorithm again. The problem is, the second field is still missing, diagonal lines will never really look diagonal, as scalers only operate in horizonal or vertical direction. Update: eedi3 does a good job restoring those lines.
+Season 3 episodes are mostly "progressive", the second field is just a fake interpolated image of the first field. One way to deal with this is to throw away the second field and upscale it with a better algorithm again. The problem is, the second field is still missing, diagonal lines will never really look diagonal, as scalers only operate in horizonal or vertical direction. Update: nnedi3 does a good job restoring those lines.
 
 ![Missing field example](./missing_field.png)
 

@@ -269,16 +269,22 @@ function sanitycheck1($title)
 			// - first of the scene (maybe check if it's type c, those are often single field and look ugly)
 			// - indirectly deinterlaced by MI level
 			// - directly deinterlaced
+			// - h/l frames that have Q set to 4/7 (nnedi3)
 			
 			//if(isset($f['first']) && array_search(['p','b'], $f['type']['value']) !== false
 			
-			if(!(!empty($f['first_pb']) || !empty($f['last_un']) || isset($f['MI']) || isset($f['deint']) && $f['deint']['value'] == '+'))
+			$sc = !empty($f['first_pb']) || !empty($f['last_un']);
+			$blend = isset($f['Q']) && ($f['Q']['value'] == 2 || $f['Q']['value'] == 5);
+			$nnedi3 = isset($f['Q']) && ($f['Q']['value'] == 4 || $f['Q']['value'] == 7) && ($f['type']['value'] == 'l' || $f['type']['value'] == 'h');
+			$deintovr = isset($f['deint']) && $f['deint']['value'] == '+';
+			
+			if(!($sc || isset($f['MI']) || $deintovr || $nnedi3))
 			{
 				// still auto-deinterlaced by TFM, examine the reason
 
 				$bogusframes[$i] = ['f' => $f, 'note' => 'auto-deint or MIC high '.$tfm['mic']];
 			}
-			else if((!empty($f['first_pb']) || !empty($f['last_un'])) && isset($f['Q']) && ($f['Q']['value'] == 2 || $f['Q']['value'] == 5))
+			else if($sc && $blend)
 			{
 				// blended first/last half frame
 				
@@ -912,7 +918,9 @@ Import("$title.avs")
 #showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
-TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
+f0=nnedi3(field=0)
+f1=nnedi3(field=1)
+TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
 #TDecimate(mode=0,hybrid=1,denoise=true,ovr="$title-tdec-ovr.txt")
 EOT;
 
@@ -922,7 +930,9 @@ $avs_1pass = <<<EOT
 Import("$title.avs")
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
-TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=9,MI=80,PP=6,chroma=true,display=false,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+f0=nnedi3(field=0)
+f1=nnedi3(field=1)
+TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=9,MI=80,PP=6,chroma=true,display=false,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=3,hybrid=2,denoise=true,vfrDec=0,mkvOut="$title-timecodes.txt",output="$title-tdec.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
@@ -933,7 +943,9 @@ Import("$title.avs")
 #showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
-TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+f0=nnedi3(field=0)
+f1=nnedi3(field=1)
+TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=4,denoise=true,output="$title-tdec.txt")
 crop(344,224,-344,-224)
 EOT;
@@ -945,7 +957,9 @@ Import("$title.avs")
 #showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
-TFM(clip2=deint2,clip3=deint3,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+f0=nnedi3(field=0)
+f1=nnedi3(field=1)
+TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
