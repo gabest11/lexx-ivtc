@@ -275,10 +275,11 @@ function sanitycheck1($title)
 			
 			$sc = !empty($f['first_pb']) || !empty($f['last_un']);
 			$blend = isset($f['Q']) && ($f['Q']['value'] == 2 || $f['Q']['value'] == 5);
-			$nnedi3 = isset($f['Q']) && ($f['Q']['value'] == 4 || $f['Q']['value'] == 7) && ($f['type']['value'] == 'l' || $f['type']['value'] == 'h');
+			$nnedi3 = isset($f['Q']) && ($f['Q']['value'] == 4 || $f['Q']['value'] == 7);
 			$deintovr = isset($f['deint']) && $f['deint']['value'] == '+';
+			$t = $f['type']['value'];
 			
-			if(!($sc || isset($f['MI']) || $deintovr || $nnedi3))
+			if(!($sc || isset($f['MI']) || $deintovr || $nnedi3 && ($t == 'l' || $t == 'h')))
 			{
 				// still auto-deinterlaced by TFM, examine the reason
 
@@ -289,6 +290,10 @@ function sanitycheck1($title)
 				// blended first/last half frame
 				
 				$bogusframes[$i] = ['f' => $f, 'note' => 'first/last blended'];
+			}
+			else if(!$sc && ($nnedi3 || !isset($f['Q'])) && ($t == 'u' || $t == 'n') && !(isset($f['dec']) && $f['dec']['value'] == '-'))
+			{
+				$bogusframes[$i] = ['f' => $f, 'note' => 'deinterlaced the wrong field probably'.(isset($f['Q']) ? ' Q = '.$f['Q']['value'] : '')];
 			}
 		}
 		
@@ -443,7 +448,7 @@ print_r([$i, $tfm, $f]);
 			&& !empty($scene['t'])
 			)
 			{
-				$bogussc[$scene['s']] = $scene['s'].' Q 3 # '.$scene['t'].' '.$f['type']['value'];
+				$bogussc[$scene['s']] = $scene['s'].' Q 4 # '.$scene['t'].' '.$f['type']['value'];
 			}
 		}
 	}
@@ -523,6 +528,12 @@ print_r([$i, $tfm, $f]);
 	foreach($ovrscenes as $scene)
 	{
 		if($scene['e'] - $scene['s'] < 2) continue;
+		
+		if(strpos($scene['t'], 'p') !== false
+		|| strpos($scene['t'], 'b') !== false
+		|| strpos($scene['t'], 'u') !== false
+		|| strpos($scene['t'], 'n') !== false)
+			continue;
 		
 		$tdec = '';
 		$dups = 0;
@@ -648,10 +659,10 @@ function sanitycheck2($title)
 	
 	foreach($ovrscenes as $index => $scene)
 	{
-		if(strlen($scene['t']) != 5) continue;
-	
 		$len = strlen($scene['t']);
 		
+		if($len != 5) continue;
+
 		$skipped = [];
 		
 		for($i = $scene['s'], $j = 0; $i <= $scene['e']; $i++, $j++)
