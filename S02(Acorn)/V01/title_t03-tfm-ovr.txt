@@ -32,7 +32,7 @@
 738,804 +---+
 805,919 c
 838,842 + # RATED
-838,842 Q 6
+838,842 Q 7
 920,1186 pcccp # keyframe
 1187,1844 pcccp
 1845,2121 ccppc
@@ -120,21 +120,20 @@
 10970,11024 + # crossfade
 11001,11418 c
 11419,11450 +
-11419,11450 Q 5
+11419,11450 Q 7
 
-
-1187 Q 3 # pcccp
-2399 Q 3 # ppccc
-2759 Q 3 # ppcccpp
-6407 Q 3 # ppccc
-6449 Q 3 # pcccp
-6934 Q 3 # ppccc
-7080 Q 3 # ppccc
-7419 Q 3 # ppccc
-7612 Q 3 # ppccc
-7670 Q 3 # pcccp
-7825 Q 3 # pcccp
-8007 Q 3 # ppccc
-8091 Q 3 # pcccp
-10486 Q 3 # pcccp
-10575 Q 3 # pcccp
+1187 Q 4 # pcccp
+2399 Q 4 # ppccc
+2759 Q 4 # ppcccpp
+6407 Q 4 # ppccc
+6449 Q 4 # pcccp
+6934 Q 4 # ppccc
+7080 Q 4 # ppccc
+7419 Q 4 # ppccc
+7612 Q 4 # ppccc
+7670 Q 4 # pcccp
+7825 Q 4 # pcccp
+8007 Q 4 # ppccc
+8091 Q 4 # pcccp
+10486 Q 4 # pcccp
+10575 Q 4 # pcccp

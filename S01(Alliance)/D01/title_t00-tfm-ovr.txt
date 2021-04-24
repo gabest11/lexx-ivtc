@@ -599,31 +599,36 @@
 46530,46766 cccpp
 46767,46851 ccppc
 
-#46852,46971 c # TODO: find the correct patterns
-#46852,46971 +
+# TODO: find the correct patterns
 
-46852,46871 clcclcphcpccccccpclp
-46852,46871 -+--+--+----------+-
+46852,46971 c
+46852,46971 +
+46852,46971 Q 7
+
+# this keep the lines mostly in sync, but way too many dups
+
+#46852,46871 clcclcphcpccccccpclp
+#46852,46871 -+--+--+----------+-
 #           +++++++++++-++-+++++
 #           ccpccppccpcxccxcpccp
-46872,46891 chcphccclcccllhlpcpc
-46872,46891 -+--+---+---++++----
+#46872,46891 chcphccclcccllhlpcpc
+#46872,46891 -+--+---+---++++----
 #           +++++++++++-++++++++
 #           cpcpccpccpcxccpcpcpc
-46892,46911 cpccclccpcphcccccccl
-46892,46911 -----+-----+-------+
+#46892,46911 cpccclccpcphcccccccl
+#46892,46911 -----+-----+-------+
 #           +++++++++++++++-++++
 #           cpcpccpcpcpccpcxccpc
-46912,46931 pcccphcphlcclccplphc
-46912,46931 -----+--++--+---+-+-
+#46912,46931 pcccphcphlcclccplphc
+#46912,46931 -----+--++--+---+-+-
 #           ++-++++++++++++++++-
-pccxpccpccpccpcpcpcx
-46932,46951 ccpccclcclcphcpccccc
-46932,46951 ------+--+--+-------
+#           pccxpccpccpccpcpcpcx
+#46932,46951 ccpccclcclcphcpccccc
+#46932,46951 ------+--+--+-------
 #           -+++++++++++++++-++-
 #           xcpccpcpccppccpcxccx
-46952,46971 cpclpcccphccclccclph
-46952,46971 ---+-----+---+---+-+
+#46952,46971 cpclpcccphccclccclph
+#46952,46971 ---+-----+---+---+-+
 #           ++++++-+++++++++-+++
 #           cpccpcxcpccpccpcxcpc
 
