@@ -925,9 +925,20 @@
 87705,87744 pcccp
 87705,87762 +---+
 87763,87789 c
-87790,87955 c # TODO
+#87790,87955 c # half pel problem
 87790,87955 -
-87790,87955 Q 7
+#87790,87955 Q 7
+87790,87809 cccccpcpccccpcpccccp
+87810,87829 ccccpcpccccpccccccpc
+87830,87849 cccpccccccpccccpcpcc
+87850,87869 ccpccccccpccccpcpccc
+87870,87889 cpccccpcpccccpcccccc
+87890,87909 pccccpcpccccpccccpcp
+87910,87929 ccccpccccccpccccpcpc
+87930,87949 cccpccccccpccccpcccc
+87950,87955 c # fade-out
+87932,87955 +
+87932,87955 Q 5
 
 87956,88462 cppcc # keyframe
 88463,88809 c

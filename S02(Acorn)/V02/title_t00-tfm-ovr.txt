@@ -55,8 +55,22 @@
 1578,1604 --++-
 1605,1644 pcccp
 1605,1644 +---+
-1645,1857 c
-1645,1857 -
+1645,1689 c
+1645,1689 -
+#1690,1857 c # half pel problem
+1690,1857 -
+#1690,1857 Q 7
+1690,1709 cccccpcpccccpcpccccp
+1710,1729 ccccpcpccccpccccccpc
+1730,1749 cccpccccccpccccpcpcc
+1750,1769 ccpccccccpccccpcpccc
+1770,1789 cpccccpcpccccpcccccc
+1790,1809 pccccpcpccccpccccpcp
+1810,1829 ccccpccccccpccccpcpc
+1830,1849 cccpccccccpccccpcccc
+1850,1857 c # fade-out
+1832,1857 +
+1832,1857 Q 5
 
 1858,2036 c # keyframe
 1893,1904 +

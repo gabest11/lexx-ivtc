@@ -74,8 +74,12 @@
 3822,4147 cppcc
 4148,4336 ccppc
 4337,4624 c
-4625 + # first frame single field and missing left side
-4625 Q 4
+# first frame single field and missing left side
+# cheat and show the first field of the next frame
+# cannot use external deinterlacers
+4625 u
+4625 f 1
+4625 Q 6
 4626,5079 cupcc # one of those 29.97 deinterlaced scenes
 4626,5079 -++--
 4626,5079 Q 5

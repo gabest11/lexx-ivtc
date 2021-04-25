@@ -55,9 +55,40 @@
 1605,1644 pcccp
 1605,1662 +---+
 1663,1689 c
-1690,1855 c # TODO
+#1690,1855 c # half pel problem
 1690,1855 -
-1690,1855 Q 7
+#1690,1855 Q 7
+1690,1709 cccccpcpccccpcpccccp
+1710,1729 ccccpcpccccpccccccpc
+1730,1749 cccpccccccpccccpcpcc
+1750,1769 ccpccccccpccccpcpccc
+1770,1789 cpccccpcpccccpcccccc
+1790,1809 pccccpcpccccpccccpcp
+1810,1829 ccccpccccccpccccpcpc
+1830,1849 cccpccccccpccccpcccc
+1850,1855 c # fade-out
+1832,1855 +
+1832,1855 Q 5
+
+# c same, p dup, C/P same but with half pel shift away from the other field
+# then frame numbers and pixel offsets where 1 is center, 0 up, 2 down half pixel
+#
+# cpccp PcpcP cpPcp CpcPp cPcpP cpCpc PpcPc pcPpc PcpPc pCpcP pcPcp PcpCp cPpcp CpcPp
+# cpccp CpcPp cPcpP cpCpc pPcpC pcPpc PcpPc pCpcP pcPcp PcpcP cpPcp CpcPp cPcpP cpCpc
+#
+#       * *     *       *     *  *     *       *     *        *     * *     *       *
+# 00122 23344 55566 77888 99000 11223 33445 56667 78889 90011 12233 34455 66677 88999
+#  21   3 2 2   3 2  2  3  2  3  2 2   3 2  2  3  2  3  2 2   3 2   3 2 2   3 2  2  3
+# 00122 33444 55666 77889 99001 12223 34445 56677 78899 90011 22233 44555 66777 88990
+#  21 2  2  3  2  3  2 2   3 2  2  3  2  3  2 2   3 2   3 2 2   3 2  2  3  2  3  2 2
+#
+# 11111 22221 11222 11122 21112 22111 22211 11222 11122 21112 22111 22211 12222 11122
+#     5    4   3  3   3   3  3   3  3   3    4  3   3   3  3   3  3   3   3   4   3
+# 11111 00011 10001 11000 01110 00111 00011 10001 11000 11110 00111 00011 10001 11000
+#     5   3   3  3   3    4  3   3  3   3   3  3   3  3    4   3  3   3   3  3   3  3
+#
+# 1692 1855 0.5 333334333333334333
+# 1695 1855 0.5 433333333433333333 (1794 should not be shifted)
 
 1856,2362 cppcc # keyframe
 2363,2709 c
