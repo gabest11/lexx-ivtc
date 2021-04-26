@@ -27,7 +27,7 @@
 1411,1419 +
 1420,1428 ccppc
 1429,1434 cppcc
-1435,1440 pcccu
+1435,1440 pcccp
 1435,1440 +---+
 1441,1449 ccppc
 1441,1449 --++-
@@ -131,6 +131,7 @@
 19300,19425 c
 19426,19578 ccppc
 19426,19454 + # fade-in
+19426,19454 Q 5 # cgi
 19579,20531 c
 20532,20627 cuppc # cppcc + ccppc
 20532,20627 -
@@ -333,10 +334,10 @@
 60236,60242 c
 60243,60247 c # single field
 60243,60247 +
-60243,60247 Q 6
+60243,60247 Q 7
 60248,60346 c # single field
 60248,60346 +
-60248,60346 Q 6
+60248,60346 Q 7
 60347,60596 c
 60597,60684 c
 60685,60700 cppcc
@@ -539,7 +540,7 @@
 82855,83028 c
 83029,83435 c
 83436,83767 c
-83436,83767 - # all c but lexx again has many stripes
+83436,83767 - # all c but lexx again has many stripes (those stripes reveal that pp was deinterlaced, aliasing in 3rd/4th frames)
 83768,83821 c
 83822,84027 c # foreground 23.976 with an extra frame in the middle
 83822,83922 --++-
@@ -553,18 +554,18 @@
 85984,86074 c
 85984,86074 +
 
-1257 Q 3 # pcccp p
-1282 Q 3 # ppccc p
-1290 Q 3 # pcccp p
-1298 Q 3 # ppccc p
-1306 Q 3 # ppccc p
-1314 Q 3 # pcccp p
-1329 Q 3 # ppccc p
-1336 Q 3 # pcccp p
-1364 Q 3 # ppccc p
-1372 Q 3 # ppccc p
-1391 Q 3 # pcccp p
-5881 Q 3 # pcccp p
-10780 Q 3 # ppccc p
-33936 Q 3 # pcccp p
-79469 Q 3 # ppccc p
+1257 Q 4 # pcccp p
+1282 Q 4 # ppccc p
+1290 Q 4 # pcccp p
+1298 Q 4 # ppccc p
+1306 Q 4 # ppccc p
+1314 Q 4 # pcccp p
+1329 Q 4 # ppccc p
+1336 Q 4 # pcccp p
+1364 Q 4 # ppccc p
+1372 Q 4 # ppccc p
+1391 Q 4 # pcccp p
+5881 Q 4 # pcccp p
+10780 Q 4 # ppccc p
+33936 Q 4 # pcccp p
+79469 Q 4 # ppccc p
