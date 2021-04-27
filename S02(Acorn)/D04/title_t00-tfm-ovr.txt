@@ -1392,8 +1392,8 @@
 168795,168954 c
 168955,169128 c
 169129,169535 c
-169536,169867 c
-169536,169867 - # all c but lexx again has many stripes (those stripes reveal that pp was deinterlaced, aliasing in 3rd/4th frames)
+169536,169867 c # ccppc (Lexx) + 29.97 (spaceship)
+169536,169867 - # this should be --++-, but the Lexx moves slow, ~1 pixel per frame, it actually looks better combed
 169868,169921 c
 169922,170127 c # foreground 23.976 with an extra frame in the middle
 169922,170022 --++-

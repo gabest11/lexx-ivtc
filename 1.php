@@ -823,7 +823,7 @@ function genranges($title)
 
 	//
 
-	$fp = fopen("$title-ranges.txt", 'w');
+	$fp = fopen("$title-timeranges.txt", 'w');
 
 	$tfc = 0;
 
@@ -943,29 +943,23 @@ deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
 f0=nnedi3(field=0)
 f1=nnedi3(field=1)
-TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=9,MI=80,PP=6,chroma=true,display=false,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=3,hybrid=2,denoise=true,vfrDec=0,mkvOut="$title-timecodes.txt",output="$title-tdec.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-if(!file_exists("$title-1pass.avs")) file_put_contents("$title-1pass.avs", $avs_1pass);
-
 $avs_2pass1st = <<<EOT
 Import("$title.avs")
-#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
 f0=nnedi3(field=0)
 f1=nnedi3(field=1)
-TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,PP=$PP,MI=$MI,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
+TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=4,denoise=true,output="$title-tdec.txt")
 crop(344,224,-344,-224)
 EOT;
 
-if(!file_exists("$title-2pass1st.avs")) file_put_contents("$title-2pass1st.avs", $avs_2pass1st);
-
 $avs_2pass2nd = <<<EOT
 Import("$title.avs")
-#showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
 deint2=yadifmod2(order=0)
 deint3=yadifmod2(order=1)
 f0=nnedi3(field=0)
@@ -974,11 +968,13 @@ TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cth
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-if(!file_exists("$title-2pass2nd.avs")) file_put_contents("$title-2pass2nd.avs", $avs_2pass2nd);
-
-function ffmpeg($cmd)
+function ffmpeg($title, $cmd, $avs)
 {
-	$cmd = '"e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe" -hide_banner '.$cmd;
+	$src = tempnam('.', $title);
+	file_put_contents($src, $avs);
+	register_shutdown_function(function() use($src) { unlink($src); });	
+
+	$cmd = '"e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe" -hide_banner -f avisynth -i "'.$src.'" '.$cmd;
 
 	echo $cmd.PHP_EOL;
 	
@@ -994,7 +990,8 @@ if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		ffmpeg('-i "'.$title.'-1pass.avs" -map 0:v '.($force ? '-y ' : '').$out);
+		ffmpeg($title, '-map 0:v '.($force ? '-y ' : '').$out, $avs_1pass);
+		
 	}
 
 	sanitycheck1($title);
@@ -1003,14 +1000,14 @@ else // if(isset($argv[2]) && strpos($argv[2], '2pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		ffmpeg('-i "'.$title.'-2pass1st.avs" -c copy -f null -');
+		ffmpeg($title, '-c copy -f null -', $avs_2pass1st);
 	}
 
 	sanitycheck1($title);
 
 	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
 	{
-		ffmpeg('-i "'.$title.'-2pass2nd.avs" -map 0:v '.($force ? '-y ' : '').$out);
+		ffmpeg($title, '-map 0:v '.($force ? '-y ' : '').$out, $avs_2pass2nd);
 	}
 }
 
