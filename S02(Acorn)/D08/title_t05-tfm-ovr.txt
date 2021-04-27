@@ -55,7 +55,10 @@
 1550,1576 --++-
 1577,1616 pcccp
 1577,1634 +---+
-1635,1828 c
+1635,1687 c
+1688,1828 c # single field
+1688,1828 +
+1688,1828 Q 7
 
 1829,2138 ccppc # keyframe
 1829,1859 + # fade-in
@@ -87,6 +90,7 @@
 8141,8205 pcccp
 8206,10517 cccpp
 9041 + # encoding error
+9041 f 0 # this field has less errors
 10486,10552 + # crossfade
 10518,10672 cccpp
 10673,10832 c
@@ -145,7 +149,6 @@
 23858,23895 cccpp
 23896,23898 c
 23899,23922 pcccp
-23899 Q 3
 23923,23949 pcccp
 23950,23963 ccppc
 23964,23992 ccppc
@@ -247,7 +250,7 @@
 35780,35867 cccpp
 35868,35993 cluph # cccpp + cppcc # lower parts of the picture lag, almost like a vsync problem
 35868,35993 -+--+
-35868,35993 Q 6
+35868,35993 Q 7
 35994,36053 ccppc
 36054,36095 cccpp
 36096,36163 ccppc
@@ -628,162 +631,163 @@
 83942,83970 luphc # crossfade, ppccc + ccppc
 83942,83970 +--+-
 83971,84246 cccpp
-84214,84246 + # fadeout
+84214,84246 + # fade-out
+84214,84246 Q 5
 
 84247,85953 c # keyframe
 85954,86104 c
 85954,86104 +
 
-
-1230 Q 3 # pcccp p
-1255 Q 3 # ppccc p
-1263 Q 3 # pcccp p
-1271 Q 3 # ppccc p
-1279 Q 3 # ppccc p
-1287 Q 3 # pcccp p
-1302 Q 3 # ppccc p
-1309 Q 3 # pcccp p
-1337 Q 3 # ppccc p
-1345 Q 3 # ppccc p
-1364 Q 3 # pcccp p
-3852 Q 3 # ppccc p
-4355 Q 3 # pcccp p
-5705 Q 3 # pcccp p
-6188 Q 3 # ppccc p
-6373 Q 3 # pcccp p
-6540 Q 3 # ppccc p
-6767 Q 3 # ppccc p
-8004 Q 3 # pcccp p
-8141 Q 3 # pcccp p
-10833 Q 3 # ppccc p
-11443 Q 3 # ppccc p
-12301 Q 3 # pcccp p
-12685 Q 3 # ppccc p
-13339 Q 3 # ppccc p
-14698 Q 3 # ppccc p
-15079 Q 3 # ppccc p
-15434 Q 3 # pcccp p
-15605 Q 3 # ppccc p
-15709 Q 3 # ppccc p
-15801 Q 3 # ppccc p
-17630 Q 3 # pcccp p
-17822 Q 3 # pcccp p
-20681 Q 3 # ppccc p
-23093 Q 3 # ppccc p
-23722 Q 3 # pcccp p
-23923 Q 3 # pcccp p
-24111 Q 3 # pcccp p
-25721 Q 3 # ppccc p
-25968 Q 3 # ppccc p
-26378 Q 3 # pcccp p
-26460 Q 3 # pcccp p
-26547 Q 3 # pcccp p
-26783 Q 3 # ppccc p
-27028 Q 3 # ppccc p
-27095 Q 3 # pcccp p
-27441 Q 3 # pcccp p
-27613 Q 3 # pcccp p
-28520 Q 3 # pcccp p
-28702 Q 3 # ppccc p
-30385 Q 3 # ppccc p
-30817 Q 3 # pcccp p
-31002 Q 3 # ppccc p
-31111 Q 3 # ppccc p
-31293 Q 3 # ppccc p
-32515 Q 3 # pcccp p
-32643 Q 3 # ppccc p
-33026 Q 3 # ppccc p
-34151 Q 3 # pcccp p
-34706 Q 3 # ppccc p
-36164 Q 3 # ppccc p
-36749 Q 3 # pcccp p
-36826 Q 3 # ppccc p
-36878 Q 3 # pcccp p
-37148 Q 3 # pcccp p
-37375 Q 3 # ppccc p
-37795 Q 3 # pcccp p
-37941 Q 3 # pcccp p
-38047 Q 3 # pcccp p
-38239 Q 3 # ppccc p
-38553 Q 3 # ppccc p
-38683 Q 3 # ppccc p
-38762 Q 3 # pcccp p
-38964 Q 3 # pcccp p
-39128 Q 3 # pcccp p
-39220 Q 3 # pcccp p
-39415 Q 3 # ppccc p
-39729 Q 3 # pcccp p
-39959 Q 3 # ppccc p
-40075 Q 3 # pcccp p
-40562 Q 3 # ppccc p
-40937 Q 3 # ppccc p
-41248 Q 3 # pcccp p
-41388 Q 3 # pcccp p
-43172 Q 3 # ppccc p
-43584 Q 3 # pcccp p
-43752 Q 3 # pcccp p
-43819 Q 3 # ppccc p
-44245 Q 3 # ppccc p
-44486 Q 3 # pcccp p
-44704 Q 3 # pcccp p
-45467 Q 3 # pcccp p
-45622 Q 3 # pcccp p
-45955 Q 3 # ppccc p
-47207 Q 3 # pcccp p
-47348 Q 3 # pcccp p
-47568 Q 3 # pcccp p
-48012 Q 3 # pcccp p
-48776 Q 3 # pcccp p
-49444 Q 3 # ppccc p
-49654 Q 3 # ppccc p
-50098 Q 3 # ppccc p
-50605 Q 3 # pcccp p
-50764 Q 3 # pcccp p
-53389 Q 3 # ppccc p
-53683 Q 3 # ppccc p
-53962 Q 3 # pcccp p
-55271 Q 3 # ppccc p
-57370 Q 3 # ppccc p
-57659 Q 3 # pcccp p
-58368 Q 3 # ppccc p
-58748 Q 3 # pcccp p
-60185 Q 3 # pcccp p
-61630 Q 3 # ppccc p
-62380 Q 3 # ppccc p
-62523 Q 3 # pcccp p
-63348 Q 3 # ppccc p
-63831 Q 3 # ppccc p
-66246 Q 3 # ppccc p
-66693 Q 3 # ppccc p
-67275 Q 3 # pcccp p
-68385 Q 3 # pcccp p
-68644 Q 3 # ppccc p
-68834 Q 3 # pcccp p
-69572 Q 3 # pcccp p
-70504 Q 3 # ppccc p
-70818 Q 3 # ppccc p
-71015 Q 3 # ppccc p
-71080 Q 3 # pcccp p
-71744 Q 3 # ppccc p
-72441 Q 3 # pcccp p
-73211 Q 3 # ppccc p
-73233 Q 3 # ppccc p
-73271 Q 3 # ppccc p
-74790 Q 3 # ppccc p
-75041 Q 3 # pcccp p
-75181 Q 3 # ppccc p
-75355 Q 3 # ppccc p
-76515 Q 3 # ppccc p
-76611 Q 3 # pcccp p
-76865 Q 3 # ppccc p
-77659 Q 3 # ppccc p
-77848 Q 3 # pcccp p
-78518 Q 3 # pcccp p
-80174 Q 3 # pcccp p
-81494 Q 3 # ppccc p
-82114 Q 3 # pcccp p
-82421 Q 3 # ppccc p
-82741 Q 3 # ppccc p
-82953 Q 3 # ppccc p
-83760 Q 3 # pcccp p
-83832 Q 3 # ppccc p
+1230 Q 4 # pcccp p
+1255 Q 4 # ppccc p
+1263 Q 4 # pcccp p
+1271 Q 4 # ppccc p
+1279 Q 4 # ppccc p
+1287 Q 4 # pcccp p
+1302 Q 4 # ppccc p
+1309 Q 4 # pcccp p
+1337 Q 4 # ppccc p
+1345 Q 4 # ppccc p
+1364 Q 4 # pcccp p
+3852 Q 4 # ppccc p
+4355 Q 4 # pcccp p
+5705 Q 4 # pcccp p
+6188 Q 4 # ppccc p
+6373 Q 4 # pcccp p
+6540 Q 4 # ppccc p
+6767 Q 4 # ppccc p
+8004 Q 4 # pcccp p
+8141 Q 4 # pcccp p
+10833 Q 4 # ppccc p
+11443 Q 4 # ppccc p
+12301 Q 4 # pcccp p
+12685 Q 4 # ppccc p
+13339 Q 4 # ppccc p
+14698 Q 4 # ppccc p
+15079 Q 4 # ppccc p
+15434 Q 4 # pcccp p
+15605 Q 4 # ppccc p
+15709 Q 4 # ppccc p
+15801 Q 4 # ppccc p
+17630 Q 4 # pcccp p
+17822 Q 4 # pcccp p
+20681 Q 4 # ppccc p
+23093 Q 4 # ppccc p
+23722 Q 4 # pcccp p
+23899 Q 4
+23923 Q 4 # pcccp p
+24111 Q 4 # pcccp p
+25721 Q 4 # ppccc p
+25968 Q 4 # ppccc p
+26378 Q 4 # pcccp p
+26460 Q 4 # pcccp p
+26547 Q 4 # pcccp p
+26783 Q 4 # ppccc p
+27028 Q 4 # ppccc p
+27095 Q 4 # pcccp p
+27441 Q 4 # pcccp p
+27613 Q 4 # pcccp p
+28520 Q 4 # pcccp p
+28702 Q 4 # ppccc p
+30385 Q 4 # ppccc p
+30817 Q 4 # pcccp p
+31002 Q 4 # ppccc p
+31111 Q 4 # ppccc p
+31293 Q 4 # ppccc p
+32515 Q 4 # pcccp p
+32643 Q 4 # ppccc p
+33026 Q 4 # ppccc p
+34151 Q 4 # pcccp p
+34706 Q 4 # ppccc p
+36164 Q 4 # ppccc p
+36749 Q 4 # pcccp p
+36826 Q 4 # ppccc p
+36878 Q 4 # pcccp p
+37148 Q 4 # pcccp p
+37375 Q 4 # ppccc p
+37795 Q 4 # pcccp p
+37941 Q 4 # pcccp p
+38047 Q 4 # pcccp p
+38239 Q 4 # ppccc p
+38553 Q 4 # ppccc p
+38683 Q 4 # ppccc p
+38762 Q 4 # pcccp p
+38964 Q 4 # pcccp p
+39128 Q 4 # pcccp p
+39220 Q 4 # pcccp p
+39415 Q 4 # ppccc p
+39729 Q 4 # pcccp p
+39959 Q 4 # ppccc p
+40075 Q 4 # pcccp p
+40562 Q 4 # ppccc p
+40937 Q 4 # ppccc p
+41248 Q 4 # pcccp p
+41388 Q 4 # pcccp p
+43172 Q 4 # ppccc p
+43584 Q 4 # pcccp p
+43752 Q 4 # pcccp p
+43819 Q 4 # ppccc p
+44245 Q 4 # ppccc p
+44486 Q 4 # pcccp p
+44704 Q 4 # pcccp p
+45467 Q 4 # pcccp p
+45622 Q 4 # pcccp p
+45955 Q 4 # ppccc p
+47207 Q 4 # pcccp p
+47348 Q 4 # pcccp p
+47568 Q 4 # pcccp p
+48012 Q 4 # pcccp p
+48776 Q 4 # pcccp p
+49444 Q 4 # ppccc p
+49654 Q 4 # ppccc p
+50098 Q 4 # ppccc p
+50605 Q 4 # pcccp p
+50764 Q 4 # pcccp p
+53389 Q 4 # ppccc p
+53683 Q 4 # ppccc p
+53962 Q 4 # pcccp p
+55271 Q 4 # ppccc p
+57370 Q 4 # ppccc p
+57659 Q 4 # pcccp p
+58368 Q 4 # ppccc p
+58748 Q 4 # pcccp p
+60185 Q 4 # pcccp p
+61630 Q 4 # ppccc p
+62380 Q 4 # ppccc p
+62523 Q 4 # pcccp p
+63348 Q 4 # ppccc p
+63831 Q 4 # ppccc p
+66246 Q 4 # ppccc p
+66693 Q 4 # ppccc p
+67275 Q 4 # pcccp p
+68385 Q 4 # pcccp p
+68644 Q 4 # ppccc p
+68834 Q 4 # pcccp p
+69572 Q 4 # pcccp p
+70504 Q 4 # ppccc p
+70818 Q 4 # ppccc p
+71015 Q 4 # ppccc p
+71080 Q 4 # pcccp p
+71744 Q 4 # ppccc p
+72441 Q 4 # pcccp p
+73211 Q 4 # ppccc p
+73233 Q 4 # ppccc p
+73271 Q 4 # ppccc p
+74790 Q 4 # ppccc p
+75041 Q 4 # pcccp p
+75181 Q 4 # ppccc p
+75355 Q 4 # ppccc p
+76515 Q 4 # ppccc p
+76611 Q 4 # pcccp p
+76865 Q 4 # ppccc p
+77659 Q 4 # ppccc p
+77848 Q 4 # pcccp p
+78518 Q 4 # pcccp p
+80174 Q 4 # pcccp p
+81494 Q 4 # ppccc p
+82114 Q 4 # pcccp p
+82421 Q 4 # ppccc p
+82741 Q 4 # ppccc p
+82953 Q 4 # ppccc p
+83760 Q 4 # pcccp p
+83832 Q 4 # ppccc p

@@ -55,7 +55,10 @@
 1546,1572 --++-
 1573,1612 pcccp
 1573,1630 +---+
-1631,1827 c
+1631,1683 c
+1684,1827 c # single field
+1684,1827 +
+1684,1827 Q 7
 
 1828,2007 ccupc # keyframe
 1828,2007 --++- # bus 29.97, bg is ccppc, bus moves so slowly that we can convert it to 23.976
