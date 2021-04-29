@@ -790,14 +790,19 @@ function sanitycheck2($title)
 function genranges($title)
 {
 	$s = file_get_contents("$title-timecodes.txt");
-
+	
+	$sl = [];
+	$sep = '# ranges';
 	$frames = [];
-
 	$pef = -1;
 
 	foreach(explode("\n", $s) as $row)
 	{
 		$row = trim($row);
+		
+		if($row == $sep) break;
+		
+		$sl[] = $row;
 	
 		if(!preg_match('/^([0-9]+),([0-9]+),([0-9\\.]+)/i', $row, $m)) continue;
 	
@@ -823,7 +828,10 @@ function genranges($title)
 
 	//
 
-	$fp = fopen("$title-timeranges.txt", 'w');
+	$fp = fopen("$title-timecodes.txt", 'w');
+	
+	foreach($sl as $s) fprintf($fp, "%s\n", $s);
+	fprintf($fp, "%s\n\n", $sep);
 
 	$tfc = 0;
 
@@ -831,65 +839,12 @@ function genranges($title)
 	{
 		$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
 		
-		fprintf($fp, "%d,%d,%.3f # %s\n", (int)$tfc, (int)($tfc + $fc + 0.5), $f['fps_num'] / 1001, $f['row']);
+		fprintf($fp, "# %d,%d,%.6f # %s\n", (int)$tfc, (int)($tfc + $fc + 0.5), $f['fps_num'] / 1001, $f['row']);
 
 		$tfc += $fc;
 	}
 
 	fclose($fp);
-	
-	//
-
-	$s = file_get_contents("$title-tfm-ovr.txt");
-
-	$keyframes = [];
-
-	preg_match_all('/([0-9]+),([0-9]+).*# *keyframe/im', $s, $m);
-
-	// print_r($m);
-
-	for($i = 0; $i < count($m[0]); $i++)
-	{
-		$frame = (int)$m[1][$i];
-
-		//echo $frame.' => ';
-	
-		$tfc = 0;
-
-		foreach($frames as $f)
-		{
-			$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
-		
-			//print_r($f);
-			//print_r([$tfc, $tfc + $fc, (int)($tfc + $fc + 0.5)]);
-	
-			if((int)$tfc <= $frame && $frame < (int)($tfc + $fc + 0.5))
-			{
-				$vfrframe = (int)($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000 + 0.5);
-				//$vfrframe = ceil($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000);
-				$vfrtime = $vfrframe / 25; // ffmpeg defaults to 25 fps for image seqs
-			
-				$ms = (int)(($vfrtime * 1000) % 1000);
-				$ss = $vfrtime % 60; $vfrtime /= 60;
-				$mm = $vfrtime % 60; $vfrtime /= 60;
-				$hh = $vfrtime;
-				$t = sprintf("%d:%02d:%02d.%03d", $hh, $mm, $ss, $ms);
-			
-				//print_r($f);
-				//print_r([$frame, $tfc, $tfc + $fc, (int)($tfc + $fc + 0.5), $f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000]);
-		
-				//echo $vfrframe.' '.$t.PHP_EOL;
-			
-				$keyframes[] = $t; //['f' => $vfrframe, 't' => $t];
-
-				break;
-			}
-	
-			$tfc += $fc;
-		}
-	}
-
-	file_put_contents("$title-keyframes.txt", implode(PHP_EOL, $keyframes));
 }
 
 //
@@ -991,7 +946,6 @@ if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
 		ffmpeg($title, '-map 0:v '.($force ? '-y ' : '').$out, $avs_1pass);
-		
 	}
 
 	sanitycheck1($title);

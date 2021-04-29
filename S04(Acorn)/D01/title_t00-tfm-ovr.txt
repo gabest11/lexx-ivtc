@@ -180,7 +180,7 @@
 15990,16032 pcccp
 16033,16123 cccpp
 16124,16323 cccpp
-16324,16593 c#cppcc
+16324,16593 cppcc # noise at the end is combed on the field level
 16572,16593 - # MIC high
 16594,16908 cppcc
 16909,17192 ccppc
@@ -466,7 +466,7 @@
 42910,42919 + # fade-in
 43002,43205 cppcc
 
-# while 5 is softer image, I cannot see a subpixel difference the tv screen is upscaled
+# while 5 is softer image, I cannot see a subpixel difference on the tv screen when it is upscaled
 # it is also closer to the original 59.94i when both fields are present
 
 43206,43346 c # tv 59.94i, bg pcccp

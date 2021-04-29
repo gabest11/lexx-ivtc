@@ -11,6 +11,7 @@ $keyframes = '';
 $timecodes = '';
 $audio = [];
 $subtitle = [];
+$chapters = '';
 $about = dirname(__FILE__).'/about.txt';
 $title = '';
 
@@ -38,27 +39,19 @@ function is51($fn)
 	$str = shell_exec('ffprobe -hide_banner -show_streams "'.$fn.'" -print_format json');
 	$obj = json_decode($str, true);
 	return $obj['streams'][0]['channels'] == 6;
-}			
+}
+
+function getchapters($fn)
+{
+	$str = shell_exec('ffprobe -hide_banner -show_chapters "'.$fn.'" -print_format json');
+	$obj = json_decode($str, true);
+	return isset($obj['chapters']) ? $obj['chapters'] : false;
+}
+	
 
 if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 || preg_match('/(.+S[0-9]+E[0-9]+-)/i', $src, $m))
 {
-	$fn = $m[1].'keyframes.txt';
-
-	if(file_exists($fn))
-	{
-		$keyframes = [];	
-	
-		foreach(explode("\n", file_get_contents($fn)) as $row)
-		{
-			$row = trim($row);
-			if(empty($row)) continue;
-			$keyframes[] = $row;
-		}
-
-		$keyframes = implode(',', $keyframes);
-	}
-
 	$fn = $m[1].'timecodes.txt';
 	
 	if(file_exists($fn)) $timecodes = $fn;
@@ -107,18 +100,98 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 			}
 		}
 	}
+	
+	foreach(['_chapters.mkv', '.mkc', '.mkv'] as $fn)
+	{
+		$fn = rtrim($m[1], '-').$fn;
+		
+		if(file_exists($fn) && ($c = getchapters($fn)) !== false)
+		{
+			$chapters = $fn;
+			break;
+		}
+	}
 }
 
 if(!empty($tfm_ovr) && file_exists($tfm_ovr))
 {
+	$frames = [];
+
+	if(!empty($timecodes) && file_exists($timecodes))
+	{
+		$s = file_get_contents($timecodes);
+
+		$pef = -1;
+
+		foreach(explode("\n", $s) as $row)
+		{
+			$row = trim($row);
+	
+			if(!preg_match('/^([0-9]+),([0-9]+),([0-9\\.]+)/i', $row, $m)) continue;
+	
+			$sf = (int)$m[1];
+			$ef = (int)$m[2];
+	
+			if($sf > $pef + 1)
+			{
+				$frames[] = ['sf' => $pef + 1, 'ef' => $sf - 1, 'fps_num' => 30000, 'row' => ''];
+			}
+
+			$pef = $ef;
+	
+			if($m[3] == '29.97') $fps_num = 30000;
+			else if($m[3] == '23.976024') $fps_num = 24000;
+			else if($m[3] == '17.982018') $fps_num = 18000;
+			else die('unknown fps '.$m[3]);
+	
+			$frames[] = ['sf' => $sf, 'ef' => $ef, 'fps_num' => $fps_num, 'row' => $row];
+		}
+
+		$frames[] = ['sf' => $pef + 1, 'ef' => 1000000, 'fps_num' => 30000, 'row' => '']; // TODO: last frame number?
+	}
+	
+	$keyframes = [];
+	
 	foreach(explode("\n", file_get_contents($tfm_ovr)) as $row)
 	{
-		if(!preg_match('/^# *S([0-9]+)E([0-9]+) +-?(.+)$/i', $row, $m)) continue;
+		if(empty($title) && preg_match('/^# *S([0-9]+)E([0-9]+) +-?(.+)$/i', $row, $m))
+		{	
+			$title = sprintf("Lexx S%02dE%02d - %s", (int)$m[1], (int)$m[2], trim($m[3]));
+		}
+
+		if(preg_match('/([0-9]+),([0-9]+).*# *keyframe/i', $row, $m))
+		{
+			$frame = (int)$m[1];
+			
+			$tfc = 0;
+
+			foreach($frames as $f)
+			{
+				$fc = ($f['ef'] - $f['sf'] + 1) * 30000 / $f['fps_num'];
 		
-		$title = sprintf("Lexx S%02dE%02d - %s", (int)$m[1], (int)$m[2], trim($m[3]));
-		
-		break;
+				if((int)$tfc <= $frame && $frame < (int)($tfc + $fc + 0.5))
+				{
+					$vfrframe = (int)($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000 + 0.5);
+					//$vfrframe = ceil($f['sf'] + ($frame - $tfc) * $f['fps_num'] / 30000);
+					$vfrtime = $vfrframe * 1001 / 30000; // -r 30000 / 1001 is also set for the input later
+			
+					$ms = (int)(($vfrtime * 1000) % 1000);
+					$ss = $vfrtime % 60; $vfrtime /= 60;
+					$mm = $vfrtime % 60; $vfrtime /= 60;
+					$hh = $vfrtime;
+					$t = sprintf("%d:%02d:%02d.%03d", $hh, $mm, $ss, $ms);
+			
+					$keyframes[] = $t; //['f' => $vfrframe, 't' => $t];
+
+					break;
+				}
+				
+				$tfc += $fc;
+			}
+		}
 	}
+	
+	$keyframes = implode(',', $keyframes);
 }
 
 $cmd = [];
@@ -126,15 +199,17 @@ $cmd = [];
 $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1];} // $cmd[] = '-start_number '.$m[2];} // changing the start isn't compatible with the vfr timecode file
-$cmd[] = '-i "'.$src.'"';
+$cmd[] = '-r 30000/1001 -i "'.$src.'"';
 foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
 foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
+if(!empty($chapters)) $cmd[] = '-i "'.$chapters.'"';
 if(strpos($codec, 'p10') !== false) $cmd[] = '-pix_fmt yuv420p10le';
 else $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
 foreach($subtitle as $index => $s) $cmd[] = '-map '.($index + count($audio) + 1).':s';
-$cmd[] = '-map_chapters -1';
+$cmd[] = '-map_metadata -1';
+$cmd[] = '-map_chapters '.(!empty($chapters) ? (count($audio) + count($subtitle) + 1) : '-1');
 $cmd[] = '-c copy';
 foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
 foreach($subtitle as $index => $s) {$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];}
