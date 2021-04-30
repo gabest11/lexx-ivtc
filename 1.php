@@ -170,7 +170,7 @@ function sanitycheck1($title)
 			
 			if(empty($m[3])) $m[3] = $m[1];
 			
-			if(empty($m[5])) $m[5] = '';
+			if(empty($m[5])) continue; //$m[5] = '';
 			
 			$scene = ['s' => (int)$m[1], 'e' => (int)$m[3], 't' => $m[5], 'row' => $row];
 			
@@ -747,6 +747,28 @@ function sanitycheck2($title)
 			}
 			
 			if(++$j == 5) $j = 0;
+		}
+
+		if(!empty($skipped)) 
+		{
+			$bogusdups[] = ['scene' => $scene, 'pos' => $scene['s'], 'skipped' => $skipped];
+		}
+	}
+	
+	// auto-dropped v, usually because the 5 frame batch has a mixed f scene
+
+	foreach($ovrscenes as $index => $scene)
+	{
+		$skipped = [];
+		
+		for($i = $scene['s'], $j = 0; $i <= $scene['e']; $i++)
+		{
+			$f = $ovrframes[$i];
+	
+			if(isset($f['rate']) && $f['rate'] == 'v' && !isset($tdecframes[$i]))
+			{
+				$skipped[] = $i.' (auto-dropped)';
+			}
 		}
 
 		if(!empty($skipped)) 
