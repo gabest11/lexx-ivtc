@@ -79,6 +79,7 @@
 # cannot use external deinterlacers
 4625 u
 4625 f 1
+4625 +
 4625 Q 6
 4626,5079 cupcc # one of those 29.97 deinterlaced scenes
 4626,5079 -++--
@@ -167,8 +168,7 @@
 16757,16903 cccpp
 16904,17053 pcccp
 17054,17145 ccppc
-17146,17207 cppcc
-17208,17236 c
+17146,17236 cppcc
 17237,17547 cccpp
 17237,17547 -
 17548,17755 cppcc

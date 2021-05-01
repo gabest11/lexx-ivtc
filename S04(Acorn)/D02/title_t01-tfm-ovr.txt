@@ -489,7 +489,7 @@
 51435,51462 ccppc
 51463,51477 cccpp
 51478,51482 ccppc
-51483,51501 c # single field
+51483,51501 c # single field, some skips and 51490/51500 are dups
 51483,51501 +
 51483,51501 Q 5
 51502,51524 pcccp

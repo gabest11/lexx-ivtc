@@ -821,7 +821,7 @@
 78382,78547 cccpp
 78517,78562 + # crossfade
 
-78548,81063 c # keyframe
+78548,81066 c # keyframe
 81067,81156 c # 59.94i, this is the third variation of this logo
 81067,81124 +
 81067,81124 Q 5

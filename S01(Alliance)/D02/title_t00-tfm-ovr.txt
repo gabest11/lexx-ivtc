@@ -1123,11 +1123,9 @@
 87119,87397 ccppc
 87398,87598 cccpp
 87599,87676 cppcc
-87677 u
-87678,87729 p # this is actually field shifted progressive
+87677,87729 p # this is actually field shifted progressive
 87730,87785 ccppc
-87786 u
-87787,87873 p
+87786,87873 p
 87874,87930 pcccp
 87931,87979 ccppc
 87980,88055 pcccp
@@ -2373,6 +2371,8 @@
 86487 Q 4 # pcccp p
 86718 Q 4 # pcccp p
 87019 Q 4 # ppccc p
+87677 Q 4
+87786 Q 4
 87874 Q 4 # pcccp p
 87980 Q 4 # pcccp p
 88243 Q 4 # pccpccpppc p

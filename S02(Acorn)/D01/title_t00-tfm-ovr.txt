@@ -79,6 +79,7 @@
 # cannot use external deinterlacers
 4625 u
 4625 f 1
+4625 +
 4625 Q 6
 4626,5079 cupcc # one of those 29.97 deinterlaced scenes
 4626,5079 -++--
@@ -167,8 +168,7 @@
 16757,16903 cccpp
 16904,17053 pcccp
 17054,17145 ccppc
-17146,17207 cppcc
-17208,17236 c
+17146,17236 cppcc
 17237,17547 cccpp
 17237,17547 -
 17548,17755 cppcc
@@ -1736,11 +1736,20 @@
 157834,158085 cppcc
 158086,158288 cccpp
 158289,158343 cccpp
+158289 + # first frame single field
+158289 f 0
+158289 Q 7
 158344,158464 ppccc
 158465,158536 cccpp
 158465,158536 ---++ # still combed
+158465 +
+158465 f 0
+158465 Q 7
 158537,158621 cppcc
 158537,158621 -++--
+158537 +
+158537 f 0
+158537 Q 7
 # Kai does not move enough to see a pattern or not noticeable,
 # we just enjoy the colorful lights, repeats several times below.
 # Motion based deinterlacers produce nasty artifacts.

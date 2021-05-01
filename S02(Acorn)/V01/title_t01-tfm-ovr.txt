@@ -797,11 +797,20 @@
 71719,71970 cppcc
 71971,72173 cccpp
 72174,72228 cccpp
+72174 + # first frame single field
+72174 f 0
+72174 Q 7
 72229,72349 ppccc
 72350,72421 cccpp
 72350,72421 ---++ # still combed
+72350 +
+72350 f 0
+72350 Q 7
 72422,72506 cppcc
 72422,72506 -++--
+72422 +
+72422 f 0
+72422 Q 7
 # Kai does not move enough to see a pattern or not noticeable,
 # we just enjoy the colorful lights, repeats several times below.
 # Motion based deinterlacers produce nasty artifacts.
