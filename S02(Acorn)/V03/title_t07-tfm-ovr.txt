@@ -159,8 +159,7 @@
 14668,14818 c
 14819,14855 c
 14850,14874 + # crossfade
-14856,15308 c # keyframe
-15309
+14856,15309 c # keyframe
 
 1103 Q 4 # ppccc p
 1467 Q 4 # pcccp p

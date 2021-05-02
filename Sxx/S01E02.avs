@@ -16,9 +16,9 @@ function FixSatellite(clip c)
 	
 	SeparateFields()
 	# ivtc + double every frame
-	SelectEvery(10, 0, 1, 0, 1, 2, 3, 2, 3, 6, 5, 6, 5, 8, 9, 8, 9)
+	SelectEvery(10, 0,1, 0,1, 2,3, 2,3, 6,5, 6,5, 8,9, 8,9)
 	# pulldown
-	SelectEvery(8, 0, 1, 2, 3, 2, 5, 4, 7, 6, 7)
+	SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7)
 	# got a few frames more, trim it down
 	Weave().Trim(0, 75)
 	AssumeFPS(30000, 1001)

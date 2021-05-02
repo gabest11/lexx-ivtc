@@ -226,21 +226,58 @@
 18181,18258 pcccp
 
 # epic scene, totally worth the effort
-18259,18282 cppcccpp
-18283,18314 cppcccpc
-18315,18354 cppccccc # cppccc?c
-18355,18378 cppccpcc
-18379,18418 cppcppcc
-18419,18442 cpccppcc
-18443,18474 ccccppcc # c?ccppcc
-18475,18498 pcccppcc
-18499,18538 pcccppcp
-18539,18570 pcccpccp
-18571,18610 pccccccp # pccc?ccp
-18611,18634 pccpcccp
-18635,18682 pcppcccp
-18683,18698 ccppcccp
-18699,18723 ccppcccc # ccppccc?
+
+# whole frame solution
+#18259,18282 cppcccpp
+#18283,18314 cppcccpc
+#18315,18354 cppccccc # cppccc?c
+#18355,18378 cppccpcc
+#18379,18418 cppcppcc
+#18419,18442 cpccppcc
+#18443,18474 ccccppcc # c?ccppcc
+#18475,18498 pcccppcc
+#18499,18538 pcccppcp
+#18539,18570 pcccpccp
+#18571,18610 pccccccp # pccc?ccp
+#18611,18634 pccpcccp
+#18635,18682 pcppcccp
+#18683,18698 ccppcccp
+#18699,18723 ccppcccc # ccppccc?
+
+# dumb solution
+#18259,18723 c
+#18259,18723 +
+#18259,18723 Q 5
+
+# "no dups" solution
+#
+# 18259,18723 by field (p: last c repeated, cap: picture shifts vertically)
+#
+# 0,   cpccc cpccP ccccp ccPcc ccpcc pcccc pccpc cccpc Cpccc cpccp
+#      cccpc cccpc cpccc cPccp ccccP ccpcc cPccc pcccP cccpc ccPcc
+# 50,  ccccp ccpcc ccpcc pcccc pccpc cccPc cpccc cPccp ccccP ccpcc
+#      cpccc Pcccp ccPcc ccpcc Pcccc pccPc cccpc cpccc cpccp ccccp
+# 100, cPccc pcccP cccpc ccPcc cpccP ccccp ccPcc ccpcc Pcccc pccpc
+#      ccpcc ccpcc pcccc pccpc cccpc cpccc cpccp ccccP ccpcc ccPcc
+# 150, cccpc cpccc cpccp ccccp ccpcc ccpcc pcccc pccpc cccPc cpccc
+#      pcccc Pccpc ccPcc cpccc Pcccp cccPc ccpcc Pcccc pccPc cccpc
+# 200, cPccp ccccP ccpcc cPccc pcccP cccpc ccPcc cpccc Pcccp ccPcc
+#      cPccc cpccp ccccp ccpcc ccpcc pcccc pcCpc cccpc cpccc cpccp
+# 250, ccpcc pcccc pccPc cccpc cpccc cpccp ccccp ccpcc ccpcC pcccc
+#      ccccp ccpcc ccPcc pcccc Pccpc cccpc cpccc Pcccp cccPc ccpcc
+# 300, pccpc cccpc cpccc cpccp ccccp ccpcc ccPcc pcccc pccpc cccPc
+#      cPccc pcccP cccpc cPccc cpccP ccccp ccPcc ccpcc Pcccc pccpc
+# 350, cpccc Pcccp cccPc ccpcc cPccc pccPc cccpc cPccc cpccP ccccp
+#      cccpc cpccc cpcCp ccccp Ccpcc ccpcc pcccc pCcpc cccpC cpccc
+# 400, ccPcc ccpcc Pcccc pcCpc cccpc Cpccc cpccp ccccp ccpcc ccpcc
+#      cPccp ccccP ccpcc ccPcc pcccP cccpc ccPcc cpccc Pcccp ccPcc
+# 450, pcccc pccpc cccPc
+#      ccpcc Pcccc pccPc
+#
+# number of c's 348, need some extra to make it 465 after pulldown
+# 30 blank frames at the beginning with fade-in may do it
+
+18259,18723 ccppc
 
 # smooth version (no good, the blended p/u fillers aren't showing at the right time and it is noticable)
 #18259,18282 ccpccccp
@@ -1784,9 +1821,31 @@
 #141835,141875 -+---------------------------------------
 #141876,141878 ccp
 #141876,141878 -+-
-141672,141878 c
-141672,141878 Q 5
-141672,141878 +
+
+# dumb solution
+#141671,141878 c
+#141671,141878 Q 5
+#141671,141878 +
+
+# "no dups" solution
+#
+# 18259,18723 by field (p: last c repeated, cap: picture shifts vertically)
+#
+# 0,   pcPcc ccpcc cPccc PccPc cPccp ccpcc pccpc cpccP ccPcc PcccP
+#      cPcPc ccccp ccpcc pccpc cPccP cccPc cPccc PccPc cPccp ccpcc
+# 50,  ccPcc cPccP ccPcc pccpc cpccp ccpcc Pccpc cPccc PccPc ccPcc
+#      pccpc cpccP ccPcc PcccP ccPcc cPccP ccpcc pccpc cpccp ccpcc
+# 100, Pccpc cpccp ccpcc pccpc cPccP cccPc cPccP cccPc cPccp ccpcc
+#      PccPc cPccc PccPc ccPcc Pccpc cpccp ccpcc pccpc cPccP cccPc
+# 150, pcCpc CpcCp ccPcc PcccP ccPcc cPccP ccPcc pccpc cpccp ccpcc
+#      cPccc PccPc cPccp ccpcc pccpc cpccP ccPcc PcccP ccPcc cPccP
+# 200, PccPc cPc
+#      ccPcc pcc
+#
+# 29 blanks + fade-in
+
+141671,141878 cppcc
+141671,141878 -
 
 141879,141948 ppccc
 141949,142098 pcccp

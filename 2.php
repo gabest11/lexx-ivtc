@@ -11,7 +11,7 @@ $keyframes = '';
 $timecodes = '';
 $audio = [];
 $subtitle = [];
-$chapters = '';
+$chapters = [];
 $about = dirname(__FILE__).'/about.txt';
 $title = '';
 
@@ -107,7 +107,7 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 		
 		if(file_exists($fn) && ($c = getchapters($fn)) !== false)
 		{
-			$chapters = $fn;
+			$chapters = $c;
 			break;
 		}
 	}
@@ -202,14 +202,13 @@ if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1];} // $cmd[] = '-sta
 $cmd[] = '-r 30000/1001 -i "'.$src.'"';
 foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
 foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
-if(!empty($chapters)) $cmd[] = '-i "'.$chapters.'"';
 if(strpos($codec, 'p10') !== false) $cmd[] = '-pix_fmt yuv420p10le';
 else $cmd[] = '-pix_fmt yuv420p';
 $cmd[] = '-map 0:v';
 foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
 foreach($subtitle as $index => $s) $cmd[] = '-map '.($index + count($audio) + 1).':s';
 $cmd[] = '-map_metadata -1';
-$cmd[] = '-map_chapters '.(!empty($chapters) ? (count($audio) + count($subtitle) + 1) : '-1');
+$cmd[] = '-map_chapters -1';
 $cmd[] = '-c copy';
 foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
 foreach($subtitle as $index => $s) {$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];}
@@ -298,6 +297,28 @@ $cmd .= <<<EOT
 --attach-file "$about" ^
 
 EOT;
+}
+
+if(!empty($chapters))
+{
+	$sl = [];
+	$i = 1;
+	foreach($chapters as $c)
+	{
+		$t = (int)($c['start_time'] * 1000);
+		if($t < 1000) $t = 0;
+		$ms = $t % 1000; $t = (int)($t / 1000);
+		$ss = $t % 60; $t = (int)($t / 60);
+		$mm = $t % 60; $t = (int)($t / 60);
+		$hh = $t;
+		$sl[] = sprintf("CHAPTER%02d=%02d:%02d:%02d.%03d", $i, $hh, $mm, $ss, $ms);
+		$sl[] = sprintf("CHAPTER%02dNAME=%s", $i, sprintf("Chapter %02d", $i));
+		$i++;
+	}
+	$tmp = tempnam(dirname($dst), 'chapters');
+	file_put_contents($tmp, implode("\n", $sl));
+	register_shutdown_function(function() use($tmp) { unlink($tmp); });
+	$cmd .= '--chapters "'.$tmp.'" ';
 }
 
 $cmd .= '"'.$dst.'"';
