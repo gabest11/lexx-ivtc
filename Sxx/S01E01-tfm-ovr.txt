@@ -225,32 +225,6 @@
 18097,18180 cccpp
 18181,18258 pcccp
 
-# epic scene, totally worth the effort
-
-# whole frame solution
-#18259,18282 cppcccpp
-#18283,18314 cppcccpc
-#18315,18354 cppccccc # cppccc?c
-#18355,18378 cppccpcc
-#18379,18418 cppcppcc
-#18419,18442 cpccppcc
-#18443,18474 ccccppcc # c?ccppcc
-#18475,18498 pcccppcc
-#18499,18538 pcccppcp
-#18539,18570 pcccpccp
-#18571,18610 pccccccp # pccc?ccp
-#18611,18634 pccpcccp
-#18635,18682 pcppcccp
-#18683,18698 ccppcccp
-#18699,18723 ccppcccc # ccppccc?
-
-# dumb solution
-#18259,18723 c
-#18259,18723 +
-#18259,18723 Q 5
-
-# "no dups" solution
-#
 # 18259,18723 by field (p: last c repeated, cap: picture shifts vertically)
 #
 # 0,   cpccc cpccP ccccp ccPcc ccpcc pcccc pccpc cccpc Cpccc cpccp
@@ -278,41 +252,6 @@
 # 30 blank frames at the beginning with fade-in may do it
 
 18259,18723 ccppc
-
-# smooth version (no good, the blended p/u fillers aren't showing at the right time and it is noticable)
-#18259,18282 ccpccccp
-#18259,18282 -+----+-
-#18283,18314 ccpccccc
-#18283,18314 -+----+-
-#18315,18354 ccpcccuc
-#18315,18354 -+----+-
-#18355,18378 ccpccccc
-#18355,18378 -+---+--
-#18379,18418 ccpccpcc
-#18379,18418 -+--+---
-#18419,18442 cccccpcc
-#18419,18442 -+--+---
-#18443,18474 cucccpcc
-#18443,18474 -+--+---
-#18475,18498 cccccpcc
-#18475,18498 +---+---
-#18499,18506 cccccpcc # first one was a p, following a c, but next time it will follow its onw p
-#18499,18506 +---+--+
-#18507,18538 pccccpcc
-#18507,18538 ----+--+
-#18539,18570 pccccccc
-#18539,18570 ----+--+
-#18571,18610 pcccuccc
-#18571,18610 ----+--+
-#18611,18634 pccccccc
-#18611,18634 ---+---+
-#18635,18682 pccpcccc
-#18635,18682 --+----+
-#18683,18698 cccpcccc
-#18683,18698 --+----+
-#18699,18723 cccpcccu
-#18699,18723 --+----+
-#18259,18723 Q 5
 
 18724,18937 c # already deinterlaced
 18938,19117 cppcc
@@ -632,38 +571,26 @@
 46525,46761 cccpp
 46762,46846 ccppc
 
-# TODO: find the correct patterns
+# 46847,46966 by field (p: last c repeated, cap: picture shifts vertically)
+#
+# mid section
+# 0,   ccpcc ppccp ccpcc ppccp cpcpc cpccp ccppc cpcpc cpcpc cpcpc 
+#      ccpcc pccpc pcpcc pcpcc pcpcc ppccp ccpcc pcpcp ccppc cpccp 
+# 50,  pccpc cpcpc pccpp ccpcc pccpc pcpcc pcpcc pcpcc ppccp ccpcc
+#      ccppc cpcpc cpcpc cpccp pccpc cpccp pccpc pcpcc pccpc pcpcc
+# 100, ppccp ccppc cpccp ccppc 
+#      pcpcc pcpcc ppccp ccpcc
+# left section
+# 0,   cpccp cpccp cpccp cpcpc cpcpc cpcpc cppcc pccpc cpcpc pccpc
+#      ccpcc pcpcc ppccp ccpcc ppccp cpccp cpccp ccppc cpcpc cpcpc
+# 50,  pccpc pccpp ccpcp ccpcp ccpcc ppccp ccpcc ppccp cpccp cpccp
+#      cpcpc pccpc cpcpc pccpc pccpc pccpp ccpcc pcpcc pcpcc ppccp
+# 100, cpcpc cpcpc cpcpc cppcp 
+#      ccpcc ppccp cpccp cpccp
+#
+# last frame of the previous scene 31 times + 89 c's including pulldown
 
-46847,46966 c 
-46847,46966 +
-46847,46966 Q 7
-
-# this keep the lines mostly in sync, but way too many dups
-
-#46847,46866 clcclcphcpccccccpclp
-#46847,46866 -+--+--+----------+-
-#           +++++++++++-++-+++++
-#           ccpccppccpcxccxcpccp
-#46867,46886 chcphccclcccllhlpcpc
-#46867,46886 -+--+---+---++++----
-#           +++++++++++-++++++++
-#           cpcpccpccpcxccpcpcpc
-#46887,46906 cpccclccpcphcccccccl
-#46887,46906 -----+-----+-------+
-#           +++++++++++++++-++++
-#           cpcpccpcpcpccpcxccpc
-#46907,46926 pcccphcphlcclccplphc
-#46907,46926 -----+--++--+---+-+-
-#           ++-++++++++++++++++-
-#           pccxpccpccpccpcpcpcx
-#46927,46946 ccpccclcclcphcpccccc
-#46927,46946 ------+--+--+-------
-#           -+++++++++++++++-++-
-#           xcpccpcpccppccpcxccx
-#46947,46966 cpclpcccphccclccclph
-#46947,46966 ---+-----+---+---+-+
-#           ++++++-+++++++++-+++
-#           cpccpcxcpccpccpcxcpc
+46847,46966 cccpp
 
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
@@ -1822,14 +1749,7 @@
 #141876,141878 ccp
 #141876,141878 -+-
 
-# dumb solution
-#141671,141878 c
-#141671,141878 Q 5
-#141671,141878 +
-
-# "no dups" solution
-#
-# 18259,18723 by field (p: last c repeated, cap: picture shifts vertically)
+# 141671,141878 by field (p: last c repeated, cap: picture shifts vertically)
 #
 # 0,   pcPcc ccpcc cPccc PccPc cPccp ccpcc pccpc cpccP ccPcc PcccP
 #      cPcPc ccccp ccpcc pccpc cPccP cccPc cPccc PccPc cPccp ccpcc
@@ -1842,9 +1762,9 @@
 # 200, PccPc cPc
 #      ccPcc pcc
 #
-# 29 blanks + fade-in
+# 30 blanks + fade-in
 
-141671,141878 cppcc
+141671,141878 ccppc
 141671,141878 -
 
 141879,141948 ppccc
