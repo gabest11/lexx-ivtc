@@ -216,15 +216,15 @@
 33026,33142 ppccc
 33143,33233 ccppc
 33234,33442 ccppc
-33443,33509 c # cppcc # deinterlaced already (badly)
+33443,33509 c # cppcc # S02E17 23159,23225 ppccc # deinterlaced already (badly)
 33443,33509 -++--
 33443,33509 Q 5
 33510,33705 c
 33706,33838 ccppc
-33839,33996 c # same
+33839,33996 c # same # S02E17 23555,23712 cccpp
 33839,33996 +---+
 33997,34116 ccppc
-34117,34150 c # same
+34117,34150 c # same # S02E17 23833,23866 pcccp
 34117,34150 ++---
 34117,34150 Q 5
 34151,34373 pcccp

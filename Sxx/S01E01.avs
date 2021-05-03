@@ -19,7 +19,7 @@ function Fix1(c)
 	SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # ccppc
 	Weave
 	AssumeFPS(30000, 1001)
-	BlankClip(last, 30) + FadeIn0(15)
+	BlankClip(last, 30) + FadeIn0(20)
 }
 
 function Fix2(c)
@@ -65,4 +65,10 @@ function Fix3(c)
 #Info
 #return last
 
-Trim(0,18258) + Fix1() + Trim(18724,46846) + Fix3() + Trim(46967,141670) + Fix2() + Trim(141879,-0)
+Trim(0,18258) + \
+Fix1() + \
+Trim(18724,46846) + \
+Fix3() + \
+Trim(46967,141670) + \
+Fix2() + \
+Trim(141879,-0)
