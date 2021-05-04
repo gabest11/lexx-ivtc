@@ -21,16 +21,18 @@ Interpolation is a problem, but it can also be used to squize out some redundant
     (b+c)/2*2-b => c
     
     then take the average of every three rows to reduce noise created by compression
-
-    o = last
+    
+    o = c # c is the clip we are working on, save it for comparison
 
     a = Expr(c, "x[0,-1] 2.0 * x[0,-2] -")
     b = Expr(c, "x[0,+1] 2.0 * x[0,+2] -")
     c = Expr(a, b, c, "x y z + + 3.0 /")
     
-    # this might be more optimizeble, but I am not sure how Expr works internally
+    # this might be more optimizable, but I am not sure how Expr works internally
     # c = Expr(a, b, c, "x y + 0.5 * z + 0.5 *")
 
+    # field number is the one that was not interpolated
+    
     a = c.nnedi3(field=0)
     b = o.nnedi3(field=0)
 

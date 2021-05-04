@@ -878,8 +878,8 @@ if(!file_exists("$title-tdec-ovr.txt")) file_put_contents("$title-tdec-ovr.txt",
 // source
 
 $avs = <<<EOT
-d2vpath="$title.d2v"
-MPEG2Source(d2vpath,cpu=4)
+title = ReplaceStr(ScriptFile(), ".avs", "")
+MPEG2Source(title + ".d2v",cpu=4)
 EOT;
 
 if(!file_exists("$title.avs")) file_put_contents("$title.avs", $avs);

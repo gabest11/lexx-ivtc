@@ -38,6 +38,8 @@
 1559,1725 Q 4
 1726,1827 c
 
+1828,83494 Q 4
+
 1828,2056 c # keyframe
 1828,1851 + # fade-in
 1828,1851 Q 5
@@ -514,7 +516,6 @@
 83363,83376 l
 83377,83388 l
 83389,83494 l
-1828,83494 Q 4
 
 83495,85983 c # keyframe
 85984,86073 c # reflection ccppc (wtf, no transparency around the sparkling thing)

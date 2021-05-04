@@ -2,8 +2,8 @@ Import("../S03(Acorn)/common.avsi")
 
 title = ReplaceStr(ScriptFile(), ".avs", "")
 
-c1 = MPEG2Source("..\S03(Alliance)\V01\title_t00.d2v",cpu=4)
-c2 = MPEG2Source("..\S03(Acorn)\V01\title_t00.d2v",cpu=4)
+c1 = MPEG2Source("..\S03(Alliance)\V01\title_t01.d2v",cpu=4)
+c2 = MPEG2Source("..\S03(Acorn)\V01\title_t01.d2v",cpu=4)
 
 c1 = Trim(c1, 0, 14) + c1 # Acorn has 15 empty frames at the beginning, padding just to match the audio
 
@@ -32,7 +32,7 @@ Overlay(c1, c2, mode="lighten")
 c = last
 #return StackHorizontal(Merge(c, c2), Overlay(c, c2, mode="difference"))
 #return StackVertical(Merge(c, c2).Crop(0,360,720,-0),c.Crop(0,360,720,-0))
-#Merge(c, c2) # Acorn is missing the sides, have to re-add (Overaly) those back if we do this
+#Merge(c, c2) # Acorn is missing the sides, have to re-add (Overlay) those back if we do this
 
 # back to 4:2:0
 
