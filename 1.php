@@ -29,12 +29,12 @@ function init()
 		$row = trim($row);
 		
 		$s = $row;
-		
+
 		if(($i = strpos($row, '#')) !== false)
 		{
 			$s = trim(substr($row, 0, $i));
 		}
-	
+
 		if(preg_match('/^([0-9]+)(,([0-9]+))? +([\\+\\-]+)$/i', $s, $m))
 		{
 			if(is_numeric($m[3])) 
