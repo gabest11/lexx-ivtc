@@ -1,8 +1,8 @@
 # Allience release (better bitrate) and the missing section from Koch's, cut to match Koch's audio track
 
-c1 = MPEG2Source("..\S01(Alliance)\D02\title_t00.d2v",cpu=4)
-c2 = MPEG2Source("..\S01(Koch)\D02\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
-c3 = MPEG2Source("..\S01(Alliance)\D01\title_t00.d2v",cpu=4)
+c1 = MPEG2Source("..\..\S01(Alliance)\D02\title_t00.d2v",cpu=4)
+c2 = MPEG2Source("..\..\S01(Koch)\D02\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
+c3 = MPEG2Source("..\..\S01(Alliance)\D01\title_t00.d2v",cpu=4)
 
 function FixSatellite(clip c)
 {

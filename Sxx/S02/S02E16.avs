@@ -1,7 +1,7 @@
 # Web and Net are very similar episodes, one can be used to fix the other
 
-c1 = MPEG2Source("..\S02(Acorn)\V04\title_t05.d2v",cpu=4)
-c2 = MPEG2Source("..\S02(Koch)\V05\title_t00.d2v",cpu=4)
+c1 = MPEG2Source("..\..\S02(Acorn)\V04\title_t05.d2v",cpu=4)
+c2 = MPEG2Source("..\..\S02(Koch)\V05\title_t00.d2v",cpu=4)
 
 Trim(c1, 0, 33442) + \
 Trim(c2, 23159, 23225) + \

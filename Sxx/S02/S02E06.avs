@@ -1,9 +1,9 @@
-c1 = MPEG2Source("..\S02(Acorn)\V02\title_t01.d2v",cpu=4)
+c1 = MPEG2Source("..\..\S02(Acorn)\V02\title_t01.d2v",cpu=4)
 
 # choose any version, Allince encode is a bit higher bitrate
 
-#c2 = MPEG2Source("..\S01(Koch)\D04\title_t00p1.d2v",cpu=4)
-c2 = MPEG2Source("..\S01(Alliance)\D04\title_t00.d2v",cpu=4).Trim(30,-0)
+#c2 = MPEG2Source("..\..\S01(Koch)\D04\title_t00p1.d2v",cpu=4)
+c2 = MPEG2Source("..\..\S01(Alliance)\D04\title_t00.d2v",cpu=4).Trim(30,-0)
 
 # c1 S02E06 38160,38216 (57) cppcc 38217,38402 c (186)
 # c2 S01E04 38240,38296 (57) cppcc 38297,38396 pcccp (100)
