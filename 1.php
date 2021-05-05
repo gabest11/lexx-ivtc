@@ -4,6 +4,8 @@ if(!file_exists($argv[1])) die('check file name');
 
 $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
+$force = isset($argv[3]) && $argv[3] == 'force';
+
 $cthresh = 9;
 $MI = 80;
 $PP = 6;
@@ -13,99 +15,15 @@ $tdecframes = [];
 $ovrframes = [];
 $ovrscenes = [];
 
-function sanitycheck1($title)
+function init()
 {
-	#TODO: scene begins with p/b, ends on u/n and blended
-
-	$bogusframes = [];
-	$bogusscenes = [];
-	$bogussc = [];
-
-	global $tfmframes;
+	global $title;
 	global $ovrframes;
 	global $ovrscenes;
 
 	$ovrframes = [];
 	$ovrscenes = [];
-	$tfmframes = [];
-
-	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
-	{
-		$row = trim($row);
-
-		if(!preg_match('/^([0-9]+) +([cpbnuhl]) +([\\+\\-]) +\\[([\-0-9]+)\\] +(\\(([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)\\))?/i', $row, $m)) continue;
-		
-		$i = (int)$m[1];
-
-		$tfmframes[$i] = ['type' => $m[2], 'deint' => $m[3], 'mic' => (int)$m[4], 'dup' => ''];
-
-		if(!empty($m[5]))
-		{
-			$mics = [];
-			
-			$mics['p'] = (int)$m[6];
-			$mics['c'] = (int)$m[7];
-			$mics['n'] = (int)$m[8];
-			$mics['b'] = (int)$m[9];
-			$mics['u'] = (int)$m[10];
-			
-			if($mics['c'] < 20)
-			{
-				$pb = $mics['p'] + $mics['b'];
-				$nu = $mics['n'] + $mics['u'];
-				$pnd = $mics['p'] - $mics['n'];
-				$bud = $mics['b'] - $mics['u'];
-
-				if($pb < 30 && $pb < $nu && $nu > 20 || $pnd < -200 && $bud < -200)
-				{
-					$tfmframes[$i]['dup'] = 'p';
-					
-					if($i > 0 && $tfmframes[$i - 1]['dup'] != 'n')
-					{
-						$tfmframes[$i]['dup'] = 'c';
-					}
-				}
-				else if($nu < 30 && $nu < $pb && $pb > 20 || $pnd > 200 && $bud > 200)
-				{
-					$tfmframes[$i]['dup'] = 'n';
-					
-					if($i > 0 && $tfmframes[$i - 1]['dup'] == 'n')
-					{
-						$tfmframes[$i - 1]['dup'] = 'c';
-					}
-				}
-				else
-				{
-					$tfmframes[$i]['dup'] = 'c';
-					
-					if($i > 0 && $tfmframes[$i - 1]['dup'] == 'n')
-					{
-						$tfmframes[$i - 1]['dup'] = 'c';
-					}
-				}
-			}
-
-			$tfmframes[$i]['mics'] = $mics;
-			
-			$mint = 'c';
-			$minv = $mics[$mint];
-			
-			foreach($mics as $t => $mic) 
-			{
-				if($mic < $minv)
-				{
-					$mint = $t; 
-					$minv = $mic;
-				}
-			}
-
-			$tfmframes[$i]['micmin'] = ['t' => $mint, 'v' => $minv];
-		}
-	}
-
-#foreach($tfmframes as $i => $f) echo $i.' '.$f['dup'].PHP_EOL;
-#exit;
-
+	
 	foreach(explode("\n", file_get_contents("$title-tfm-ovr.txt")) as $row)
 	{
 		$row = trim($row);
@@ -185,6 +103,7 @@ function sanitycheck1($title)
 				
 				$ovrframes[$i]['type']['value'] = $value;
 				$ovrframes[$i]['type']['row'] = $row;
+				$ovrframes[$i]['type']['scene'] = $scene;
 
 				$ovrframes[$i]['first_pb'] = isset($ovrframes[$i]['first']) && array_search($value, ['p','b']) !== false;
 				$ovrframes[$i]['last_un'] = isset($ovrframes[$i]['last']) && array_search($value, ['u','n']) !== false;
@@ -239,6 +158,99 @@ function sanitycheck1($title)
 			}
 		}
 	}
+}
+
+function sanitycheck1()
+{
+	#TODO: scene begins with p/b, ends on u/n and blended
+
+	global $title;
+	global $tfmframes;
+	global $ovrframes;
+	global $ovrscenes;
+
+	$bogusframes = [];
+	$bogusscenes = [];
+	$bogussc = [];
+
+	$tfmframes = [];
+
+	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
+	{
+		$row = trim($row);
+
+		if(!preg_match('/^([0-9]+) +([cpbnuhl]) +([\\+\\-]) +\\[([\-0-9]+)\\] +(\\(([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)\\))?/i', $row, $m)) continue;
+		
+		$i = (int)$m[1];
+
+		$tfmframes[$i] = ['type' => $m[2], 'deint' => $m[3], 'mic' => (int)$m[4], 'dup' => ''];
+
+		if(!empty($m[5]))
+		{
+			$mics = [];
+			
+			$mics['p'] = (int)$m[6];
+			$mics['c'] = (int)$m[7];
+			$mics['n'] = (int)$m[8];
+			$mics['b'] = (int)$m[9];
+			$mics['u'] = (int)$m[10];
+			
+			if($mics['c'] < 20)
+			{
+				$pb = $mics['p'] + $mics['b'];
+				$nu = $mics['n'] + $mics['u'];
+				$pnd = $mics['p'] - $mics['n'];
+				$bud = $mics['b'] - $mics['u'];
+
+				if($pb < 30 && $pb < $nu && $nu > 20 || $pnd < -200 && $bud < -200)
+				{
+					$tfmframes[$i]['dup'] = 'p';
+					
+					if($i > 0 && $tfmframes[$i - 1]['dup'] != 'n')
+					{
+						$tfmframes[$i]['dup'] = 'c';
+					}
+				}
+				else if($nu < 30 && $nu < $pb && $pb > 20 || $pnd > 200 && $bud > 200)
+				{
+					$tfmframes[$i]['dup'] = 'n';
+					
+					if($i > 0 && $tfmframes[$i - 1]['dup'] == 'n')
+					{
+						$tfmframes[$i - 1]['dup'] = 'c';
+					}
+				}
+				else
+				{
+					$tfmframes[$i]['dup'] = 'c';
+					
+					if($i > 0 && $tfmframes[$i - 1]['dup'] == 'n')
+					{
+						$tfmframes[$i - 1]['dup'] = 'c';
+					}
+				}
+			}
+
+			$tfmframes[$i]['mics'] = $mics;
+			
+			$mint = 'c';
+			$minv = $mics[$mint];
+			
+			foreach($mics as $t => $mic) 
+			{
+				if($mic < $minv)
+				{
+					$mint = $t; 
+					$minv = $mic;
+				}
+			}
+
+			$tfmframes[$i]['micmin'] = ['t' => $mint, 'v' => $minv];
+		}
+	}
+
+#foreach($tfmframes as $i => $f) echo $i.' '.$f['dup'].PHP_EOL;
+#exit;
 
 	foreach($tfmframes as $i => $tfm)
 	{
@@ -566,14 +578,15 @@ print_r([$i, $tfm, $f]);
 	file_put_contents("$title-bogussc.txt", implode(PHP_EOL, $bogussc));
 }
 
-function sanitycheck2($title)
+function sanitycheck2()
 {
-	$bogusdups = [];
-
+	global $title;
 	global $tfmframes;
 	global $tdecframes;
 	global $ovrframes;
 	global $ovrscenes;
+	
+	$bogusdups = [];
 	
 	$tdecframes = [];
 	
@@ -809,8 +822,10 @@ function sanitycheck2($title)
 	}
 }
 
-function genranges($title)
+function genranges()
 {
+	global $title;
+	
 	$s = file_get_contents("$title-timecodes.txt");
 	
 	$sl = [];
@@ -871,6 +886,8 @@ function genranges($title)
 
 //
 
+init();
+
 if(!file_exists("$title-tfm-ovr.txt")) file_put_contents("$title-tfm-ovr.txt", '');
 if(!file_exists("$title-tdec-ovr.txt")) file_put_contents("$title-tdec-ovr.txt", '');
 //if(!file_exists("$title-tdeint-ovr.txt")) file_put_contents("$title-tdeint-ovr.txt", '');
@@ -897,7 +914,7 @@ Merge(c1, c2, 0.15)
 ConvertToYUV444(matrix="rec709")
 EOT;
 
-if(!file_exists("$title-topaz.avs")) file_put_contents("$title-topaz.avs", $avs);
+//if(!file_exists("$title-topaz.avs")) file_put_contents("$title-topaz.avs", $avs);
 
 // test
 
@@ -945,8 +962,24 @@ TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cth
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-function ffmpeg($title, $cmd, $avs)
+$avs_field0 = <<<EOT
+Import("$title.avs")
+ConvertToYV24
+SeparateRows(2)
+SelectEven
+EOT;
+
+$avs_field1 = <<<EOT
+Import("$title.avs")
+ConvertToYV24
+SeparateRows(2)
+SelectOdd
+EOT;
+
+function ffmpeg($cmd, $avs)
 {
+	global $title;
+	
 	$src = tempnam('.', $title);
 	file_put_contents($src, $avs);
 	register_shutdown_function(function() use($src) { unlink($src); });	
@@ -960,35 +993,178 @@ function ffmpeg($title, $cmd, $avs)
 	if(!empty($ret)) die($ret);
 }
 
-$out = strpos($argv[2], 'null') === false ? '-c:v huffyuv -aspect 720:480 "'.$title.'-huffyuv.avi"' : '-f null -';
-$force = isset($argv[3]) && $argv[3] == 'force';
+if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
+{
+	$trim = [];
+	$has_field = [false, false, false];
+	$prev_field = 2;
+	$inframe_s = 0;
+	$inframe_e = -1;
+	$useframe_s = 0;
+	$useframe_e = -1;
+	
+	foreach(explode("\n", file_get_contents("$title-tdec-debug.txt")) as $row)
+	{
+		$row = trim($row);
+		
+		if(!preg_match('/TDecimate: +inframe = ([0-9]+) +useframe = ([0-9]+)/i', $row, $m)) continue;
+		
+		$inframe = (int)$m[1];
+		$useframe = (int)$m[2];
+
+		$field = 2;
+		
+		if(isset($ovrframes[$useframe]))
+		{
+			$f = $ovrframes[$useframe];
+
+			$hl_scene = false;
+			
+			if(isset($f['type']))
+			{
+				$type = $f['type'];
+				
+				if(isset($type['value']) && ($type['value'] == 'h' || $type['value'] == 'l') && isset($type['scene']))
+				{
+					$scene = $type['scene'];
+					
+					if($scene['e'] > $scene['s'] && strlen($scene['t']) == 1)
+					{
+						$hl_scene = true;
+					}
+				}	
+			}
+			
+			if($hl_scene && isset($f['Q']['value']) && ($f['Q']['value'] == 4 || $f['Q']['value'] == 7))
+			{
+				$field = $f['type']['value'] == 'h' ? 0 : 1;
+			}
+		}
+		
+		$has_field[$field] = true;
+		
+		if($field != $prev_field || $prev_field != 2 && $useframe > $useframe_e + 1)
+		{
+			if($useframe_e >= 0)
+			{
+				if($prev_field != 2)
+				{
+					$trim[] = ['s' => $useframe_s, 'e' => $useframe_e, 'f' => $prev_field];
+				}
+				else
+				{
+					$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
+				}
+			}
+			
+			$inframe_s = $inframe;
+			$useframe_s = $useframe;
+		}
+		
+		$prev_field = $field;
+		
+		$inframe_e = $inframe;
+		$useframe_e = $useframe;
+	}
+	
+	if($prev_field != 2)
+	{
+		$trim[] = ['s' => $useframe_s, 'e' => $useframe_e, 'f' => $prev_field];
+	}
+	else
+	{
+		$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
+	}
+	
+	$fp = fopen($title.'-topaz-png.avs', 'w');
+	
+	if($has_field[2])
+	{
+		fprintf($fp, "i2 = ImageSource(file=\"%s-huffyuv_1.50x_1080x720_ahq-11_png\\%%06d.png\", start=0, end=%d)\n", $title, $inframe);
+	}
+
+	if($has_field[0])
+	{
+		fprintf($fp, "i0 = ImageSource(file=\"%s-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i0 = i0.Spline64Resize(i2.Width, i2.Height)\n", $title, $useframe);
+	}
+
+	if($has_field[1])
+	{
+		fprintf($fp, "i1 = ImageSource(file=\"%s-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i1 = i1.Spline64Resize(i2.Width, i2.Height)\n", $title, $useframe);
+	}
+
+	$sl = [];
+	$total = 0;
+	
+	foreach($trim as $i => $t)
+	{
+		fprintf($fp, "c%d = Trim(i%d, %d, %d)\n", $i, $t['f'], $t['s'], $t['e']);
+		$sl[] = sprintf("c%d", $i); //sprintf("Trim(c%d, %d, %d)", $t['f'], $t['s'], $t['e']);
+		$total += $t['e'] - $t['s'] + 1;
+	}
+	
+	//fputs($fp, 'UnalignedSplice('.implode(',', $sl).')');
+	fputs($fp, implode('+', $sl)."\n");
+	
+	fclose($fp);
+	
+	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
+	
+	$cmd = '-map 0:v -y -c:v ffvhuff -aspect 540:240';
+	
+	if($has_field[0])
+	{
+		$dst = $title.'-f0-huffyuv.avi';
+	
+		if($force || !file_exists($dst))
+		{
+			ffmpeg($cmd.' "'.$dst.'"', $avs_field0);
+		}
+	}
+	
+	if($has_field[1])
+	{
+		$dst = $title.'-f1-huffyuv.avi';
+	
+		if($force || !file_exists($dst))
+		{
+			ffmpeg($cmd.' "'.$dst.'"', $avs_field1);
+		}
+	}
+		
+	exit;
+}
+
+$out = strpos($argv[2], 'null') === false ? '-c:v ffvhuff -aspect 720:480 "'.$title.'-huffyuv.avi"' : '-f null -';
 
 if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		ffmpeg($title, '-map 0:v '.($force ? '-y ' : '').$out, $avs_1pass);
+		ffmpeg('-map 0:v '.($force ? '-y ' : '').$out, $avs_1pass);
 	}
 
-	sanitycheck1($title);
+	sanitycheck1();
 }
 else // if(isset($argv[2]) && strpos($argv[2], '2pass') !== false)
 {
 	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
 	{
-		ffmpeg($title, '-c copy -f null -', $avs_2pass1st);
+		ffmpeg('-c copy -f null -', $avs_2pass1st);
 	}
 
-	sanitycheck1($title);
+	sanitycheck1();
 
 	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
 	{
-		ffmpeg($title, '-map 0:v '.($force ? '-y ' : '').$out, $avs_2pass2nd);
+		ffmpeg('-map 0:v '.($force ? '-y ' : '').$out, $avs_2pass2nd);
 	}
 }
 
-sanitycheck2($title);
+sanitycheck2();
 
-genranges($title);
+genranges();
 
 ?>

@@ -2,10 +2,10 @@ Import("..\..\S03(Acorn)\common.avsi")
 
 title = ReplaceStr(ScriptFile(), ".avs", "")
 
-c1 = MPEG2Source("..\..\S03(Alliance)\V01\title_t01.d2v",cpu=4)
-c2 = MPEG2Source("..\..\S03(Acorn)\V01\title_t01.d2v",cpu=4)
+c1 = MPEG2Source("..\..\S03(Alliance)\V01\title_t02.d2v",cpu=4)
+c2 = MPEG2Source("..\..\S03(Acorn)\V01\title_t03.d2v",cpu=4)
 
-c1 = Trim(c1, 0, 14) + c1 # Acorn has 15 empty frames at the beginning, padding just to match the audio
+c1 = Trim(c1, 0, 24) + c1 # Acorn has 25 empty frames at the beginning, padding just to match the audio
 
 # need full resolution to move the fields by 1 pixel
 

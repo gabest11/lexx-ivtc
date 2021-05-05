@@ -25,15 +25,9 @@ c2 = Fix(c2, title)
 
 Overlay(c1, c2, mode="lighten")
 
-#Fix("S03E02")
-
 # cancel noise from the two maybe? (are they different, or one encoded from the other?)
 
-c = last
+#c = last
 #return StackHorizontal(Merge(c, c2), Overlay(c, c2, mode="difference"))
 #return StackVertical(Merge(c, c2).Crop(0,360,720,-0),c.Crop(0,360,720,-0))
 #Merge(c, c2) # Acorn is missing the sides, have to re-add (Overaly) those back if we do this
-
-# back to 4:2:0
-
-ConvertToYV12()
