@@ -65,3 +65,24 @@ function ConvertAllianceS03(clip c)
 	b = SelectOdd
 	Interleave(t, b).AssumeTFF.Weave
 }
+
+function Detect240p(clip c)
+{
+	# if there is no or very little difference visible:
+	#
+	# tl even fields are interpolated (2=(1+3)/2,4=(3+5)/2,...)
+	# tr odd fields are interpolated (1=(0+2)/2,3=(2+4)/2,...)
+	# bl even and odd fields are the same (0=1,2=3,...)
+	# br odd and even fields are the same (1=2,3=4,...)
+	
+	c1 = c.SeparateRows(2)
+	c2 = c.PointResize(c.Width, c.Height, src_top = 1, src_height = c.Height)
+	c2 = c2.SeparateRows(2)
+	Expr(c, "x[0,-1] x[0,+1] + 0.5 *")
+	SeparateRows(2)
+	e1 = Overlay(SelectEven, c1.SelectEven, mode = "difference")
+	o1 = Overlay(SelectOdd, c1.SelectOdd, mode = "difference")
+	e2 = Overlay(c1.SelectEven, c1.SelectOdd, mode = "difference")
+	o2 = Overlay(c2.SelectEven, c2.SelectOdd, mode = "difference")
+	StackVertical(StackHorizontal(e1, o1),StackHorizontal(e2, o2))
+}
