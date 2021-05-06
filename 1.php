@@ -1107,7 +1107,7 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	
 	//fputs($fp, 'UnalignedSplice('.implode(',', $sl).')');
 	fputs($fp, implode('+', $sl)."\n");
-	
+	fputs($fp, 'ConvertToYUV444(matrix="rec709")'."\n"); # ?
 	fclose($fp);
 	
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
