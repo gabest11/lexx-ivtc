@@ -29,7 +29,7 @@ function Fix2E(clip c)
 {
 	Fix2(c)
 	SeparateFields.SelectEven
-	Interleave(last, last)
+	Interleave(last, c.SeparateFields.SelectOdd)
 	Weave
 	#SeparateRows(2).SelectEven
 	#PointResize(c.Width, c.Height)
@@ -39,7 +39,7 @@ function Fix2O(clip c)
 {
 	Fix2(c)
 	SeparateFields.SelectOdd
-	Interleave(last, last)
+	Interleave(c.SeparateFields.SelectEven, last)
 	Weave
 	#SeparateRows(2).SelectOdd
 	#PointResize(c.Width, c.Height)

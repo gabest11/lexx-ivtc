@@ -14,6 +14,8 @@ $subtitle = [];
 $chapters = [];
 $about = dirname(__FILE__).'/about.txt';
 $title = '';
+$fps_mod = 0;
+$fps_demod = 0;
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
@@ -41,6 +43,25 @@ function is51($fn)
 	return $obj['streams'][0]['channels'] == 6;
 }
 
+function getfps($fn, &$mod, &$demod)
+{
+	$str = shell_exec('ffprobe -hide_banner -show_streams "'.$fn.'" -print_format json');
+	$obj = json_decode($str, true);
+	
+	foreach($obj['streams'] as $stream)
+	{
+		if($stream['codec_type'] == 'video' && !empty($stream['avg_frame_rate']))
+		{
+			$fps = explode('/', $stream['avg_frame_rate'], 2);
+			$mod = $fps[0];
+			$demod = $fps[1];
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 function getchapters($fn)
 {
 	$str = shell_exec('ffprobe -hide_banner -show_chapters "'.$fn.'" -print_format json');
@@ -63,7 +84,11 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 	$fn = $m[1].'tdec-ovr.txt';
 	
 	if(file_exists($fn)) $tdec_ovr = $fn;
+
+	$fn = $m[1].'huffyuv.avi';
 	
+	if(file_exists($fn)) getfps($fn, $fps_mod, $fps_demod);
+
 	foreach(['eng', 'hun', 'fra', 'rus'] as $lang)
 	{
 		$fn2 = rtrim($m[1], '-');
@@ -199,7 +224,7 @@ $cmd = [];
 $cmd[] = 'ffmpeg -hide_banner';
 if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
 if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1];} // $cmd[] = '-start_number '.$m[2];} // changing the start isn't compatible with the vfr timecode file
-if(strpos($src, "%") !== false) $cmd[] = '-r 30000/1001';
+if(strpos($src, ".avi") === false) $cmd[] = "-r $fps_mod/$fps_demod"; // -framerate? if the fps is not set to match the real duration, the audio will stop playing at a random position, ffmpeg tries to be smart when muxing or something
 $cmd[] = '-i "'.$src.'"';
 foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
 foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';

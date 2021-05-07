@@ -894,70 +894,47 @@ if(!file_exists("$title-tdec-ovr.txt")) file_put_contents("$title-tdec-ovr.txt",
 
 // source
 
-$avs = <<<EOT
+$avs_source = <<<EOT
 title = ReplaceStr(ScriptFile(), ".avs", "")
 MPEG2Source(title + ".d2v",cpu=4)
 EOT;
 
-if(!file_exists("$title.avs")) file_put_contents("$title.avs", $avs);
-
-// topaz
-
-$avs = <<<EOT
-c1 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=200000)
-c2 = FFVideoSource("$title-huffyuv.avi").ConvertToRGB24()
-c1 = c1.Trim(0, c2.FrameCount)
-#c1 = c1.Spline64Resize(c1.Height * 4 / 3, c1.Height)
-c2 = c2.Spline64Resize(c1.Width, c1.Height)
-Merge(c1, c2, 0.15)
-#StackHorizontal(c1, last)
-ConvertToYUV444(matrix="rec709")
-EOT;
-
-//if(!file_exists("$title-topaz.avs")) file_put_contents("$title-topaz.avs", $avs);
-
-// test
+if(!file_exists("$title.avs")) file_put_contents("$title.avs", $avs_source);
 
 $avs = <<<EOT
 Import("$title.avs")
 #showframenumber(x=5,y=475).separatefields.lanczosresize(720,480)
-deint2=yadifmod2(order=0)
-deint3=yadifmod2(order=1)
-f0=nnedi3(field=0)
-f1=nnedi3(field=1)
+deint2 = yadifmod2(order=0)
+deint3 = yadifmod2(order=1)
+f0 = nnedi3(field=0)
+f1 = nnedi3(field=1)
+EOT;
+
+// virtualdub
+
+$avs_virtualdub = <<<EOT
+$avs
 TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,display=true,ovr="$title-tfm-ovr.txt")
 #TDecimate(mode=0,hybrid=1,denoise=true,ovr="$title-tdec-ovr.txt")
 EOT;
 
-if(!file_exists("$title-virtualdub.avs")) file_put_contents("$title-virtualdub.avs", $avs);
+if(!file_exists("$title-virtualdub.avs")) file_put_contents("$title-virtualdub.avs", $avs_virtualdub);
 
 $avs_1pass = <<<EOT
-Import("$title.avs")
-deint2=yadifmod2(order=0)
-deint3=yadifmod2(order=1)
-f0=nnedi3(field=0)
-f1=nnedi3(field=1)
+$avs
 TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=3,hybrid=2,denoise=true,vfrDec=0,mkvOut="$title-timecodes.txt",output="$title-tdec.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
 $avs_2pass1st = <<<EOT
-Import("$title.avs")
-deint2=yadifmod2(order=0)
-deint3=yadifmod2(order=1)
-f0=nnedi3(field=0)
-f1=nnedi3(field=1)
+$avs
 TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,micout=2,output="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=4,denoise=true,output="$title-tdec.txt")
 crop(344,224,-344,-224)
 EOT;
 
 $avs_2pass2nd = <<<EOT
-Import("$title.avs")
-deint2=yadifmod2(order=0)
-deint3=yadifmod2(order=1)
-f0=nnedi3(field=0)
-f1=nnedi3(field=1)
+$avs
 TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cthresh,MI=$MI,PP=$PP,chroma=true,input="$title-tfm.txt",ovr="$title-tfm-ovr.txt")
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
@@ -966,14 +943,14 @@ $avs_field0 = <<<EOT
 Import("$title.avs")
 ConvertToYV24
 SeparateRows(2)
-SelectEven
+SelectOdd
 EOT;
 
 $avs_field1 = <<<EOT
 Import("$title.avs")
 ConvertToYV24
 SeparateRows(2)
-SelectOdd
+SelectEven
 EOT;
 
 function ffmpeg($cmd, $avs)
@@ -1037,7 +1014,7 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 			
 			if($hl_scene && isset($f['Q']['value']) && ($f['Q']['value'] == 4 || $f['Q']['value'] == 7))
 			{
-				$field = $f['type']['value'] == 'h' ? 0 : 1;
+				$field = $f['type']['value'] == 'h' ? 1 : 0;
 			}
 		}
 		
@@ -1085,34 +1062,60 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 
 	if($has_field[0])
 	{
-		fprintf($fp, "i0 = ImageSource(file=\"%s-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 		fprintf($fp, "i0 = i0.Spline64Resize(i2.Width, i2.Height)\n", $title, $useframe);
+//		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_3.00x_1080x720_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 	}
 
 	if($has_field[1])
 	{
-		fprintf($fp, "i1 = ImageSource(file=\"%s-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 		fprintf($fp, "i1 = i1.Spline64Resize(i2.Width, i2.Height)\n", $title, $useframe);
+//		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_3.00x_1080x720_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 	}
-
-	$sl = [];
+	
+	$cl = [];
 	$total = 0;
 	
 	foreach($trim as $i => $t)
 	{
-		fprintf($fp, "c%d = Trim(i%d, %d, %d)\n", $i, $t['f'], $t['s'], $t['e']);
-		$sl[] = sprintf("c%d", $i); //sprintf("Trim(c%d, %d, %d)", $t['f'], $t['s'], $t['e']);
+		$c = sprintf("c%d", $i);
+		fprintf($fp, "%s = Trim(i%d, %d, %d)\n", $c, $t['f'], $t['s'], $t['e']);
+		$cl[] = $c;
 		$total += $t['e'] - $t['s'] + 1;
 	}
+
+	// experiment to test if avisynth reads clips organized into a tree faster
+
+	$next = count($cl);
 	
-	//fputs($fp, 'UnalignedSplice('.implode(',', $sl).')');
-	fputs($fp, implode('+', $sl)."\n");
-	fputs($fp, 'ConvertToYUV444(matrix="rec709")'."\n"); # ?
+	$batchsize = 10;
+
+	if(0)
+	while(count($cl) > 1)
+	{
+		$cl2 = [];
+	
+		for($i = 0; $i < count($cl); $i += $batchsize)
+		{
+			$c = sprintf("c%d", $next++);
+			fprintf($fp, "%s = %s\n", $c, implode('+', array_slice($cl, $i, $batchsize)));
+			$cl2[] = $c;
+		}
+	
+		$cl = $cl2;
+	}
+	
+	//
+	
+	fputs($fp, implode('+', $cl)."\n");
+
 	fclose($fp);
 	
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
 	
 	$cmd = '-map 0:v -y -c:v ffvhuff -aspect 540:240';
+	//$cmd = '-map 0:v -y -c:v ffvhuff -aspect 360:240';
 	
 	if($has_field[0])
 	{
