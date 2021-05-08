@@ -1761,8 +1761,6 @@
 #      cPccc PccPc cPccp ccpcc pccpc cpccP ccPcc PcccP ccPcc cPccP
 # 200, PccPc cPc
 #      ccPcc pcc
-#
-# 30 blanks + fade-in
 
 141671,141878 ccppc
 141671,141878 -

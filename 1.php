@@ -1058,20 +1058,23 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	if($has_field[2])
 	{
 		fprintf($fp, "i2 = ImageSource(file=\"%s-huffyuv_1.50x_1080x720_ahq-11_png\\%%06d.png\", start=0, end=%d)\n", $title, $inframe);
+		
+		if($has_field[0] || $has_field[1])
+		{
+			// TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
+			
+			fprintf($fp, "i2 = i2.Spline64Resize(1080, 540)\n");
+		}
 	}
 
 	if($has_field[0])
 	{
-		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
-		fprintf($fp, "i0 = i0.Spline64Resize(i2.Width, i2.Height)\n", $title, $useframe);
-//		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_3.00x_1080x720_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_2.00x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 	}
 
 	if($has_field[1])
 	{
-		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.00x_1080x480_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
-		fprintf($fp, "i1 = i1.Spline64Resize(i2.Width, i2.Height)\n", $title, $useframe);
-//		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_3.00x_1080x720_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.00x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 	}
 	
 	$cl = [];
@@ -1114,8 +1117,9 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
 	
-	$cmd = '-map 0:v -y -c:v ffvhuff -aspect 540:240';
-	//$cmd = '-map 0:v -y -c:v ffvhuff -aspect 360:240';
+	$cmd = '-map 0:v -y -c:v ffvhuff -aspect 480:240'; 
+	
+	# upscale with topaz ai, aa, 2.25x, 1080x540, anything >=2.5x and the picture falls apart, small features like stripes and holes connect in a wrong way
 	
 	if($has_field[0])
 	{
