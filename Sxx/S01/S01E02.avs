@@ -103,9 +103,13 @@ function FixShower(clip c)
 	
 	# 181 frames
 	
-	super = MSuper(pel=1, hpad=0, vpad=0, chroma=true)
-	backward_vec = MAnalyse(super, blksize=32, isb = true, chroma=true, searchparam=1,search=0)
-	forward_vec = MAnalyse(super, blksize=32, isb = false, chroma=true, searchparam=1,search=0)
+	# flowing water is a difficult task...
+	#super = MSuper(pel=4, hpad=0, vpad=0)
+	#backward_vec = MAnalyse(super, blksize=32, overlap=4, isb = true, search=3)
+	#forward_vec = MAnalyse(super, blksize=32, overlap=4, isb = false, search=3)
+	super = MSuper(pel=1, hpad=0, vpad=0)
+	backward_vec = MAnalyse(super, blksize=32, isb = true, search=0, searchparam=1)
+	forward_vec = MAnalyse(super, blksize=32, isb = false, search=0, searchparam=1)
 	# 50% speed, 360 frames, only every other frame is blended, but cannot slow down the whole clip, it is a bit too much
 	#MFlowFps(super, backward_vec, forward_vec, num=2*FramerateNumerator(last), den=FramerateDenominator(last))
 	# 55% speed, exactly 325 frames

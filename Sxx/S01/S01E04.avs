@@ -10,3 +10,66 @@ Trim(c2, 107809, 107901) + \
 Trim(c1, 107932, 158522) + \
 Trim(c2, 158493, 158550) + \
 Trim(c1, 158580, 167263)
+
+function Fix1(clip c)
+{
+	# moth flying over the gigashadow
+	
+	Trim(c, 132527, 132680) # need 154 frames
+	SeparateFields
+	
+	# explosion has a few dups where it slighly moves and even misaligned c frames 
+	# not every field pair lies up completely
+	# pattern repeats every 19 frames
+	
+	e = SelectEven.SelectEvery(19, 1,3,5,6,7,9,10,12,13,15,16,19) # bit naughty asking the last frame outside the batch, but step size is just a step size, not a restriction
+	o = SelectOdd.SelectEvery(19, 0,2,3,5,6,8,10,12,13,15,16,18)
+	Interleave(e, o)
+	#SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # ccppc
+	Weave
+	AssumeFPS(30000, 1001)
+	
+	# 96 frames
+
+	super = MSuper(pel=4)
+	backward_vec = MAnalyse(super, blksize=16, overlap=8, isb = true, search=3)
+	forward_vec = MAnalyse(super, blksize=16, overlap=8, isb = false, search=3)
+	MFlowFps(super, backward_vec, forward_vec, num=38130, den=1001)#, ml=100000)
+	AssumeFPS(30000, 1001)
+
+	# 123 frames
+
+	SeparateFields
+	SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # ccppc
+	Weave
+	AssumeFPS(30000, 1001)
+}
+
+function Fix2(clip c)
+{
+	# Lexx firing at the gigashadow, on the oval display
+	
+	Trim(c, 138458, 138543) # need 86 frames
+	SeparateFields
+		
+	e = SelectEven.SelectEvery(FrameCount, 1,3,4,6,7,9,11,13,14,16,18,20,21,23,24,26,28,30,31,33,34,37,38,40,41,43,45,47,48,50,51,53,55,57,58,60,62,64,65,67,68,70,72,74,75,77,78,80,82,84,85)
+	o = SelectOdd.SelectEvery(FrameCount, 0,2,4,6,7,9,10,12,14,16,17,19,20,22,24,26,27,29,31,33,34,36,37,39,41,43,44,46,48,50,51,53,54,56,58,60,61,63,64,66,68,70,71,73,75,77,78,80,81,83,85)
+	Interleave(e, o)
+	#SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # ccppc
+	Weave
+	AssumeFPS(30000, 1001)
+
+	# 50 frames
+
+	super = MSuper(pel=4)
+	backward_vec = MAnalyse(super, blksize=16, overlap=8, isb = true, search=3)
+	forward_vec = MAnalyse(super, blksize=16, overlap=8, isb = false, search=3)
+	MFlowFps(super, backward_vec, forward_vec, num=51500, den=1001)#, ml=100000)
+	AssumeFPS(30000, 1001)
+}
+
+Trim(0, 132526) + \
+Fix1 + \
+Trim(132681, 138457) + \
+Fix2 + \
+Trim(138544, 0)

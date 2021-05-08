@@ -1659,8 +1659,25 @@
 132327,132447 pcccp
 132448,132526 c # fg cccpp, bg 29.97
 132448,132526 ---++
-132527,132680 pcppcppcpccpccpccpc
-132602 - # MIC = 109
+
+# by field (they are the same, the first is 10 frame ahead, pattern repeats in every 19 frames)
+#
+# 132527 pcp
+#        cpc
+# 132530 ccpcc pccpc cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp
+#        cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp cpccp
+# 132580 ccpcp cpccp ccpcc pccpc cpcpc pccpc cpccp ccpcc pcpcp ccpcc
+#        ccpcc pccpc cpcpc pccpc cpccp ccpcc pcpcp ccpcc pccpc cpccp
+# 132630 pccpc cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp
+#        cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp ccpcp ccpcc
+# 132680 c
+         p
+       
+#132527,132680 pcppcppcpccpccpccpc
+#132602 - # MIC = 109
+
+132527,132680 ccppc # fix1
+
 132681,132747 c # fg ppccc, bg ccppc, some flying rocks 29.97
 132681,132747 +
 132748,132807 ppccc # 59.94i
@@ -1754,9 +1771,18 @@
 138307,138457 ccppc
 138307,138457 - # MIC high
 138307 +
-138458,138543 c
-138458,138543 i 1
-138458,138543 PP 3
+
+# 138458 pc
+#        cp
+# 138460 pccpc cpcpc pccpc pcpcc pccpc pcpcc pccpp ccpcc pcpcp ccpcc
+#        cpcpc cpccp cpcpc cpccp cpcpc cpcpc pccpc cpcpc pccpc pcpcc
+# 138510 pcpcp ccpcp cpccp ccpcp cpccp ccpcp cpcc
+#        pccpc pcpcc pccpc pcpcc pcpcp ccpcc pcpc
+       
+138458,138543 c # fix2
+#138458,138543 i 1
+#138458,138543 PP 3
+
 138544,138687 ccppc
 138688,138772 cppcc # 59.94i
 138688,138772 +
