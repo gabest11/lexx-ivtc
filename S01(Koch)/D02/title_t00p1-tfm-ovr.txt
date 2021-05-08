@@ -305,19 +305,56 @@
 21290,21334 +--+-
 21335,21438 ccppc
 21418,21474 + # crossfade
+
 # this part makes no sense
+
+# this is not fixed here, see Sxx\S01\S01E02.avs for a solution
+#
+# selecting every c is mostly okay (and doubling the frame count)
+# there are a few c's where the following p is required to make it line up with the crossfaded next scene
+# I corrected those by hand
+#
+# 21430 pcpcp ccppc cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp pcccc
+#       pccpp ccpcp cpccp cpcpc pcpcc pcpcp ccppc cpcpc pccpp ccpcc
+# 21480 pcpcp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp
+#       pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp cpccp cpcpc pcpcc
+# 21530 cpccp cpcpc pcpcc pcpcp ccppc cpcpc ...
+#       pcpcp ccppc cpcpc pccpc pcpcp cpccp ...
+
 21439,21478 ccccpcpcccpccccpcpcccppcccpcpccccpcccpcc
 21479,21518 cccpcpccccpcpcccpccccpcpccccpcccpcpccccp
 21519,21526 cpcccpcc
+
 21527,21564 + # crossfade
+
+# 21530 pccpp ccpcp cpccp cpcpc cpcpc pccpp ccpcp cpcpc pccpc pcpcc
+#       pccpc pcpcc pcpcp ccpcp cpccp pccpc pcpcc ppccp cpcpc cpcpc
+# 21580 ppccp cpcpc cpcpc pccpc pcpcc ppccp cpcpc cpcpc pccpc pcpcc
+#       pcpcp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp cpcpc cppcc
+# 21630 ppccp cpcpc cpcpc pccpc pcpcp cpccp cpcpc cpcpc pccpp ccpcp
+#       pcpcp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp cpcpc cppcc
+# 21680 cpccp cpcpc cpcpc pccpp ccp..
+#       pcpcp ccpcp cpccp cpcpc cpp..
+      
 21544,21583 ccpcpccccpcccccpccccpcccpcpccccpcpcccpcc
 21584,21623 ccpcpccccpcpccccpcccccpccccpcpccccpcpccc
 21624,21663 cpcccccpccccpcpccccpcpccccpcccpcpccccpcp
 21664,21688 ccccpcpcccppcccpcpccccpcc
+
 21654,21709 + # crossfade
+
+# 21655 cpccp
+#       ccpcc
+# 21660 cpccp pccpc pcpcc pcpcp ccpcp cpccp pccpc pcpcc pcpcp ccppc
+#       pcpcp ccppc cpcpc pccpc pcpcc ppccp cpcpc cpcpc pccpp ccpcp
+# 21710 cpccp cpcpc cpcpc pccpc pcpcc ppccp cpcpc cpcpc ppccc cpccc
+#       cccpp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp pccpc cccpc
+      
 21689,21728 cpccccpcpccccpcccccpccppcccpcpccccpcpccc
 21729,21750 cpcccccpccccpcpccccpcc
+
 # transitions into ppccc from 21751
+
 21751,21796 ppccu # crossfade, ppccc + pcccp
 21797,21838 cccpp
 21839,21884 uppcc # crossfade, cppcc + ppccc

@@ -294,22 +294,15 @@
 21214,21289 cppcc
 21290,21334 luphc # crossfade, ppccc + ccppc
 21290,21334 +--+-
-21335,21438 ccppc
-21418,21474 + # crossfade
-# this part makes no sense
-21439,21478 ccccpcpcccpccccpcpcccppcccpcpccccpcccpcc
-21479,21518 cccpcpccccpcpcccpccccpcpccccpcccpcpccccp
-21519,21526 cpcccpcc
-21527,21564 + # crossfade
-21544,21583 ccpcpccccpcccccpccccpcccpcpccccpcpcccpcc
-21584,21623 ccpcpccccpcpccccpcccccpccccpcpccccpcpccc
-21624,21663 cpcccccpccccpcpccccpcpccccpcccpcpccccpcp
-21664,21688 ccccpcpcccppcccpcpccccpcc
-21654,21709 + # crossfade
-21689,21728 cpccccpcpccccpcccccpccppcccpcpccccpcpccc
-21729,21750 cpcccccpccccpcpccccpcc
-# transitions into ppccc from 21751
-21751,21796 ppccu # crossfade, ppccc + pcccp
+
+# shower fix
+
+21335,21429 ccppc
+21430,21754 ccppc # replaced section
+21755,21796 uppcc # crossfade, ppccc (from the original previous scene, before the replacement) + pcccp
+
+#
+
 21797,21838 cccpp
 21839,21884 uppcc # crossfade, cppcc + ppccc
 21839 + # can't drop this one, 21835 is also dropped
@@ -1541,7 +1534,7 @@
 115994,116103 cppcc
 
 #116104,116675 c # crossfade, pp 01/56 34/89 01/56 23/78 12/67 45/90 45/90 12/67 01/56
-#idea: add macros to TIVTC to somehow convert these into the listing below
+#idea: add macros to TIVTC to somehow convert these into the listing above
 116104,116116 cppcc
 #116117,116178 cluph # crossfade, cccpp + cppcc
 #116117,116178 -+--+
