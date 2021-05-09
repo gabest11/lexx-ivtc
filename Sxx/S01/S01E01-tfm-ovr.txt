@@ -247,11 +247,8 @@
 #      cPccp ccccP ccpcc ccPcc pcccP cccpc ccPcc cpccc Pcccp ccPcc
 # 450, pcccc pccpc cccPc
 #      ccpcc Pcccc pccPc
-#
-# number of c's 348, need some extra to make it 465 after pulldown
-# 30 blank frames at the beginning with fade-in may do it
 
-18259,18723 ccppc
+18259,18723 c#ccppc
 
 18724,18937 c # already deinterlaced
 18938,19117 cppcc

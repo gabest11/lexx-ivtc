@@ -1,3 +1,5 @@
+Import("../../common.avsi")
+
 # Allience release (better bitrate) and the missing section from Koch's, cut to match Koch's audio track
 
 c1 = MPEG2Source("..\..\S01(Alliance)\D03\title_t00.d2v",cpu=4)

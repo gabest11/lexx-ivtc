@@ -1199,10 +1199,12 @@
 104533,104757 cppcc
 104758,104899 cppcc
 
-#             c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc # repeats three times
-104900,105040 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
-104900,105040 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
-104900,105040 Q 5
+#            c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc # repeats three times
+#104900,105040 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
+#104900,105040 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
+#104900,105040 Q 5
+
+104900,105040 ccppc # fix1
 
 # c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc
 # the goal is to make it play as smooth as possible

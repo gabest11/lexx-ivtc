@@ -1,4 +1,4 @@
-function Fix1(clip c)
+function Fix240p1(clip c)
 {
 	# denoise upsampled 480p without interpolation
 	# every other line should be the same
@@ -11,7 +11,7 @@ function Fix1(clip c)
 	#PointResize(c.Width, c.Height)
 }
 
-function Fix2(clip c)
+function Fix240p2(clip c)
 {
 	# denoise interpolated 480p
 	# extract original value from interpolated lines 
@@ -25,9 +25,9 @@ function Fix2(clip c)
 	return c
 }
 
-function Fix2E(clip c)
+function Fix240p2E(clip c)
 {
-	Fix2(c)
+	Fix240p2(c)
 	SeparateFields.SelectEven
 	Interleave(last, c.SeparateFields.SelectOdd)
 	Weave
@@ -35,9 +35,9 @@ function Fix2E(clip c)
 	#PointResize(c.Width, c.Height)
 }
 
-function Fix2O(clip c)
+function Fix240p2O(clip c)
 {
-	Fix2(c)
+	Fix240p2(c)
 	SeparateFields.SelectOdd
 	Interleave(c.SeparateFields.SelectEven, last)
 	Weave
@@ -45,13 +45,13 @@ function Fix2O(clip c)
 	#PointResize(c.Width, c.Height)
 }
 
-function Fix(clip c, string title)
+function Fix240p(clip c, string title)
 {
 	last = c
-	ConditionalFilter(Fix1, last, "_fix", "==", "1")
+	ConditionalFilter(Fix240p1, last, "_fix", "==", "1")
 	# not sure about these yet
-	#ConditionalFilter(Fix2E, last, "_fix", "==", "2")
-	#ConditionalFilter(Fix2O, last, "_fix", "==", "3")
+	#ConditionalFilter(Fix240p2E, last, "_fix", "==", "2")
+	#ConditionalFilter(Fix240p2O, last, "_fix", "==", "3")
 	ConditionalReader(title + "-var-fix.txt", "_fix")
 }
 
@@ -85,4 +85,47 @@ function Detect240p(clip c)
 	e2 = Overlay(c1.SelectEven, c1.SelectOdd, mode = "difference")
 	o2 = Overlay(c2.SelectEven, c2.SelectOdd, mode = "difference")
 	StackVertical(StackHorizontal(e1, o1),StackHorizontal(e2, o2))
+}
+
+function FixSlowMoI(clip c, int "start", int "end", int "fps_num", int "fc", bool "pd", int "fin", int "fout", val_array "f")
+{
+	last = c
+	
+	fps_num = Default(fps_num, 30000)
+	fc = Default(fc, FrameCount)
+	pd = Default(pd, true)
+	fin = Default(fin, 0)
+	fout = Default(fout, 0)
+	
+	Trim(start, end)
+	SeparateFields
+	e = SelectEven.SelectEvery(fc, f[0])
+	o = SelectOdd.SelectEvery(fc, f[1])
+	Interleave(e, o)
+	Weave
+	AssumeFPS(c)
+	
+	if(fin > 0) {Trim(0, fin).nnedi3 + Trim(fin + 1, 0)}
+	if(fout > 0) {Trim(0, FrameCount - fout - 1) + Trim(FrameCount - fout, 0).nnedi3}
+	
+	if(fps_num != 30000)
+	{
+		super = MSuper(pel=4) #, hpad=0, vpad=0
+		backward_vec = MAnalyse(super, blksize=32, overlap=8, isb=true, search=3)
+		forward_vec = MAnalyse(super, blksize=32, overlap=8, isb=false, search=3)
+		MFlowFps(super, backward_vec, forward_vec, num=fps_num, den=FrameRateDenominator)#, ml=100000)
+		AssumeFPS(c)
+	}
+	
+	if(pd)
+	{
+		SeparateFields
+		SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # ccppc
+		Weave
+		AssumeFPS(c)
+	}
+	
+	#c = last
+	#assert(FrameCount == end - start + 1, Format("{} {}", FrameCount, end - start + 1))
+	#return c
 }

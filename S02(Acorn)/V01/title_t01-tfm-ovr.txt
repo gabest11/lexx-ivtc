@@ -260,10 +260,12 @@
 18418,18642 cppcc
 18643,18784 cppcc
 
-#             c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc # repeats three times
-18785,18925 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
-18785,18925 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
-18785,18925 Q 5
+#            c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc # repeats three times
+#18785,18925 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
+#18785,18925 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
+#18785,18925 Q 5
+
+18785,18925 ccppc # fix1
 
 # c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc
 # the goal is to make it play as smooth as possible

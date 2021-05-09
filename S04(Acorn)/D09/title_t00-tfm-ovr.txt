@@ -299,12 +299,22 @@
 22615,22676 cccpp
 22615,22676 ---++
 22677,22759 pcccp
-22729,22789 + # crossfade
-22760,22780 ppcccppcccpccppcccppc
-22781,22801 ppcccppcccpccppcccpcc
-22802,22822 ppcccppccpcccppcccpcc
-22823,22843 ppcccppcppcccppcccpcc
-22844,22860 ppcccppcppcccppcc
+22729,22759 + # fade-out (fade-in deinterlaced in fix1)
+
+# 22760 cpccc pcccc pccpc cccpc cpccc cpccc cpccp ccccp ccpcc ccpcc
+#       ccpcc ccpcc pcccc pcccc pccpc cccpc cpccc cpccc pcccp ccccp
+# 22810 cpccc pcccc pccpc cccpc cpccc cpccc cpccp ccccp ccpcc ccpcc
+#       ccpcc ccpcc cpccc pcccc pccpc cccpc cpccc cpccc cpccp ccccp
+# 22860 c
+#       c
+      
+# single frame difference between the two lines at 22800/1
+#22760,22809 cpcccppcccpccppcccppcppcccppcccpccppcccpccppcccppc
+#22810,22859 cpcccppcccpccppcccppcppcccppcccpccppcccppcppcccppc
+#22860 c
+
+22760,22860 ccppc # fix1
+
 22861,22950 cppcc
 22951,23061 # ppccc ? cannot see
 23062,23352 ccppc
@@ -696,7 +706,18 @@
 61671,61771 ccppc
 61772,61943 cccpp
 61944,62170 pcccp
-62171,62260 cccpccpcppcppcpccpccpccpc
+
+# 62170                                                        cpcp
+#                                                              cpcc
+# 62175 ccpcp ccpcc pccpc cpccp ccpcp ccpcp ccpcc pccpc cpccp ccpcp
+#       pccpc cpccp cpccp cpccp ccpcc pccpc cpccp cpccp cpccp ccpcc
+# 62225 ccpcp ccpcc pccpc cpccp ccpcp ccpcp ccpcc p
+#       pccpc cpccp cpccp cpccp ccpcc pccpc cpccp c
+      
+# 62171,62260 cccpccpcppcppcpccpccpccpc
+
+62171,62260 ccppc
+
 62261,62351 ccppc
 62352,62428 ppccc
 62429,62470 ccppc

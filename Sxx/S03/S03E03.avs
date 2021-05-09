@@ -1,4 +1,4 @@
-Import("..\..\S03(Acorn)\common.avsi")
+Import("../../common.avsi")
 
 title = ReplaceStr(ScriptFile(), ".avs", "")
 
@@ -18,8 +18,8 @@ c1 = ConvertAllianceS03(c1)
 
 # denoise single field sections
 
-c1 = Fix(c1, title)
-c2 = Fix(c2, title)
+c1 = Fix240p(c1, title)
+c2 = Fix240p(c2, title)
 
 # replace the clipped brighter pixels with Acorn's
 

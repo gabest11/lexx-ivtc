@@ -304,10 +304,10 @@
 16003 -
 16048 -
 16061,16165 cppcc
-16166,16325 c # single field, many dups # ? make this smoother
+16166,16325 c # single field, many dups # ... ppcpc pcpcp ... # fix1
 16166,16325 +
 16166,16325 Q 7
-16326,16382 c # single field, many dups
+16326,16382 c # single field, many dups # same # fix2
 16326,16382 +
 16326,16382 Q 7
 16383,16400 c # crossfade
@@ -589,13 +589,14 @@
 38354,38377 + # crossfade
 #38374,38496 c
 # change to c and blend the dup p frames that cannot be dropped in a group of five
-38497,38574 cpcccccpcccpcccccppccpccpcccpcccccppccpccccccpcccccppccpccpccccccpccppcccccpcc
-38497,38574 ----+---------+----------------+---------+------+-------------+---------+-----
-#38497,38574 c#cpccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcc
-#38497,38574 #-+--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+--
-38497,38574 Q 5
-#cpc cpccp cccpc cpccp pccpc cpccc pccpc cppcc pccpc ccpcc pccpp ccpcc pcccp ccpcc ppccp ccpcc
-#+-+ ++++- +++-+ ++++- +++-+ +-+++ -++++ +-+++ -++++ ++-++ +++-+ ++-++ -++++ ++-++ -++++ ++-++
+#38497,38574 cpcccccpcccpcccccppccpccpcccpcccccppccpccccccpcccccppccpccpccccccpccppcccccpcc
+#38497,38574 ----+---------+----------------+---------+------+-------------+---------+-----
+##38497,38574 c#cpccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcc
+##38497,38574 #-+--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+--
+#38497,38574 Q 5
+##cpc cpccp cccpc cpccp pccpc cpccc pccpc cppcc pccpc ccpcc pccpp ccpcc pcccp ccpcc ppccp ccpcc
+##+-+ ++++- +++-+ ++++- +++-+ +-+++ -++++ +-+++ -++++ ++-++ +++-+ ++-++ -++++ ++-++ -++++ ++-++
+38497,38574 ccppc # fix3
 38575,38684 c
 38685,38823 pcccp
 38824,39031 cppcc

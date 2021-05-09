@@ -2,8 +2,8 @@ Import("../../common.avsi")
 
 title = ReplaceStr(ScriptFile(), ".avs", "")
 
-c1 = MPEG2Source("..\..\S03(Alliance)\V01\title_t01.d2v",cpu=4)
-c2 = MPEG2Source("..\..\S03(Acorn)\V01\title_t01.d2v",cpu=4)
+c1 = MPEG2Source("..\..\S03(Alliance)\V01\title_t03.d2v",cpu=4)
+c2 = MPEG2Source("..\..\S03(Acorn)\V01\title_t04.d2v",cpu=4)
 
 c1 = Trim(c1, 0, 14) + c1 # Acorn has 15 empty frames at the beginning, padding just to match the audio
 
@@ -15,6 +15,10 @@ c2 = c2.ConvertToYV24()
 # correct Alliance levels
 
 c1 = ConvertAllianceS03(c1)
+
+# the ending is cut, replace it from the other
+
+c1 = Trim(c1, 0, 86032) + Trim(c2, 86033, -0)
 
 # denoise single field sections
 
