@@ -774,7 +774,16 @@
 60174,60386 c
 60174,60386 +
 #60174,60386 Q 7 # symbol
-60387,60416 ccccpccppcppccpcccpccpcccpcppc
+
+# 60387 pcc
+#       cpc
+# 60390 cpccp ccpcc cpccc pccpc cpccp cc
+#       ccpcc cpccp ccpcc pcccp cccpc cp
+      
+# 60387,60416 ccccpccppcppccpcccpccpcccpcppc
+
+60387,60416 ccppc # fix5
+
 60417,60473 c
 60417,60473 +
 #60417,60473 Q 7 # symbol
@@ -1127,17 +1136,35 @@
 88098,88138 c
 88139,88172 cppcc
 
-88173,88182 cpcccpcccp
-88183,88192 cppcppcpcc
-88193,88202 ccccccccpc
-88203,88212 cpcppcppcp
-88213,88222 cccccccccc
-88223,88227 pccpc
+# slow motion applied after ccppc pulldown
+
+#88173,88182 cpcccpcccp
+#88183,88192 cppcppcpcc
+#88193,88202 ccccccccpc
+#88203,88212 cpcppcppcp
+#88213,88222 cccccccccc
+#88223,88227 pccpc
+#88173,88227 -
+
+# 88173    pc cpcpc
+#          pc cpccp
+# 88180 ccpcp ccpcc pccpc cpccp cpccp cpccp ccpcc pccpc cpcpc cpc
+#       cccpc cpccp cpcpc cpccp ccpcc pccpc cpcpc pccpc cpccp ccp
+
+88173,88227 ccppc # fix2
 88173,88227 -
 
-88228,88237 pccpccpppc
-88238,88267 pccpccpcpc
-88268,88272 ppcpc
+#88228,88237 pccpccpppc
+#88238,88267 pccpccpcpc
+#88268,88272 ppcpc
+
+# 88228    cc
+#          cc
+# 88230 ccccc pccpc cpccp cpcpc cpccp cpcpc cpccp cpcpc cpc
+#       ccccc ccpcp cpccp ccpcp cpccp ccpcp ccpcp ccpcc pcp
+
+88228,88272 ccppc # fix3
+      
 88273 u
 88274,88308 p
 88309,88413 c
@@ -1747,14 +1774,23 @@
 130077,130145 cccpp
 130146,130264 c
 
-130265,130274 cccccpccpc
-130275,130284 ppcppcpccp
-130285,130294 ccpccccccc #pccpccpccc
-130295,130304 pccpccpppp
-130305,130314 cppcpccccc
-130315,130324 ccccccccpc
-130325,130334 pppppcpccp
-130335,130342 cccccccc
+# 130265 cccpc pccpc pccpc cpccp ccpcc pccpc pccpc pccpc cpccp ccpcc
+#        cccpc cpccp ccpcc pcpcc pcpcc pccpc cpccp ccpcc pcpcc pcpcc
+# 130315 pccpc pccpc pccpc cpccp ccpcc pcc
+#        pccpc cpccp ccpcc pcpcc pcpcc pcc
+       
+#130265,130274 cccccpccpc
+#130275,130284 ppcppcpccp
+#130285,130294 ccpccccccc #pccpccpccc
+#130295,130304 pccpccpppp
+#130305,130314 cppcpccccc
+#130315,130324 ccccccccpc
+#130325,130334 pppppcpccp
+#130335,130342 cccccccc
+
+130265,130342 ccppc # fix4
+130330 + # brightness level change
+130330 Q 2
 
 130343,130400 ppccc
 130401,130444 cppcc

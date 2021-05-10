@@ -412,7 +412,7 @@
 32827,32931 Q 5
 32932,33150 cppcc
 33151,33331 cppcc
-33332,33421 c
+33332,33421 c # field skips
 33332,33421 +
 33422,33784 pcccp
 #33422,33784 +---+ # clouds (colums jitter, sacrifice the slow moving clouds?)
@@ -477,11 +477,12 @@
 41173,41187 cppcc
 41188,41227 cppcc
 #41228,41297 cppcccpcppcccpcppccccccp
-41228,41296 ccpcuccccpcuccccpcuccucc # make it smooth
-41228,41296 -+--+-+-+--+-+-+--+--+-+
-41228,41296 Q 5
-41297 h # ends on u
-41297 +
+#41228,41296 ccpcuccccpcuccccpcuccucc # make it smooth
+#41228,41296 -+--+-+-+--+-+-+--+--+-+
+#41228,41296 Q 5
+#41297 h # ends on u
+#41297 +
+41228,41297 c # fix4
 41298,41465 cccpp
 41466,41815 ccppc
 41816,41906 pcccp
@@ -587,7 +588,7 @@
 #
 # last frame of the previous scene 31 times + 89 c's including pulldown
 
-46847,46966 cccpp
+46847,46966 c # fix2
 
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
@@ -805,10 +806,23 @@
 63825,63881 ppccc
 63882,64060 ccppc
 64061,64082 cppcc
-64083,64088 c # who did this sequence?
-64089,64097 cpccc
-64098,64151 cppcc
-64152,64181 cppcc
+
+# 64083    cc ccccc
+#          cc ccccc
+# 64090 pcccp pcccp ccccp ccccp ccccp ccccp ccccp ccccp ccccp ccccp
+#       Pcccp cpccc cpccc cpccc cpccc cpccc cpccc cpccc cpccc cpccc
+# 64140 ccccp ccccp cccpc cccpc cccpc cccpc cccpc cccpc cc
+#       cpccc cpccc cpccc pcccc pcccc pcccc pcccc pcccc pc
+#
+# P: one field advances 1 frame, the other 2 frames, just ignore it, the next c is in sync
+
+#64083,64088 c # who did this sequence?
+#64089,64097 cpccc
+#64098,64151 cppcc
+#64152,64181 cppcc
+
+64083,64181 ccppc # fix6
+
 64182,64262 cccpp
 64182,64262 - # MIC high
 64263,64318 cccpp
@@ -821,7 +835,7 @@
 64654,64734 cccpp
 64735,64772 ccppc
 64743 + # ?
-64773,64812 c
+64773,64812 c # fields advance 1 and 2 fields, not in sync
 64773,64812 +
 64813,64851 cccpp
 64852,64862 cppcc
@@ -967,8 +981,19 @@
 72684,72757 ccppc # it's 23.976, but the blinking led is 59.94i
 72684,72757 +
 72684,72757 Q 5
-72758,72785 ppcccpccpccppc # wtf?
-72786,72842 ppccpcccpccppc # p moves one position to the left
+
+# 72758    pc
+#          cc
+# 72760 cccpc cpccp ccpcc ccpcc pccpc cpccc pcccp ccpcc pcccp cccpc
+#       pccpc ccpcc cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pccpc
+# 72810 cpccp cccpc ccpcc pccpc ccpcc cpccp ccp
+#       cccpc cpccp ccpcc ccpcc pccpc cpccc cpc
+     
+#72758,72785 ppcccpccpccppc # wtf?
+#72786,72842 ppccpcccpccppc # p moves one position to the left
+
+72758,72842 ccppc # fix7
+
 72843,72957 cccpp
 72843,72957 +
 72843,72957 Q 5
@@ -1339,9 +1364,15 @@
 105552,105688 cppcc
 105689,105731 cccpp
 105732,105845 ppccc
-105846,105886 c
-105846,105886 +
-#105846,105886 Q 5
+
+105846,105864 cppcc
+105865,105886 cppcc
+105846,105886 -
+105848 +
+105853 +
+105864,105866 +
+105846,105886 Q 7
+
 105887,106068 ppccc
 106069,106161 ccppc
 106162,106221 cppcc
@@ -1470,25 +1501,47 @@
 
 # plan B, make it smooth instead
 
+#114068 l
+#114068 +
+#114069,114084 ccccuccucccccccp
+#114069,114084 -+--+--+-+--+-+-
+#114085,114132 ccccuccuccccpccc
+#114085,114132 -+--+--+-+-+--+-
+#114133,114148 ccccucccccccpccc
+#114133,114148 -+--+-+--+-+--+-
+#114149,114180 cuccucccccccpccc
+#114149,114180 -+--+-+--+-+--+-
+#114181,114244 cuccuccccpcccccc
+#114181,114244 -+--+-+-+--+--+-
+#114245,114276 cucccccccpcccccc
+#114245,114276 -+-+--+-+--+--+-
+#114277,114292 cuccccpccpcucccc
+#114277,114292 -+-+-+--+--+--+-
+#114293,114321 cuccccpccccucccc
+#114293,114321 -+-+-+--+--+--+-
+#114069,114321 Q 5
+
+# plan C
+
+# 114069 c
+#        c
+# 114070 pccpc cpcpc cpcpc cpccp ccpcp cpccp ccpcc pccpc pcpcc pccpc
+#        cpcpc cpccp ccpcc pcpcp ccpcc pccpc pccpc pccpc cpccp cpccp
+# 114120 cpccp cpcpc cpccp ccpcp ccpcp ccpcc pccpc pccpc pccpc cpccp
+#        cpccp ccpcc pcpcc pcpcc pccpc cpcpc pccpc cpccp ccpcp cpccp
+# 114170 cpccp cpccp ccpcc pcpcp ccpcc pccpc cpcpc pccpc cpccp ccpcp
+#        ccpcc pccpc pcpcc pccpc cpcpc cpcpc cpccp ccpcp ccpcp ccpcc
+# 114220 cpccp ccpcc pccpc pcpcc pccpc cpcpc cpcpc cpccp ccpcp ccpcp
+#        pccpc pccpc pccpc cpccp cpcpc cpccp ccpcc pcpcp ccpcc pccpc
+# 114270 ccpcc pccpc pcpcc pccpc cpccp cpcpc cpccp ccpcc pcpcp ccpcc
+#        cpcpc pccpc cpccp ccpcp cpccp ccpcc pcpcc pcpcc pccpc cpcpc
+# 114320 pc
+#        cp
+
 114068 l
 114068 +
-114069,114084 ccccuccucccccccp
-114069,114084 -+--+--+-+--+-+-
-114085,114132 ccccuccuccccpccc
-114085,114132 -+--+--+-+-+--+-
-114133,114148 ccccucccccccpccc
-114133,114148 -+--+-+--+-+--+-
-114149,114180 cuccucccccccpccc
-114149,114180 -+--+-+--+-+--+-
-114181,114244 cuccuccccpcccccc
-114181,114244 -+--+-+-+--+--+-
-114245,114276 cucccccccpcccccc
-114245,114276 -+-+--+-+--+--+-
-114277,114292 cuccccpccpcucccc
-114277,114292 -+-+-+--+--+--+-
-114293,114321 cuccccpccccucccc
-114293,114321 -+-+-+--+--+--+-
-114069,114321 Q 5
+114068 Q 7
+114069,114321 ccppc # fix5
 
 114322,114413 ppccc
 114414,115431 ccppc
@@ -1540,9 +1593,12 @@
 118189,118918 cccpp
 118919,119465 ccppc
 119466,119631 pcccp # skips a p
-119632,119872 c # wtf
-119632,119872 +
-119632,119872 Q 5
+
+#119632,119872 c # wtf
+#119632,119872 +
+#119632,119872 Q 5
+119632,119872 ccppc # fix8
+
 119873,120248 pcccp
 120249,120438 ccppc
 120439,121135 ccppc

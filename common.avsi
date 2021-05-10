@@ -87,32 +87,56 @@ function Detect240p(clip c)
 	StackVertical(StackHorizontal(e1, o1),StackHorizontal(e2, o2))
 }
 
-function FixSlowMoI(clip c, int "start", int "end", int "fps_num", int "fc", bool "pd", int "fin", int "fout", val_array "f")
+function FieldChecker(clip c)
+{
+	c.SeparateFields
+	StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
+}
+
+function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", bool "pd", int "fin", int "fout", int "mv_search", val_array "f")
 {
 	last = c
 	
 	fps_num = Default(fps_num, 30000)
 	fc = Default(fc, FrameCount)
+	ivtc = Default(ivtc, 0)
 	pd = Default(pd, true)
 	fin = Default(fin, 0)
 	fout = Default(fout, 0)
+	mv_search = Default(mv_search, 3)
 	
 	Trim(start, end)
 	SeparateFields
 	e = SelectEven.SelectEvery(fc, f[0])
 	o = SelectOdd.SelectEvery(fc, f[1])
+	if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
+	if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
+	if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
+	if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
+	if(ivtc == 5) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # pcccp
 	Interleave(e, o)
 	Weave
 	AssumeFPS(c)
 	
-	if(fin > 0) {Trim(0, fin).nnedi3 + Trim(fin + 1, 0)}
-	if(fout > 0) {Trim(0, FrameCount - fout - 1) + Trim(FrameCount - fout, 0).nnedi3}
+	# fin, fout are frame counts before pulldown, kinda have to guess it
+	
+	if(fin > 0) 
+	{
+		if(fin < FrameCount) {Trim(0, fin - 1).nnedi3 + Trim(fin, 0)}
+		else {nnedi3}
+	}
+	
+	if(fout > 0)
+	{
+		if(fout < FrameCount) {Trim(0, FrameCount - fout - 1) + Trim(FrameCount - fout, 0).nnedi3}
+		else {nnedi3}
+	}
 	
 	if(fps_num != 30000)
 	{
 		super = MSuper(pel=4) #, hpad=0, vpad=0
-		backward_vec = MAnalyse(super, blksize=32, overlap=8, isb=true, search=3)
-		forward_vec = MAnalyse(super, blksize=32, overlap=8, isb=false, search=3)
+		backward_vec = MAnalyse(super, blksize=32, overlap=8, isb=true, search=mv_search)
+		forward_vec = MAnalyse(super, blksize=32, overlap=8, isb=false, search=mv_search)
 		MFlowFps(super, backward_vec, forward_vec, num=fps_num, den=FrameRateDenominator)#, ml=100000)
 		AssumeFPS(c)
 	}
