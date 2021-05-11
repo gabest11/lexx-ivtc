@@ -585,10 +585,8 @@
 #      cpcpc pccpc cpcpc pccpc pccpc pccpp ccpcc pcpcc pcpcc ppccp
 # 100, cpcpc cpcpc cpcpc cppcp 
 #      ccpcc ppccp cpccp cpccp
-#
-# last frame of the previous scene 31 times + 89 c's including pulldown
 
-46847,46966 c # fix2
+46847,46966 ccppc # fix2
 
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
@@ -1815,7 +1813,7 @@
 # 200, PccPc cPc
 #      ccPcc pcc
 
-141671,141878 ccppc
+141671,141878 ccppc # fix3
 141671,141878 -
 
 141879,141948 ppccc
@@ -1872,9 +1870,18 @@
 148080,148168 pcccp
 148169,148596 cccpp
 148597,148667 cppcc
-148668,148721 pcppcccppcccp # ?
-148722 c # extra c at the end
+
+# 148668 pc
+#        cc
+# 148670 pcccc pcccc pccpc cccpc cccpc cpccc cpccc cpccp ccccp ccccp ccc
+#        ccpcc ccpcc ccpcc pcccc pcccc pccpc cccpc cccpc cpccc cpccc cpc
+       
+#148668,148721 pcppcccppcccp # ?
+#148722 c # extra c at the end
+
+148668,148721 ccppc # fix9
 148669,148722 -
+
 148723,148769 ppccc
 148770,148839 ppccc
 148840,148959 ccppc
@@ -1978,13 +1985,13 @@
 156789,156837 ppccc
 156838,156950 cppcc
 156951,157018 cppcc
-157019,157198 c
+157019,157198 c # fg cppcc, bg pc?c? (157032- fields do not line up, only every 3rd is in sync)
 157019,157198 +
 157019,157198 Q 5
 157199,157408 ccppc
 157409,157617 ccppc
-157618,157889 ccppc
-157618,157889 +
+157618,157889 ccppc # fg ccp??, bg ccppc (fg fields not in sync at the 4/5th place)
+157618,157889 ---++
 #157618,157889 Q 5
 157890,158220 ccppc
 157890,158220 - # MIC high

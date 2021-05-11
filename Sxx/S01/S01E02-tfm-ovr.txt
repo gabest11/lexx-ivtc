@@ -33,8 +33,7 @@
 3576,3603 cppcc
 3604,3625 ppccc
 3626,3660 ppccc
-3661,3675 c
-3661,3675 +
+3661,3675 ccppc # fix6
 3676,3710 ppccu # mid ppccc, side pcccp, drop 5th
 3711,3760 pcccp
 3761,3815 cccpp
@@ -299,6 +298,7 @@
 
 21335,21429 ccppc
 21430,21754 ccppc # replaced section
+21430,21754 -
 21755,21796 uppcc # crossfade, ppccc (from the original previous scene, before the replacement) + pcccp
 
 #
@@ -1025,15 +1025,24 @@
 #79914,79961 ++-++
 79914,79961 phclu # fg ppccc, bg cccpp
 79914,79961 -+-+-
-# it's one of those specials
-79962,79969 ppcccpcc
-79970,79985 ppccpccc
-79986,80009 ppcppccc
-80010,80049 pccppccc
-80050,80057 pccppccp
-80058 c
-79962,80058 + # bg is 59.94i anyway
-#
+
+# 79962   pcc ccpcc
+#         ccp ccpcc
+# 79970 pcccp cccpc ccpcc cpccp ccccp ccpcc ccpcc pcccc pccpc cccpc
+#       ccpcc pcccc pccpc cccpc cpccc cpccp ccccp ccpcc cpccc pcccp
+# 80020 cpccc cpccp ccccp ccpcc ccpcc pcccc pccpc ccpc
+#       cccpc ccpcc cpccp ccccp ccpcc ccpcc pcccc pccp
+      
+#79962,79969 ppcccpcc
+#79970,79985 ppccpccc
+#79986,80009 ppcppccc
+#80010,80049 pccppccc
+#80050,80057 pccppccp
+#80058 c
+#79962,80058 + # bg is 59.94i anyway
+
+79962,80058 c # fix7 (bg isn't moving much and the fps conversion hid the combed outline a bit)
+
 80059,80153 c # fg cppcc
 80059,80153 +
 80154,80276 cccpp
@@ -1223,14 +1232,23 @@
 91502,91562 +
 91502,91562 Q 7
 91563,91647 pcccp
-# ???
-91648,91657 pcpcpcpccc
-91658,91667 cpcpccppcc
-91668,91677 ccpcpcccpp
-91678,91687 cccpcpcccc
-91688,91697 pcpcpcpccc
-91698,91707 cpcpccppcc
-#
+
+#91648 pc
+#      cp
+#91650 pcpcp ccpcp cpccp pccpc pcpcc ppccp cpcpc cpcpc pcpcp ccpcp
+#      pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp cpccp pccpc pcpcc
+#91700 cpccp pcc
+#      pcpcp cpc
+
+#91648,91657 pcpcpcpccc
+#91658,91667 cpcpccppcc
+#91668,91677 ccpcpcccpp
+#91678,91687 cccpcpcccc
+#91688,91697 pcpcpcpccc
+#91698,91707 cpcpccppcc
+
+91648,91707 ccppc # fix8
+
 91708,91812 pcccp
 91813,91902 c
 91813,91902 +
@@ -1242,13 +1260,20 @@
 91970,92075 +
 91970,92075 Q 7
 92076,92163 pcccp
-# ???
-92164,92173 cpcpccpcpc
-92174,92183 pcpcpccpcp
-92184,92193 cpcpcpccpc
-92194,92203 pcpccppccp
-92204,92206 cpp
-#
+
+#92164 c
+#      c
+#92165 pcpcc pcpcp cpcpc cpcpc pcpcp ccpcp cpccp pccpc pc
+#      cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cc
+
+#92164,92173 cpcpccpcpc
+#92174,92183 pcpcpccpcp
+#92184,92193 cpcpcpccpc
+#92194,92203 pcpccppccp
+#92204,92206 cpp
+
+92164,92206 ccppc # fix9
+
 92207,92261 c
 92207,92261 +
 92207,92261 Q 7

@@ -29,8 +29,8 @@
 3560,3587 cppcc
 3588,3609 ppccc
 3610,3644 ppccc
-3645,3659 c
-3645,3659 +
+3645,3659 ccppc # fix6
+#3645,3659 +
 3660,3694 ppccu # mid ppccc, side pcccp
 3695,3744 pcccp
 3745,3799 cccpp
@@ -544,9 +544,6 @@
 50277,50698 cppcc
 50699,50846 ppccc
 
-50847,50892 c
-50847,50892 + # single field
-50847,50892 Q 7
 # moving frames, which one to drop?
 # +++++ --+++ -+-++ -++-+ -+++- -++++ --+++ -+-++ -++-+ -
 # 50845/6 are kept from the previous scene, hopefully
@@ -554,6 +551,12 @@
 #            x      x      x      x      x      x      x      x      x      x
 # We could drop the first of every group, those are mostly dups, and get a "smooth" video
 # (verified, it does drop the marked frames)
+
+#50847,50892 c
+#50847,50892 + # single field
+#50847,50892 Q 7
+
+50847,50892 ccppc # fix4
 
 50893,50946 ccppc
 50947,51017 ccppc
@@ -569,8 +572,16 @@
 51548,51562 clcpp # fields without pairs
 51548,51562 -+--+
 51563,51572 cccpp
-51573,51605 cppppccpppcccppcppppcccppccpppccc # ?
-51606,51693 ppccc
+
+# 51573 cp
+#       cc
+# 51575 ccccc pcccc cpccp ccccc cpccc pcccc c
+#       cccpc cccpc cccpc cccpc cccpc cccpc c
+      
+#51573,51604 cppppccpppcccppcppppcccppccpppcc # ?
+51573,51603 ccppc # fix5
+
+51604,51693 ccppc
 51694,51695 pc
 
 51696,51772 bcccb
@@ -1308,11 +1319,20 @@
 131230,131247 ppccc
 131248,131285 pcccp
 
-# TODO: make this smooth? (no missing fields to stich, it is just bad)
-131286,131304 ccpcpccpcppcpccpccp
-131305,131323 ccpcpcppcppcpccpccp
-131324,131342 ccpcpcppcpccpccpccp
-131343,131353 cpccpcppcpc
+
+# 131286  ccpc
+#         ccpc
+# 131290 pccpc pccpc cpccp ccpcp cpccp ccpcc pccpc cpcpc pccpc cpccp
+#        cpccp ccpcp cpccp ccpcc pccpc cpcpc pccpc cpccp ccpcp ccpcp
+# 131340 ccpcp ccpcp ccpc
+#        ccpcc pccpc cpcp
+       
+#131286,131304 ccpcpccpcppcpccpccp
+#131305,131323 ccpcpcppcppcpccpccp
+#131324,131342 ccpcpcppcpccpccpccp
+#131343,131353 cpccpcppcpc
+
+131286,131353 cppcc # fix1
 
 131354,131457 pcccp
 131458,131562 pcccp
@@ -1417,15 +1437,35 @@
 142108,142246 cccpp
 142247,142337 ccbbc
 
-142338,142362 pccpccpccpccpcpccpcppcpcc
-142363,142387 pccpccpccpcpccpcppcppcpcc
-142388,142412 pccpccpccpcpccpcppcpccpcc
-142413,142437 pccpccpcpccpcppcppcpccpcc
-142438,142441 pccp
-142338 Q 3
+# 142338 pc
+#        cp
+# 142340 cpccp ccpcc pcpcc pcpcc pccpc cpccp ccpcp ccpcp ccpcc pccpc
+#        ccpcp ccpcc pccpc cpccp cpccp cpccp ccpcc pccpc cpccp cpccp
+# 142390 cpccp ccpcp ccpcp ccpcc pccpc cpccp cpccp cpccp ccpcc pccpc
+#        cpccp ccpcc pccpc cpccp cpcpc cpccp ccpcc pccpc cpcpc cpcpc 
+# 142440 cp
+#        cp
+       
+#142338,142362 pccpccpccpccpcpccpcppcpcc
+#142363,142387 pccpccpccpcpccpcppcppcpcc
+#142388,142412 pccpccpccpcpccpcppcpccpcc
+#142413,142437 pccpccpcpccpcppcppcpccpcc
+#142438,142441 pccp
+#142338 Q 3
+
+142338,142441 ccppc # fix7
 
 142442,142774 pcccp
-142775,142872 # TODO: same crap as 142338, very small movement to see the pattern
+
+# 142775 pccpp ccpcp cpcpc pcpcp ccppc cpcpc pcpcp cpcpc cppcc pcpcp
+#        cpcpc pcpcc ppccp pccpc pcpcp cpccp pccpp ccpcp cpcpc pccpp
+# 142825 cpcpc pcpcc ppccp cpcpc pcpcp cpccp pccpc pcpcp cpcpc pcc
+#        ccppc cpcpc pcpcp ccppc cppcc pcpcp cpcpc cppcc ppccp cpc
+       
+#142775,142872 # TODO: same crap as 142338, very small movement to see the pattern
+
+142775,142872 ccppc # fix8
+
 142873,143520 ppccc
 143521,143666 cccpp
 143667,143738 cccpp
@@ -1459,7 +1499,13 @@
 145475,145496 Q 7
 145497,145557 pcccp
 145558,145654 ppccc
-145655,145696 cpcppccpppcccppcpcppccpppcppppcppppcppppcp
+
+# 145655 cpcpc ccpcc cccpc cpcpc ccpcc cpccc cpccc cpccc cp
+#        cPccc pcccc pcccc pPccc pcccc pcccc pcccc pcccc pc
+       
+#145655,145696 cpcppccpppcccppcpcppccpppcppppcppppcppppcp
+145655,145696 cppcc # fix2
+
 145697,145778 ppccc
 145779,145859 ppccc
 145860,145959 cppcc
@@ -1680,7 +1726,17 @@
 162441,162494 c # fg 59.94i
 162441,162494 +
 162495,162701 cccpp
-162702,162763 ppcpccpccpccpcpccpc
+
+# 162702 pcc
+#        ccp
+# 162705 pccpc cpccp cpccp cpccp ccpcc pccpc pccpc pccpc cpccp ccpcp
+#        cpccp cpccp ccpcc pccpc pccpc pccpc cpccp ccpcp ccpcp ccpcc
+# 162755 ccpcp ccpc
+#        pccpc cpcp
+
+#162702,162763 ppcpccpccpccpcpccpc
+162702,162763 cppcc # fix3
+
 162764,162810 cccpp
 162811,162839 ppccc
 162823 - # MIC = 168

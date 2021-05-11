@@ -87,20 +87,20 @@ function Detect240p(clip c)
 	StackVertical(StackHorizontal(e1, o1),StackHorizontal(e2, o2))
 }
 
-function FieldChecker(clip c)
+function ShowFields(clip c)
 {
 	c.SeparateFields
 	StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
 
-function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", bool "pd", int "fin", int "fout", int "mv_search", val_array "f")
+function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "fin", int "fout", int "mv_search", val_array "f")
 {
 	last = c
 	
 	fps_num = Default(fps_num, 30000)
 	fc = Default(fc, FrameCount)
 	ivtc = Default(ivtc, 0)
-	pd = Default(pd, true)
+	pd = Default(pd, 3)
 	fin = Default(fin, 0)
 	fout = Default(fout, 0)
 	mv_search = Default(mv_search, 3)
@@ -109,12 +109,12 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	SeparateFields
 	e = SelectEven.SelectEvery(fc, f[0])
 	o = SelectOdd.SelectEvery(fc, f[1])
+	Interleave(e, o)
 	if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
 	if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
 	if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
 	if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
 	if(ivtc == 5) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # pcccp
-	Interleave(e, o)
 	Weave
 	AssumeFPS(c)
 	
@@ -141,10 +141,14 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 		AssumeFPS(c)
 	}
 	
-	if(pd)
+	if(pd > 0)
 	{
 		SeparateFields
-		SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # ccppc
+		if(pd == 1) {assert(false)} #{SelectEvery(8, -2,1, 0,3, 2,3, 4,5, 6,7)} # ppccc
+		if(pd == 2) {SelectEvery(8, 0,1, 0,3, 2,5, 4,5, 6,7)} # cppcc
+		if(pd == 3) {SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7)} # ccppc
+		if(pd == 4) {assert(false)} #{SelectEvery(8, 0,1, 2,3, 4,5, 4,7, 6,9)} # cccpp
+		if(pd == 5) {assert(false)} #{SelectEvery(8, 0,3, 2,3, 4,5, 6,7, 6,9)} # pcccp
 		Weave
 		AssumeFPS(c)
 	}

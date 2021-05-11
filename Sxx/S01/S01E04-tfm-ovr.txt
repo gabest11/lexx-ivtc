@@ -54,8 +54,7 @@
 1009,1036 cppcc
 1037,1058 ppccc
 1059,1093 ppccc
-1094,1108 c
-1094,1108 +
+1094,1108 ccppc # fix6
 1109,1143 ppccu # ppccc + pcccp
 1144,1193 ppccu # ppccc + pcccp
 1194,1248 cccpp
@@ -258,13 +257,36 @@
 9507,9649 pcccp
 9650,9830 ppccc
 9650,9651 + # fade-in
-9831,9934 ccpccpcccp
-9935,10083 ccppc
-# S01E01 18568+
-10084,10086 ccp
-10087,10126 pccccccp # pccc?ccp
-10127,10149 pccpcccp
+
+# 9831  ccpc cpccc
+#       cccp ccpcc
+# 9840 pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc
+#      cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc
+# 9890 pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc
+#      cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp
 #
+# pccpc cpccc / cpccp ccpcc repeating
+     
+#9831,9934 ccpccpcccp
+
+9831,9934 ccppc # fix10
+
+9935,10083 ccppc
+
+# 10084     c 
+#           c 
+# 10090 cpccc cpccp ccccp ccpcc ccPcc pcccc pccpc cccPc cpccc Pcccp
+#       cccpc cPccc cpccP ccccp ccPcc ccpcc Pcccc pccpc cccpc cpccc
+# 10140 cccPc ccpcc cPccc 
+#       cpcCp ccccp Ccpcc 
+
+# S01E01 18568+
+#10084,10086 ccp
+#10087,10126 pccccccp # pccc?ccp
+#10127,10149 pccpcccp
+
+10084,10149 c # fix3
+
 10150,10168 + # crossfade
 10169,10188 c
 10189,10419 cccpp
@@ -311,16 +333,23 @@
 13063,13262 c
 13263,13412 cccpp
 13413,13554 cccpp
-13555,13675 c # looks like 59.94i, might be cppcc
+13555,13675 c # fg 29.97(?). bg cppcc
 13555,13675 +
 13676,13776 cppcc
 13777,13859 cppcc
 13860,14069 cppcc
 13899,13907 + # zoom-in
 14061,14070 + # zoom-out
+
+# fog crazy pattern, one field is ahead by two frames sometimes
+#
+# 14071 ccppcccppcccpcppccpccpcpcccppccccpp
+#       pcccppcccppcccppcpccpccpcpcccppcccc
+      
 14071,14185 pcccp
 14071,14185 ---+++----++----++----+++ # bg fog combed
 #14071,14185 Q 6
+
 14186,14251 ppccc
 14252,14393 c
 14394,14474 cppcc
@@ -341,8 +370,19 @@
 15956,16015 ccppc
 16016,16131 pcccp
 16132,16191 c # cannot see a pattern
-16192,16197 cppccp
-16198,16250 ccpccpcccp
+
+# 16192  cpc ccpcc
+#        ccc pccpc
+# 16200 pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc
+#       cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc
+# 16250 p
+#       c
+
+#16192,16197 cppccp
+#16198,16250 ccpccpcccp
+
+16192,16250 ccppc # fix4
+
 16251,16291 ccppc
 16292,16396 cccpp
 16397,16470 ppccc
@@ -398,9 +438,18 @@
 19571,19620 +
 #19571,19620 Q 7
 19621,19769 cccpp # c frames are multiple frame blended together, cannot make it smooth
-19770,19775 cppccp
-19776,19822 ccpccpcccp
-19823,19909 pcccp # ?
+
+# 19770 cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpc
+#       cccpc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccp
+      
+#19770,19775 cppccp
+#19776,19822 ccpccpcccp
+
+19770,19822 ccppc # fix5
+
+19823,19909 c # ?
+19823,19909 +
+
 19910,19989 ppccc
 19990,20012 pcccp
 20013,20043 cppcc
@@ -425,7 +474,7 @@
 20708,20751 pcccp
 20752,20901 c
 20902,20966 pu # top and bottom fields are split between frames
-20967,21097 c # 59.94i + cppcc
+20967,21097 c # 29.97 + cppcc
 20967,21097 + # -++--
 20967,21097 Q 7
 21098,21131 cppcc
@@ -1647,8 +1696,20 @@
 131456,131541 +
 131456,131541 Q 7
 131542,131656 cppcc
-131657,131819 c # random p's
-131657,131819 +
+
+# 131657 pcc
+#        ccp
+# 131660 pccpc cpccp ccpcc pccpc cpccp cpccp ccpcp ccpcc pccpc cpccp
+#        ccpcc pcpcc pccpc pccpc cpccp ccpcc pccpc cpccp ccpcp ccpcp
+# 131710 ccpcc pccpc cpcpc cpcpc cpccp ccpcc pccpc cpccp ccpcc pcpcc
+#        ccpcc pccpc cpccp ccpcc pccpc cpcpc cpccp cpccp ccpcc pccpc
+# 131760 pccpc pccpc cpccp ccpcc pccpc cpccp ccpcp ccpcp ccpcc pccpc
+#       cpccp ccpcc pccpc pccpc cpcpc cpccp ccpcc pccpc cpccp ccpcp
+# 131810 cpccp ccpcc
+#        ccpcc pcpcc
+
+131657,131819 ccppc # fix11
+
 131820,131942 ccppc
 131943,132194 ccppc
 131943,132194 --++- # still combed
@@ -1700,8 +1761,18 @@
 133264,133432 Q 5
 133264 Q 3
 133433,133732 cccpp
-133733,133880 c # random p's
-133733,133880 +
+
+# 133733    cc pccpc
+#           cc pcccc
+# 133740 cpccc pcccp ccpcc pcccp cccpc cpccp cccpc ccpcc pccpc ccpcc
+#        pccpc cpccp ccccp ccpcc pccpc cccpc cpccp ccpcc ccpcc pccpc 
+# 133790 cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pccpc cccpc cpccp
+#        cpccc cpccp ccpcc pcccp cccpc cpccp cccpc ccpcc pccpc ccpcc
+# 133840 ccpcc ccpcc pccpc cpccc cpccp ccpcc pcccc pccpc c
+#        cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pcccp c
+       
+133733,133880 cppcc # fix7
+
 133881,133977 ppccc
 133978,134163 pcccp
 134164,134291 cppcc
@@ -1850,7 +1921,7 @@
 143308,143556 ccppc
 143557,143614 cppcc
 143615,143722 cccpp
-143723,143762 c # ?
+143723,143762 c # shaky cam
 143723,143762 +
 143763,143985 ccppc
 143763,143985 - # MIC high
@@ -1903,7 +1974,7 @@
 148150,148181 c
 148150,148181 +
 148182,148233 ppccc
-148234,148343 c # ? looks like 59.94i but 4th is a dup
+148234,148343 c # fields skips two frames
 148234,148343 +
 148344,148498 ccppc
 148499,148565 ccppc
@@ -1919,9 +1990,24 @@
 149269,149288 cppcc
 149289,149318 ppccc
 149319,149385 ppccc
+
+# 149386  cccp
+#         cccc
+# 149390 cccpP ccpcc ccpcc Pcccc pccpc cccpc cPccc cpccc pcccp cccPc
+#        cpcpc cpccp ccccP ccpcc ccpcc pcccc pccpc cccpc cpccc cpccp
+# 149440 ccpcc cpccc pcccc pccpc cccpc cpccc cpccp ccccp ccpcc ccpcc
+#        ccccp ccpcc ccpcc pcccc pccpc cccpc cpccc cpccp ccccp ccpcc
+# 149490 pcccc pccpc cccpc cpccc cpccp ccccp ccpcc ccpcc p
+#        ccpcc cpccc pcccp cccpc ccpcc cpccc cpccp ccccp c
+
+# 149394 and a few others have no field pair, Stanley's pp is already deinterlaced too
+
 149386,149530 c # one of those where the image shifts half pixel up and down
 149386,149530 +
 149386,149530 Q 5
+
+#149386,149530 ccppc # fix8
+
 149531,149594 cccpp
 149595,149675 ppccc
 149596,149675 -
@@ -1935,7 +2021,7 @@
 149992,150013 ccppc
 150014,150101 cccpp
 150102,150179 pcccp
-150180,150290 cppcc # cppcc # ?
+150180,150290 cppcc # cppcc # field skips
 150180,150290 --++-
 150184 +
 150189 +
@@ -1951,15 +2037,18 @@
 151315,151551 cppcc
 151552,151629 ppccc
 
-#151630,151639 ppccc
-#151640,151657 cppcc
-#151658,151666 cppcc
-#151667,151670 cppcc
-#151671,151704 cppcc
-151630,151649 cpcccppcccpppcccppcc
-151650,151669 cppcccpppppcccppccpp
-151670,151689 ccppccccccppcccppcpp
-151690,151704 cccppccpcccppcc
+# 151630 cpccc pcccc ppccc cpccc cpccc cpccp ccccp cccpc ccpcc ccpcc
+#        ccpcc ccpcc pccpc cccpc cccpc cccpc cpccc cpccp ccccp ccpcc
+# 151680 pcccc pccpc cccpc ccpcc cpccc
+#        ccpcc ccpcc pcccc pccpc cccpc
+       
+#151630,151649 cpcccppcccpppcccppcc
+#151650,151669 cppcccpppppcccppccpp
+#151670,151689 ccppccccccppcccppcpp
+#151690,151704 cccppccpcccppcc
+
+151630,151704 ccppc # fix9
+
 151705,151897 cccpp
 151898,152073 ppccc
 152074,152281 cccpp

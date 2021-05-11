@@ -249,11 +249,16 @@
 10932,10988 ppccc
 10989,11189 c
 11190,11209 + # crossfade
-11210,11331 cccpppccccpppcc # ? make this smoother 
-# S04E06 70899-71004, but all c frames and shorter
-# also S04E08 18382-18534 as ppccc, might be a better match
-11210,11331 - # ---+++----+++--
-11210,11331 Q 5
+
+# S04E06 70899-71004, c but shorter
+# S04E08 18382-18534 ppccc, might be a better match
+
+#11210,11331 cccpppccccpppcc
+#11210,11331 - # ---+++----+++--
+#11210,11331 Q 5
+
+11210,11331 ccppc # fix5 (few frames shorter)
+
 11332,11361 cppcc
 11362,11423 ppccc
 11424,11772 cccpp
@@ -308,14 +313,14 @@
 16003 -
 16048 -
 16061,16165 cppcc
-16166,16325 c # single field, many dups # ? make this smoother
-16166,16325 +
-16166,16325 Q 7
-16326,16382 c # single field, many dups
-16326,16382 +
-16326,16382 Q 7
-16383,16400 c # crossfade
-16383,16400 +
+16166,16325 ccppc # single field, many dups # ... ppcpc pcpcp ... # fix1
+#16166,16325 +
+#16166,16325 Q 7
+16326,16384 ccppc # single field, many dups # same # fix2
+#16326,16384 +
+#16326,16384 Q 7
+16385,16400 c # crossfade
+16385,16400 +
 16401,16411 c
 16401,16411 +
 16412,16442 cccpcpcccpcccpccccccpcccpcccpcp
@@ -326,13 +331,14 @@
 16461,16514 cccpcccpcpcccpcccpcccpccccccccccpcccpcccpcccpcpccccpcc # cccpc ccpcp cccpc ccpcc ccpcc ccccc cccpc ccpcc cpccc pcpcc ccpcc
 16461,16514 -
 16464,16469 +
-16515,16532 c # crossfade
-16515,16532 +
-16533,16620 c # single fields
-16533,16620 +
-16533,16620 Q 7
-16621,16638 c # crossfade
-16621,16638 +
+16515,16531 c # crossfade
+16515,16531 +
+#16533,16620 c # single field
+#16533,16620 +
+#16533,16620 Q 7
+16532,16621 ccppc # fix4
+16622,16638 c # crossfade
+16622,16638 +
 16639,16695 ccccpcccpcccpcccpcpcpcpcccpcccpcccpccccccccccpcccpcccpccc # cpcppccppccppccp pcpcpcpcpcpcpcpcpcpcpcpcp cpcppccppccppccp
 16639,16645 +
 16696,16713 c # crossfade
@@ -593,13 +599,14 @@
 38354,38377 + # crossfade
 #38374,38496 c
 # change to c and blend the dup p frames that cannot be dropped in a group of five
-38497,38574 cpcccccpcccpcccccppccpccpcccpcccccppccpccccccpcccccppccpccpccccccpccppcccccpcc
-38497,38574 ----+---------+----------------+---------+------+-------------+---------+-----
-#38497,38574 c#cpccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcc
-#38497,38574 #-+--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+--
-38497,38574 Q 5
-#cpc cpccp cccpc cpccp pccpc cpccc pccpc cppcc pccpc ccpcc pccpp ccpcc pcccp ccpcc ppccp ccpcc
-#+-+ ++++- +++-+ ++++- +++-+ +-+++ -++++ +-+++ -++++ ++-++ +++-+ ++-++ -++++ ++-++ -++++ ++-++
+#38497,38574 cpcccccpcccpcccccppccpccpcccpcccccppccpccccccpcccccppccpccpccccccpccppcccccpcc
+#38497,38574 ----+---------+----------------+---------+------+-------------+---------+-----
+##38497,38574 c#cpccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcccpccpccppccpccpcc
+##38497,38574 #-+--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+---+--+--++--+--+--
+#38497,38574 Q 5
+##cpc cpccp cccpc cpccp pccpc cpccc pccpc cppcc pccpc ccpcc pccpp ccpcc pcccp ccpcc ppccp ccpcc
+##+-+ ++++- +++-+ ++++- +++-+ +-+++ -++++ +-+++ -++++ ++-++ +++-+ ++-++ -++++ ++-++ -++++ ++-++
+38497,38574 ccppc # fix3
 38575,38684 c
 38685,38823 pcccp
 38824,39031 cppcc

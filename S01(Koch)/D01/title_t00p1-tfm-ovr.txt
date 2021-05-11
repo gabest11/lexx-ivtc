@@ -1942,13 +1942,13 @@
 156789,156837 ppccc
 156838,156950 cppcc
 156951,157018 cppcc
-157019,157198 c
+157019,157198 c # fg cppcc, bg pc?c? (157032- fields do not line up, only every 3rd is in sync)
 157019,157198 +
 157019,157198 Q 5
 157199,157408 ccppc
 157409,157617 ccppc
-157618,157889 ccppc
-157618,157889 +
+157618,157889 ccppc # fg ccp??, bg ccppc (fg fields not in sync at the 4/5th place)
+157618,157889 ---++
 #157618,157889 Q 5
 157890,158220 ccppc
 157890,158220 - # MIC high

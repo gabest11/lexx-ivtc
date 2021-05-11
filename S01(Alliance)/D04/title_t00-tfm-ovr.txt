@@ -311,7 +311,7 @@
 13093,13292 c
 13293,13442 cccpp
 13443,13584 cccpp
-13585,13705 c # looks like 59.94i, might be cppcc
+13585,13705 c # fg 29.97(?). bg cppcc
 13585,13705 +
 13706,13806 cppcc
 13807,13889 cppcc
@@ -400,7 +400,8 @@
 19651,19799 cccpp # c frames are multiple frame blended together, cannot make it smooth
 19800,19805 cppccp
 19806,19852 ccpccpcccp
-19853,19939 pcccp # ?
+19853,19939 c # ?
+19853,19939 +
 19940,20019 ppccc
 20020,20042 pcccp
 20043,20073 cppcc
@@ -425,7 +426,7 @@
 20738,20781 pcccp
 20782,20931 c
 20932,20996 pu # top and bottom fields are split between frames
-20997,21127 c # 59.94i + cppcc
+20997,21127 c # 29.97 + cppcc
 20997,21127 + # -++--
 20997,21127 Q 7
 21128,21161 cppcc
