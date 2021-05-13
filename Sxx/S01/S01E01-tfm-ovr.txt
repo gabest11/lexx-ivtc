@@ -248,7 +248,7 @@
 # 450, pcccc pccpc cccPc
 #      ccpcc Pcccc pccPc
 
-18259,18723 c#ccppc
+18259,18723 c # ccppc # fix1
 
 18724,18937 c # already deinterlaced
 18938,19117 cppcc
@@ -412,8 +412,8 @@
 32827,32931 Q 5
 32932,33150 cppcc
 33151,33331 cppcc
-33332,33421 c # field skips
-33332,33421 +
+33332,33421 c # field skips # fix10
+#33332,33421 +
 33422,33784 pcccp
 #33422,33784 +---+ # clouds (colums jitter, sacrifice the slow moving clouds?)
 #33422,33784 Q 5
@@ -833,8 +833,8 @@
 64654,64734 cccpp
 64735,64772 ccppc
 64743 + # ?
-64773,64812 c # fields advance 1 and 2 fields, not in sync
-64773,64812 +
+64773,64812 c # fields advance 1 and 2 fields, not in sync # fix11
+#64773,64812 +
 64813,64851 cccpp
 64852,64862 cppcc
 64863,65059 cccpp
@@ -1192,7 +1192,12 @@
 84886,85063 cppcc
 85064,85207 ppccc
 
-85208,85544 cpplc # bg cppcc, fg cppnc, the order is swapped somehow
+# 85472 011 24455 68899 02233 46
+#       012 33456 77890 11234 55
+
+# one bottom field has no pair, l is good enough, not worth changing the fps to 5/6 
+      
+85208,85544 cpplc # bg cppcc, fg cpplc
 85208,85544 ---+-
 85474,85544 Q 7 # clip2/3 does not work very well with h/l when the order is swapped, investigate it...
 
@@ -1744,8 +1749,12 @@
 135290,135343 ppccc
 135344,135428 ccppc
 135429,135443 cccpp
-135444,135481 c # ???
-135444,135481 +
+
+# 135444 0 13456 79012 34578 90134 56790 12356 78912 34
+#        1 23457 89013 45679 01235 67891 23457 89013 45
+       
+135444,135481 c # fix13
+
 135482,135637 cccpp
 135638,135913 cppcc
 135914,135975 ppccc

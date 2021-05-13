@@ -93,29 +93,79 @@ function ShowFields(clip c)
 	StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
 
-function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "fin", int "fout", int "mv_search", val_array "f")
+function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", int "deintf", int "fin", int "fout", int "mv_search", val_array "f")
 {
+	# depending on the last array argument, it operates on frames if f[1] is empty, 
+	# else f[0] selects the even, f[1] the odd fields
+	#
+	# f[2] tells which resulting frames to deinterlace, odd numbers select deinterlaced frames
+	# ie. [0,2,4,7,8,10] will deinterlace the 4th frame only
+	
 	last = c
 	
 	fps_num = Default(fps_num, 30000)
 	fc = Default(fc, FrameCount)
 	ivtc = Default(ivtc, 0)
 	pd = Default(pd, 3)
+	deint = Default(deint, 1)
+	deintf = Default(deintf, -1)
 	fin = Default(fin, 0)
 	fout = Default(fout, 0)
 	mv_search = Default(mv_search, 3)
 	
 	Trim(start, end)
 	SeparateFields
-	e = SelectEven.SelectEvery(fc, f[0])
-	o = SelectOdd.SelectEvery(fc, f[1])
-	Interleave(e, o)
+	
+	if(f[0].ArraySize() > 0 && f[1].ArraySize() == 0)
+	{
+		SelectEvery(fc, f[0])
+	}
+	else # if(f[0].ArraySize() > 0 && f[1].ArraySize() > 0)
+	{
+		e = SelectEven.SelectEvery(fc, f[0])
+		o = SelectOdd.SelectEvery(fc, f[1])
+		Interleave(e, o)
+	}
+
+	Weave
+		
+	if(f.ArraySize() > 2 && deint > 0)
+	{
+		# TODO: deintf needs to be in the f[2] (0,1,2) and Interleave(last, cc_field0, cc_field1)
+		
+		cn = nnedi3(field = deintf)
+		
+		if(deint == 1)
+		{
+			cc = cn
+		}
+		else if(deint == 2)
+		{
+			super = MSuper(pel=4)
+			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=1)
+			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=1)
+			cc = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+			cc = cc.Trim(0, FrameCount - 2) + cn.Trim(FrameCount - 1, 0)
+		}
+		else if(deint == 3)
+		{
+			super = MSuper(pel=4)
+			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=2)
+			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=2)
+			cc = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+			cc = cn.Trim(0, -1) + cc.Trim(0, FrameCount - 2) + cn.Trim(FrameCount - 1, 0)
+		}
+
+ 		Interleave(last, cc)
+		SelectEvery(f[2].ArraySize() * 2, f[2])
+	}
+	
 	if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
 	if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
 	if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
 	if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
 	if(ivtc == 5) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # pcccp
-	Weave
+	
 	AssumeFPS(c)
 	
 	# fin, fout are frame counts before pulldown, kinda have to guess it

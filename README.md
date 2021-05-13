@@ -308,10 +308,66 @@ If you change from p to the previous c, and the scene ends on that c, you lose a
 
 u frames are also problematic at the end of the scene.
 
-### random dups
+## Random dups and skips
 
-    40063,40089 cccpccpccccpcpcccpccccpcccp
+There are two methods used to fit a clip into a different time-frame. Both can result in an irregular pattern, with seemingly random p frames, that cannot be ivtc'ed.
 
-Ignore and pray that TDecimate will sort it out. 
+### Fast motion
 
-Sometimes it is worth turning p into c and blending the fields.
+    S01E01 at 135444,135481
+    
+    0 13456 79012 34578 90134 56790 12356 78912 34
+    1 23457 89013 45679 01235 67891 23457 89013 45
+
+The two rows represent the fields, the numbers the frame offset starting from 135444. Grouping and wrap-around around after 9 is for readability.
+
+If you watch carefully, there are fields without pairs (2,6,8,...). In a TFM override file, one frame cannot be split into two. The solution is to remap all the fields in the Avisynth script to whole frames (SelectEvery) and apply MFlowFPS to stretch the clip to its original length.
+
+    FixSlowMoI(135444, 135481, 25000, pd = 0, f = [ \
+        [0,0,2,1,3,3,4,5,6,7,8,9,10,10,12,11,13,13,14,15,16,17,18,19,20,20,22,21,24,23,26,25,27,27,28,29,30,30,32,31,34,33,36,35,37,37,38,39,40,40,42,41,44,43,46,45,47,47,48,49,50,50,52,51,54,53,56,55,57,57,58,59,60,60,62,61,64,63,66,65,67,67,68,69,70,70,72,71,74,73,75,75], \
+        [], \
+        [1,2,5,6,8,10,13,14,17,18,20,22,25,26,28,30,33,34,37,38,40,42,45,46,49,50,52,54,57,58,61,62,64,66,69,70,73,74,76,78,81,82,85,86,88,91] \
+        ])
+    
+25000 is the frame rate numerator, 30000 would be the normal NTSC speed. It was chosen to match the output and the original frame count.
+
+pd is the pulldown value. 0 means no pulldown, 1: ppccc, 2: cppcc, etc. Sometimes it is better to do a 23.976 fps interpolation, if the smoothness of 29.97 would feel out of place, there is also less interpolated frames. Although, the frame count is unpredictable, harder to match, try switching between pd = 2 or 3 if there is no way to get the right number.
+
+First array selects the fields to make whole frames.
+
+The function will also replace those single field frames with a clip created by nnedi3, and the third array is which maps them, even are numbers left alone, odd numbers are deinterlaced. It's basically the argument for Interleave(c, c.nnedi3).SelectEvery(fc, f[2]).
+
+This clip is then inserted into its right place with Trim.
+
+![Comparison](./utils/media/fastmo.mp4)
+
+### Slow motion
+
+    18785 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp ccpcc cpccp cccpc
+          cpccp ccpcc pccpc ccpcc pcccp ccpcc pccpc cpccp ccpcc pccpc
+    18835 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp cccpc cpccc pccpc
+          cpccp ccpcc pcccp ccpcc cpccp ccpcc pccpc cpccp ccpcc pccpc
+    18885 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccc pccpc c 
+          cpccp ccpcc cpccp cccpc cpccp ccpcc pccpc cpccp c
+
+This time the fields are not numbered, I just used c to mark a field advancing and p to be a duplicate of the previous. 
+
+A regular ccppc pattern would look like:
+
+    ccpcc
+    ccccp
+
+As you can see, there is nothing that resembles regularity of the normal pattern. There might be a logic behind it, it was produced by an algorithm in some ancient video editor, but I have no idea how they managed to do it. Deleting fields here and there...
+
+    FixSlowMoI(18785, 18925, 44300, pd = 0, f = [ \
+        [0,2,3,5,6,8,9,11,12,14,15,17,18,20,21,23,24,26,27,29,30,32,33,35,36,38,39,40,42,43,45,46,47,49,50,52,53,55,56,58,59,61,62,64,65,67,68,70,71,73,74,76,77,79,80,82,83,85,86,87,89,90,92,93,94,96,97,99,100,102,103,105,106,108,109,111,112,114,115,117,118,120,121,123,124,126,127,129,130,132,133,134,136,137,139,140], \
+        [0,2,3,5,6,8,9,11,12,14,15,16,18,19,21,22,23,25,26,28,29,31,32,34,35,37,38,40,41,43,44,46,47,49,50,52,53,55,56,58,59,61,62,63,65,66,68,69,70,72,73,75,76,78,79,81,82,84,85,87,88,90,91,93,94,96,97,99,100,102,103,105,106,108,109,110,112,113,115,116,117,119,120,122,123,125,126,128,129,131,132,134,135,137,138,140] \
+        ])
+
+This time both f[0] and f[1] are used, all the c fields are mapped, ignoring any p, separately in even and odd fields. 
+
+There must be equal number of c's in each field, unless the list is wrong or there is one half frame at the beginning/end. That single field can be dropped.
+
+The first method, with the numbers, could also be used here, but this was the first I came up with and there were already many scenes done with it. If there are no fields without pairs, this is usually easier to do.
+
+![Comparison](./utils/media/slowmo.mp4)

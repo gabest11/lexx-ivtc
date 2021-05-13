@@ -265,6 +265,13 @@
 #18785,18925 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
 #18785,18925 Q 5
 
+# 18785 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp ccpcc cpccp cccpc
+#       cpccp ccpcc pccpc ccpcc pcccp ccpcc pccpc cpccp ccpcc pccpc
+# 18835 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp cccpc cpccc pccpc
+#       cpccp ccpcc pcccp ccpcc cpccp ccpcc pccpc cpccp ccpcc pccpc
+# 18885 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccc pccpc c 
+#       cpccp ccpcc cpccp cccpc cpccp ccpcc pccpc cpccp c
+
 18785,18925 ccppc # fix1
 
 # c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc

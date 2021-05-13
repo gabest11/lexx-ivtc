@@ -1502,7 +1502,12 @@
 
 # 145655 cpcpc ccpcc cccpc cpcpc ccpcc cpccc cpccc cpccc cp
 #        cPccc pcccc pcccc pPccc pcccc pcccc pcccc pcccc pc
-       
+
+# few missing fields, use the alternative method that can handle it
+
+# 147655 002234556789001224456778900123445678890122
+#        012344567889012234566789001234456788901223
+
 #145655,145696 cpcppccpppcccppcpcppccpppcppppcppppcppppcp
 145655,145696 cppcc # fix2
 

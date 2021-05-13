@@ -109,10 +109,20 @@
 8384,8606 pcccp
 8607,8799 ccppc
 8800,8938 pcccp
-8939,9028 c
-#8939,9028 +
-#8939,9028 i 1
-#8939,9028 Q 5 # bilinear is needed for smooth background movement
+
+# 8939                                   0
+#                                        1
+# 8940 01244668901234567890123456789012346
+#      12345678901234567800224567890123456
+# 8975 68800234567890123456789012345688002
+#      78901234567890224466890123456789012
+# 9010 2456789012345678901
+#      3456789012446688012
+
+# this is the screen scrolling up, the objects and even the fog are on a different layer, MFlowInter will handle the jumping frames
+
+8939,9028 c # fix1
+
 9029,9137 c
 9138,9221 cppcc
 9222,9300 ppccc
@@ -1203,6 +1213,13 @@
 #104900,105040 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
 #104900,105040 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
 #104900,105040 Q 5
+
+# 104900 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp ccpcc cpccp cccpc
+#        cpccp ccpcc pccpc ccpcc pcccp ccpcc pccpc cpccp ccpcc pccpc
+# 104950 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp cccpc cpccc pccpc
+#        cpccp ccpcc pcccp ccpcc cpccp ccpcc pccpc cpccp ccpcc pccpc
+# 105000 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccc pccpc c
+#        cpccp ccpcc cpccp cccpc cpccp ccpcc pccpc cpccp c
 
 104900,105040 ccppc # fix1
 

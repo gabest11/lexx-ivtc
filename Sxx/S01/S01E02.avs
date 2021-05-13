@@ -178,11 +178,11 @@ function FixTowers(clip c)
 	last = c
 
 	c1 = Trim(107667, 107867)
-	c1 = c1.Crop(192, 0, -136, 0)
+	c1 = c1.Crop(192, 0, -136, -100).Tweak(bright = -2) # brightness just below the other clip, we only need to transfer the blue light rings
 	c2 = Trim(110736, 110811).Reverse()
 	c3 = c2 + BlankClip(c2, c1.FrameCount - c2.FrameCount)
 	c3 = c3.FreezeFrame(c2.FrameCount, c1.FrameCount - 1, c2.FrameCount - 1)
-
+	#Overlay(c3, Overlay(c3, c1, x = 192, mode = "lighten"), mode = "difference").Levels(92,1,160,0,255)
 	Overlay(c3, c1, x = 192, mode = "lighten")
 }
 
