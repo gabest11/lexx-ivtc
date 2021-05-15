@@ -89,11 +89,17 @@ function Detect240p(clip c)
 
 function ShowFields(clip c)
 {
+	#c = c.Crop(0,0,360,0)
+	c1 = c
 	c.SeparateFields
-	StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
+	c2 = Interleave(SelectEven.Trim(1, 0), SelectOdd).Weave
+	c3 = Interleave(SelectEven.Trim(2, 0), SelectOdd).Weave
+	c4 = StackVertical(c2.Crop(0, c.Height / 2, c.Width / 2, 0), c3.Crop(0, c.Height / 2, c.Width / 2, 0))
+	StackHorizontal(StackHorizontal(c1, c4), StackVertical(SelectEven, SelectOdd))
+	#StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
 
-function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", int "deintf", int "fin", int "fout", int "mv_search", val_array "f")
+function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", int "deintf", bool "deint4", int "fin", int "fout", int "mv_search", val_array "f")
 {
 	# depending on the last array argument, it operates on frames if f[1] is empty, 
 	# else f[0] selects the even, f[1] the odd fields
@@ -109,6 +115,7 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	pd = Default(pd, 3)
 	deint = Default(deint, 1)
 	deintf = Default(deintf, -1)
+	deint4 = Default(deint4, false)
 	fin = Default(fin, 0)
 	fout = Default(fout, 0)
 	mv_search = Default(mv_search, 3)
@@ -133,19 +140,23 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	{
 		# TODO: deintf needs to be in the f[2] (0,1,2) and Interleave(last, cc_field0, cc_field1)
 		
-		cn = nnedi3(field = deintf)
+		c1 = nnedi3(field = deintf)
+		c2 = nnedi3(field = 0)
+		c3 = nnedi3(field = 1)
 		
 		if(deint == 1)
 		{
-			cc = cn
+			# default
 		}
 		else if(deint == 2)
 		{
+			# this makes no sense but works with the column elevator
+			
 			super = MSuper(pel=4)
 			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=1)
 			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=1)
 			cc = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
-			cc = cc.Trim(0, FrameCount - 2) + cn.Trim(FrameCount - 1, 0)
+			c1 = cc.Trim(0, FrameCount - 2) + c1.Trim(FrameCount - 1, 0)
 		}
 		else if(deint == 3)
 		{
@@ -153,11 +164,25 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=2)
 			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=2)
 			cc = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
-			cc = cn.Trim(0, -1) + cc.Trim(0, FrameCount - 2) + cn.Trim(FrameCount - 1, 0)
+			c1 = c1.Trim(0, -1) + cc.Trim(0, FrameCount - 2) + c1.Trim(FrameCount - 1, 0)
+		}
+		else if(deint == 4)
+		{
+			c1 = yadifmod2()
+			c2 = yadifmod2(field = 0)
+			c3 = yadifmod2(field = 1)
 		}
 
- 		Interleave(last, cc)
-		SelectEvery(f[2].ArraySize() * 2, f[2])
+		if(deint4)
+		{
+	 		Interleave(last, c1, c2, c3)
+			SelectEvery(f[2].ArraySize() * 4, f[2])
+		}
+ 		else
+ 		{
+ 			Interleave(last, c1)
+			SelectEvery(f[2].ArraySize() * 2, f[2])
+ 		}
 	}
 	
 	if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
@@ -206,4 +231,47 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	#c = last
 	#assert(FrameCount == end - start + 1, Format("{} {}", FrameCount, end - start + 1))
 	#return c
+}
+
+function FixSplitFields(clip c, int s, int e, int pd)
+{
+	pd = Default(pd, 3)
+	
+	# only for this kind of pattern:
+		
+	# 1 222 33 444 55 666 77 888
+	# l hlh lh lhl hl hlh lh lhl
+	
+	# fields are split into frames and a pulldown on top of it
+	
+	# there quite a few clips like this, not sure how similar they are
+	
+	Trim(c, s - 1, e)
+	SelectEvery(10, 0,1, 2,3, 6,5, 8,9)
+	Trim(0, length=2).SelectEvery(2, 1,1).nnedi3 + Trim(2, 0) # first frame half field
+	AssumeFieldBased
+	Weave
+	AssumeFPS(c)
+
+	# double the frame count to match the original
+	
+	FixSlowMoI(0, FrameCount, 60000, pd = 0, fc = 2, f = [[0, 1], []])
+	
+	# restore size
+
+	Spline64Resize(Width, Height / 2)
+	
+	# pulldown again
+
+	if(pd > 0)
+	{
+		SeparateFields
+		if(pd == 1) {assert(false)} #{SelectEvery(8, -2,1, 0,3, 2,3, 4,5, 6,7)} # ppccc
+		if(pd == 2) {SelectEvery(8, 0,1, 0,3, 2,5, 4,5, 6,7)} # cppcc
+		if(pd == 3) {SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7)} # ccppc
+		if(pd == 4) {assert(false)} #{SelectEvery(8, 0,1, 2,3, 4,5, 4,7, 6,9)} # cccpp
+		if(pd == 5) {assert(false)} #{SelectEvery(8, 0,3, 2,3, 4,5, 6,7, 6,9)} # pcccp
+		Weave
+		AssumeFPS(c)
+	}
 }

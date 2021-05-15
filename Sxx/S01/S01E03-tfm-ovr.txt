@@ -109,10 +109,15 @@
 6024,6074 pcccp
 6075,6118 pcccp
 6119,6129 cppcc
-6130,6151 ppccc
-6152,6203 ccppcpucccpccppcccp # yep
-6152,6162 + # fade-in
-6152 Q 2
+6130,6153 ppccc
+
+# 6170 ccccp cccpc cpccc cpccp pcpcc ccpcc pcccc pccpc cpccc cpccp
+#      ccccc pcccp cccpc cpccc ppccp cccpc ccpcc pcccc pccpc ccpcc
+# 6220 cccc
+#      cpcc
+     
+6154,6203 ccppc # fix9
+
 6208,6263 pcccp
 6264,6338 cccpp
 6339,6380 pcccp
@@ -154,10 +159,12 @@
 7777,7914 cppcc
 7915,8024 ccppc
 8025,8075 cccpp
-8076,8107 c
-8076,8107 Q 5
-8083,8089 +-
-8099,8105 +-
+
+# 8092 012 34567 88002 24567 89012 34566 8801
+#      012 34568 89012 34567 89012 44667 8901
+
+8076,8107 c # fix10
+
 8108,8134 ccppc
 8135,8162 pcccp
 8163,8199 cccpp
@@ -373,6 +380,8 @@
 27214,27259 pcccp
 27260,27336 ccppc
 27280,27297 --++- # still shaking
+27282 - # not combed
+27298 - # not combed
 27260,27336 Q 5
 27337,27399 pcccp
 27400,27532 cppcc
@@ -441,15 +450,24 @@
 36726,36796 cppcc
 36797,37137 pcccp
 
-37138,37276 cppcc
-37277,37281 cppcc
-
 #37283- many dup fields... only the hair is moving a bit, cannot make it out
 #         0t 1t/2t/3t       4t 5t
 #0b/1b/2b    3b       4b/5b    6b
 
-37282,37374 c
+# 37282 11123
+#       02333
+
+#37138,37281 cppcc
+#37282,37374 ccppc # fix14
+#37138,37374 cppcc # fix14
+
+# deinterlacing two frames from the opposite field then two normal looks super bad
+# just blend it, topaz will make it look almost as good as the non blurred beginning of this scene
+
+37138,37374 cppcc
+# 37282,37374 # 10 12 12 23 33 (blend and drop 3rd)
 37282,37374 +
+37282,37374 Q 5
 
 37375,37456 ccppc
 37457,37821 ccppc
@@ -480,15 +498,26 @@
 40798,40923 ccppc
 40924,41063 cccpp
 
-#looks annoying when upscaled
 #41064,41082 ccppcccpccppcccpccp # first might be a p
 #41083,41120 pcppcccpccppccpcccp # x2
 #41121,41139 ccppcccpccppcppcccp
 #41140,41157 ccppccpcccpc
 #41158,41248 c # moth is getting too small at this point
 
-41064,41248 c
-41064,41248 +
+# 41064     p cpccc
+#           c pccpc
+# 41070 cpccp ccccp ccpcc pcccc pccpc ccpcc cpccp ccccp ccpcc cpccc
+#       ccpcc cpccp ccccp ccpcc cpccc pccpc cccpc cpccp ccccp ccpcc
+# 41120 pccpc cccpc cpccp ccccp ccpcc cpccc pccpc cccpc cpccc pcccp
+#       cpccc pccpc cccpc cpccc pcccp ccpcc ccpcc pccpc cccpc cpccc
+# 41170 ccpcc ccpcc pccpc cccpc cpccc pcccp ccpcc ccpcc pcccp cccpc
+#       pcccp ccpcc ccpcc pcccp cccpc cpccc cpccp ccpcc ccpcc pcccp
+# 41220 cpccc cpccp ccpcc ccpcc pcccc pccp
+#       cccpc cpccc cpccp cccpc ccpcc pccc
+      
+#41064,41248 c
+41064,41248 ccppc # fix11
+41064,41248 + # looks annoying when upscaled
 41064,41248 Q 5
 
 41249,41425 ccppc
@@ -572,6 +601,8 @@
 51548,51562 clcpp # fields without pairs
 51548,51562 -+--+
 51563,51572 cccpp
+
+# the part above already has field skips and the first field has a y offset sometimes
 
 # 51573 cp
 #       cc
@@ -781,52 +812,86 @@
 
 # there are a few missing fields, we can plug the temporal gap by blending
 
-75264,75280 ccchchppppcclcccc
-75264,75280 ---+-+----+-+----
-75274 Q 5
-75281,75295 chchchppppcclcc
-75281,75295 -+-+-+----+-+--
-75291 Q 5
-75296,75310 ccchchppppcclcc
-75296,75310 ---+-+----+-+--
-75306 Q 5
-75311,75324 ccchchppppppcc
-75311,75324 ---+-+------+-
-75323 Q 5
+# 75264 0 12345
+#       0 12446
+# 75270 67890 22456 78901 23456 78002 34567 89012 34668 90123 45678
+#       78901 23456 78002 24567 89012 34568 80123 45678 90124 46789
+# 75320 90124 
+#       01234 
+
+#75264,75280 ccchchppppcclcccc
+#75264,75280 ---+-+----+-+----
+#75274 Q 5
+#75281,75295 chchchppppcclcc
+#75281,75295 -+-+-+----+-+--
+#75291 Q 5
+#75296,75310 ccchchppppcclcc
+#75296,75310 ---+-+----+-+--
+#75306 Q 5
+#75311,75324 ccchchppppppcc
+#75311,75324 ---+-+------+-
+#75323 Q 5
+
+75264,75324 c # fix15
 
 # same bs happens in the next hour (for me)
 
-75325,75376 culcclccchcchpc
-75325,75376 --+--+---+--+--
+# 75325 00134 46789 01234
+#       01234 56780 01344
 
-75377,75393 pppcclccccccchchp
-75377,75393 ---+-+-------+-+-
-75394,75408 pppcclccccchchp
-75394,75408 ---+-+-----+-+-
-75409,75425 pppcclclccccchchp
-75409,75425 ---+-+-+-----+-+-
-75426,75440 pppcclccccchchp
-75426,75440 ---+-+-----+-+-
-75441,75449 pppcclclc
-75441,75449 ---+-+-+-
-75377 + # scene start
-75380 Q 5
-75397 Q 5
-75412 Q 5
-75429 Q 5
-75444 Q 5
+#75325,75376 culcclccchcchpc
+#75325,75376 --+--+---+--+--
 
-75450,75493 cccpp
+75325,75376 c # fix16 (not really needed)
 
-75494,75539 hpccclccculccppcpppcc
-75494,75539 ++---+----+-----+----
-75510 Q 5
-75531 Q 5
+# 75377 012
+#       123
+# 75380 35578 90123 45678 90133 56789 01234 56799 11345 67890 12345
+#       45678 90123 55789 01234 56789 11345 67890 12345 67991 23456
+# 75430 77901 23456 78901 33557 
+#       78901 23557 89012 34567 
 
-75540,75569 ccculccuccpppcchpccchccclccccc
-75540,75569 ----+---+-+----+----+---+-----
-75548 Q 5 # this is not a time gap, just a dup
-75550 Q 5
+#75377,75393 pppcclccccccchchp
+#75377,75393 ---+-+-------+-+-
+#75394,75408 pppcclccccchchp
+#75394,75408 ---+-+-----+-+-
+#75409,75425 pppcclclccccchchp
+#75409,75425 ---+-+-+-----+-+-
+#75426,75440 pppcclccccchchp
+#75426,75440 ---+-+-----+-+-
+#75441,75449 pppcclclc
+#75441,75449 ---+-+-+-
+#75377 + # scene start
+#75380 Q 5
+#75397 Q 5
+#75412 Q 5
+#75429 Q 5
+#75444 Q 5
+
+75377,75454 c # fix17
+
+75455,75498 cccpp
+
+# 75494 0 12344 67889 12234 55678 90123 35677 80112 34456 78901 
+#       0 22345 67890 12344 56778 01123 45678 90123 34566 79001 
+#                           ^ time skip              ^ time skip
+
+#75494,75539 hpccclccculccppcpppcc
+#75494,75539 ++---+----+-----+----
+#75510 Q 5
+#75531 Q 5
+
+75499,75539 c # fix18
+
+# 75540 01223 56678 99012 34567 89011 34556
+#       01234 56788 90112 45567 99012 34567
+
+#75540,75569 ccculccuccpppcchpccchccclccccc
+#75540,75569 ----+---+-+----+----+---+-----
+#75548 Q 5 # this is not a time gap, just a dup
+#75550 Q 5
+
+75540,75569 c # fix19
 
 75570,75614 pcccp
 
@@ -1098,13 +1163,15 @@
 104583,104643 cccpp
 104644,104992 ccppc
 
-104993,105011 ccpcccpccppccppccpp
-104993,105011 ------+--+---------
-105012,105068 ccpcccpccppccppccpc
-105012,105049 ------+--+---------
-105050,105068 --+---+--+---------
-105069,105077 ccpccppcc
-105069,105077 --+--+---
+#104993,105011 ccpcccpccppccppccpp
+#104993,105011 ------+--+---------
+#105012,105068 ccpcccpccppccppccpc
+#105012,105049 ------+--+---------
+#105050,105068 --+---+--+---------
+#105069,105077 ccpccppcc
+#105069,105077 --+--+---
+
+104993,105077 c # fix12
 
 105078,105175 pcccp
 105176,105320 cccpp
@@ -1537,16 +1604,25 @@
 147696,147979 ccppc
 147980,148235 ccppc
 
+# 148335 00223 45667 89001 23345 67789 01223 45567 89001 23445 67889
+#        01234 45678 89012 23456 67890 01234 45678 89012 23456 67890
+# 148385 00123 44567 89001 23445 67889 00123 44567 88901 22345 66789
+#        01234 45678 89012 23456 67890 01234 45678 89012 23456 67890
+#
+# there are quite a few single field frames
+      
+#148335,148339 cpcpp
+#148340,148349 cccpp
+#148350,148359 ccupp
+#148360,148364 cccpp
+#148365,148369 ccupp
+#148370,148409 cccpp
+#148410,148434 cpppp
+#148386,148395 ++---
+
 148236,148334 ccppc
-148335,148339 cpcpp
-148340,148349 cccpp
-148350,148359 ccupp
-148360,148364 cccpp
-148365,148369 ccupp
-148370,148409 cccpp
-148410,148434 cpppp
+148335,148434 ccppc # fix13
 148435,148499 cccpp
-148386,148395 ++---
 
 148500,148587 c
 148500,148587 +

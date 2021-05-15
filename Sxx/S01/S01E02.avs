@@ -6,29 +6,6 @@ c1 = MPEG2Source("..\..\S01(Alliance)\D02\title_t00.d2v",cpu=4)
 c2 = MPEG2Source("..\..\S01(Koch)\D02\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
 c3 = MPEG2Source("..\..\S01(Alliance)\D01\title_t00.d2v",cpu=4)
 
-function FixSatellite(clip c)
-{
-	# we need to create 76 frames somehow
-	
-	# first get rid of the blue plasma thing shooting up from the planet
-	
-	c1 = Trim(c, 46715, 46752)
-	c2 = c1.FreezeFrame(0, c1.FrameCount, 0).Crop(432, 0, 128, 128)
-	Overlay(c1, c2, x = 432, y = 0, mode = "Blend")
-	
-	SeparateFields()
-	# ivtc + double every frame
-	SelectEvery(10, 0,1, 0,1, 2,3, 2,3, 6,5, 6,5, 8,9, 8,9)
-	# pulldown
-	SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7)
-	# got a few frames more, trim it down
-	Weave().Trim(0, 75)
-	AssumeFPS(30000, 1001)
-	# ccppc
-	
-	# MFlowFps looks strange here, the satellite moves very slowly and only interpolated in larger blocks, its parts advance with a 1 pixel difference
-}
-
 #0
 #14315 moth landing in better quality, but not zoomed in that much
 #14553
@@ -52,9 +29,7 @@ Trim(c1, 30554, 45045) + \
 Trim(c3, 136067, 136155) + \
 Trim(c1, 45135, 55304) + \
 Trim(c3, 136067, 136155) + \
-Trim(c1, 55394, 104818) + \
-FixSatellite(c1) + \
-Trim(c1, 104895, 107681) + \
+Trim(c1, 55394, 107681) + \
 Trim(c2, 107667, 108034) + \
 Trim(c1, 108048, 168058)
 
@@ -186,9 +161,67 @@ function FixTowers(clip c)
 	Overlay(c3, c1, x = 192, mode = "lighten")
 }
 
+# Zev in the intro
+
+fix10 = FixSlowMoI(6170, 6223, 32800, fin = 7, f = [ \
+	[0,1,2,3,5,6,7,9,10,12,13,14,15,17,18,21,23,24,25,26,28,29,31,32,33,34,36,37,39,40,42,43,44,45,47,48,50,51,52,53], \
+	[0,1,2,3,4,6,7,8,10,11,12,14,15,17,18,19,22,23,25,26,27,29,30,31,33,34,36,37,38,39,41,42,44,45,46,48,49,50,52,53] \
+	])
+
+# His Shadow going up on the column (one frame longer than needed, don't stretch, just remove the last)
+	
+fix11 = FixSlowMoI(8092, 8123, 30000, pd = 0, deint = 3, f = [ \
+	[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14,16,15,19,19,20,21,23,23,24,25,27,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,46,48,47,50,50,52,51,55,55,56,57,59,59,60,61,62,63], [], \
+	[0,2,4,6,8,10,12,15,16,19,20,23,24,27,28,30,32,34,36,38,40,42,44,47,48,51,52,55,56,59,60,62] \
+	]).Trim(0, 8123 - 8092)
+	
+# Lexx fly-by (very few whole frames, almost 59.94i)
+
+_fix12 = FixSlowMoI(40715, 40752, 17500, pd = 0, f = [ \
+	[0,0,2,1,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18,20,19,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,29,30,30,31,31,32,32,33,33,34,34,35,35,36,36,38,37,40,39,41,41,42,42,43,43,44,44,45,45,46,47,48,49,50,50,51,51,52,52,53,53,54,54,56,55,58,57,59,59,60,60,61,61,62,62,63,63,64,64,65,65,66,67,68,68,69,69,70,70,71,71,72,72,73,73,74,74,75,75], [], \
+	[1,2,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,36,39,41,43,45,47,49,51,52,55,57,59,61,63,65,67,68,70,73,75,77,79,81,82,84,87,89,91,93,95,96,98,101,103,105,107,109,111,113,114,117,119,121,123,125,127,129,131] \
+	])
+
+# satellites
+
+function FixSat(clip c, bool rev)
+{
+	# first get rid of the blue plasma thing shooting up from the planet
+	
+	c1 = Trim(c, 46715, 46752)
+	c2 = c1.FreezeFrame(0, c1.FrameCount, 0).Crop(432, 0, 128, 128)
+	Overlay(c1, c2, x = 432, y = 0, mode = "Blend")
+
+	#SeparateFields()
+	#SelectEvery(10, 0,1, 2,3, 6,5, 8,9) # ivtc
+	#Weave
+	#AssumeFPS(c)
+	#Trim(0, length = FrameCount - 2) # last frame not very nice
+	#if(rev) {Reverse} # crashes
+	#FixSlowMoI(0, FrameCount, 81000, pd = 0, fc = 2, f = [[0, 1], []])
+	
+	SeparateFields()
+	SelectEvery(10, 0,1, 2,3, 6,5, 8,9) # ivtc
+	SelectEvery(2, 0,1, 0,1) # double every frame (MFlowFps looks strange here)
+	if(rev) {Weave.Reverse.Trim(1, 0).SeparateFields} # last frame not very nice
+	SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7) # pulldown (ccppc)
+	Weave
+	AssumeFPS(c)
+}
+
+fix13 = FixSat(c1, false).Trim(0, 104879 - 104804)
+fix14 = FixSat(c1, true).Trim(0, 115796 - 115723)
+
+#_fix14 = FixSplitFields(115723, 115796)
+#StackHorizontal(fix14, fix14_2) # almost no difference!
+
 Trim(0, 3660) + \
 fix6 + \
-Trim(3676, 21429) + \
+Trim(3676, 6169) + \
+fix10 + \
+Trim(6224, 8091) + \
+fix11 + \
+Trim(8124, 21429) + \
 FixShower + \
 Trim(21755, 60386) + \
 fix5 + \
@@ -201,9 +234,13 @@ Trim(88273, 91647) + \
 fix8 + \
 Trim(91708, 92163) + \
 fix9 + \
-Trim(92207, 107666) + \
+Trim(92207, 104803) + \
+fix13 + \
+Trim(104880, 107666) + \
 FixTowers + \
-Trim(107868, 130264) + \
+Trim(107868, 115722) + \
+fix14 + \
+Trim(115797, 130264) + \
 fix4 + \
 Trim(130343, 0)
 

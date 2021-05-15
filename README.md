@@ -8,9 +8,9 @@ Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
 * S02 done (Acorn)
 
-* S03 (these episodes are terrible quality, one field is simply missing in many places)
+* S03/E01-03 done (these episodes are terrible quality, one field is simply missing in many places)
 
-* S04/E01-24 done (Acorn)
+* S04 done (Acorn)
 
 Planing to do newer releases if I can get them and are better quality.
 
