@@ -224,32 +224,7 @@
 18046,18096 ppccc
 18097,18180 cccpp
 18181,18258 pcccp
-
-# 18259,18723 by field (p: last c repeated, cap: picture shifts vertically)
-#
-# 0,   cpccc cpccP ccccp ccPcc ccpcc pcccc pccpc cccpc Cpccc cpccp
-#      cccpc cccpc cpccc cPccp ccccP ccpcc cPccc pcccP cccpc ccPcc
-# 50,  ccccp ccpcc ccpcc pcccc pccpc cccPc cpccc cPccp ccccP ccpcc
-#      cpccc Pcccp ccPcc ccpcc Pcccc pccPc cccpc cpccc cpccp ccccp
-# 100, cPccc pcccP cccpc ccPcc cpccP ccccp ccPcc ccpcc Pcccc pccpc
-#      ccpcc ccpcc pcccc pccpc cccpc cpccc cpccp ccccP ccpcc ccPcc
-# 150, cccpc cpccc cpccp ccccp ccpcc ccpcc pcccc pccpc cccPc cpccc
-#      pcccc Pccpc ccPcc cpccc Pcccp cccPc ccpcc Pcccc pccPc cccpc
-# 200, cPccp ccccP ccpcc cPccc pcccP cccpc ccPcc cpccc Pcccp ccPcc
-#      cPccc cpccp ccccp ccpcc ccpcc pcccc pcCpc cccpc cpccc cpccp
-# 250, ccpcc pcccc pccPc cccpc cpccc cpccp ccccp ccpcc ccpcC pcccc
-#      ccccp ccpcc ccPcc pcccc Pccpc cccpc cpccc Pcccp cccPc ccpcc
-# 300, pccpc cccpc cpccc cpccp ccccp ccpcc ccPcc pcccc pccpc cccPc
-#      cPccc pcccP cccpc cPccc cpccP ccccp ccPcc ccpcc Pcccc pccpc
-# 350, cpccc Pcccp cccPc ccpcc cPccc pccPc cccpc cPccc cpccP ccccp
-#      cccpc cpccc cpcCp ccccp Ccpcc ccpcc pcccc pCcpc cccpC cpccc
-# 400, ccPcc ccpcc Pcccc pcCpc cccpc Cpccc cpccp ccccp ccpcc ccpcc
-#      cPccp ccccP ccpcc ccPcc pcccP cccpc ccPcc cpccc Pcccp ccPcc
-# 450, pcccc pccpc cccPc
-#      ccpcc Pcccc pccPc
-
 18259,18723 c # ccppc # fix1
-
 18724,18937 c # already deinterlaced
 18938,19117 cppcc
 19118,19929 ccppc
@@ -568,39 +543,16 @@
 46474,46524 cccpp
 46525,46761 cccpp
 46762,46846 ccppc
-
-# 46847,46966 by field (p: last c repeated, cap: picture shifts vertically)
-#
-# mid section
-# 0,   ccpcc ppccp ccpcc ppccp cpcpc cpccp ccppc cpcpc cpcpc cpcpc 
-#      ccpcc pccpc pcpcc pcpcc pcpcc ppccp ccpcc pcpcp ccppc cpccp 
-# 50,  pccpc cpcpc pccpp ccpcc pccpc pcpcc pcpcc pcpcc ppccp ccpcc
-#      ccppc cpcpc cpcpc cpccp pccpc cpccp pccpc pcpcc pccpc pcpcc
-# 100, ppccp ccppc cpccp ccppc 
-#      pcpcc pcpcc ppccp ccpcc
-# left section
-# 0,   cpccp cpccp cpccp cpcpc cpcpc cpcpc cppcc pccpc cpcpc pccpc
-#      ccpcc pcpcc ppccp ccpcc ppccp cpccp cpccp ccppc cpcpc cpcpc
-# 50,  pccpc pccpp ccpcp ccpcp ccpcc ppccp ccpcc ppccp cpccp cpccp
-#      cpcpc pccpc cpcpc pccpc pccpc pccpp ccpcc pcpcc pcpcc ppccp
-# 100, cpcpc cpcpc cpcpc cppcp 
-#      ccpcc ppccp cpccp cpccp
-
 46847,46966 ccppc # fix2
-
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
-
 47046,47101 phclu # pcccp + ppccc + cccpp
 47046,47101 -+-+-
 47046 + # starts with a p
-
 47102,47174 pccup # mid pcccp, side cccpp, far sides?
-
 #47175,47332 cluph # ccppc + cccpp + cppcc (not sure about the 3rd, it does not make it smoother)
 #47175,47332 -+--+
 47175,47332 ccupp # ccppc + cccpp
-
 47333,47606 ccppc
 47607,47938 pcccp
 47621 + # clock (ending in 1,6 are dropped anyway)
@@ -805,20 +757,10 @@
 63882,64060 ccppc
 64061,64082 cppcc
 
-# 64083    cc ccccc
-#          cc ccccc
-# 64090 pcccp pcccp ccccp ccccp ccccp ccccp ccccp ccccp ccccp ccccp
-#       Pcccp cpccc cpccc cpccc cpccc cpccc cpccc cpccc cpccc cpccc
-# 64140 ccccp ccccp cccpc cccpc cccpc cccpc cccpc cccpc cc
-#       cpccc cpccc cpccc pcccc pcccc pcccc pcccc pcccc pc
-#
-# P: one field advances 1 frame, the other 2 frames, just ignore it, the next c is in sync
-
 #64083,64088 c # who did this sequence?
 #64089,64097 cpccc
 #64098,64151 cppcc
 #64152,64181 cppcc
-
 64083,64181 ccppc # fix6
 
 64182,64262 cccpp
@@ -833,7 +775,7 @@
 64654,64734 cccpp
 64735,64772 ccppc
 64743 + # ?
-64773,64812 c # fields advance 1 and 2 fields, not in sync # fix11
+64773,64812 c # fix11
 #64773,64812 +
 64813,64851 cccpp
 64852,64862 cppcc
@@ -979,19 +921,9 @@
 72684,72757 ccppc # it's 23.976, but the blinking led is 59.94i
 72684,72757 +
 72684,72757 Q 5
-
-# 72758    pc
-#          cc
-# 72760 cccpc cpccp ccpcc ccpcc pccpc cpccc pcccp ccpcc pcccp cccpc
-#       pccpc ccpcc cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pccpc
-# 72810 cpccp cccpc ccpcc pccpc ccpcc cpccp ccp
-#       cccpc cpccp ccpcc ccpcc pccpc cpccc cpc
-     
 #72758,72785 ppcccpccpccppc # wtf?
 #72786,72842 ppccpcccpccppc # p moves one position to the left
-
 72758,72842 ccppc # fix7
-
 72843,72957 cccpp
 72843,72957 +
 72843,72957 Q 5
@@ -1192,14 +1124,10 @@
 84886,85063 cppcc
 85064,85207 ppccc
 
-# 85472 011 24455 68899 02233 46
-#       012 33456 77890 11234 55
-
-# one bottom field has no pair, l is good enough, not worth changing the fps to 5/6 
-      
 85208,85544 cpplc # bg cppcc, fg cpplc
 85208,85544 ---+-
 85474,85544 Q 7 # clip2/3 does not work very well with h/l when the order is swapped, investigate it...
+#85208,85544 cppcc # fix12 # one bottom field has no pair, l is good enough, not worth changing the fps to 5/6 
 
 85545,86029 cccpp
 86030,86090 cccpp
@@ -1526,21 +1454,6 @@
 
 # plan C
 
-# 114069 c
-#        c
-# 114070 pccpc cpcpc cpcpc cpccp ccpcp cpccp ccpcc pccpc pcpcc pccpc
-#        cpcpc cpccp ccpcc pcpcp ccpcc pccpc pccpc pccpc cpccp cpccp
-# 114120 cpccp cpcpc cpccp ccpcp ccpcp ccpcc pccpc pccpc pccpc cpccp
-#        cpccp ccpcc pcpcc pcpcc pccpc cpcpc pccpc cpccp ccpcp cpccp
-# 114170 cpccp cpccp ccpcc pcpcp ccpcc pccpc cpcpc pccpc cpccp ccpcp
-#        ccpcc pccpc pcpcc pccpc cpcpc cpcpc cpccp ccpcp ccpcp ccpcc
-# 114220 cpccp ccpcc pccpc pcpcc pccpc cpcpc cpcpc cpccp ccpcp ccpcp
-#        pccpc pccpc pccpc cpccp cpcpc cpccp ccpcc pcpcp ccpcc pccpc
-# 114270 ccpcc pccpc pcpcc pccpc cpccp cpcpc cpccp ccpcc pcpcp ccpcc
-#        cpcpc pccpc cpccp ccpcp cpccp ccpcc pcpcc pcpcc pccpc cpcpc
-# 114320 pc
-#        cp
-
 114068 l
 114068 +
 114068 Q 7
@@ -1749,12 +1662,7 @@
 135290,135343 ppccc
 135344,135428 ccppc
 135429,135443 cccpp
-
-# 135444 0 13456 79012 34578 90134 56790 12356 78912 34
-#        1 23457 89013 45679 01235 67891 23457 89013 45
-       
 135444,135481 c # fix13
-
 135482,135637 cccpp
 135638,135913 cppcc
 135914,135975 ppccc
@@ -1807,19 +1715,6 @@
 #141835,141875 -+---------------------------------------
 #141876,141878 ccp
 #141876,141878 -+-
-
-# 141671,141878 by field (p: last c repeated, cap: picture shifts vertically)
-#
-# 0,   pcPcc ccpcc cPccc PccPc cPccp ccpcc pccpc cpccP ccPcc PcccP
-#      cPcPc ccccp ccpcc pccpc cPccP cccPc cPccc PccPc cPccp ccpcc
-# 50,  ccPcc cPccP ccPcc pccpc cpccp ccpcc Pccpc cPccc PccPc ccPcc
-#      pccpc cpccP ccPcc PcccP ccPcc cPccP ccpcc pccpc cpccp ccpcc
-# 100, Pccpc cpccp ccpcc pccpc cPccP cccPc cPccP cccPc cPccp ccpcc
-#      PccPc cPccc PccPc ccPcc Pccpc cpccp ccpcc pccpc cPccP cccPc
-# 150, pcCpc CpcCp ccPcc PcccP ccPcc cPccP ccPcc pccpc cpccp ccpcc
-#      cPccc PccPc cPccp ccpcc pccpc cpccP ccPcc PcccP ccPcc cPccP
-# 200, PccPc cPc
-#      ccPcc pcc
 
 141671,141878 ccppc # fix3
 141671,141878 -
@@ -1878,18 +1773,10 @@
 148080,148168 pcccp
 148169,148596 cccpp
 148597,148667 cppcc
-
-# 148668 pc
-#        cc
-# 148670 pcccc pcccc pccpc cccpc cccpc cpccc cpccc cpccp ccccp ccccp ccc
-#        ccpcc ccpcc ccpcc pcccc pcccc pccpc cccpc cccpc cpccc cpccc cpc
-       
 #148668,148721 pcppcccppcccp # ?
 #148722 c # extra c at the end
-
 148668,148721 ccppc # fix9
 148669,148722 -
-
 148723,148769 ppccc
 148770,148839 ppccc
 148840,148959 ccppc

@@ -336,7 +336,7 @@
 #16533,16620 c # single field
 #16533,16620 +
 #16533,16620 Q 7
-16532,16621 ccppc # fix4
+16532,16621 ccppc # fix3
 16622,16638 c # crossfade
 16622,16638 +
 16639,16695 ccccpcccpcccpcccpcpcpcpcccpcccpcccpccccccccccpcccpcccpccc # cpcppccppccppccp pcpcpcpcpcpcpcpcpcpcpcpcp cpcppccppccppccp
@@ -606,7 +606,7 @@
 #38497,38574 Q 5
 ##cpc cpccp cccpc cpccp pccpc cpccc pccpc cppcc pccpc ccpcc pccpp ccpcc pcccp ccpcc ppccp ccpcc
 ##+-+ ++++- +++-+ ++++- +++-+ +-+++ -++++ +-+++ -++++ ++-++ +++-+ ++-++ -++++ ++-++ -++++ ++-++
-38497,38574 ccppc # fix3
+38497,38574 ccppc # fix4
 38575,38684 c
 38575,38684 + # single field
 38575,38684 Q 7

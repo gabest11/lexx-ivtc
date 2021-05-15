@@ -39,6 +39,29 @@ function FixShower(clip c)
 {
 	# 21430,21754: 325 frames
 
+	# 21430 pcpcp ccppc cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp pcccc
+	#       pccpp ccpcp cpccp cpcpc pcpcc pcpcp ccppc cpcpc pccpp ccpcc
+	# 21480 pcpcp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp
+	#       pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp cpccp cpcpc pcpcc
+	# 21530 cpccp cpcpc pcpcc pcpcp ccppc cpcpc ...
+	#       pcpcp ccppc cpcpc pccpc pcpcp cpccp ...
+	# ...crossfade...
+	# 21530 pccpp ccpcp cpccp cpcpc cpcpc pccpp ccpcp cpcpc pccpc pcpcc
+	#       pccpc pcpcc pcpcp ccpcp cpccp pccpc pcpcc ppccp cpcpc cpcpc
+	# 21580 ppccp cpcpc cpcpc pccpc pcpcc ppccp cpcpc cpcpc pccpc pcpcc
+	#       pcpcp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp cpcpc cppcc
+	# 21630 ppccp cpcpc cpcpc pccpc pcpcp cpccp cpcpc cpcpc pccpp ccpcp
+	#       pcpcp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp cpcpc cppcc
+	# 21680 cpccp cpcpc cpcpc pccpp ccp..
+	#       pcpcp ccpcp cpccp cpcpc cpp..
+	# ...crossfade...
+	# 21655 cpccp
+	#       ccpcc
+	# 21660 cpccp pccpc pcpcc pcpcp ccpcp cpccp pccpc pcpcc pcpcp ccppc
+	#       pcpcp ccppc cpcpc pccpc pcpcc ppccp cpcpc cpcpc pccpp ccpcp
+	# 21710 cpccp cpcpc cpcpc pccpc pcpcc ppccp cpcpc cpcpc ppccc cpccc
+	#       cccpp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp pccpc cccpc
+
 	last = c
 	
 	f1 = FixSlowMoI(21430, 21559, pd = 0, f = [ \
@@ -93,12 +116,22 @@ function FixShower(clip c)
 
 # cogwheels spinning up 
 
+# 88173    pc cpcpc
+#          pc cpccp
+# 88180 ccpcp ccpcc pccpc cpccp cpccp cpccp ccpcc pccpc cpcpc cpc
+#       cccpc cpccp cpcpc cpccp ccpcc pccpc cpcpc pccpc cpccp ccp
+
 fix2 = FixSlowMoI(88173, 88227, 37000, f = [ \
 	[0,1,2,4,6,7,8,10,12,13,15,16,18,19,21,22,24,25,27,29,30,32,34,35,37,38,40,41,43,44,46,47,49,51,52,54], \
 	[0,1,2,4,5,7,8,9,11,12,14,15,17,19,21,22,24,25,27,28,30,31,33,34,36,37,39,41,43,44,46,47,49,50,52,53] \
 	])
 
 # more spinning wheels
+
+# 88228    cc
+#          cc
+# 88230 ccccc pccpc cpccp cpcpc cpccp cpcpc cpccp cpcpc cpc
+#       ccccc ccpcp cpccp ccpcp cpccp ccpcp ccpcp ccpcc pcp
 
 fix3 = FixSlowMoI(88228, 88272, 37000, f = [ \
 	[0,1,2,3,4,5,6,8,9,11,12,14,15,17,19,21,22,24,25,27,29,31,32,34,35,37,39,41,42,44], \
@@ -107,12 +140,22 @@ fix3 = FixSlowMoI(88228, 88272, 37000, f = [ \
 
 # disc on a slice of Kai's body (same method)
 
+# 130265 cccpc pccpc pccpc cpccp ccpcc pccpc pccpc pccpc cpccp ccpcc
+#        cccpc cpccp ccpcc pcpcc pcpcc pccpc cpccp ccpcc pcpcc pcpcc
+# 130315 pccpc pccpc pccpc cpccp ccpcc pcc
+#        pccpc cpccp ccpcc pcpcc pcpcc pcc
+
 fix4 = FixSlowMoI(130265, 130342, 37000, f = [ \
 	[0,1,2,4,6,7,9,11,12,14,15,17,18,20,21,23,24,26,27,29,31,32,34,36,37,39,40,42,43,45,46,48,49,51,52,54,56,57,59,61,62,64,65,67,68,70,71,73,74,76,77], \
 	[0,1,2,4,5,7,8,10,11,13,14,16,18,19,21,23,24,26,27,29,30,32,33,35,36,38,39,41,43,44,46,48,49,51,52,54,55,57,58,60,61,63,64,66,68,69,71,73,74,76,77] \
 	])
 
 # Zev on floor tile switch thingy (bg is a little bent in two frames, mv_search = 7 maybe?)
+
+# 60387 pcc
+#       cpc
+# 60390 cpccp ccpcc cpccc pccpc cpccp cc
+#       ccpcc cpccp ccpcc pcccp cccpc cp
 
 fix5 = FixSlowMoI(60387, 60416, 35500, f = [ \
 	[1,2,3,5,6,8,9,11,12,13,15,16,17,19,20,22,23,25,26,28,29], \
@@ -129,6 +172,13 @@ fix6 = FixSlowMoI(3661, 3675, 41500, f = [ \
 	
 # Zev in her dream land
 
+# 79962   pcc ccpcc
+#         ccp ccpcc
+# 79970 pcccp cccpc ccpcc cpccp ccccp ccpcc ccpcc pcccc pccpc cccpc
+#       ccpcc pcccc pccpc cccpc cpccc cpccp ccccp ccpcc cpccc pcccp
+# 80020 cpccc cpccp ccccp ccpcc ccpcc pcccc pccpc ccpc
+#       cccpc ccpcc cpccp ccccp ccpcc ccpcc pcccc pccp
+
 fix7 = FixSlowMoI(79962, 80058, 40600, pd = 0, f = [ \
 	[1,2,3,4,6,7,9,10,11,13,14,15,17,18,19,21,22,23,25,26,28,29,30,31,33,34,36,37,38,39,41,42,44,45,46,47,49,50,52,53,54,55,57,58,60,61,62,63,65,66,68,69,70,71,73,74,76,77,78,79,81,82,84,85,86,87,89,90,92,93,94,96], \
 	[0,1,3,4,6,7,8,9,11,12,14,15,16,17,19,20,22,23,24,25,27,28,30,31,32,33,35,36,38,39,40,41,43,44,46,47,48,50,51,52,54,55,56,58,59,60,62,63,64,66,67,68,70,71,73,74,75,76,78,79,81,82,83,84,86,87,89,90,91,92,94,95] \
@@ -136,12 +186,24 @@ fix7 = FixSlowMoI(79962, 80058, 40600, pd = 0, f = [ \
 
 # Stanley's torture #1
 
+# 91648 pc
+#       cp
+# 91650 pcpcp ccpcp cpccp pccpc pcpcc ppccp cpcpc cpcpc pcpcp ccpcp
+#       pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp cpccp pccpc pcpcc
+# 91700 cpccp pcc
+#       pcpcp cpc
+
 fix8 = FixSlowMoI(91648, 91707, 44100, f = [ \
 	[1,3,5,7,8,10,12,14,15,18,19,21,23,25,26,29,30,32,34,36,37,39,41,43,45,47,48,50,52,54,55,58,59], \
 	[0,3,4,6,8,10,11,13,15,17,19,21,22,24,26,28,29,32,33,35,37,39,40,43,44,46,48,50,51,53,55,57,59] \
 	])
 
 # Stanley's torture #2
+
+# 92164 c
+#       c
+# 92165 pcpcc pcpcp cpcpc cpcpc pcpcp ccpcp cpccp pccpc pc
+#       cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cc
 
 fix9 = FixSlowMoI(92164, 92206, 44100, f = [ \
 	[0,2,4,5,7,9,11,13,15,16,18,20,22,24,26,27,29,31,33,34,37,38,40,42], \
@@ -163,19 +225,31 @@ function FixTowers(clip c)
 
 # Zev in the intro
 
+# 6170 ccccp cccpc cpccc cpccp pcpcc ccpcc pcccc pccpc cpccc cpccp
+#      ccccc pcccp cccpc cpccc ppccp cccpc ccpcc pcccc pccpc ccpcc
+# 6220 cccc
+#      cpcc
+
 fix10 = FixSlowMoI(6170, 6223, 32800, fin = 7, f = [ \
 	[0,1,2,3,5,6,7,9,10,12,13,14,15,17,18,21,23,24,25,26,28,29,31,32,33,34,36,37,39,40,42,43,44,45,47,48,50,51,52,53], \
 	[0,1,2,3,4,6,7,8,10,11,12,14,15,17,18,19,22,23,25,26,27,29,30,31,33,34,36,37,38,39,41,42,44,45,46,48,49,50,52,53] \
 	])
 
-# His Shadow going up on the column (one frame longer than needed, don't stretch, just remove the last)
+# His Shadow going up on the column
 	
-fix11 = FixSlowMoI(8092, 8123, 30000, pd = 0, deint = 3, f = [ \
+# 8092 012 34567 88002 24567 89012 34566 8801
+#      012 34568 89012 34567 89012 44667 8901
+
+fix11 = FixSlowMoI(8092, 8123, 30000, pd = 0, f = [ \
 	[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14,16,15,19,19,20,21,23,23,24,25,27,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,46,48,47,50,50,52,51,55,55,56,57,59,59,60,61,62,63], [], \
-	[0,2,4,6,8,10,12,15,16,19,20,23,24,27,28,30,32,34,36,38,40,42,44,47,48,51,52,55,56,59,60,62] \
-	]).Trim(0, 8123 - 8092)
+	[0,2,4,6,8,10,12,15,16,19,20,23,24,27,28,30,32,34,36,38,40,42,44,47,48,51,52,55,56,59,60,62], \
+	[0,2,4,6,8,10,12,14,16,19,20,23,24,27,28,30,32,34,36,38,40,42,44,46,48,50,52,55,56,59,60,62] \
+	])
 	
 # Lexx fly-by (very few whole frames, almost 59.94i)
+
+# 40715 01357 91357 80246 79134 57912 35789 13578 024
+#       12468 02468 91356 80245 68012 46890 24679 135
 
 _fix12 = FixSlowMoI(40715, 40752, 17500, pd = 0, f = [ \
 	[0,0,2,1,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18,20,19,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,29,30,30,31,31,32,32,33,33,34,34,35,35,36,36,38,37,40,39,41,41,42,42,43,43,44,44,45,45,46,47,48,49,50,50,51,51,52,52,53,53,54,54,56,55,58,57,59,59,60,60,61,61,62,62,63,63,64,64,65,65,66,67,68,68,69,69,70,70,71,71,72,72,73,73,74,74,75,75], [], \
@@ -213,7 +287,6 @@ fix13 = FixSat(c1, false).Trim(0, 104879 - 104804)
 fix14 = FixSat(c1, true).Trim(0, 115796 - 115723)
 
 #_fix14 = FixSplitFields(115723, 115796)
-#StackHorizontal(fix14, fix14_2) # almost no difference!
 
 Trim(0, 3660) + \
 fix6 + \

@@ -114,14 +114,7 @@
 6135,6145 cppcc
 6146,6169 ppccc
 6167,6178 + # crossfade
-
-# 6170 ccccp cccpc cpccc cpccp pcpcc ccpcc pcccc pccpc cpccc cpccp
-#      ccccc pcccp cccpc cpccc ppccp cccpc ccpcc pcccc pccpc ccpcc
-# 6220 cccc
-#      cpcc
-     
 6170,6219 ccppc # fix10
-
 6224,6279 pcccp
 6280,6354 cccpp
 6355,6396 pcccp
@@ -163,12 +156,7 @@
 7793,7930 cppcc
 7931,8040 ccppc
 8041,8091 cccpp
-
-# 8092 012 34567 88002 24567 89012 34566 8801
-#      012 34568 89012 34567 89012 44667 8901
-
 8092,8123 c # fix11
-
 8124,8150 ccppc
 8151,8178 pcccp
 8179,8215 cccpp
@@ -303,38 +291,10 @@
 21290,21334 luphc # crossfade, ppccc + ccppc
 21290,21334 +--+-
 
-# shower fix
-
-# 21430 pcpcp ccppc cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp pcccc
-#       pccpp ccpcp cpccp cpcpc pcpcc pcpcp ccppc cpcpc pccpp ccpcc
-# 21480 pcpcp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp
-#       pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp cpccp cpcpc pcpcc
-# 21530 cpccp cpcpc pcpcc pcpcp ccppc cpcpc ...
-#       pcpcp ccppc cpcpc pccpc pcpcp cpccp ...
-# ...crossfade...
-# 21530 pccpp ccpcp cpccp cpcpc cpcpc pccpp ccpcp cpcpc pccpc pcpcc
-#       pccpc pcpcc pcpcp ccpcp cpccp pccpc pcpcc ppccp cpcpc cpcpc
-# 21580 ppccp cpcpc cpcpc pccpc pcpcc ppccp cpcpc cpcpc pccpc pcpcc
-#       pcpcp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp cpcpc cppcc
-# 21630 ppccp cpcpc cpcpc pccpc pcpcp cpccp cpcpc cpcpc pccpp ccpcp
-#       pcpcp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp cpcpc cppcc
-# 21680 cpccp cpcpc cpcpc pccpp ccp..
-#       pcpcp ccpcp cpccp cpcpc cpp..
-# ...crossfade...
-# 21655 cpccp
-#       ccpcc
-# 21660 cpccp pccpc pcpcc pcpcp ccpcp cpccp pccpc pcpcc pcpcp ccppc
-#       pcpcp ccppc cpcpc pccpc pcpcc ppccp cpcpc cpcpc pccpp ccpcp
-# 21710 cpccp cpcpc cpcpc pccpc pcpcc ppccp cpcpc cpcpc ppccc cpccc
-#       cccpp ccpcp cpccp cpcpc cppcc pcpcp ccpcp cpccp pccpc cccpc
-
 21335,21429 ccppc
-21430,21754 ccppc # replaced section
+21430,21754 ccppc # FixShower
 21430,21754 -
 21755,21796 uppcc # crossfade, ppccc (from the original previous scene, before the replacement) + pcccp
-
-#
-
 21797,21838 cccpp
 21839,21884 uppcc # crossfade, cppcc + ppccc
 21839 + # can't drop this one, 21835 is also dropped
@@ -537,10 +497,7 @@
 40555,40618 ++--+---++---++---++-++---++---++---++------++---++---++---+--++ # editor of the year
 40619,40714 ppccc
 
-# 40715 01357 91357 80246 79134 57912 35789 13578 024
-#       12468 02468 91356 80245 68012 46890 24679 135
-# better left as is, mostly 59.94i
-# I think it has some shaky cam effect and the fields are misaligned
+# better left as is, mostly 59.94i, I think it has some shaky cam effect and the fields are misaligned
 
 40715,40752 c 
 40715,40752 +
@@ -570,7 +527,7 @@
 41329,41368 --+--------+-----+--------+-----+------- 
 41329,41368 PP 3
 
-# same (I think it's the same clip in three segments)
+# same
 
 41369,41398 c
 41369,41398 +
@@ -823,16 +780,8 @@
 60174,60386 c
 60174,60386 +
 #60174,60386 Q 7 # symbol
-
-# 60387 pcc
-#       cpc
-# 60390 cpccp ccpcc cpccc pccpc cpccp cc
-#       ccpcc cpccp ccpcc pcccp cccpc cp
-      
 # 60387,60416 ccccpccppcppccpcccpccpcccpcppc
-
 60387,60416 ccppc # fix5
-
 60417,60473 c
 60417,60473 +
 #60417,60473 Q 7 # symbol
@@ -1075,13 +1024,6 @@
 79914,79961 phclu # fg ppccc, bg cccpp
 79914,79961 -+-+-
 
-# 79962   pcc ccpcc
-#         ccp ccpcc
-# 79970 pcccp cccpc ccpcc cpccp ccccp ccpcc ccpcc pcccc pccpc cccpc
-#       ccpcc pcccc pccpc cccpc cpccc cpccp ccccp ccpcc cpccc pcccp
-# 80020 cpccc cpccp ccccp ccpcc ccpcc pcccc pccpc ccpc
-#       cccpc ccpcc cpccp ccccp ccpcc ccpcc pcccc pccp
-      
 #79962,79969 ppcccpcc
 #79970,79985 ppccpccc
 #79986,80009 ppcppccc
@@ -1204,22 +1146,12 @@
 #88223,88227 pccpc
 #88173,88227 -
 
-# 88173    pc cpcpc
-#          pc cpccp
-# 88180 ccpcp ccpcc pccpc cpccp cpccp cpccp ccpcc pccpc cpcpc cpc
-#       cccpc cpccp cpcpc cpccp ccpcc pccpc cpcpc pccpc cpccp ccp
-
 88173,88227 ccppc # fix2
 88173,88227 -
 
 #88228,88237 pccpccpppc
 #88238,88267 pccpccpcpc
 #88268,88272 ppcpc
-
-# 88228    cc
-#          cc
-# 88230 ccccc pccpc cpccp cpcpc cpccp cpcpc cpccp cpcpc cpc
-#       ccccc ccpcp cpccp ccpcp cpccp ccpcp ccpcp ccpcc pcp
 
 88228,88272 ccppc # fix3
       
@@ -1282,13 +1214,6 @@
 91502,91562 Q 7
 91563,91647 pcccp
 
-#91648 pc
-#      cp
-#91650 pcpcp ccpcp cpccp pccpc pcpcc ppccp cpcpc cpcpc pcpcp ccpcp
-#      pccpc pcpcc pcpcp cpcpc cpcpc pccpp ccpcp cpccp pccpc pcpcc
-#91700 cpccp pcc
-#      pcpcp cpc
-
 #91648,91657 pcpcpcpccc
 #91658,91667 cpcpccppcc
 #91668,91677 ccpcpcccpp
@@ -1309,11 +1234,6 @@
 91970,92075 +
 91970,92075 Q 7
 92076,92163 pcccp
-
-#92164 c
-#      c
-#92165 pcpcc pcpcp cpcpc cpcpc pcpcp ccpcp cpccp pccpc pc
-#      cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cc
 
 #92164,92173 cpcpccpcpc
 #92174,92183 pcpcpccpcp
@@ -1751,8 +1671,9 @@
 123730,123784 cppcc # 790?
 123785,123854 ppccc
 
-123855,123986 c
+123855,123986 c # mostly 59.94i
 123855,123986 +
+
 #123855,123874 uppppppppppcpcpccccc
 #123875,123894 ccccucucupppppppppcp
 #123895,123914 cpcpcccccccccucucupp
@@ -1851,11 +1772,6 @@
 130077,130145 cccpp
 130146,130264 c
 
-# 130265 cccpc pccpc pccpc cpccp ccpcc pccpc pccpc pccpc cpccp ccpcc
-#        cccpc cpccp ccpcc pcpcc pcpcc pccpc cpccp ccpcc pcpcc pcpcc
-# 130315 pccpc pccpc pccpc cpccp ccpcc pcc
-#        pccpc cpccp ccpcc pcpcc pcpcc pcc
-       
 #130265,130274 cccccpccpc
 #130275,130284 ppcppcpccp
 #130285,130294 ccpccccccc #pccpccpccc

@@ -55,15 +55,35 @@ function Fix240p(clip c, string title)
 	ConditionalReader(title + "-var-fix.txt", "_fix")
 }
 
+function ConvertToTFF(clip c)
+{
+	last = c
+	SeparateFields
+	e = SelectEven.Crop(0,0,-0,-1).AddBorders(0,1,0,0)
+	o = SelectOdd
+	Interleave(e, o)
+	AssumeTFF
+	Weave
+}
+
+function ConvertToBFF(clip c)
+{
+	last = c
+	SeparateFields
+	e = SelectEven
+	o = SelectOdd.Crop(0,1,-0,-0).AddBorders(0,0,0,1)
+	Interleave(e, o)
+	AssumeBFF
+	Weave
+}
+
 function ConvertAllianceS03(clip c)
 {
 	last = c
-	# still just a bit brighter, close enough, within 2 y values
-	ConvertBits(16).Levels(396, 1, 65280, 0, 60416, coring=false).ConvertBits(8, dither=1)
-	SeparateFields
-	t = SelectEven.Crop(0,0,-0,-1).AddBorders(0,1,0,0)
-	b = SelectOdd
-	Interleave(t, b).AssumeTFF.Weave
+	ConvertBits(16)
+	Levels(396, 1, 65280, 0, 60416, coring=false) # still just a bit brighter, close enough, within 2 y values
+	ConvertBits(8, dither=1)
+	ConvertToTFF
 }
 
 function Detect240p(clip c)
@@ -95,17 +115,26 @@ function ShowFields(clip c)
 	c2 = Interleave(SelectEven.Trim(1, 0), SelectOdd).Weave
 	c3 = Interleave(SelectEven.Trim(2, 0), SelectOdd).Weave
 	c4 = StackVertical(c2.Crop(0, c.Height / 2, c.Width / 2, 0), c3.Crop(0, c.Height / 2, c.Width / 2, 0))
-	StackHorizontal(StackHorizontal(c1, c4), StackVertical(SelectEven, SelectOdd))
+	StackHorizontal(StackHorizontal(c4, c1), StackVertical(SelectEven, SelectOdd))
 	#StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
 
-function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", int "deintf", bool "deint4", int "fin", int "fout", int "mv_search", val_array "f")
+function BlendFields(clip c, int s, int e)
+{
+	Trim(c, s, e)
+	Bob
+	Merge(SelectEven, SelectOdd)
+}
+
+function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", bool "deintdisp", int "fin", int "fout", int "mv_search", val_array "f")
 {
 	# depending on the last array argument, it operates on frames if f[1] is empty, 
 	# else f[0] selects the even, f[1] the odd fields
 	#
 	# f[2] tells which resulting frames to deinterlace, odd numbers select deinterlaced frames
 	# ie. [0,2,4,7,8,10] will deinterlace the 4th frame only
+	#
+	# f[3] selects the top/bottom field to deinterlace, if empty, top field by default
 	
 	last = c
 	
@@ -114,8 +143,7 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	ivtc = Default(ivtc, 0)
 	pd = Default(pd, 3)
 	deint = Default(deint, 1)
-	deintf = Default(deintf, -1)
-	deint4 = Default(deint4, false)
+	deintdisp = Default(deintdisp, false)
 	fin = Default(fin, 0)
 	fout = Default(fout, 0)
 	mv_search = Default(mv_search, 3)
@@ -138,15 +166,17 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 		
 	if(f.ArraySize() > 2 && deint > 0)
 	{
-		# TODO: deintf needs to be in the f[2] (0,1,2) and Interleave(last, cc_field0, cc_field1)
+		# maybe switch parity defending on the main clip's parity?
 		
-		c1 = nnedi3(field = deintf)
-		c2 = nnedi3(field = 0)
-		c3 = nnedi3(field = 1)
+		# NOTE: field = ttf, 0: bottom, 1: top
+		
+		top_field = GetParity() ? 1 : 0
+		bottom_field = GetParity() ? 0 : 1
 		
 		if(deint == 1)
 		{
-			# default
+			cd0 = nnedi3(field = top_field)
+			cd1 = nnedi3(field = bottom_field)
 		}
 		else if(deint == 2)
 		{
@@ -155,34 +185,38 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 			super = MSuper(pel=4)
 			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=1)
 			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=1)
-			cc = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
-			c1 = cc.Trim(0, FrameCount - 2) + c1.Trim(FrameCount - 1, 0)
+			cdf = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+			cd0 = nnedi3() # top? bottom?
+			cd0 = cdf.Trim(0, FrameCount - 2) + cd0.Trim(FrameCount - 1, 0)
+			cd1 = cd0
 		}
 		else if(deint == 3)
 		{
 			super = MSuper(pel=4)
 			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=2)
 			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=2)
-			cc = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
-			c1 = c1.Trim(0, -1) + cc.Trim(0, FrameCount - 2) + c1.Trim(FrameCount - 1, 0)
+			cdf = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+			cd0 = nnedi3() # top? bottom?
+			cd0 = cd0.Trim(0, -1) + cdf.Trim(0, FrameCount - 2) + cd0.Trim(FrameCount - 1, 0)
+			cd1 = cd0
 		}
 		else if(deint == 4)
 		{
-			c1 = yadifmod2()
-			c2 = yadifmod2(field = 0)
-			c3 = yadifmod2(field = 1)
+			cd0 = yadifmod2(field = top_field)
+			cd1 = yadifmod2(field = bottom_field)
 		}
 
-		if(deint4)
+		if(f.ArraySize() > 3)
 		{
-	 		Interleave(last, c1, c2, c3)
-			SelectEvery(f[2].ArraySize() * 4, f[2])
+			cd0 = Interleave(cd0, cd1).SelectEvery(f[3].ArraySize() * 2, f[3])
 		}
- 		else
- 		{
- 			Interleave(last, c1)
-			SelectEvery(f[2].ArraySize() * 2, f[2])
- 		}
+		
+		if(deintdisp)
+		{
+			cd0 = cd0.Subtitle("interlaced", x = 5, y = 5)
+		}
+
+		Interleave(last, cd0).SelectEvery(f[2].ArraySize() * 2, f[2])
 	}
 	
 	if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc

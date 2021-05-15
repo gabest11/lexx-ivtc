@@ -265,21 +265,14 @@
 #18785,18925 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
 #18785,18925 Q 5
 
-# 18785 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp ccpcc cpccp cccpc
-#       cpccp ccpcc pccpc ccpcc pcccp ccpcc pccpc cpccp ccpcc pccpc
-# 18835 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccp cccpc cpccc pccpc
-#       cpccp ccpcc pcccp ccpcc cpccp ccpcc pccpc cpccp ccpcc pccpc
-# 18885 cpccp ccpcc pccpc cpccp ccpcc pccpc cpccc pccpc c 
-#       cpccp ccpcc cpccp cccpc cpccp ccpcc pccpc cpccp c
-
-18785,18925 ccppc # fix1
-
 # c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc
 # the goal is to make it play as smooth as possible
 # ? are dups, blend with the next frame
 # first p's can also be considered a dup, blend their two fields as c
 # seconds p's are real new frames, keep them
 # this way there are a few blended frames, but not a single one is a dup or skipped
+
+18785,18925 ccppc # fix1
 
 18926,19169 ppccc
 19170,19202 pcccp

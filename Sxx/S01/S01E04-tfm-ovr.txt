@@ -257,36 +257,14 @@
 9507,9649 pcccp
 9650,9830 ppccc
 9650,9651 + # fade-in
-
-# 9831  ccpc cpccc
-#       cccp ccpcc
-# 9840 pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc
-#      cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc
-# 9890 pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc
-#      cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp
-#
-# pccpc cpccc / cpccp ccpcc repeating
-     
 #9831,9934 ccpccpcccp
-
 9831,9934 ccppc # fix10
-
 9935,10083 ccppc
-
-# 10084     c 
-#           c 
-# 10090 cpccc cpccp ccccp ccpcc ccPcc pcccc pccpc cccPc cpccc Pcccp
-#       cccpc cPccc cpccP ccccp ccPcc ccpcc Pcccc pccpc cccpc cpccc
-# 10140 cccPc ccpcc cPccc 
-#       cpcCp ccccp Ccpcc 
-
 # S01E01 18568+
 #10084,10086 ccp
 #10087,10126 pccccccp # pccc?ccp
 #10127,10149 pccpcccp
-
 10084,10149 c # fix3
-
 10150,10168 + # crossfade
 10169,10188 c
 10189,10419 cccpp
@@ -341,10 +319,12 @@
 13899,13907 + # zoom-in
 14061,14070 + # zoom-out
 
-# fog crazy pattern, one field is ahead by two frames sometimes
+# fog ccpxpc, an additional mix of the previous top and following bottom fields (similar to S01E03 37282-)
 #
-# 14071 ccppcccppcccpcppccpccpcpcccppccccpp
-#       pcccppcccppcccppcpccpccpcpcccppcccc
+# 14072 cppcccppcccpcppccpccpcpcccppccccpp
+#       cccppcccppcccppcpccpccpcpcccppcccc
+#
+# meanwhile, foreground is cccpp
       
 14071,14185 pcccp
 14071,14185 ---+++----++----++----+++ # bg fog combed
@@ -370,19 +350,9 @@
 15956,16015 ccppc
 16016,16131 pcccp
 16132,16191 c # cannot see a pattern
-
-# 16192  cpc ccpcc
-#        ccc pccpc
-# 16200 pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc
-#       cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc
-# 16250 p
-#       c
-
 #16192,16197 cppccp
 #16198,16250 ccpccpcccp
-
 16192,16250 ccppc # fix4
-
 16251,16291 ccppc
 16292,16396 cccpp
 16397,16470 ppccc
@@ -438,18 +408,11 @@
 19571,19620 +
 #19571,19620 Q 7
 19621,19769 cccpp # c frames are multiple frame blended together, cannot make it smooth
-
-# 19770 cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpc
-#       cccpc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccp
-      
 #19770,19775 cppccp
 #19776,19822 ccpccpcccp
-
 19770,19822 ccppc # fix5
-
 19823,19909 c # ?
 19823,19909 +
-
 19910,19989 ppccc
 19990,20012 pcccp
 20013,20043 cppcc
@@ -1696,20 +1659,7 @@
 131456,131541 +
 131456,131541 Q 7
 131542,131656 cppcc
-
-# 131657 pcc
-#        ccp
-# 131660 pccpc cpccp ccpcc pccpc cpccp cpccp ccpcp ccpcc pccpc cpccp
-#        ccpcc pcpcc pccpc pccpc cpccp ccpcc pccpc cpccp ccpcp ccpcp
-# 131710 ccpcc pccpc cpcpc cpcpc cpccp ccpcc pccpc cpccp ccpcc pcpcc
-#        ccpcc pccpc cpccp ccpcc pccpc cpcpc cpccp cpccp ccpcc pccpc
-# 131760 pccpc pccpc cpccp ccpcc pccpc cpccp ccpcp ccpcp ccpcc pccpc
-#       cpccp ccpcc pccpc pccpc cpcpc cpccp ccpcc pccpc cpccp ccpcp
-# 131810 cpccp ccpcc
-#        ccpcc pcpcc
-
 131657,131819 ccppc # fix11
-
 131820,131942 ccppc
 131943,132194 ccppc
 131943,132194 --++- # still combed
@@ -1720,25 +1670,9 @@
 132327,132447 pcccp
 132448,132526 c # fg cccpp, bg 29.97
 132448,132526 ---++
-
-# by field (they are the same, the first is 10 frame ahead, pattern repeats in every 19 frames)
-#
-# 132527 pcp
-#        cpc
-# 132530 ccpcc pccpc cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp
-#        cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp cpccp
-# 132580 ccpcp cpccp ccpcc pccpc cpcpc pccpc cpccp ccpcc pcpcp ccpcc
-#        ccpcc pccpc cpcpc pccpc cpccp ccpcc pcpcp ccpcc pccpc cpccp
-# 132630 pccpc cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp
-#        cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp ccpcp ccpcc
-# 132680 c
-         p
-       
 #132527,132680 pcppcppcpccpccpccpc
 #132602 - # MIC = 109
-
 132527,132680 ccppc # fix1
-
 132681,132747 c # fg ppccc, bg ccppc, some flying rocks 29.97
 132681,132747 +
 132748,132807 ppccc # 59.94i
@@ -1761,18 +1695,7 @@
 133264,133432 Q 5
 133264 Q 3
 133433,133732 cccpp
-
-# 133733    cc pccpc
-#           cc pcccc
-# 133740 cpccc pcccp ccpcc pcccp cccpc cpccp cccpc ccpcc pccpc ccpcc
-#        pccpc cpccp ccccp ccpcc pccpc cccpc cpccp ccpcc ccpcc pccpc 
-# 133790 cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pccpc cccpc cpccp
-#        cpccc cpccp ccpcc pcccp cccpc cpccp cccpc ccpcc pccpc ccpcc
-# 133840 ccpcc ccpcc pccpc cpccc cpccp ccpcc pcccc pccpc c
-#        cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pcccp c
-       
 133733,133880 cppcc # fix7
-
 133881,133977 ppccc
 133978,134163 pcccp
 134164,134291 cppcc
@@ -1842,18 +1765,9 @@
 138307,138457 ccppc
 138307,138457 - # MIC high
 138307 +
-
-# 138458 pc
-#        cp
-# 138460 pccpc cpcpc pccpc pcpcc pccpc pcpcc pccpp ccpcc pcpcp ccpcc
-#        cpcpc cpccp cpcpc cpccp cpcpc cpcpc pccpc cpcpc pccpc pcpcc
-# 138510 pcpcp ccpcp cpccp ccpcp cpccp ccpcp cpcc
-#        pccpc pcpcc pccpc pcpcc pcpcp ccpcc pcpc
-       
 138458,138543 c # fix2
 #138458,138543 i 1
 #138458,138543 PP 3
-
 138544,138687 ccppc
 138688,138772 cppcc # 59.94i
 138688,138772 +
@@ -2005,9 +1919,7 @@
 149386,149530 c # one of those where the image shifts half pixel up and down
 149386,149530 +
 149386,149530 Q 5
-
 #149386,149530 ccppc # fix8
-
 149531,149594 cccpp
 149595,149675 ppccc
 149596,149675 -
@@ -2036,19 +1948,11 @@
 151255,151314 # nothing moves
 151315,151551 cppcc
 151552,151629 ppccc
-
-# 151630 cpccc pcccc ppccc cpccc cpccc cpccp ccccp cccpc ccpcc ccpcc
-#        ccpcc ccpcc pccpc cccpc cccpc cccpc cpccc cpccp ccccp ccpcc
-# 151680 pcccc pccpc cccpc ccpcc cpccc
-#        ccpcc ccpcc pcccc pccpc cccpc
-       
 #151630,151649 cpcccppcccpppcccppcc
 #151650,151669 cppcccpppppcccppccpp
 #151670,151689 ccppccccccppcccppcpp
 #151690,151704 cccppccpcccppcc
-
 151630,151704 ccppc # fix9
-
 151705,151897 cccpp
 151898,152073 ppccc
 152074,152281 cccpp

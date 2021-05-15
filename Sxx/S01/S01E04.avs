@@ -15,8 +15,20 @@ Trim(c1, 158580, 167263)
 
 # moth flying over the exploding gigashadow
 
-# bit naughty asking for the last field outside the batch, 
-# but step size is just a step size, not a restriction
+# by field (they are the same, the first is 10 frame ahead, pattern repeats in every 19 frames)
+#
+# 132527 pcp
+#        cpc
+# 132530 ccpcc pccpc cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp
+#        cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp cpccp
+# 132580 ccpcp cpccp ccpcc pccpc cpcpc pccpc cpccp ccpcc pcpcp ccpcc
+#        ccpcc pccpc cpcpc pccpc cpccp ccpcc pcpcp ccpcc pccpc cpccp
+# 132630 pccpc cpccp cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp
+#        cpcpc cpccp ccpcc pccpc pcpcc pccpc cpccp ccpcp ccpcp ccpcc
+# 132680 c
+#        p
+
+# bit naughty asking for the last field outside the batch, but step size is just a step size, not a restriction
 
 fix1 = FixSlowMoI(132527, 132680, 38130, fc = 19, f = [ \
 	[1,3,5,6,7,9,10,12,13,15,16,19], \
@@ -25,6 +37,13 @@ fix1 = FixSlowMoI(132527, 132680, 38130, fc = 19, f = [ \
 
 # Lexx firing at the gigashadow, watching on the oval display
 
+# 138458 pc
+#        cp
+# 138460 pccpc cpcpc pccpc pcpcc pccpc pcpcc pccpp ccpcc pcpcp ccpcc
+#        cpcpc cpccp cpcpc cpccp cpcpc cpcpc pccpc cpcpc pccpc pcpcc
+# 138510 pcpcp ccpcp cpccp ccpcp cpccp ccpcp cpcc
+#        pccpc pcpcc pccpc pcpcc pcpcp ccpcc pcpc
+       
 # it's already a morphing gfx, morphing it even harder at 29.97
 
 fix2 = FixSlowMoI(138458, 138543, 51500, pd = 0, f = [ \
@@ -34,14 +53,26 @@ fix2 = FixSlowMoI(138458, 138543, 51500, pd = 0, f = [ \
 
 # transport ships flying in
 
+# 10084     c 
+#           c 
+# 10090 cpccc cpccp ccccp ccpcc ccPcc pcccc pccpc cccPc cpccc Pcccp
+#       cccpc cPccc cpccP ccccp ccPcc ccpcc Pcccc pccpc cccpc cpccc
+# 10140 cccPc ccpcc cPccc 
+#       cpcCp ccccp Ccpcc 
+
 fix3 = FixSlowMoI(10084, 10149, 39800, pd = 0, f = [ \
 	[0,1,3,4,5,6,8,9,11,12,13,14,16,17,19,20,21,22,24,25,27,28,29,30,32,33,35,36,37,38,40,41,43,44,45,47,48,49,51,52,53,55,56,57,59,60,61,63,64,65], \
 	[0,1,2,3,5,6,8,9,10,11,13,14,16,17,18,19,21,22,24,25,26,27,29,30,32,33,34,35,37,38,40,41,42,43,45,46,48,49,50,51,53,54,56,57,58,59,61,62,64,65] \
 	])
-#	[0,1,3,4,5,6,8,9,11,12,13,14,16,17,19,20,21,22,24,25,27,28,29,30,32,33,35,36,37,38,40,41,43,44,45,47,48,49,51,52,53,55,56,57,59,60,61,63,64,65,67,68,70,71,72,73,75,76,78,79,80,81,83,84,86,87,88,89], \
-#	[0,1,2,3,5,6,8,9,10,11,13,14,16,17,18,19,21,22,24,25,26,27,29,30,32,33,34,35,37,38,40,41,42,43,45,46,48,49,50,51,53,54,56,57,58,59,61,62,64,65,66,67,69,70,72,73,74,75,77,78,80,81,82,83,85,86,88,89,90] \
 
 # brain #1
+
+# 16192  cpc ccpcc
+#        ccc pccpc
+# 16200 pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc
+#       cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc
+# 16250 p
+#       c
 
 fix4 = FixSlowMoI(16192, 16250, 34000, f = [ \
 	[0,2,3,4,6,7,9,10,12,13,14,16,17,19,20,22,23,24,26,27,29,30,32,33,34,36,37,39,40,42,43,44,46,47,49,50,52,53,54,56,57], \
@@ -50,6 +81,9 @@ fix4 = FixSlowMoI(16192, 16250, 34000, f = [ \
 
 # brain #2
 
+# 19770 cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpc
+#       cccpc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccp
+      
 fix5 = FixSlowMoI(19770, 19822, 34200, f = [ \
 	[0,2,3,4,6,7,9,10,12,13,14,16,17,19,20,22,23,24,26,27,29,30,32,33,34,36,37,39,40,42,43,44,46,47,49,50,52], \
 	[0,1,2,4,5,7,8,10,11,13,14,15,17,18,20,21,23,24,25,27,28,30,31,33,34,35,37,38,40,41,43,44,45,47,48,50,51] \
@@ -65,12 +99,26 @@ fix6 = FixSlowMoI(1094, 1108, 41500, f = [ \
 
 # gigashadow inside #1
 
+# 133733    cc pccpc
+#           cc pcccc
+# 133740 cpccc pcccp ccpcc pcccp cccpc cpccp cccpc ccpcc pccpc ccpcc
+#        pccpc cpccp ccccp ccpcc pccpc cccpc cpccp ccpcc ccpcc pccpc 
+# 133790 cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pccpc cccpc cpccp
+#        cpccc cpccp ccpcc pcccp cccpc cpccp cccpc ccpcc pccpc ccpcc
+# 133840 ccpcc ccpcc pccpc cpccc cpccp ccpcc pcccc pccpc c
+#        cpccp ccpcc cpccc pccpc cpccc pcccp ccpcc pcccp c
+
 fix7 = FixSlowMoI(133733, 133880, 33500, pd = 2, f = [ \
 	[0,1,3,4,6,7,9,10,11,13,14,15,17,18,20,21,23,24,25,27,28,29,31,32,34,35,37,38,39,41,42,43,45,46,48,49,51,52,53,55,56,57,59,60,62,63,65,66,67,69,70,71,73,74,76,77,79,80,81,83,84,85,87,88,90,91,93,94,96,97,98,99,101,102,104,105,107,108,110,111,112,113,115,116,118,119,121,122,124,125,126,127,129,130,132,133,135,136,138,139,140,141,143,144,146,147], \
 	[0,1,3,4,5,6,8,9,11,12,14,15,17,18,19,20,22,23,25,26,28,29,31,32,33,34,36,37,39,40,42,43,45,46,47,48,50,51,53,54,56,57,59,60,61,62,64,65,67,68,70,71,73,74,75,77,78,79,81,82,84,85,87,88,89,91,92,93,95,96,98,99,101,102,103,105,106,107,109,110,112,113,115,116,117,119,120,121,123,124,126,127,129,130,131,133,134,135,137,138,140,141,143,144,145,147] \
 	])
 	
 # scared Stanley and the shadow
+
+# 151630 cpccc pcccc ppccc cpccc cpccc cpccp ccccp cccpc ccpcc ccpcc
+#        ccpcc ccpcc pccpc cccpc cccpc cccpc cpccc cpccp ccccp ccpcc
+# 151680 pcccc pccpc cccpc ccpcc cpccc
+#        ccpcc ccpcc pcccc pccpc cccpc
 
 fix9 = FixSlowMoI(151630, 151704, 31700, f = [ \
 	[0,2,3,4,6,7,8,9,12,13,14,15,17,18,19,20,22,23,24,25,27,28,30,31,32,33,35,36,37,39,40,41,43,44,45,46,48,49,51,52,53,54,56,57,59,60,61,62,64,65,66,68,69,70,72,73,74], \
@@ -79,6 +127,15 @@ fix9 = FixSlowMoI(151630, 151704, 31700, f = [ \
 
 # brain #0
 
+# 9831  ccpc cpccc
+#       cccp ccpcc
+# 9840 pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc
+#      cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc
+# 9890 pccpc cpccc pccpc cpccc pccpc cpccc pccpc cpccc pccpc
+#      cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp ccpcc cpccp
+#
+# pccpc cpccc / cpccp ccpcc repeating
+     
 fix10 = FixSlowMoI(9831, 9934, 34200, f = [ \
 	[0,1,3,4,6,7,8,10,11,13,14,16,17,18,20,21,23,24,26,27,28,30,31,33,34,36,37,38,40,41,43,44,46,47,48,50,51,53,54,56,57,58,60,61,63,64,66,67,68,70,71,73,74,76,77,78,80,81,83,84,86,87,88,90,91,93,94,96,97,98,100,101,103], \
 	[0,1,2,4,5,7,8,9,11,12,14,15,17,18,19,21,22,24,25,27,28,29,31,32,34,35,37,38,39,41,42,44,45,47,48,49,51,52,54,55,57,58,59,61,62,64,65,67,68,69,71,72,74,75,77,78,79,81,82,84,85,87,88,89,91,92,94,95,97,98,99,101,102] \
@@ -86,10 +143,23 @@ fix10 = FixSlowMoI(9831, 9934, 34200, f = [ \
 
 # gigashadow inside #2
 
+# 131657 pcc
+#        ccp
+# 131660 pccpc cpccp ccpcc pccpc cpccp cpccp ccpcp ccpcc pccpc cpccp
+#        ccpcc pcpcc pccpc pccpc cpccp ccpcc pccpc cpccp ccpcp ccpcp
+# 131710 ccpcc pccpc cpcpc cpcpc cpccp ccpcc pccpc cpccp ccpcc pcpcc
+#        ccpcc pccpc cpccp ccpcc pccpc cpcpc cpccp cpccp ccpcc pccpc
+# 131760 pccpc pccpc cpccp ccpcc pccpc cpccp ccpcp ccpcp ccpcc pccpc
+#        cpccp ccpcc pccpc pccpc cpcpc cpccp ccpcc pccpc cpccp ccpcp
+# 131810 cpccp ccpcc
+#        ccpcc pcpcc
+
 fix11 = FixSlowMoI(131657, 131819, 36900, f = [ \
 	[1,2,4,5,7,8,10,11,13,14,16,17,19,20,22,23,25,26,28,30,31,33,34,36,38,39,41,42,44,45,47,48,50,51,53,54,56,57,59,60,62,63,65,67,68,70,72,73,75,76,78,79,81,82,84,85,87,88,90,91,93,94,96,97,99,101,102,104,105,107,109,110,112,113,115,116,118,119,121,122,124,125,127,128,130,131,133,134,136,138,139,141,143,144,146,147,149,150,152,153,155,156,158,159,161,162], \
 	[0,1,3,4,6,7,9,11,12,14,15,17,19,20,22,23,25,26,28,29,31,32,34,35,37,38,40,41,43,44,46,48,49,51,53,54,56,57,59,60,62,63,65,66,68,69,71,72,74,75,77,78,80,82,83,85,86,88,90,91,93,94,96,97,99,100,102,103,105,106,108,109,111,112,114,115,117,119,120,122,123,125,127,128,130,131,133,134,136,137,139,140,142,143,145,146,148,149,151,153,154,156,157,159,161,162] \
 	])
+
+#return ShowFields
 
 Trim(0, 1093) + \
 fix6 + \
