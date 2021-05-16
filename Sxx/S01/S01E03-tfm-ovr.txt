@@ -110,6 +110,8 @@
 6075,6118 pcccp
 6119,6129 cppcc
 6130,6153 ppccc
+6152,6153 + # crossfade
+6152,6153 Q 2
 6154,6203 ccppc # fix9
 6208,6263 pcccp
 6264,6338 cccpp
@@ -887,6 +889,7 @@
 ## the jump between 75825-75826 is a bit large
 
 75795,75850 c # fix24
+75845 - # MIC high
 
 75851,76060 pcccp
 75859,75860 +
@@ -1496,7 +1499,8 @@
 145497,145557 pcccp
 145558,145654 ppccc
 #145655,145696 cpcppccpppcccppcpcppccpppcppppcppppcppppcp
-145655,145696 cppcc # fix2
+145655,145696 ccppc # fix2
+145655,145696 -
 145697,145778 ppccc
 145779,145859 ppccc
 145860,145959 cppcc

@@ -29,7 +29,6 @@
 2817,2919 ppccc
 2920,3008 ccppc
 3009,3041 pcccp
-3023,3041 ++--- # chroma combed?
 3039 +
 3039 PP 3
 3010,3041 Q 5
@@ -39,7 +38,6 @@
 3070,3085 ++---
 3086,3104 cccpp
 3105,3125 pcccp
-3115 + # croma?
 3126,3149 l # all single field
 3150,3169 l
 3170,3184 l
@@ -306,7 +304,6 @@
 34712,34781 c
 34712,34781 -++--
 34782,34839 cccpp
-34782,34794 ---++ # chroma combed?
 34840,34958 c # single field, 3/4 dups, vertically shifted by 1 pixel
 34959,35130 l
 35131,35346 l

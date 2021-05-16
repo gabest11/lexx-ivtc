@@ -1,17 +1,55 @@
 Import("../../common.avsi")
 
-# Allience release (better bitrate) and the missing section from Koch's, cut to match Koch's audio track
+# Alliance vs Koch
+#
+# Koch / Alliance
+# 0-75361 = 30-75391 +30
+# Alliance 75392 missing from Koch
+# 75362-107808 = 75393-107839 +31
+# Koch 107809 missing from Alliance
+# 107810-158549 = 107840-158579 +30
+# Koch 158550 missing from Alliance
+# 158551- = 158580- +29
 
-c1 = MPEG2Source("..\..\S01(Alliance)\D04\title_t00.d2v",cpu=4)
-c2 = MPEG2Source("..\..\S01(Koch)\D04\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
+kochpath = "..\..\S01(Koch)\D04\title_t00p1.d2v"
+allipath = "..\..\S01(Alliance)\D04\title_t00.d2v"
 
-Trim(c1, 30, 75348) + \
-Trim(c2, 75319, 75506) + \
-Trim(c1, 75538, 107839) + \
-Trim(c2, 107809, 107901) + \
-Trim(c1, 107932, 158522) + \
-Trim(c2, 158493, 158550) + \
-Trim(c1, 158580, 167263)
+if(Exist(kochpath))
+{
+	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
+
+	if(Exist(allipath))
+	{
+		c = ConvertToBFF()
+
+		MPEG2Source(allipath, cpu=4)
+		
+		Trim(30, 75348) + \
+		Trim(c, 75319, 75506) + \
+		Trim(75538, 107839) + \
+		Trim(c, 107809, 107901) + \
+		Trim(107932, 158522) + \
+		Trim(c, 158493, 158550) + \
+		Trim(158580, 0)
+	}
+}
+else if(Exist(allipath))
+{
+	MPEG2Source(allipath, cpu=4)
+	
+	Trim(30, 75391) + \
+	Trim(75393, 107839) + \
+	Trim(107840, -1) + \
+	Trim(107840, 158579) + \
+	Trim(158579, -1) + \
+	Trim(158580, 0)
+}
+else
+{
+	assert(false, "Cannot find S01E04")
+}
+
+Trim(0, 167234)
 
 # moth flying over the exploding gigashadow
 
@@ -37,8 +75,8 @@ fix1 = FixSlowMoI(132527, 132680, 38130, fc = 19, f = [ \
 
 # Lexx firing at the gigashadow, watching on the oval display
 
-# 138458 pc
-#        cp
+# 138458    pc
+#           cp
 # 138460 pccpc cpcpc pccpc pcpcc pccpc pcpcc pccpp ccpcc pcpcp ccpcc
 #        cpcpc cpccp cpcpc cpccp cpcpc cpcpc pccpc cpcpc pccpc pcpcc
 # 138510 pcpcp ccpcp cpccp ccpcp cpccp ccpcp cpcc
@@ -67,8 +105,8 @@ fix3 = FixSlowMoI(10084, 10149, 39800, pd = 0, f = [ \
 
 # brain #1
 
-# 16192  cpc ccpcc
-#        ccc pccpc
+# 16192   cpc ccpcc
+#         ccc pccpc
 # 16200 pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc pccpc ccpcc
 #       cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc cpccp cccpc
 # 16250 p
@@ -159,11 +197,51 @@ fix11 = FixSlowMoI(131657, 131819, 36900, f = [ \
 	[0,1,3,4,6,7,9,11,12,14,15,17,19,20,22,23,25,26,28,29,31,32,34,35,37,38,40,41,43,44,46,48,49,51,53,54,56,57,59,60,62,63,65,66,68,69,71,72,74,75,77,78,80,82,83,85,86,88,90,91,93,94,96,97,99,100,102,103,105,106,108,109,111,112,114,115,117,119,120,122,123,125,127,128,130,131,133,134,136,137,139,140,142,143,145,146,148,149,151,153,154,156,157,159,161,162] \
 	])
 
-#return ShowFields
+# Zev in the intro (S01E02)
+
+# 6170 ccccp cccpc cpccc cpccp pcpcc ccpcc pcccc pccpc cpccc cpccp
+#      ccccc pcccp cccpc cpccc ppccp cccpc ccpcc pcccc pccpc ccpcc
+# 6220 cccc
+#      cpcc
+     
+fix12 = FixSlowMoI(3603, 3656, 32800, fin = 7, f = [ \
+	[0,1,2,3,5,6,7,9,10,12,13,14,15,17,18,21,23,24,25,26,28,29,31,32,33,34,36,37,39,40,42,43,44,45,47,48,50,51,52,53], \
+	[0,1,2,3,4,6,7,8,10,11,12,14,15,17,18,19,22,23,25,26,27,29,30,31,33,34,36,37,38,39,41,42,44,45,46,48,49,50,52,53] \
+	])
+
+# His Shadow going up on the column (S01E02)
+	
+# 8092 012 34567 88002 24567 89012 34566 8801
+#      012 34568 89012 34567 89012 44667 8901
+
+# use missing frame interpolation here, because the text looks bad with nnedi3
+
+fix13 = FixSlowMoI(5525, 5556, 30000, pd = 0, deint = 3, f = [ \
+	[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14,16,15,19,19,20,21,23,23,24,25,27,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,46,48,47,50,50,52,51,55,55,56,57,59,59,60,61,62,63], [], \
+	[0,2,4,6,8,10,12,15,16,19,20,23,24,27,28,30,32,34,36,38,40,42,44,47,48,51,52,55,56,59,60,62], \
+	[0,2,4,6,8,10,12,14,16,19,20,23,24,27,28,30,32,34,36,38,40,42,44,46,48,50,52,55,56,59,60,62] \
+	])
+
+# last man standing
+
+# 21157 023 45689 01245 6
+#       123 46789 02345 6
+      
+fix14 = FixSlowMoI(21157, 21170, 30000, pd = 0, f = [ \
+	[0,0,1,1,2,3,4,5,6,7,8,8,10,9,11,11,12,13,14,15,16,17,18,18,20,19,21,21,22,23,24,25,26,27], [], \
+	[1,3,4,6,8,11,12,15,16,18,20,23,24,27,28,30,32], \
+	[0,3,4,6,8,10,12,15,16,18,20,22,24,27,28,30,32] \
+	])
+ 
+#return showfields
 
 Trim(0, 1093) + \
 fix6 + \
-Trim(1109, 9830) + \
+Trim(1109, 3602) + \
+fix12 + \
+Trim(3657, 5524) + \
+fix13 + \
+Trim(5557, 9830) + \
 fix10 + \
 Trim(9935, 10083) + \
 fix3 + \
@@ -171,7 +249,12 @@ Trim(10150, 16191) + \
 fix4 + \
 Trim(16251, 19769) + \
 fix5 + \
-Trim(19823, 131656) + \
+Trim(19823, 20966) + \
+Trim(20967, 21097).LeftToVideo(2, 600) + \
+Trim(21098, 21131) + \
+Trim(21132, 21156).LeftToVideo(1, 600) + \
+fix14 + \
+Trim(21174, 131656) + \
 fix11 + \
 Trim(131820, 132526) + \
 fix1 + \

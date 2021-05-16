@@ -1,13 +1,37 @@
 Import("../../common.avsi")
 
-# Allience release (better bitrate) and the missing section from Koch's, cut to match Koch's audio track
+# Alliance vs Koch
+#
+# +35, and the end credits are a bit longer with fade-out
 
-c1 = MPEG2Source("..\..\S01(Alliance)\D03\title_t00.d2v",cpu=4)
-#c2 = MPEG2Source("..\..\S01(Koch)\D03\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
+kochpath = "..\..\S01(Koch)\D03\title_t00p1.d2v"
+allipath = "..\..\S01(Alliance)\D03\title_t00.d2v"
 
-# nothing to replace so far... only a placeholder
+if(Exist(kochpath))
+{
+	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
 
-Trim(c1, 35, 169633) #+ Trim(c2, , ) + Trim(c1, , -0) 
+	if(Exist(allipath))
+	{		
+		c = ConvertToBFF()
+
+		MPEG2Source(allipath, cpu=4)
+
+		Trim(35, 0) # + ...
+	}
+}
+else if(Exist(allipath))
+{
+	MPEG2Source(allipath, cpu=4)
+
+	Trim(35, 0) # + ...
+}
+else
+{
+	assert(false, "Cannot find S01E03")
+}
+
+Trim(0, 169589)
 
 # head rolling
 
@@ -33,6 +57,8 @@ fix2 = FixSlowMoI(145655, 145696, f = [ \
 	[1,3,4,6,9,10,12,15,17,18,20,23,25,27,28,31,33,34,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67], \
 	[0,3,4,6,8,10,12,14,16,18,20,22,24,27,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,67] \
 	]).Trim(0, 145696 - 145655) # 1 frame longer, drop it, it's also a half frame without field pair
+
+#return fix2.info # showfields
 
 # Kai jumping into a hole
 
@@ -104,7 +130,7 @@ fix8 = FixSlowMoI(142775, 142872, 45300, f = [ \
 	[0,2,4,6,8,9,12,13,16,17,19,21,23,25,27,28,31,32,35,36,38,40,42,44,46,47,50,51,54,55,57,59,61,63,65,66,69,70,73,74,76,78,80,82,84,85,88,89,92,93,95,97] \
 	])
 	
-# Zev in the intro
+# Zev in the intro (S01E02)
 
 # 6170 ccccp cccpc cpccc cpccp pcpcc ccpcc pcccc pccpc cpccc cpccp
 #      ccccc pcccp cccpc cpccc ppccp cccpc ccpcc pcccc pccpc ccpcc
@@ -116,7 +142,7 @@ fix9 = FixSlowMoI(6154, 6207, 32800, fin = 7, f = [ \
 	[0,1,2,3,4,6,7,8,10,11,12,14,15,17,18,19,22,23,25,26,27,29,30,31,33,34,36,37,38,39,41,42,44,45,46,48,49,50,52,53] \
 	])
 
-# His Shadow going up on the column (one frame longer than needed, don't stretch, just remove the last)
+# His Shadow going up on the column (S01E02)
 	
 # 8092 012 34567 88002 24567 89012 34566 8801
 #      012 34568 89012 34567 89012 44667 8901
@@ -344,7 +370,7 @@ fix25 = FixSlowMoI(98343, 98385, 30000, pd = 0, f = [ \
 	[0,2,5,6,9,10,12,14,16,18,20,22,25,26,29,30,32,34,36,38,41,42,45,46,48,50,52,54,57,58,61,62,64,66,68,70,73,74,77,78,81,82,84,86,89], \
 	[0,2,4,6,8,10,12,14,16,18,20,22,25,26,29,30,32,34,36,38,40,42,44,46,48,50,52,54,57,58,61,62,64,66,68,70,72,74,76,78,80,82,84,86,89] \
 	])
-
+	
 Trim(0, 3644) + \
 fix6 + \
 Trim(3660, 6153) + \

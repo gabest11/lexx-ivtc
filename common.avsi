@@ -55,35 +55,42 @@ function Fix240p(clip c, string title)
 	ConditionalReader(title + "-var-fix.txt", "_fix")
 }
 
-function ConvertToTFF(clip c)
+# NOTE: ConvertToTFF/BFF will blur the color planes, use it wisely
+
+function ConvertToTFF(clip c, bool "yv12")
 {
+	yv12 = default(yv12, true)
+	assert(c.IsYV12)
 	last = c
-	SeparateFields
-	e = SelectEven.Crop(0,0,-0,-1).AddBorders(0,1,0,0)
-	o = SelectOdd
-	Interleave(e, o)
+	ConvertToYV24(interlaced=true)
+	Crop(0,0,-0,-1).AddBorders(0,1,0,0)
 	AssumeTFF
-	Weave
+	if(yv12) {ConvertToYV12(interlaced=true)}
 }
 
-function ConvertToBFF(clip c)
+function ConvertToBFF(clip c, bool "yv12")
 {
+	yv12 = default(yv12, true)
+	assert(c.IsYV12)
 	last = c
-	SeparateFields
-	e = SelectEven
-	o = SelectOdd.Crop(0,1,-0,-0).AddBorders(0,0,0,1)
-	Interleave(e, o)
+	ConvertToYV24(interlaced=true)
+	Crop(0,1,-0,-0).AddBorders(0,0,0,1)
 	AssumeBFF
-	Weave
+	if(yv12) {ConvertToYV12(interlaced=true)}
 }
 
-function ConvertAllianceS03(clip c)
+function ColorCorrectAllianceS03(clip c)
 {
 	last = c
+	
+	# still just a bit brighter, close enough, within 2 y values
+	
+	# this way Overlay("lighten") will only overwrite values that are really higher, 
+	# not just because of the compression noise
+	
 	ConvertBits(16)
-	Levels(396, 1, 65280, 0, 60416, coring=false) # still just a bit brighter, close enough, within 2 y values
+	Levels(396, 1, 65280, 0, 60416, coring=false)
 	ConvertBits(8, dither=1)
-	ConvertToTFF
 }
 
 function Detect240p(clip c)
@@ -114,7 +121,8 @@ function ShowFields(clip c)
 	c.SeparateFields
 	c2 = Interleave(SelectEven.Trim(1, 0), SelectOdd).Weave
 	c3 = Interleave(SelectEven.Trim(2, 0), SelectOdd).Weave
-	c4 = StackVertical(c2.Crop(0, c.Height / 2, c.Width / 2, 0), c3.Crop(0, c.Height / 2, c.Width / 2, 0))
+	#c4 = StackVertical(c2.Crop(0, c.Height / 2, c.Width / 2, 0), c3.Crop(0, c.Height / 2, c.Width / 2, 0))
+	c4 = StackVertical(c2.Crop(c.Width / 4, c.Height / 4, c.Width / 2, c.Height / 2), c3.Crop(c.Width / 4, c.Height / 4, c.Width / 2, c.Height / 2))
 	StackHorizontal(StackHorizontal(c4, c1), StackVertical(SelectEven, SelectOdd))
 	#StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
@@ -149,81 +157,95 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	mv_search = Default(mv_search, 3)
 	
 	Trim(start, end)
-	SeparateFields
-	
-	if(f[0].ArraySize() > 0 && f[1].ArraySize() == 0)
-	{
-		SelectEvery(fc, f[0])
-	}
-	else # if(f[0].ArraySize() > 0 && f[1].ArraySize() > 0)
-	{
-		e = SelectEven.SelectEvery(fc, f[0])
-		o = SelectOdd.SelectEvery(fc, f[1])
-		Interleave(e, o)
-	}
 
-	Weave
-		
-	if(f.ArraySize() > 2 && deint > 0)
+	if(f.IsArray() && f.ArraySize() > 1)
 	{
-		# maybe switch parity defending on the main clip's parity?
-		
-		# NOTE: field = ttf, 0: bottom, 1: top
-		
-		top_field = GetParity() ? 1 : 0
-		bottom_field = GetParity() ? 0 : 1
-		
-		if(deint == 1)
+		SeparateFields
+	
+		if(f[0].ArraySize() > 0 && f[1].ArraySize() == 0)
 		{
-			cd0 = nnedi3(field = top_field)
-			cd1 = nnedi3(field = bottom_field)
+			SelectEvery(fc, f[0])
+		
+			# field order would change if the second field was selected twice for a frame
+		
+			if(c.GetParity()) {AssumeTFF}
+			else {AssumeBFF}
 		}
-		else if(deint == 2)
+		else if(f[0].ArraySize() > 0 && f[1].ArraySize() > 0)
 		{
-			# this makes no sense but works with the column elevator
+			e = SelectEven.SelectEvery(fc, f[0])
+			o = SelectOdd.SelectEvery(fc, f[1])
+			Interleave(e, o)
+		}
+
+		Weave
+		
+		if(f.ArraySize() > 2 && deint > 0)
+		{
+			# NOTE: field = ttf, 0: bottom, 1: top
+		
+			top_field = GetParity() ? 1 : 0
+			bottom_field = GetParity() ? 0 : 1
+		
+			if(deint == 1)
+			{
+				cd0 = nnedi3(field = top_field)
+				cd1 = nnedi3(field = bottom_field)
+			}
+			else if(deint == 2)
+			{
+				# this makes no sense but works with the column elevator
 			
-			super = MSuper(pel=4)
-			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=1)
-			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=1)
-			cdf = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
-			cd0 = nnedi3() # top? bottom?
-			cd0 = cdf.Trim(0, FrameCount - 2) + cd0.Trim(FrameCount - 1, 0)
-			cd1 = cd0
-		}
-		else if(deint == 3)
-		{
-			super = MSuper(pel=4)
-			backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=2)
-			forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=2)
-			cdf = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
-			cd0 = nnedi3() # top? bottom?
-			cd0 = cd0.Trim(0, -1) + cdf.Trim(0, FrameCount - 2) + cd0.Trim(FrameCount - 1, 0)
-			cd1 = cd0
-		}
-		else if(deint == 4)
-		{
-			cd0 = yadifmod2(field = top_field)
-			cd1 = yadifmod2(field = bottom_field)
-		}
+				super = MSuper(pel=4)
+				backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=1)
+				forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=1)
+				cdf = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+				cd0 = nnedi3() # top? bottom?
+				cd0 = cdf.Trim(0, FrameCount - 2) + cd0.Trim(FrameCount - 1, 0)
+				cd1 = cd0
+			}
+			else if(deint == 3)
+			{
+				super = MSuper(pel=4)
+				backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=2)
+				forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=2)
+				cdf = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+				cd0 = nnedi3() # top? bottom?
+				cd0 = cd0.Trim(0, -1) + cdf.Trim(0, FrameCount - 2)
+				cd1 = cd0
+			}
+			else if(deint == 4)
+			{
+				cd0 = yadifmod2(field = top_field)
+				cd1 = yadifmod2(field = bottom_field)
+			}
 
-		if(f.ArraySize() > 3)
-		{
-			cd0 = Interleave(cd0, cd1).SelectEvery(f[3].ArraySize() * 2, f[3])
-		}
+			if(f.ArraySize() > 3)
+			{
+				cd0 = Interleave(cd0, cd1).SelectEvery(f[3].ArraySize() * 2, f[3])
+			}
 		
-		if(deintdisp)
-		{
-			cd0 = cd0.Subtitle("interlaced", x = 5, y = 5)
-		}
+			if(deintdisp)
+			{
+				cd0 = cd0.Subtitle("interlaced", x = 5, y = 5)
+			}
 
-		Interleave(last, cd0).SelectEvery(f[2].ArraySize() * 2, f[2])
+			Interleave(last, cd0).SelectEvery(f[2].ArraySize() * 2, f[2])
+		}
 	}
-	
-	if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
-	if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
-	if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
-	if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
-	if(ivtc == 5) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # pcccp
+
+	if(ivtc > 0)
+	{
+		SeparateFields
+		
+		if(ivtc == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
+		if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
+		if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
+		if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
+		if(ivtc == 5) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # pcccp
+		
+		Weave
+	}
 	
 	AssumeFPS(c)
 	
@@ -309,3 +331,23 @@ function FixSplitFields(clip c, int s, int e, int pd)
 		AssumeFPS(c)
 	}
 }
+
+function LeftToVideo(clip c, int i, int w)
+{
+	# left side ivtc + conversion, right side 29.97 (NOTE: 37500/30000 = 5/4)
+	
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, 0, w, -0))
+}
+
+function RightToVideo(clip c, int i, int w)
+{
+	# right side ivtc + conversion, left side 29.97 (NOTE: 37500/30000 = 5/4)
+	
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(w, 0, -0, -0), x = w)
+}
+
+# TODO: Top/BottomToVideo

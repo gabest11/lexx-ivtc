@@ -59,8 +59,6 @@
 2195,2263 ppccc
 2264,2317 pcccp
 2318,2339 cccpp
-2318,2339 ---++ # chroma combed?
-2318,2339 Q 5
 2340,2362 c # looks bad
 2340,2362 +
 2363,2381 cccpp
@@ -75,8 +73,7 @@
 2472,2492 +---+
 2493,2505 c # looks bad
 2493,2505 +
-2506,2530 ccppc # chroma combed?
-2506,2530 --++-
+2506,2530 ccppc
 2529 + # still combed
 2529 Q 5
 2531,2624 l # single field

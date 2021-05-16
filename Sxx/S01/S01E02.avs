@@ -1,39 +1,76 @@
 Import("../../common.avsi")
 
-# Allience release (better bitrate) and the missing section from Koch's, cut to match Koch's audio track
+# Alliance vs Koch
+#
+# 0-107867 +15
+# 107868- +13 107868=107881, the last/first frames are missing from the two scenes here
 
-c1 = MPEG2Source("..\..\S01(Alliance)\D02\title_t00.d2v",cpu=4)
-c2 = MPEG2Source("..\..\S01(Koch)\D02\title_t00p1.d2v",cpu=4).Letterbox(0,0,2,2)
-c3 = MPEG2Source("..\..\S01(Alliance)\D01\title_t00.d2v",cpu=4)
+# 0
+# 14315 moth landing in better quality, but not zoomed in that much
+# 14553
+# 30355 encoding error
+# 30539
+# 45031 tunnel in better quality
+# 45120
+# 55290 tunnel again
+# 55379
+# 104819 satellites
+# 104880
+# 107667 encoding error
+# 108035
+# 168046 end
 
-#0
-#14315 moth landing in better quality, but not zoomed in that much
-#14553
-#30355 encoding error
-#30539
-#45031 tunnel in better quality
-#45120
-#55290 tunnel again
-#55379
-#104819 satellites
-#104880
-#107667 encoding error
-#108035
-#168046
+kochpath = "..\..\S01(Koch)\D02\title_t00p1.d2v"
+allipath1 = "..\..\S01(Alliance)\D01\title_t00.d2v"
+allipath2 = "..\..\S01(Alliance)\D02\title_t00.d2v"
 
-Trim(c1, 15, 14329) + \
-Trim(c3, 110947, 111169) + \
-Trim(c1, 14553, 30369) + \
-Trim(c2, 30355, 30538) + \
-Trim(c1, 30554, 45045) + \
-Trim(c3, 136067, 136155) + \
-Trim(c1, 45135, 55304) + \
-Trim(c3, 136067, 136155) + \
-Trim(c1, 55394, 107681) + \
-Trim(c2, 107667, 108034) + \
-Trim(c1, 108048, 168058)
+if(Exist(kochpath))
+{
+	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
 
-# Acorn's frame numbering from here
+	if(Exist(allipath1) && Exist(allipath2))
+	{
+		c0 = ConvertToBFF
+
+		c1 = MPEG2Source(allipath1, cpu=4)
+		c2 = MPEG2Source(allipath2, cpu=4)
+
+		Trim(c2, 15, 14329) + \
+		Trim(c1, 110947, 111169) + \
+		Trim(c2, 14553, 30369) + \
+		Trim(c0, 30355, 30538) + \
+		Trim(c2, 30554, 45045) + \
+		Trim(c1, 136067, 136155) + \
+		Trim(c2, 45135, 55304) + \
+		Trim(c1, 136067, 136155) + \
+		Trim(c2, 55394, 107681) + \
+		Trim(c0, 107667, 108034) + \
+		Trim(c2, 108048, 0)
+	}
+}
+else if(Exist(allipath1) && Exist(allipath2))
+{
+	c1 = MPEG2Source(allipath1, cpu=4)
+	c2 = MPEG2Source(allipath2, cpu=4)
+	
+	Trim(c2, 15, 14329) + \
+	Trim(c1, 110947, 111169) + \
+	Trim(c2, 14553, 45045) + \
+	Trim(c1, 136067, 136155) + \
+	Trim(c2, 45135, 55304) + \
+	Trim(c1, 136067, 136155) + \
+	Trim(c2, 55394, 0)
+	
+	# add the two missing frames by duplicating the surroundings
+	
+	Trim(0, 107866) + Trim(107866, -1) + Trim(107867, -1) + Trim(107867, 0)
+}
+else
+{
+	assert(false, "Cannot find S01E02")
+}
+
+Trim(0, 168044)
 
 function FixShower(clip c)
 {
@@ -260,9 +297,11 @@ _fix12 = FixSlowMoI(40715, 40752, 17500, pd = 0, f = [ \
 
 function FixSat(clip c, bool rev)
 {
-	# first get rid of the blue plasma thing shooting up from the planet
+	last = c
 	
-	c1 = Trim(c, 46715, 46752)
+	# first get rid of the blue plasma thing shooting up from the planet
+		
+	c1 = Trim(46700, 46737)
 	c2 = c1.FreezeFrame(0, c1.FrameCount, 0).Crop(432, 0, 128, 128)
 	Overlay(c1, c2, x = 432, y = 0, mode = "Blend")
 
@@ -283,8 +322,8 @@ function FixSat(clip c, bool rev)
 	AssumeFPS(c)
 }
 
-fix13 = FixSat(c1, false).Trim(0, 104879 - 104804)
-fix14 = FixSat(c1, true).Trim(0, 115796 - 115723)
+fix13 = FixSat(false).Trim(0, 104879 - 104804)
+fix14 = FixSat(true).Trim(0, 115796 - 115723)
 
 #_fix14 = FixSplitFields(115723, 115796)
 

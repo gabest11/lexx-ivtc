@@ -113,7 +113,8 @@
 6091,6134 pcccp
 6135,6145 cppcc
 6146,6169 ppccc
-6167,6178 + # crossfade
+6168,6169 + # crossfade
+6168,6169 Q 2
 6170,6219 ccppc # fix10
 6224,6279 pcccp
 6280,6354 cccpp
@@ -380,7 +381,7 @@
 29962,30047 cppcc
 30048,30309 cppcc
 30310,30354 cccpp
-30355,30538 cbbcc
+30355,30538 cppcc
 30539,30592 ccppc
 30593,30883 cccpp
 30884,30971 cccpp
@@ -447,9 +448,9 @@
 35465,35651 ppccc
 35652,35704 ppccc
 35705,35738 pcccp
-35739,35765 c # 59.94i in the later part and in the first two frames of the next scene
-35739,35765 +
-35766,35891 cccpp
+35739,35763 c # 59.94i in the later part of the scene
+35739,35763 +
+35764,35891 ppccc
 35892,35990 ccppc
 35991,36401 cccpp
 36402,36505 pcccp
@@ -1420,17 +1421,15 @@
 107543,107618 cccpp
 107619,107666 pcccp
 
-107667,107671 cbccc # swapped fields (double vision in the background)
-107672,107690 ccbbc
-107692 n # skip the blurred frame
-107693,107747 bcccb # swapped fields
-107748,107802 ccbbc
-107803 n # skip
-107804,107858 bcccb # swapped fields
-107859,107867 ccbbc
+107667,107671 cpccc # ?
+107672,107692 ccppc
+107693,107747 pcccp
+107748,107803 ccppc
+107804,107858 pcccp
+107859,107867 ccppc
 107667,107867 - # MIC high
-#107667,107867 Q 5 # field problems could be solved with a blend, then it does not matter...
-107868,108034 cccbb
+
+107868,108034 cccpp
 
 108035,108126 ppccc
 108127,108211 pcccp
@@ -2150,7 +2149,7 @@
 162266,162618 ccppc
 162521,162618 --++- # fade-out
 
-162619,168045 c # keyframe
+162619,168044 c # keyframe
 162619,167860 +
 162619,167860 Q 7
 
