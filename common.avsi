@@ -180,7 +180,7 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 
 		Weave
 		
-		if(f.ArraySize() > 2 && deint > 0)
+		if(f.ArraySize() > 2 && f[2].ArraySize() > 0 && deint > 0)
 		{
 			# NOTE: field = ttf, 0: bottom, 1: top
 		
@@ -220,7 +220,7 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 				cd1 = yadifmod2(field = bottom_field)
 			}
 
-			if(f.ArraySize() > 3)
+			if(f.ArraySize() > 3 && f[3].ArraySize() > 0)
 			{
 				cd0 = Interleave(cd0, cd1).SelectEvery(f[3].ArraySize() * 2, f[3])
 			}
@@ -242,7 +242,7 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 		if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
 		if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
 		if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
-		if(ivtc == 5) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # pcccp
+		if(ivtc == 5) {assert(false)} #{SelectEvery(10, 0,-1, 2,3, 4,5, 6,7)} # pcccp
 		
 		Weave
 	}
@@ -334,8 +334,6 @@ function FixSplitFields(clip c, int s, int e, int pd)
 
 function LeftToVideo(clip c, int i, int w)
 {
-	# left side ivtc + conversion, right side 29.97 (NOTE: 37500/30000 = 5/4)
-	
 	last = c
 	
 	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, 0, w, -0))
@@ -343,11 +341,49 @@ function LeftToVideo(clip c, int i, int w)
 
 function RightToVideo(clip c, int i, int w)
 {
-	# right side ivtc + conversion, left side 29.97 (NOTE: 37500/30000 = 5/4)
-	
 	last = c
 	
 	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(w, 0, -0, -0), x = w)
 }
 
-# TODO: Top/BottomToVideo
+function TopToVideo(clip c, int i, int h)
+{
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, 0, -0, h))
+}
+
+function BottomToVideo(clip c, int i, int h)
+{
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, h, -0, -0), y = h)
+}
+
+function LeftToFilm(clip c, int i, int w)
+{
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = i).Crop(0, 0, w, -0))
+}
+
+function RightToFilm(clip c, int i, int w)
+{
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = i).Crop(w, 0, -0, -0), x = w)
+}
+
+function TopToFilm(clip c, int i, int h)
+{
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 24000, pd = i).Crop(0, 0, -0, h))
+}
+
+function BottomToFilm(clip c, int i, int h)
+{
+	last = c
+	
+	Overlay(FixSlowMoI(0, FrameCount - 1, 24000, pd = i).Crop(0, h, -0, -0), y = h)
+}

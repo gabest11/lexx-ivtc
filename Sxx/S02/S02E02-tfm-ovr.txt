@@ -1,0 +1,1177 @@
+# S02E02 Terminal
+
+0,1172 pcccp # keyframe
+0,1172 -
+1065 +
+1248,1257 cppcc
+1258,1266 pcccp
+1267,1274 ccppc
+1275,1282 ccppc
+1283,1290 ppccc
+1291,1298 pcccp
+1299,1306 ppccc
+1307,1314 ppccc
+1315,1322 pcccp
+1323,1329 cccpp
+1330,1336 ppccc
+1337,1343 pcccp
+1344,1350 cccpp
+1351,1357 ccppc
+1358,1364 cppcc
+1365,1372 ppccc
+1373,1378 ppccc
+1379,1385 ccppc
+1386,1391 pcccp
+1392,1396 pcccp
+1397,1402 c
+1403,1411 c
+1412,1420 c
+1421,1429 ccppc
+1430,1435 cppcc
+1430,1435 -++--
+1436,1441 pcccp
+1436,1441 +---+
+1442,1450 ccppc
+1442,1450 --++-
+1451,1457 ppccc
+1451,1457 ++---
+1458,1463 c
+1464,1469 pcccp
+1464,1469 +---+
+1470,1491 c
+1492,1497 cccpp
+1492,1497 ---++
+1498,1506 ++---
+1507,1553 c
+1554,1562 pcccp
+1554,1562 +---+
+1563,1568 pcccp
+1563,1568 +---+
+1569,1577 c
+1578,1604 ccppc
+1578,1604 --++-
+1605,1644 pcccp
+1605,1662 +---+
+1663,1855 c
+1716,1855 + # single field
+1716,1855 Q 7
+
+1858,2185 llccc # keyframe
+1858,2185 ++--- # top field already blended, we also drop the 2nd, so one half res per group
+1858,2185 Q 7
+2186,3774 ppccc
+3775,3913 pcccp
+3914,4025 ccppc
+4026,4154 ppccc
+4155,4187 ppccc
+4188,4245 pcccp
+4246,4290 pcccp
+4291,4337 ccppc
+4338,4408 ccppc
+4409,4481 cccpp
+4482,4521 cccpp
+4522,4579 cccpp
+4580,4639 cccpp
+4640,4717 pcccp
+4718,4805 ccppc
+4806,4892 ccppc
+4893,4954 cccpp
+4955,5112 cppcc
+5113,5157 cppcc
+5158,5389 ppccc
+5390,5476 pcccp
+5477,5578 pcccp
+5579,5642 ppccc
+5643,5710 ccppc
+5711,5808 ccppc
+5809,5899 pcccp
+5900,6251 cccpp
+6252,6282 pcccp
+6283,6332 cccpp
+6333,6361 pcccp
+6362,6554 ccppc
+6555,6611 ccppc
+6612,6689 pcccp
+6690,6727 cccpp
+6728,6833 ppccc
+6834,6897 cppcc
+6898,6930 cccpp
+6931,6978 pcccp
+6979,7027 pcccp
+7028,7068 ppccc
+7069,7201 ppccc
+7202,7220 ccppc
+7202,7209 --++-
+7221,7235 pcccp
+7236,7275 ccppc
+7276,7305 ppccc
+7306,7363 ccppc
+7364,7499 cccpp
+7500,7621 ccppc
+7622,7723 pcccp
+7724,7772 cccpp
+7773,7843 ccppc
+7844,7878 cppcc
+7879,7915 ccppc
+7916,7984 cccpp
+7985,8041 ccppc
+8042,8107 cccpp
+8108,8184 pcccp
+8185,8272 cppcc
+8273,8320 cppcc
+8321,8371 ccppc
+8372,8433 pcccp
+8434,8500 ppccc
+8501,8640 pcccp
+8641,8686 cppcc
+8687,8722 pcccp
+8723,8767 pcccp
+8768,8820 cppcc
+8821,8866 cccpp
+8867,8954 ppccc
+8955,9002 pcccp
+9003,9077 cccpp
+9078,9114 ccppc
+9115,9329 cppcc
+9330,9461 pcccp
+9462,9607 ppccc
+9608,9680 ccppc
+9681,9700 ccppc
+9701,9705 hchpc # missing some fields here
+9701 +
+9703 +
+9701,9705 Q 4
+9706,9753 ccppc
+9754,9804 ppccc
+9805,9873 cppcc
+9874,9914 cppcc
+9915,10032 pcccp
+10033,10176 cppcc
+10177,10259 cccpp
+10260,10440 ppccc
+10441,10638 c
+10639,10831 c
+10832,11455 ccppc
+11456,11568 ccppc
+11569,11864 ppccc
+11865,11961 cccpp
+11962,12180 ppccc
+12181,12301 pcccp
+12302,12362 ppccc
+12363,12414 ccppc
+12415,12593 cccpp
+12594,12617 c # 59.94i
+12594,12617 +
+12594,12617 Q 5
+12618,12741 c # blinking cccpp
+12618,12741 - # ---++
+12622 +
+12646 +
+12652 +
+12676 +
+12682 +
+12706 +
+12712 +
+12736 +
+12742,12894 cccpp
+12895,13007 cccpp
+13008,13133 ccppc
+13134,13273 c
+13274,13375 ppccc
+13376,13623 ccppc
+13376,13481 --++- # hand
+13624,13822 ccppc
+13823,14003 ccppc
+14004,14232 ppccc
+14233,14371 ppccc
+14372,14384 c
+# bg in these clips is 29.97, the bubbles move vertically and slow,
+# no one will probably notice if we drop a frame and some balls are
+# a bit combed in the other p frame
+14385,14508 cccbb
+14385,14508 -
+14509,14567 ppccc
+14568,14638 ccbbc
+14568,14638 -
+14639,14644 c
+14645,14710 c
+14711,14802 ppccc
+14803,14900 cppcc
+14901,14940 c
+14941,14946 c
+14947,15042 ccbbc
+14947,15042 -
+15043,15118 ppccc
+15119,15164 bcccb
+15120,15164 -
+15119 f 0 # force the right field of the first b frame
+15165,15355 cccpp
+15356,15417 cbbcc
+15356,15417 -
+15418,15656 cppcc
+15657,15746 cbbcc
+15657,15746 -
+15747,15829 cccpp
+15830,15876 cccbb
+15830,15876 -
+15877,15978 cppcc
+15979,16129 cppcc
+16130,16242 cccpp
+16243,16399 ppccc
+16244,16399 -
+16400,16516 ppccc
+16517,16573 ppccc
+16574,16913 cppcc
+16604,16702 -++-- # hand
+16914,16956 bbccc
+16915,16956 -
+16957,16962 c
+16963,17052 c # still image
+17053,17140 c
+17053,17140 + # combed with drifting offset
+17141,17269 c
+17141,17269 + # same as above, but only the projectile
+17270,17320 c
+17321,17419 c
+17321,17419 +
+17420,17480 ppccc
+17481,17520 cccbb
+17481,17520 -
+17521,17525 c
+17526,17639 c
+17640,17644 c
+17645,17756 cbbcc
+17645,17756 -
+17757,17791 ppccc
+17792,17849 ppccc
+17850,17900 c # bbccc # nothing really fits this
+17850,17900 ++---
+#17851,17900 -
+#17850,17851 +
+#17851 f 0 # ?
+17901,17987 ppccc
+17988,18098 c # bbccc
+17988,18098 ++---
+18099,18161 ccppc
+18162,18268 c # fg cccpp, display might be 29.97
+18162,18246 ---++
+18269,18417 c
+18269,18417 +
+18418,18642 cppcc
+18643,18784 cppcc
+
+#            c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc # repeats three times
+#18785,18925 cuccuccuccuccucccccccccpccpccpccpccpccpccpccpcc
+#18785,18925 -+--+--+--+--+--+--+--+--+--+--+--+--+---------
+#18785,18925 Q 5
+
+# c?cc?cc?cc?cc?ccpccpccppcppcppcppcppcppccpccpcc
+# the goal is to make it play as smooth as possible
+# ? are dups, blend with the next frame
+# first p's can also be considered a dup, blend their two fields as c
+# seconds p's are real new frames, keep them
+# this way there are a few blended frames, but not a single one is a dup or skipped
+
+18785,18925 ccppc # fix1
+
+18926,19169 ppccc
+19170,19202 pcccp
+19203,19432 ccppc
+19433,19561 ccppc
+19476 + # random combed frame
+19476 Q 5
+19562,19706 ppccc
+19707,19748 pcccp
+19749,19870 cccpp
+19871,19923 cccpp
+19924,19970 ppccc
+19971,20059 cppcc
+20060,20127 c # single field, and it's not smooth, because missing a field for continuity
+20060,20127 +
+20060,20127 Q 7
+20128,20188 ccppc
+20189,20252 c # single field (same problem)
+20189,20252 +
+20189,20252 Q 7
+20253,20372 cppcc
+20373,20525 cccpp
+20482 - # noisy image MIC = 86
+20526,20598 ccppc
+20599,20702 ccppc
+20703,21402 ppccc
+21403,21545 cppcc
+21546,21668 pcccp
+21669,21716 pcccp
+21717,21849 ccppc
+21850,21942 pcccp
+21943,22100 ccppc
+22101,22253 ccppc
+22254,22484 cccpp
+22485,22787 cppcc # scene cut when the focus changes
+22788,22957 cppcc
+22958,23144 ppccc
+23145,23228 cppcc
+23229,23370 pcccp
+23371,23422 cccpp
+23423,23547 pcccp
+23548,23636 cccpp
+23637,23778 cccpp
+23779,24009 ccppc
+24010,24143 cppcc
+24144,24410 cppcc
+24411,24645 c # single field
+24411,24645 +
+24411,24645 Q 7
+24646,24713 cppcc
+24714,24771 ppccc
+24772,25008 ppccc
+25009,25110 ccppc
+25111,25296 cccpp
+25297,25838 cppcc
+25839,25921 cppcc
+25922,25962 ppccc
+25963,26058 ccppc
+26059,26136 cppcc
+26137,26286 ccppc
+26287,26332 ccppc
+26333,26420 ppccc
+26421,26450 cccpp
+26451,26502 pcccp
+26503,26559 ppccc
+26560,26647 pcccp
+26648,26730 cppcc
+26731,26897 cccpp
+26898,27153 cccpp
+27154,27235 cccpp
+27236,27480 pcccp
+27481,27555 c
+27481,27555 --++-
+27556,27600 cppcc
+27601,27682 pcccp
+27683,27836 ppccc
+27837,27958 cppcc
+27959,28215 cccpp
+28216,28348 cccpp
+28349,28384 cppcc
+28385,28507 cppcc
+28508,28573 ccupp
+28574,28611 ppccc
+#28612,28695 ppccc
+28612,28695 c # display is 29.97 and already deinterlaced
+28612,28695 ++--- # dr kazan adapts
+28696,28826 ccppc
+28827,28949 pcccp
+28950,29089 cppcc
+29090,29335 cccpp
+29336,29396 cppcc
+29397,29675 ppccc
+29676,29719 pcccp
+29720,29918 ppccc
+29919,29973 ccppc
+29974,30062 cppcc
+30063,30140 cccpp
+30141,30197 ppccc
+30198,30483 cppcc
+30484,30653 cppcc
+30484,30653 -++-- # even the restored frames are slightly combed
+30654,30738 cccpp
+30739,30788 pcccp
+30789,30881 cppcc
+30882,30948 pcccp
+30949,31082 ccppc
+31083,31229 ppccc
+31230,31525 ccppc
+31526,31634 cppcc
+31635,31915 ppccc
+31916,31963 pcccp
+31964,32028 ppccc
+32029,32157 cccpp
+32158,32306 ppccc
+32307,32393 pcccp
+32394,32459 ppccc
+32460,32590 pcccp
+32591,32672 ccppc
+32673,32725 cccpp
+32726,32757 cppcc
+32758,32812 ppccc
+32813,32887 ccppc
+32888,32947 ccppc
+32948,33008 ppccc
+33009,33184 cccpp
+33185,33253 ccppc
+33254,33324 pcccp
+33325,33389 ccppc
+33390,33439 pcccp
+33440,33508 cccpp
+33509,33913 cccpp
+33789 - # MIC = 87
+33914,34278 c # pcccp, already badly deinterlaced
+34279,34433 ccppc
+34434,34603 pcccp
+34604,34851 cccpp
+34852,34997 cccpp
+34998,35080 cppcc
+35081,35292 pcccp
+35293,35507 pcccp
+35508,35561 ccppc
+35562,35697 pcccp
+35698,35875 pcccp
+35876,36370 ccppc
+36371,36567 cppcc
+36568,36636 ccppc
+36637,36687 cccpp
+36688,36810 cppcc
+36811,36842 ppccc
+36843,37040 ppccc
+37041,37260 pcccp
+37261,37339 ppccc
+37340,37462 cppcc
+37463,37688 ccppc
+37689,37717 pcccp
+37718,37757 cppcc
+37745 + # purple vertical artifact in the middle of the picture
+37758,37874 cccpp
+37875,37948 ccppc
+37949,38189 pcccp
+38190,38248 ccppc
+38249,38331 cccpp
+38332,38512 cppcc
+38513,38661 cccpp
+38662,38720 cppcc
+38721,38890 cccpp
+38891,38986 ppccc
+38987,39019 cppcc
+39020,39114 pcccp
+39115,39176 pcccp
+39177,39318 ccppc
+39319,39368 pcccp
+39369,39698 pcccp
+39484 - # MIC = 83
+39699,39765 ppccc
+39766,39847 ccppc
+39848,39971 cppcc
+39972,40083 pcccp
+40084,40190 ppccc
+40191,40384 ppccc
+40385,40431 cccpp
+40432,40484 cccpp
+40485,40551 ccppc
+40552,40841 cppcc
+40842,41025 cccpp
+41026,41286 pcccp
+41272,41302 + # crossfade
+41287,41488 ccppc
+41489,41941 cppcc
+41942,42380 ppccc
+42381,42462 cppcc
+42463,42546 ccppc
+42547,42706 cccpp
+42713,42863 cccpp
+42713,42863 - # MIC high
+42864,42953 cccpp
+42954,42998 ccppc
+42999,43047 pcccp
+43048,43091 cppcc
+43092,43165 cppcc
+43092,43165 - # MIC high
+43166,43444 cccpp
+43166,43444 - # MIC high
+43445,43482 ppccc
+43483,43522 cluph # cppcc + cccpp
+43483,43522 -+--+
+43523,43605 pcccp
+43606,43658 c
+43606,43658 Q 7
+43606,43607 +
+43609,43610 +
+43613 +
+43621 +
+43636 +
+43638,43639 +
+43641 +
+43647 +
+43652 +
+#43606,43658 -
+43659,43771 ccppc
+43772,43880 c
+43772,43880 - # MIC high
+43881,44431 pcccp
+44432,44528 c
+44529,44653 ppccc
+44530 +
+44530 Q 5
+44654,44924 ccppc
+44654,44656 +
+44654,44656 Q 5
+44775,44924 +----
+44925,44987 ccppc
+44988,45186 pcccp
+45187,45283 ppccc
+45284,45408 ccppc
+45409,45472 ppccc
+45473,45582 cppcc
+45583,45645 ccppc
+45646,45920 ccppc
+45921,46119 cppcc
+46120,46362 ccppc
+46363,46480 cppcc
+46481,46603 cccpp
+46604,46661 ppccc
+46662,47075 ppccc
+47076,47188 cccpp
+47189,47526 cppcc
+47527,47600 pcccp
+47601,47740 cccpp
+47741 + # last frame is a dup and a third p type
+47742,47910 ppccc
+47911,47940 ccppc
+47941,48563 cccpp
+48564,48615 cppcc
+48616,48733 ccppc
+48734,48826 cppcc
+48827,48966 pcccp
+48967,49026 ccppc
+49027,49094 ccppc
+49095,49206 ccppc
+49207,49242 cccpp
+49243,49281 cccpp
+49282,49319 pcccp
+49320,49397 pcccp
+49398,49463 cppcc
+49464,49561 ppccc
+49562,49647 pcccp
+49648,49707 cppcc
+49708,49791 cccpp
+49792,49897 ppccc
+49898,49983 ccppc
+49984,50065 pcccp
+50066,50108 cccpp
+50109,50288 cccpp
+50289,50350 cccpp
+50351,50406 cccpp
+50407,50498 ppccc
+50499,50560 pcccp
+50561,50678 cppcc
+50679,50758 cccpp
+50759,50784 cccpp
+50785,50809 ppccc
+50810,50853 ccppc
+50854,50879 c # single field, smoothing it
+50854,50879 +
+50854,50879 Q 7
+50880,50917 c # pp badly deinterlaced
+50880,50917 ---++
+50918,50949 ccppc
+50950,51024 c # pp badly deinterlaced
+50950,51024 ---++
+51025,51145 cppcc
+51025,51145 -
+51146,51234 cccpp
+51235,51300 cppcc
+51301,51469 cccpp
+51470,51547 cccpp
+51548,51789 pcccp
+51790,51839 cccpp
+51840,51963 cccpp
+51964,52042 cppcc
+52043,52092 cppcc
+52093,52247 cccpp
+52248,52294 c # scene cut, previous scene played back in reverse and one field only
+52248,52294 +
+52248,52294 Q 7
+52295,52840 ppccc
+52841,52949 c
+52950,53004 ccppc
+53005,53124 cppcc
+53125,53159 cppcc
+53160,53420 c
+53207,53253 ++--- # fg was badly deinterlaced, only really visible in this section
+53207,53253 Q 5
+53421,53479 pcccp
+53480,53560 c
+53480,53560 --+--
+53561,53640 ppccc
+53641,53821 c
+53822,53963 ppccc
+53964,54136 c
+53964,54136 -+---
+54137,54284 cppcc
+54285,54346 c
+54347,54398 cccpp
+54399,54552 cccpp
+54553,54685 c
+54686,54769 ppccc
+54770,54912 c
+54913,54987 ppccc
+54988,55024 cccpp
+55025,55230 c
+55231,55366 cppcc
+55367,55543 c
+55544,55644 cppcc
+55645,55745 c
+55645,55745 ---+-
+55746,55786 ppccc
+55787,55824 cppcc
+55825,55940 ccppc
+55908,55968 + # crossfade
+55941,56579 ppccc
+56580,56812 cppcc
+56813,56942 ppccc
+56943,57099 pcccp
+57100,57172 cccpp
+57173,57305 ccppc
+57306,57469 cppcc
+57470,57624 ccppc
+57625,57817 cccpp
+57818,57898 ccppc
+57899,58048 ccppc
+58049,58168 pcccp
+58169,58256 ccppc
+58257,58307 cccpp
+58308,58386 cppcc # the moving guy behind the transparent display will cause some errors, but it would be a shame to blur that fine graphics
+58308,58386 -
+#58308,58386 cllcc # alternatively, with minimal losses
+#58308,58386 -++--
+58387,58445 cccpp
+58446,58531 pcccp
+58532,58611 ppccc
+58532 +
+58533,58611 -
+58612,58703 ppccc
+58704,58759 cccpp
+58704,58759 -
+58760,58862 cppcc
+58863,58906 cccpp
+58907,58978 ccppc
+58907,58978 -
+58979,59111 cccpp
+59112,59381 ccppc
+59382,59476 cccpp
+59477,59539 cccpp
+59540,59609 cccpp
+59610,59688 cppcc
+59689,59776 ccppc
+59777,59900 ppccc
+59901,60270 cppcc
+60201,60270 -++--
+60271,60426 cppcc
+60271,60363 -++--
+60427,60607 c
+60427,60608 i 3
+60608,60757 c
+60608,60757 ---++
+60758,60858 c
+60859,60986 c
+60987,61067 c
+61068,61127 c
+61128,61237 c
+61238,61348 pcccp
+61238,61348 +---+ # bg
+61277,61309 Q 5 # lamps look bad with yadif or 6
+61349,61426 ccppc
+61427,61499 ccppc
+61500,61592 c
+61593,62154 ccppc
+61593,61675 --++-
+61748,61830 --++-
+61908,61945 --++-
+62000 - # MIC = 90
+62108,62154 --++-
+62155,62414 cccpp
+62200,62224 ---++
+62320,62353 ---++
+62415,62467 ppccc
+62468,62528 cccpp
+62529,62660 ppccc
+62529,62545 ++---
+62619,62630 ++---
+62661,62720 ppccc
+62721,62762 cccpp
+62763,62863 ccppc
+62864,62948 cccpp
+62949,63001 cppcc
+63002,63097 ccppc
+63002,63074 --++-
+63098,63175 pcccp
+63176,63363 pcccp
+63176,63268 +---+
+63305,63347 ++---
+63364,63447 pcccp
+63448,63715 ccppc
+63716,63804 cccpp
+63749,63804 ---++
+63805,64337 ccppc
+64338,64552 cppcc
+64553,64681 ccppc
+64553,64681 -
+64682,64803 cccpp
+64804,64907 cccpp
+64804,64907 -
+64908,65009 cppcc
+64908,64909 + # first two frames combed
+64908,64909 Q 7
+65010,65116 ccppc
+65117,65194 ccppc
+65195,65255 cppcc
+65195,65196 + # same
+65195,65196 Q 7
+65256,65341 cccpp
+65256,65341 -
+65342,65680 cppcc
+65681,65808 cppcc
+65808 +
+65809,65889 cppcc
+65890,66012 c
+65890,66012 +---+
+65890,66012 Q 5
+66013,66092 c
+66093,66156 ppccc
+66157,66207 pcccp
+66208,66285 c
+66286,66385 c
+66386,66423 pcccp
+66424,66517 c
+66518,66557 cccpp
+66558,66568 c
+66558,66568 ---++
+66569,66581 cppcc
+66582,66608 cccpp
+66609,66690 c
+66691,66790 c
+66691,66790 --++-
+66791,66825 cccpp
+66826,66857 cccpp
+66858,66895 c
+66896,66911 pcccp
+66896,66911 + # still combed
+66912,67104 ppccc
+67105,67275 ppccc
+67105,67275 ++---
+67276,67889 cccpp
+67890,68473 ccppc
+68474,68522 c
+68523,68922 cppcc
+68923,68932 ccppc
+68933,68955 c
+68956,68961 pcccp
+68962,69011 cccpp
+68993,69023 + # crossfade
+69012,69175 pcccp
+69176,69338 cccpp
+69339,69394 pcccp
+69395,69453 ccppc
+69454,69599 pcccp
+69600,69665 cccpp
+69666,69781 cccpp
+69782,69865 cppcc
+69866,70125 pcccp
+70126,70214 ppccc
+70215,70272 pcccp
+70273,70332 cppcc
+70333,70441 ppccc
+70442,70525 cccpp
+70526,70548 cppcc
+70549,70648 ccppc
+70649,70719 ccppc
+70720,70780 ccppc
+70781,70841 cccpp
+70836 - # MIC = 92
+70842,70888 c
+70889,71000 cccpp
+71001,71052 cppcc
+71001,71052 -++--
+71053,71082 cppcc
+71083,71106 pcccp
+71083,71106 +---+
+71107,71146 ppccc
+71147,71205 c # ccppc # not sure and there is almost no movement, all c looks just as good
+71147,71205 - # --++-
+71206,71256 ccppc
+71257,71297 c
+71298,71371 cppcc
+71372,71504 cppcc
+71505,71562 c
+71563,71600 cppcc
+71601,71645 pcccp
+71601,71645 +---+
+71646,71718 ppccc
+71646,71647 +
+71719,71970 cppcc
+71971,72173 cccpp
+72174,72228 cccpp
+72174 + # first frame single field
+72174 f 0
+72174 Q 7
+72229,72349 ppccc
+72350,72421 cccpp
+72350,72421 ---++ # still combed
+72350 +
+72350 f 0
+72350 Q 7
+72422,72506 cppcc
+72422,72506 -++--
+72422 +
+72422 f 0
+72422 Q 7
+# Kai does not move enough to see a pattern or not noticeable,
+# we just enjoy the colorful lights, repeats several times below.
+# Motion based deinterlacers produce nasty artifacts.
+72507,72702 c #ccppc
+72507,72702 - #--++-
+72691 +
+72703,72810 c #
+72703,72810 - #
+72811,72961 pcccp
+72811,72961 +---+
+72962,73024 c #pcccp
+72962,73024 - #+---+
+72971,72986 ++---
+73002 +
+73011 +
+73025,73082 cppcc
+73025,73082 -++--
+73083,73158 pcccp
+73083,73158 +---+
+73159,73224 pcccp
+73225,73321 c #
+73225,73321 - #
+73322,73395 c #
+73322,73395 - #
+73396,73508 cppcc
+73396,73459 -++-- # sfx ends sooner than the scene
+73509,73766 pcccp
+73767,73954 c # dups and skips, cannot do anything about it
+73767,73954 + # single field, smoothing it
+73767,73954 Q 7
+73955,73998 cppcc
+73955,73998 -++--
+73999,74024 + # single field, smoothing it
+73999,74024 Q 7
+74025,74105 c
+74106,74169 ccppc
+74106,74169 --++-
+74170,74236 ccppc
+74237,74304 c
+74305,74364 cccpp
+74305,74364 ---++
+74365,74436 c
+74437,74476 ppccc
+74437,74476 ++---
+74477,74522 c #
+74477,74522 - #
+74523,74570 c # 74524 74537 74541 74545 74549 74562 74566 74570 dups *7-8 skips
+74523,74570 + # single field, smoothing it
+74523,74570 Q 7
+74571,74605 c
+74606,74636 c
+74637,74655 ppccc
+74637,74655 ++---
+74656,74678 ppccc
+74656,74678 + #- #++---
+74657,74678 Q 5
+74679,74720 pcccp
+74679,74720 +---+
+#74679,74720 PP 2
+74721,74784 c
+74785,74818 cccpp
+74785,74818 ---++
+74819,74882 cccpp
+74819,74882 ---++
+74883,74916 ppccc
+74883,74916 ++---
+74917,74963 pcccp
+74917,74963 +---+
+74964,75012 c
+75013,75069 cppcc
+75013,75069 -++--
+75070,75096 cppcc
+75070,75096 -++--
+75097,75145 ppccc
+75097,75145 ++---
+75142,75143 PP 3
+75146,75183 cppcc
+75146,75183 -++--
+75184,75219 c
+75220,75274 ccppc
+75220,75274 --++-
+75275,75337 ppccc
+75275,75337 ++---
+75338,75387 c
+75388,75465 pcccp
+75466,75499 ppccc
+75500,75610 ccppc
+75611,76008 ccppc
+76009,76096 ccppc
+76097,76252 cppcc
+76253,76306 pcccp
+76307,76383 ccppc
+76384,76461 ccppc
+76462,76636 cppcc
+76462,76636 -++--
+76637,76748 ccppc
+76749,76820 cccpp
+76821,76940 ccppc
+76941,77012 ppccc
+77013,77067 ccppc
+77068,77116 cccpp
+77117,77212 ccppc
+77213,77284 pcccp
+77285,77403 ccppc
+77404,77472 cccpp
+77473,77561 ccppc
+77562,77620 ppccc
+77621,77745 ccppc
+77701,77745 --++-
+77745 +
+77746,77918 ccppc
+77846,77918 --++-
+77919,77990 ccppc
+77991,78075 ccppc
+77991,78075 --++-
+78076,78147 cccpp
+78076,78147 ---++
+78148,78252 cccpp
+78148,78191 ---++
+78253,78371 ppccc
+78253,78285 ++---
+78278,78279 Q 4 # combed as the brightness changes field by field
+78372,78494 cppcc
+78495,78552 cccpp
+78553,78701 ccppc
+78702,78760 ppccc
+78761,78824 c
+78761,78787 --++-
+78788,78824 +-+++ # why did I do this?
+78788,78824 Q 7
+78788,78824 M 2
+78825,78877 pcccp
+78878,78964 ppccc
+78965,79042 pcccp
+79043,79223 cppcc
+79224,79290 cppcc
+79291,79768 cppcc
+79769,80161 cppcc
+80130,80192 + # crossfade
+80162,80192 Q 5 # cgi
+80162,80388 c
+80389,80722 ppccc
+80723,80955 cccpp
+80956,81187 ccppc
+81188,81252 ppccc
+81253,81389 ccppc
+81390,81521 cccpp
+81522,81597 ccppc
+81598,81807 pcccp
+81808,81928 ppccc
+81929,82003 cccpp
+82004,82294 pcccp
+82295,82562 ppccc
+82563,82836 cccpp
+82837,83369 c
+82837,83369 -
+
+83370,85893 c # keyframe
+85894,85983 c
+85984,86114 c
+85984,86114 +
+
+1258 Q 4 # pcccp
+1283 Q 4 # ppccc
+1291 Q 4 # pcccp
+1299 Q 4 # ppccc
+1307 Q 4 # ppccc
+1315 Q 4 # pcccp
+1330 Q 4 # ppccc
+1337 Q 4 # pcccp
+1365 Q 4 # ppccc
+1373 Q 4 # ppccc
+1386 Q 4 # pcccp
+1392 Q 4 # pcccp
+3775 Q 4 # pcccp
+4155 Q 4 # ppccc
+4188 Q 4 # pcccp
+4246 Q 4 # pcccp
+4640 Q 4 # pcccp
+5158 Q 4 # ppccc
+5390 Q 4 # pcccp
+5477 Q 4 # pcccp
+5579 Q 4 # ppccc
+5809 Q 4 # pcccp
+6252 Q 4 # pcccp
+6333 Q 4 # pcccp
+6612 Q 4 # pcccp
+6728 Q 4 # ppccc
+6931 Q 4 # pcccp
+6979 Q 4 # pcccp
+7028 Q 4 # ppccc
+7069 Q 4 # ppccc
+7221 Q 4 # pcccp
+7276 Q 4 # ppccc
+7622 Q 4 # pcccp
+8108 Q 4 # pcccp
+8372 Q 4 # pcccp
+8434 Q 4 # ppccc
+8501 Q 4 # pcccp
+8687 Q 4 # pcccp
+8723 Q 4 # pcccp
+8867 Q 4 # ppccc
+8955 Q 4 # pcccp
+9330 Q 4 # pcccp
+9462 Q 4 # ppccc
+9754 Q 4 # ppccc
+9915 Q 4 # pcccp
+10260 Q 4 # ppccc
+11569 Q 4 # ppccc
+11962 Q 4 # ppccc
+12181 Q 4 # pcccp
+12302 Q 4 # ppccc
+13274 Q 4 # ppccc
+14004 Q 4 # ppccc
+14233 Q 4 # ppccc
+14509 Q 4 # ppccc
+14711 Q 4 # ppccc
+15043 Q 4 # ppccc
+15119 Q 4 # bcccb
+16243 Q 4 # ppccc
+16400 Q 4 # ppccc
+16517 Q 4 # ppccc
+16914 Q 4 # bbccc
+17420 Q 4 # ppccc
+17757 Q 4 # ppccc
+17792 Q 4 # ppccc
+17901 Q 4 # ppccc
+17988 Q 4 # bbccc
+18926 Q 4 # ppccc
+19170 Q 4 # pcccp
+19562 Q 4 # ppccc
+19707 Q 4 # pcccp
+19924 Q 4 # ppccc
+20703 Q 4 # ppccc
+21546 Q 4 # pcccp
+21669 Q 4 # pcccp
+21850 Q 4 # pcccp
+23229 Q 4 # pcccp
+23423 Q 4 # pcccp
+24714 Q 4 # ppccc
+24772 Q 4 # ppccc
+25922 Q 4 # ppccc
+26333 Q 4 # ppccc
+26451 Q 4 # pcccp
+26503 Q 4 # ppccc
+26560 Q 4 # pcccp
+27236 Q 4 # pcccp
+27601 Q 4 # pcccp
+27683 Q 4 # ppccc
+28574 Q 4 # ppccc
+28827 Q 4 # pcccp
+29397 Q 4 # ppccc
+29676 Q 4 # pcccp
+29720 Q 4 # ppccc
+30141 Q 4 # ppccc
+30739 Q 4 # pcccp
+30882 Q 4 # pcccp
+31083 Q 4 # ppccc
+31635 Q 4 # ppccc
+31916 Q 4 # pcccp
+31964 Q 4 # ppccc
+32158 Q 4 # ppccc
+32307 Q 4 # pcccp
+32394 Q 4 # ppccc
+32460 Q 4 # pcccp
+32758 Q 4 # ppccc
+32948 Q 4 # ppccc
+33254 Q 4 # pcccp
+33390 Q 4 # pcccp
+34434 Q 4 # pcccp
+35081 Q 4 # pcccp
+35293 Q 4 # pcccp
+35562 Q 4 # pcccp
+35698 Q 4 # pcccp
+36811 Q 4 # ppccc
+36843 Q 4 # ppccc
+37041 Q 4 # pcccp
+37261 Q 4 # ppccc
+37689 Q 4 # pcccp
+37949 Q 4 # pcccp
+38891 Q 4 # ppccc
+39020 Q 4 # pcccp
+39115 Q 4 # pcccp
+39319 Q 4 # pcccp
+39369 Q 4 # pcccp
+39699 Q 4 # ppccc
+39972 Q 4 # pcccp
+40084 Q 4 # ppccc
+40191 Q 4 # ppccc
+41026 Q 4 # pcccp
+41942 Q 4 # ppccc
+42999 Q 4 # pcccp
+43445 Q 4 # ppccc
+43523 Q 4 # pcccp
+43881 Q 4 # pcccp
+44529 Q 4 # ppccc
+44988 Q 4 # pcccp
+45187 Q 4 # ppccc
+45409 Q 4 # ppccc
+46604 Q 4 # ppccc
+46662 Q 4 # ppccc
+47527 Q 4 # pcccp
+47742 Q 4 # ppccc
+48827 Q 4 # pcccp
+49282 Q 4 # pcccp
+49320 Q 4 # pcccp
+49464 Q 4 # ppccc
+49562 Q 4 # pcccp
+49792 Q 4 # ppccc
+49984 Q 4 # pcccp
+50407 Q 4 # ppccc
+50499 Q 4 # pcccp
+50785 Q 4 # ppccc
+51548 Q 4 # pcccp
+52295 Q 4 # ppccc
+53421 Q 4 # pcccp
+53561 Q 4 # ppccc
+53822 Q 4 # ppccc
+54686 Q 4 # ppccc
+54913 Q 4 # ppccc
+55746 Q 4 # ppccc
+56813 Q 4 # ppccc
+56943 Q 4 # pcccp
+58049 Q 4 # pcccp
+58446 Q 4 # pcccp
+58612 Q 4 # ppccc
+59777 Q 4 # ppccc
+62415 Q 4 # ppccc
+62661 Q 4 # ppccc
+63098 Q 4 # pcccp
+63364 Q 4 # pcccp
+66093 Q 4 # ppccc
+66157 Q 4 # pcccp
+66386 Q 4 # pcccp
+66912 Q 4 # ppccc
+68956 Q 4 # pcccp
+69339 Q 4 # pcccp
+69454 Q 4 # pcccp
+69866 Q 4 # pcccp
+70126 Q 4 # ppccc
+70215 Q 4 # pcccp
+70333 Q 4 # ppccc
+71107 Q 4 # ppccc
+72229 Q 4 # ppccc
+73159 Q 4 # pcccp
+73509 Q 4 # pcccp
+75388 Q 4 # pcccp
+75466 Q 4 # ppccc
+76253 Q 4 # pcccp
+76941 Q 4 # ppccc
+77213 Q 4 # pcccp
+77562 Q 4 # ppccc
+78702 Q 4 # ppccc
+78825 Q 4 # pcccp
+78878 Q 4 # ppccc
+78965 Q 4 # pcccp
+80389 Q 4 # ppccc
+81188 Q 4 # ppccc
+81598 Q 4 # pcccp
+81808 Q 4 # ppccc
+82004 Q 4 # pcccp
+82295 Q 4 # ppccc

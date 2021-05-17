@@ -179,9 +179,9 @@ if(!empty($tfm_ovr) && file_exists($tfm_ovr))
 	
 	foreach(explode("\n", file_get_contents($tfm_ovr)) as $row)
 	{
-		if(empty($title) && preg_match('/^# *S([0-9]+)E([0-9]+) +-?(.+)$/i', $row, $m))
+		if(empty($title) && preg_match('/^# *S([0-9]+)(E|R)([0-9]+) +-?(.+)$/i', $row, $m))
 		{	
-			$title = sprintf("Lexx S%02dE%02d - %s", (int)$m[1], (int)$m[2], trim($m[3]));
+			$title = sprintf("Lexx S%02d%s%02d - %s", (int)$m[1], $m[2], (int)$m[3], trim($m[4]));
 		}
 
 		if(preg_match('/([0-9]+),([0-9]+).*# *keyframe/i', $row, $m))

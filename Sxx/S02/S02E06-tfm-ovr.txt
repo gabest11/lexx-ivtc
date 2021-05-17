@@ -393,8 +393,6 @@
 38025,38092 cccpp
 38093,38159 cccpp
 
-# TODO: replace the following scene with a better version from S01E04
-#
 # S01E04 38240,38296 (57) cppcc 38297,38396 pcccp (100)
 # S02E06 38160,38216 (57) cppcc 38217,38402 c (186)
 #
@@ -410,18 +408,14 @@
 # - ...
 # - 38396,38401 (38393 x 6)
 # - 38402 (38395/6 x 1)
-# basically: about every 2nd/3rd x 6 (60 x 6), plus 5 and 1 (1 x 6) => 186
-#
-# if we want to do better... 
-# - 100 to 186 frames with less skips
-# - or do the full scene 157 to 243 frames, 125.6 after ivtc * 2 = 251.2, skip a few here and there and it will fit
+# about every 2nd/3rd frame x 6 (60 x 6), plus 5 and 1 (1 x 6) at both ends => 186
 
 #38160,38216 cppcc
 #38217,38402 c # single field only
 #38217,38402 +
 #38217,38402 Q 7
 
-38160,38402 c # fix
+38160,38402 cppcc # fix1
 
 38403,38482 cccpp
 38483,38532 cccpp

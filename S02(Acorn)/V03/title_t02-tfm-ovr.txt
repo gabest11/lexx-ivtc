@@ -181,8 +181,9 @@
 12276,12397 cccpp
 12398,12636 cppcc
 12637,12759 cccpp
-12760,13011 ccppc
-12760,13011 --++- # people upstairs cccpp and deinterlaced
+#12760,13011 ccppc
+#12760,13011 --++- # people upstairs cccpp and deinterlaced
+12760,13011 ccppc # fix
 13012,15158 pcccp
 15159,15958 pcccp
 15959,16043 cccpp
@@ -231,8 +232,11 @@
 27454,27578 c # single field
 27454,27578 +
 27454,27578 Q 7
+
 27579,27859 ccppc
-27579,27859 --++- # cgi left side at 29.97
+#27579,27859 --++- # cgi left side at 29.97
+#27579,27859 c # fix
+
 27860,27978 ccppc
 27979,28142 ccppc
 28143,28185 pcccp
