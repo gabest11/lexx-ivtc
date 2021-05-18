@@ -1,3 +1,40 @@
+
+function LoadEpisodeWithAlt(string title, int frames, val_array files)
+{
+	# files = [[string path, int start, bool tff], ...]
+	
+	for(i = 0, files.ArraySize() - 1, 1)
+	{
+		if(Exist(files[i][0]))
+		{
+			MPEG2Source(files[i][0], cpu=4)
+			
+			if(files[i].ArraySize() > 1)
+			{
+				Trim(files[i][1], 0)
+			}
+			
+			if(files[i].ArraySize() > 2)
+			{
+				if(GetParity() != files[i][2])
+				{
+					if(files[i][2]) {ConvertToTFF}
+					else {ConvertToBFF}
+				}
+			}
+
+			if(frames > 0)
+			{
+				Trim(0, frames - 1)
+			}
+			
+			return last
+		}
+	}
+
+	assert(false, Format("Cannot find {}", title))
+}
+
 function Fix240p1(clip c)
 {
 	# denoise upsampled 480p without interpolation

@@ -1,0 +1,139 @@
+# Rated 01
+
+0,515 cppcc
+0,515 -
+591,600 cppcc
+601,609 pcccp
+601,609 +---+
+610,617 ccppc
+610,617 --++-
+618,625 ccppc
+618,625 --++-
+626,633 ppccc
+626,633 ++---
+634,641 ppccc
+634,641 ++---
+642,649 ppccc
+642,649 ++---
+650,657 ppccc
+650,657 ++---
+658,669 c
+670,674 c
+675,680 c
+681,686 c
+687,695 pcccp
+687,695 +---+
+696,701 pcccp
+696,701 +---+
+702,710 c
+711,737 ccppc
+711,737 --++-
+738,804 pcccp
+738,804 +---+
+805,919 c
+838,842 + # RATED
+838,842 Q 7
+920,1186 pcccp # keyframe
+1187,1844 pcccp
+1845,2121 ccppc
+2122,2398 cppcc
+2399,2637 ppccc
+2638,2758 cccpp 
+
+2759,2765 ppcccpp # scene from S01E01, but the first c is missing
+2766,2781 cppcccpp
+2782,2813 cppcccpc
+2814,2853 cppccccc # cppccc?c
+2854,2877 cppccpcc
+2878,2917 cppcppcc
+2918,2941 cpccppcc
+2942,2973 ccccppcc # c?ccppcc
+2974,2997 pcccppcc
+2998,3037 pcccppcp
+3038,3069 pcccpccp
+3070,3109 pccccccp # pccc?ccp
+3110,3133 pccpcccp
+3134,3181 pcppcccp
+3182,3197 ccppcccp
+3198,3222 ccppcccc # ccppccc?
+
+3223,3251 c # already deinterlaced
+3252,3357 ccppc
+3358,4169 ccppc
+4170,4449 cccpp
+4450,5146 ccppc
+5147,5378 cppcc
+5379,6220 cppcc
+6221,6406 ccppc
+6407,6428 ppccc
+6429,6448 cccpp
+6449,6475 pcccp
+6476,6523 cppcc
+6524,6933 cppcc
+6934,7079 ppccc
+#7080,7124 ppccc
+7080,7124 upccc # right side
+7080,7124 + # left side is single field until the saw starts
+7080,7124 Q 5
+# somehow the two sides of the picture are out of sync...
+# are you trying to tell me they did not really cut his head open???
+7125,7267 uphcl # pcccp + cppcc
+7125,7267 --+-+
+7268,7330 cccpp
+7331,7418 cccpp
+7419,7473 ppccc
+7474,7611 ccppc
+7612,7669 ppccc
+7670,7756 pcccp
+7757,7824 cccpp
+7825,7882 pcccp
+7883,7928 cluph # cppcc (left) + cccpp (right)
+7883,7928 -+--+
+7929,7974 ccppc
+7975,8006 cccpp
+8007,8043 uppcc # cppcc (left) + ppccc (right)
+8044,8090 ccppc
+8091,8174 uphcl # cppcc (left) + pcccp (right)
+8091,8174 --+-+
+8175,8308 cppcc
+8309,8611 ccupp # cccpp (left) + ccppc (right)
+8612,8847 ccppc
+8848,9000 cppcc
+9001,9119 c # keyframe
+9120,9209 c
+9210,9291 c
+9292,9598 ccppc # keyframe
+9599,9639 cppcc
+9640,9771 cccpp
+9772,9830 ccppc
+9831,9940 cppcc
+9941,10087 cccpp
+10088,10119 cccpp
+10120,10198 cccpp
+10199,10408 cppcc
+10409,10485 cppcc
+10486,10574 pcccp
+10575,10653 pcccp
+10654,10735 ccppc
+10736,10869 ccppc
+10870,10969 ccppc
+10970,11024 + # crossfade
+11001,11449 c
+11419,11449 +
+11419,11449 Q 7
+
+1187 Q 4 # pcccp
+2399 Q 4 # ppccc
+2759 Q 4 # ppcccpp
+6407 Q 4 # ppccc
+6449 Q 4 # pcccp
+6934 Q 4 # ppccc
+7080 Q 4 # ppccc
+7419 Q 4 # ppccc
+7612 Q 4 # ppccc
+7670 Q 4 # pcccp
+7825 Q 4 # pcccp
+8007 Q 4 # ppccc
+8091 Q 4 # pcccp
+10486 Q 4 # pcccp
+10575 Q 4 # pcccp

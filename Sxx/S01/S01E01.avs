@@ -31,6 +31,8 @@ else if(Exist(allipath))
 	Trim(5, 107818) + \
 	BlankClip(last, length = 108064 - 107814) + \
 	Trim(108044, 0)
+	
+	# damaged part blanked out, maybe it is just my disc
 }
 else
 {

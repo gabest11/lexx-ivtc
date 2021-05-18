@@ -1,22 +1,8 @@
 Import("../../common.avsi")
 
-path1 = "..\..\S02(Acorn)\V01\title_t01.d2v"
-path2 = "..\..\S02(Acorn)\D01\title_t00.d2v"
-
-if(Exist(path1))
-{
-	MPEG2Source(path1, cpu=4)
-}
-else if(Exist(path2))
-{
-	MPEG2Source(path2, cpu=4).Trim(86115, 0)
-}
-else
-{
-	assert(false, "Cannot find S02E02")
-}
-
-Trim(0, 86114)
+LoadEpisodeWithAlt("S02E02", 86115, \
+	["..\..\S02(Acorn)\V01\title_t01.d2v"], \
+	["..\..\S02(Acorn)\D01\title_t00.d2v", 86115])
 
 # Stanley pushed on a bed
 

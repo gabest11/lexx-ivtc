@@ -1,22 +1,8 @@
 Import("../../common.avsi")
 
-path1 = "..\..\S02(Acorn)\V01\title_t05.d2v"
-path2 = "..\..\S02(Acorn)\D02\title_t00.d2v"
-
-if(Exist(path1))
-{
-	MPEG2Source(path1, cpu=4)
-}
-else if(Exist(path2))
-{
-	MPEG2Source(path2, cpu=4).Trim(86100, 0)
-}
-else
-{
-	assert(false, "Cannot find S02E04")
-}
-
-Trim(0, 86129)
+LoadEpisodeWithAlt("S02E04", 86130, \
+	["..\..\S02(Acorn)\V01\title_t05.d2v"], \
+	["..\..\S02(Acorn)\D02\title_t00.d2v", 86100])
 
 c0 = SeparateFields
 c0.SelectEven
