@@ -8,10 +8,19 @@ function LoadEpisodeWithAlt(string title, int frames, val_array files)
 		if(Exist(files[i][0]))
 		{
 			MPEG2Source(files[i][0], cpu=4)
-			
+
 			if(files[i].ArraySize() > 1)
 			{
-				Trim(files[i][1], 0)
+				start = (int)(files[i][1])
+				
+				if(start > 0)
+				{
+					Trim(start, 0)
+				}
+				else if(start < 0)
+				{
+					BlankClip(last, -start) + last
+				}
 			}
 			
 			if(files[i].ArraySize() > 2)

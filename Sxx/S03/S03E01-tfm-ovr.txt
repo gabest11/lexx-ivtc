@@ -518,8 +518,8 @@
 83389,83494 l
 
 83495,85983 c # keyframe
-85984,86073 c # reflection ccppc (wtf, no transparency around the sparkling thing)
-85984,86073 +
+85984,86074 c # reflection ccppc (wtf, no transparency around the sparkling thing)
+85984,86074 +
 
 1020 Q 4 # ppccc p
 1212 Q 4 # pcccp p
