@@ -2,6 +2,8 @@ Import("../../common.avsi")
 
 title = ReplaceStr(ScriptFile(), ".avs", "")
 
+# TODO: when Acorn isn't available, try to load Alliance as-is
+
 LoadEpisodeWithAlt("S03E02", 86050, \
 	["..\..\S03(Acorn)\V01\title_t01.d2v"], \
 	["..\..\S03(Acorn)\D01\title_t01.d2v"])
@@ -16,16 +18,15 @@ try
 
 	c1 = c1.ColorCorrectAllianceS03()
 
-	# denoise single field sections
+	# replace the clipped brighter pixels with Acorn's, only Y values, BFF conversion also blurs chroma
 
-	c1 = Fix240p(c1, title)
-	c2 = Fix240p(c2, title)
-
-	# replace the clipped brighter pixels with Acorn's
-
-	Overlay(c1, c2, mode="lighten")
+	Overlay(c1, Overlay(c1, c2, mode="lighten"), mode="luma")
 }
 catch(msg)
 {
 	last # clip undefined if the script ends here
 }
+
+# denoise single field sections
+
+Fix240p(title)

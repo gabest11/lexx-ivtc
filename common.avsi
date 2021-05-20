@@ -44,17 +44,43 @@ function LoadEpisodeWithAlt(string title, int frames, val_array files)
 	assert(false, Format("Cannot find {}", title))
 }
 
-function Fix240p1(clip c)
+# denoise upsampled 480p without interpolation
+# every other line should be the same, if not, take the average
+# original chroma and field order restored by the last Overlay call
+
+function Fix240p1E(clip c)
 {
-	# denoise upsampled 480p without interpolation
-	# every other line should be the same
-	# if not, take the average
-	
-	c.SeparateFields
+	c.AssumeTFF
+
+	SeparateFields
 	Merge(SelectEven, SelectOdd)
 	Interleave(last, last)
 	Weave
-	#PointResize(c.Width, c.Height)
+	
+	Overlay(c, last, mode="luma")
+}
+
+function Fix240p1O(clip c)
+{
+	# have to shift down the odd fields by 1 pixel, merge, then back
+	# also, fix first/last line
+
+	c.AssumeBFF
+	
+	cc = ConvertToYV24(interlaced = true)
+	
+	cc.SeparateFields
+	Merge(SelectEven, SelectOdd.Crop(0, 1, -0, -0).AddBorders(0, 0, 0, 1))
+	Interleave(last, last)
+	Weave
+
+	Crop(0, 0, -0, -1).AddBorders(0, 1, 0, 0)
+	Overlay(cc.Crop(0, 0, -0, 1), x = 0, y = 0, mode = "luma")
+	Overlay(cc.Crop(0, cc.Height - 1, -0, 1), x = 0, y = cc.Height - 1, mode = "luma")
+	
+	ConvertToYV12(interlaced = true)
+	
+	Overlay(c, last, mode="luma")
 }
 
 function Fix240p2(clip c)
@@ -94,10 +120,11 @@ function Fix240p2O(clip c)
 function Fix240p(clip c, string title)
 {
 	last = c
-	ConditionalFilter(Fix240p1, last, "_fix", "==", "1")
-	# not sure about these yet
-	#ConditionalFilter(Fix240p2E, last, "_fix", "==", "2")
-	#ConditionalFilter(Fix240p2O, last, "_fix", "==", "3")
+	ConditionalFilter(GetParity() ? Fix240p1E : Fix240p1O, last, "_fix", "==", "1")
+	ConditionalFilter(GetParity() ? Fix240p1O : Fix240p1E, last, "_fix", "==", "2")
+	# not sure about these yet, needs parity check and make sure even selects first row by assume*
+	#ConditionalFilter(Fix240p2E, last, "_fix", "==", "3")
+	#ConditionalFilter(Fix240p2O, last, "_fix", "==", "4")
 	ConditionalReader(title + "-var-fix.txt", "_fix")
 }
 
@@ -180,7 +207,7 @@ function BlendFields(clip c, int s, int e)
 	Merge(SelectEven, SelectOdd)
 }
 
-function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", bool "deintdisp", int "fin", int "fout", int "mv_search", val_array "f")
+function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", bool "deintdisp", int "fin", int "fout", int "mv_blksize", int "mv_overlap", int "mv_search", int "mv_searchparam", val_array "f")
 {
 	# depending on the last array argument, it operates on frames if f[1] is empty, 
 	# else f[0] selects the even, f[1] the odd fields
@@ -201,6 +228,9 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	fin = Default(fin, 0)
 	fout = Default(fout, 0)
 	mv_search = Default(mv_search, 3)
+	mv_blksize = Default(mv_blksize, 32)
+	mv_overlap = Default(mv_overlap, 8)
+	mv_searchparam = Default(mv_searchparam, 2)
 	
 	Trim(start, end)
 
@@ -312,8 +342,8 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	if(fps_num != 30000)
 	{
 		super = MSuper(pel=4) #, hpad=0, vpad=0
-		backward_vec = MAnalyse(super, blksize=32, overlap=8, isb=true, search=mv_search)
-		forward_vec = MAnalyse(super, blksize=32, overlap=8, isb=false, search=mv_search)
+		backward_vec = MAnalyse(super, blksize=mv_blksize, overlap=mv_overlap, isb=true, search=mv_search)
+		forward_vec = MAnalyse(super, blksize=mv_blksize, overlap=mv_overlap, isb=false, search=mv_search)
 		MFlowFps(super, backward_vec, forward_vec, num=fps_num, den=FrameRateDenominator)#, ml=100000)
 		AssumeFPS(c)
 	}
@@ -321,11 +351,11 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	if(pd > 0)
 	{
 		SeparateFields
-		if(pd == 1) {assert(false)} #{SelectEvery(8, -2,1, 0,3, 2,3, 4,5, 6,7)} # ppccc
+		if(pd == 1) {Trim(0, -6).SelectEvery(6, 0,1, 0,3, 4,5).AssumeFPS(24000,1001) + Trim(6, 0).SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7).AssumeFPS(24000,1001)} #{SelectEvery(8, -2,1, 0,3, 2,3, 4,5, 6,7)} # ppccc
 		if(pd == 2) {SelectEvery(8, 0,1, 0,3, 2,5, 4,5, 6,7)} # cppcc
 		if(pd == 3) {SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7)} # ccppc
-		if(pd == 4) {assert(false)} #{SelectEvery(8, 0,1, 2,3, 4,5, 4,7, 6,9)} # cccpp
-		if(pd == 5) {assert(false)} #{SelectEvery(8, 0,3, 2,3, 4,5, 6,7, 6,9)} # pcccp
+		if(pd == 4) {SelectEvery(8, 0,1, 2,3, 4,5, 4,7, 6,9)} # cccpp
+		if(pd == 5) {SelectEvery(8, 0,3, 2,3, 4,5, 6,7, 6,9)} # pcccp
 		Weave
 		AssumeFPS(c)
 	}
@@ -433,3 +463,5 @@ function BottomToFilm(clip c, int i, int h)
 	
 	Overlay(FixSlowMoI(0, FrameCount - 1, 24000, pd = i).Crop(0, h, -0, -0), y = h)
 }
+
+# TODO: rect to *

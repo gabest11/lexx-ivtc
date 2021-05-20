@@ -232,6 +232,16 @@ fix14 = FixSlowMoI(21157, 21170, 30000, pd = 0, f = [ \
 	[1,3,4,6,8,11,12,15,16,18,20,23,24,27,28,30,32], \
 	[0,3,4,6,8,10,12,15,16,18,20,22,24,27,28,30,32] \
 	])
+	
+# looking back behind the shoulder in slow-mo, every frame is just duplicated
+# interpolate new ones while keeping the cccpp pattern
+
+fix15 = FixSlowMoI(13908, 14059, pd = 4, deint = 3, fc = 10, f = [ \
+	[0, 1, 2, 3, 4, 5, 8, 7], [], \
+	[0, 3] \
+	])
+
+#return showfields
 
 Trim(0, 1093) + \
 fix6 + \
@@ -243,7 +253,9 @@ Trim(5557, 9830) + \
 fix10 + \
 Trim(9935, 10083) + \
 fix3 + \
-Trim(10150, 16191) + \
+Trim(10150, 13907) + \
+fix15 + \
+Trim(14060, 16191) + \
 fix4 + \
 Trim(16251, 19769) + \
 fix5 + \

@@ -313,9 +313,13 @@
 13555,13675 +
 13676,13776 cppcc
 13777,13859 cppcc
-13860,14069 cppcc
+#13860,14069 cppcc
+13860,14059 cppcc
 13899,13907 + # zoom-in
-14061,14070 + # zoom-out
+#14061,14070 + # zoom-out
+14060,14070 uppcc # crossfade, ppccc + pcccp
+14062 + # nose slightly combed
+14062 Q 6 # p frame, external deinterlacers would use the wrong fields
 
 # fog ccpxpc, an additional mix of the previous top and following bottom fields (similar to S01E03 37282-)
 #
@@ -976,7 +980,7 @@
 72965,73048 +
 73049,73121 cppcc
 73049,73121 -
-73122,73152 cpppp # ?
+73122,73152 cpppp # ? first field might be shifted vertically too, they don't line up to make a nice frame
 73122,73152 + # -++++
 73122,73152 Q 7
 73153,73154 ccppc
@@ -1445,11 +1449,17 @@
 112400,112481 +
 112482,112550 cccpp
 112551,112956 ccppc
-112957,113002 ppccc
+112957,113002 ppccc # single field, mostly
+112957,113002 +
+112957,113002 Q 7
 113003,113031 ppccc
-113032,113072 cccpp
+113032,113072 cccpp # same
+113032,113072 +
+113032,113072 Q 7
 113073,113109 pcccp
-113110,113171 pcccp
+113110,113171 pcccp # same
+113110,113171 +
+113110,113171 Q 7
 113172,113249 ppccc
 113250,113375 cppcc
 113376,113492 pcccp
