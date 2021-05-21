@@ -12,5 +12,3 @@ LoadEpisodeWithAlt("S03E05", 86090, \
 # denoise single field sections
 
 Fix240p(title)
-
-Info

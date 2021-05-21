@@ -493,8 +493,8 @@
 
 #41064,41248 c
 41064,41248 ccppc # fix11
-41064,41248 + # looks annoying when upscaled
-41064,41248 Q 5
+#41064,41248 + # looks annoying when upscaled
+#41064,41248 Q 5
 
 41249,41425 ccppc
 

@@ -200,11 +200,20 @@ function ShowFields(clip c)
 	#StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
 
-function BlendFields(clip c, int s, int e)
+function BlendFields(clip c)
 {
-	Trim(c, s, e)
-	Bob
+	c.Bob(0, 1)
 	Merge(SelectEven, SelectOdd)
+}
+
+function BlendFields2(clip c, float offset)
+{
+	offset = Default(offset, 0)
+		
+	c.SeparateFields
+	e = SelectEven.Spline64Resize(Width, c.Height, src_top = -0.25 + offset, src_height = Height)
+	o = SelectOdd.Spline64Resize(Width, c.Height, src_top = +0.25 + offset, src_height = Height)
+	Merge(e, o)
 }
 
 function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", bool "deintdisp", int "fin", int "fout", int "mv_blksize", int "mv_overlap", int "mv_search", int "mv_searchparam", val_array "f")
@@ -295,6 +304,11 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 				cd0 = yadifmod2(field = top_field)
 				cd1 = yadifmod2(field = bottom_field)
 			}
+			else if(deint == 5)
+			{
+				cd0 = BlendFields
+				cd1 = cd0
+			}
 
 			if(f.ArraySize() > 3 && f[3].ArraySize() > 0)
 			{
@@ -363,6 +377,44 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	#c = last
 	#assert(FrameCount == end - start + 1, Format("{} {}", FrameCount, end - start + 1))
 	#return c
+}
+
+function FixFieldOffset(clip c, bool parity, float "offset", float "toffset", float "boffset")
+{
+	last = c
+	
+	offset = Default(offset, 0)
+	toffset = Default(toffset, 0)
+	boffset = Default(boffset, 0)
+
+	SeparateFields
+	
+	if(c.GetParity() != parity)
+	{
+		ComplementParity
+		
+		if(parity)
+		{
+			e = SelectEven.Spline64Resize(Width, Height, src_top = 0.5 + offset + toffset, src_height = Height)
+			o = SelectOdd.Spline64Resize(Width, Height, src_top = -0.5 + offset + toffset, src_height = Height)
+		}
+		else
+		{
+			e = SelectEven.Spline64Resize(Width, Height, src_top = -0.5 + offset + boffset, src_height = Height)
+			o = SelectOdd.Spline64Resize(Width, Height, src_top = 0.5 + offset + boffset, src_height = Height)
+		}
+	}
+	else
+	{
+		e = SelectEven.Spline64Resize(Width, Height, src_top = 0 + offset + toffset, src_height = Height)
+		o = SelectOdd.Spline64Resize(Width, Height, src_top = 0 + offset + toffset, src_height = Height)
+	}
+
+	Interleave(e, o)
+	Weave
+
+	#if(c.GetParity()) {subtitle("X", align=2)}
+	#if(parity) {subtitle("O", align=5)}
 }
 
 function FixSplitFields(clip c, int s, int e, int pd)

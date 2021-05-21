@@ -38,5 +38,7 @@ Interpolation is a problem, but it can also be used to squize out some redundant
 
     Overlay(a, b, mode="difference")
 
+When point sampling was used to create the missing rows, the average of the two can be used to remove some of the noise added by compression.
+
 There are a few 59.94i scenes, where small features, like stars, are on alternating fields, a single field deinterlacer would mean losing a lot of detail and shimmering. There are also the usual hybrid scenes, 4 + 1 dup and 5 real frames layered on top of each other. These are harder to fix, as there are no redundant fields to choose from.
 
