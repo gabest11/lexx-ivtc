@@ -14,6 +14,10 @@ Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
 Planing to do newer releases if I can get them and are better quality.
 
+Still work in progress: 
+* parity changing scenes, very time consuming, but there are not a lot
+* interpolating new pp frames with MVTools where they were badly done decades ago, tests look promising
+
 ## Encoding
 
 Need a bunch of tools like avisynth, ffmpeg, dgindex, mpeg2dec, yadifmod2, eedi3, php... Also, some paths point to locations on my hard disk.
@@ -26,7 +30,9 @@ First step is to rip every disc with mkvmerge.
 
 0.bat title_tNN.mkv will demux the video elementary streams and call dgindex to produce the corresponding .d2v file. I work on elementary streams because the timestamps are stripped and if the disc is damaged the audio is easier to resync. There is a certain version floating on the internet which has a problem with S02E02. But this project isn't for that.
 
-php 1.php title_tNN.mkv 1pass|2pass will do tfm/tdec run and output a huffyuv compressed avi.
+php 1.php title_tNN.mkv 1pass|2pass|fields will do tfm/tdec run and output a huffyuv compressed avi. 
+
+The "fields" option creates avis for both fields and Topaz AI can be used to individually upscale those to 540p (higher is not recommended). This seems to be a better option for S03 than nnedi3. A special .avs file is also generated which maps to those 240p fields, with as many Trims as needed, could be thousands.
 
 php 2.php input output h265/h264 preset vertical_res cfr will encode it into a usable file for further muxing with the audio. The input can be the huffyuv avi or %06d.png if you created those with Topaz AI.
 
@@ -218,6 +224,8 @@ The only "correct" way to deal with this, if you can tolerate the ghosting in tw
     tfm: ccccc, --++-, Q 5
     tdec: v
 
+Update: Recreating pp with MVTools is also an option.
+
 Examples: (there are many, easy to find, just few of the ugliest looking)
 * S02E01 Mantrid, at the beginning, the astronaut's helmet and face, just before descending into the shaft
 * S02E04 Luvliner, fight on the edge of Lexx's bridge
@@ -310,7 +318,7 @@ u frames are also problematic at the end of the scene.
 
 ## Random dups and skips
 
-There are two methods used to fit a clip into a different time-frame. Both can result in an irregular pattern, with seemingly random p frames, that cannot be ivtc'ed.
+There are a couple of methods used to fit a clip into a different time-frame. Both can result in an irregular pattern, with seemingly random p frames, that cannot be ivtc'ed.
 
 ### Fast motion
 
@@ -371,3 +379,39 @@ There must be equal number of c's in each field, unless the list is wrong or the
 The first method, with the numbers, could also be used here, but this was the first I came up with and there were already many scenes done with it. If there are no fields without pairs, this is usually easier to do.
 
 ![Comparison](./utils/media/slowmo.mp4)
+
+### When parity changes
+
+I think this is also a form of slow motion. This time the duplicate fields are not kept in the same row, just inserted in order, each one shifting the rest of the fields to the other row, horribly messing up the whole scene. A bob deinterlacer will hide the problem, but there is also a way to fix it.
+
+First step, create a list of the fields grouped by temporal position, for example ccppc tff will look like hl hlh lh lhl. 3rd h still belongs to the second frame, as the 4th l to the last frame. Now if there is such a slow motion effect, the groups will have plus one field sometimes.
+
+    S01E01 141676-
+    hl hlh lh lhl hlh lhl hl hlhl
+                  ? ?        ?  ?
+
+Any of the fields marked by the question mark should be dropped, one from each group, which will also invert the parity for the rest. No way to tell which one, could be random, trial and error.
+
+Let's drop the first h(?)
+
+    hl hlh lh lhl HL HLH LH LHLH
+                            ?  ?
+
+Then the next L(?)
+
+    hl hlh lh lhl HL HLH LH lhl
+    or
+    ccppc CCP(P/p)c
+
+Avisynth will see the capitalized segments with the opposite parity. This can be used to conditionally shift the fields back to their place. This sub-pixel shift will blur them a bit. Still a lot better then Bob+Merge, or just watching the fields jumping around.
+
+The amount of sub-pixel shift should be +/-0.5, but of course this is not the case. Acorn/Koch needs something like 0.75/-0.25, Alliance is more closer to half. I don't know if this the side-effect of the resizer's sampler, or the resizer used when the DVD was made.
+
+After dropping the dups and restoring the vertical position, continue as above, IVTC and FixSlowMoI to match the frame count.
+
+Examples
+* S01E01: When the prisoners arrive on the transport ships, first scene right after the guard checks out Thodin in his walking cage.
+* S01E01: Megashadow harpooning the Lexx
+* S01E02: Flying towards the colony
+* S01E03: Stanley getting impregnated
+* S01E04: Shadow chasing Stanley on the bridge of the Lexx

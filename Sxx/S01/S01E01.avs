@@ -78,29 +78,28 @@ _fix1 = FixSlowMoI(18259, 18723, 40200, pd = 0, deint = 5, f = [ \
 # the goal is to end up with something that converts to progressive after a normal ivtc
 # vertical field offset needs to be corrected too, that means blurring many of the frames with a sup-pixel move
 
+# TODO: pattern
+
 function FixTransportShips(clip c)
 {
 	Trim(c, 18259, 18723)
 
 	ConvertToYV24(interlaced = true)
 
-	#ShowFrameNumber(x=640,y=25)
 	Separatefields
-	#ShowFrameNumber(x=5,y=220)
-	#return last
+
 	DeleteFrame(18,34,48,63,79,93,109,125,141,157, \
 		170,187,202,216,232,248,264,280,294,309, \
 		325,341,357,371,387,403,416,432,448,464, \
 		478,494,510,526,540,555,571,587,601,617, \
 		633,649,665,679,694,710,726,740,756,772, \
 		788,804,818,833,849,863,879,895,911,925)
-	#ShowFrameNumber(x=640,y=220)
-	SelectEvery(10, 0,1, 4,3, 6,7, 8,9) # cppcc
-	Weave
+
+	SelectEvery(10, 0,1, 4,3, 6,7, 8,9).Weave.AssumeFPS(c)
 
 	# different releases have different field offsets, of course
 	
-	if(GetParity()) # tff => koch
+	if(c.GetParity) # tff => koch
 	{
 		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
 	}
@@ -109,16 +108,14 @@ function FixTransportShips(clip c)
 		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
 	}
 	
-	#Info
-	#return ShowFields
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
 	
 	ConvertToYV12(interlaced = true)
-	
-	AssumeFPS(c)
 }
 
 fix1 = FixTransportShips
-#fix1 = FixSlowMoI(fix1, 0, fix1.FrameCount - 1, 32100, pd = 3)
+#fix1 = FixSlowMoI(fix1, 0, fix1.FrameCount - 1, 32100)
 fix1 = FixSlowMoI(fix1, 0, fix1.FrameCount - 1, 40200, pd = 0)
 #return fix1
 	
@@ -166,12 +163,84 @@ fix2 = FixSlowMoI(46847, 46966, 40750, f = [ \
 # PccPc cPc
 # ccPcc pcc
 
-fix3 = FixSlowMoI(141671, 141878, 35110, deint = 5, f = [ \
+_fix3 = FixSlowMoI(141671, 141878, 35110, deint = 5, f = [ \
 	[1,3,4,5,6,8,9,10,12,13,15,16,18,19,20,22,23,25,26,28,29,31,32,34,35,37,38,40,41,43,44,46,47,49,50,51,53,54,56,57,58,60,61,63,64,66,67,69,70,72,73,75,76,78,79,81,82,84,85,87,88,90,91,92,94,95,97,98,99,101,102,104,105,107,108,110,111,113,114,116,117,119,120,122,123,125,126,128,129,130,132,133,135,136,138,139,140,142,143,145,146,148,149,151,152,154,155,157,158,160,161,163,164,166,167,169,170,171,173,174,176,177,178,180,181,183,184,186,187,189,190,192,193,195,196,198,199,201,202,204,205,207], \
 	[0,2,4,5,6,7,8,10,11,13,14,16,17,19,20,22,23,25,26,28,29,30,32,33,35,36,37,39,40,42,43,45,46,48,49,51,52,54,55,57,58,60,61,63,64,66,67,69,70,71,73,74,76,77,78,80,81,83,84,86,87,89,90,92,93,95,96,98,99,101,102,104,105,107,108,110,111,112,114,115,117,118,119,121,122,124,125,127,128,130,131,133,134,136,137,139,140,142,143,145,146,148,149,150,152,153,155,156,158,159,160,162,163,165,166,168,169,171,172,174,175,177,178,180,181,183,184,186,187,189,190,191,193,194,196,197,198,200,201,203,204,206], \
 	[1] \
 	])
 
+# 0
+# h lhlh lhl hl <-- WTF
+#
+# 10
+# hl hlh lh lhl hlh lhl hl hlhl hl hlhl hl hlhl hl hlhl hl hlh
+#                 ?        ?       ?       ?          ? 
+# 55
+# lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl hl hlhl hl 
+# ?         ?        ?       ?          ?       ?        ?         ?        ?       
+# 116
+# hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh
+#    ?    ?          ?        ?         ?        ?       ?          ?       ?
+# 175
+# lhl hlh lhl hlh lhl hl hlhl hl hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh 
+#     ?         ?        ?          ?       ?       ?        ?         ?       
+# 233
+# lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl hlh lhl hl hlhl hl hlhl hl hlhl
+# ?       ?          ?        ?         ?       ?        ?          ?       ?
+# 290
+# hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl
+#        ?         ?        ?       ?       ?          ?        ?         ?
+# 348
+# hl hlhl hl hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh l
+#    ?       ?          ?       ?        ?         ?        ?          ?    ?          ?
+	
+function FixMegashadow(clip c)
+{
+	Trim(c, 141671, 141878)
+	
+	ConvertToYV24(interlaced = true)
+
+	Separatefields
+	
+	# first 5 frames are strange, starts on a half frame and the last has same fields with no pair anywhere
+	
+	c1 = Trim(0, 9).SelectEvery(10, 0,1, 4,3, 6,5, 8,9).Weave.AssumeFPS(c)
+	c1 = c1.Trim(0,-1).nnedi3 + c1.Trim(1,0)
+
+	DeleteFrame(22,28,34,40,49, \
+		55,63,69,75,84,90,96,104,110, \		
+		119,122,131,137,145,151,157,166,172, \
+		178,186,192,201,207,213,219,227, \
+		233,239,248,254,262,268,274,283,289, \
+		295,303,309,315,321,330,336,344, \
+		350,356,365,371,377,385,391,400,403,412)
+
+	Trim(10, 0).SelectEvery(10, 0,1, 2,3, 6,5, 8,9).Weave.AssumeFPS(c)
+
+	if(c.GetParity) # tff => koch
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+	}
+	else # bff => alliance
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
+	}
+	
+	c2 = last
+
+	last = c1 + c2
+	
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
+	
+	ConvertToYV12(interlaced = true)
+}
+
+fix3 = FixMegashadow
+fix3 = FixSlowMoI(fix3, 0, fix3.FrameCount - 1, 34950)
+#fix3 = FixSlowMoI(fix3, 0, fix3.FrameCount - 1, 43850, pd = 0)
+#return fix3
+	
 # prisoner flattened (first swing looks better without vertical mv search)
 
 fix4_f = [ \
