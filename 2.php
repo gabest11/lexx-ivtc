@@ -16,6 +16,7 @@ $about = dirname(__FILE__).'/about.txt';
 $title = '';
 $fps_mod = 0;
 $fps_demod = 0;
+$mkvmerge = "E:\\tmp\\media\\util\\mkvtoolnix\\mkvmerge.exe";
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
@@ -261,8 +262,6 @@ if(!empty($timecodes) && preg_match('/# TDecimate Mode [0-9]+: +Last Frame = ([0
 */
 $cmd[] = '"'.$dst.'"';
 
-// TODO: chapters for keyframes
-
 $cmd = implode(' ', $cmd);
 
 echo $cmd.PHP_EOL;
@@ -277,7 +276,7 @@ if(!empty($timecodes))
 $dstvfr = preg_replace('/\\.mkv$/i', '-vfr.mkv', $dst);
 
 $cmd = <<<EOT
-E:\\tmp\\media\\util\\mkvtoolnix\\mkvmerge.exe ^
+$mkvmerge ^
 --output "$dstvfr" ^
 --language 0:und ^
 --default-track 0:yes ^
@@ -325,28 +324,6 @@ $cmd .= <<<EOT
 EOT;
 }
 
-if(!empty($chapters))
-{
-	$sl = [];
-	$i = 1;
-	foreach($chapters as $c)
-	{
-		$t = (int)($c['start_time'] * 1000);
-		if($t < 1000) $t = 0;
-		$ms = $t % 1000; $t = (int)($t / 1000);
-		$ss = $t % 60; $t = (int)($t / 60);
-		$mm = $t % 60; $t = (int)($t / 60);
-		$hh = $t;
-		$sl[] = sprintf("CHAPTER%02d=%02d:%02d:%02d.%03d", $i, $hh, $mm, $ss, $ms);
-		$sl[] = sprintf("CHAPTER%02dNAME=%s", $i, sprintf("Chapter %02d", $i));
-		$i++;
-	}
-	$tmp = tempnam(dirname($dst), 'chapters');
-	file_put_contents($tmp, implode("\n", $sl));
-	register_shutdown_function(function() use($tmp) { unlink($tmp); });
-	$cmd .= '--chapters "'.$tmp.'" ';
-}
-
 $cmd .= '"'.$dst.'"';
 
 $cmd = preg_replace('/[\r\n]+/', ' ', $cmd);
@@ -360,6 +337,48 @@ if(!empty($ret)) die(sprintf("%d\n", $ret));
 echo 'del '.$dst.PHP_EOL;
 
 if(!unlink($dst)) echo 'cannot delete...'.PHP_EOL;
+
+$dst = $dstvfr;
+
+}
+
+// TODO: chapters for keyframes
+
+if(!empty($chapters))
+{
+	$dstwch = preg_replace('/\\.mkv$/i', '-with-chapters.mkv', $dst);
+	
+	$sl = [];
+	$i = 1;
+	
+	foreach($chapters as $c)
+	{
+		$t = (int)($c['start_time'] * 1000);
+		if($t < 1000) $t = 0;
+		$ms = $t % 1000; $t = (int)($t / 1000);
+		$ss = $t % 60; $t = (int)($t / 60);
+		$mm = $t % 60; $t = (int)($t / 60);
+		$hh = $t;
+		$sl[] = sprintf("CHAPTER%02d=%02d:%02d:%02d.%03d", $i, $hh, $mm, $ss, $ms);
+		$sl[] = sprintf("CHAPTER%02dNAME=%s", $i, sprintf("Chapter %02d", $i));
+		$i++;
+	}
+	
+	$tmp = tempnam(dirname($dst), 'chapters');
+	file_put_contents($tmp, implode("\n", $sl));
+	register_shutdown_function(function() use($tmp) { unlink($tmp); });
+
+	$cmd = "$mkvmerge --output \"$dstwch\" --chapters \"$tmp\" \"$dst\" ";
+
+	echo $cmd.PHP_EOL;
+	
+	$ret = 0;
+	passthru($cmd, $ret);
+	if(!empty($ret)) die(sprintf("%d\n", $ret));
+
+	echo 'del '.$dst.PHP_EOL;
+
+	if(!unlink($dst)) echo 'cannot delete...'.PHP_EOL;
 }
 
 ?>

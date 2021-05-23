@@ -379,6 +379,26 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 	#return c
 }
 
+function BobMerge(clip c, bool parity)
+{
+	last = c
+
+	SeparateFields
+	
+	if(c.GetParity() == parity)
+	{
+		e = SelectEven.Spline64Resize(Width, Height*2, src_top = -0.25)
+		o = SelectOdd.Spline64Resize(Width, Height*2, src_top = +0.25)
+	}
+	else
+	{
+		e = SelectEven.Spline64Resize(Width, Height*2, src_top = +0.25)
+		o = SelectOdd.Spline64Resize(Width, Height*2, src_top = -0.25)
+	}
+
+	Merge(e, o)
+}
+
 function FixFieldOffset(clip c, bool parity, float "offset", float "toffset", float "boffset")
 {
 	last = c

@@ -77,10 +77,60 @@ _fix1 = FixSlowMoI(18259, 18723, 40200, pd = 0, deint = 5, f = [ \
 # they are pretty hard to find, sometimes it is not obvious which one to drop
 # the goal is to end up with something that converts to progressive after a normal ivtc
 # vertical field offset needs to be corrected too, that means blurring many of the frames with a sup-pixel move
+# ... or blend the fields
 
-# TODO: pattern
+# 0 hlh lh lhl hl hlh lh lhlh lh lhl hl hlh lh lhlh
+#                           ?                     ?
+# 35 lh lhl hl hlh lh lhlh lh lhl hl hlh lhl hlh lh lhl
+#                     ?                    ?
+# 72 hl hlh lhl hlh lh lhl hl hlh lhl hlh lh lhl hl hlh
+#             ?                   ?
+# 109 lhl hlh lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh
+#     ?                    ?                     ?
+# 147 lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh lh lhl
+#               ?                     ?
+# 184 hl hlhl hl hlh lh lhl hlh lhl hl hlh lh lhl hlh lhl
+#        ?                    ?                   ?
+# 222 hl hlh lh lhl hlh lhl hl hlh lh lhlh lh lhl hl hlh
+#                   ?                    ?
+# 259 lh lhlh lh lhl hl hlh lh lhlh lh lhl hl hlh lh lhlh
+#           ?                     ?                  ?
+# 297 lh lhl hl hlh lh lhlh lh lhl hl hlh lhl hlh lh lhl
+#                      ?                    ?
+# 334 hl hlh lhl hlh lh lhl hl hlh lhl hlh lh lhl hl hlhl
+#            ?                     ?                 ?
+# 372 hl hlh lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh
+#                         ?                     ?
+# 409 lh lhl hl hlhl hl hlh lh lhl hlh lhl hl hlh lh lhl
+#               ?                    ?
+# 446 hlh lhl hl hlh lh lhl hlh lhl hl hlh lh lhl hlh lhl
+#       ?                     ?                   ?
+# 484 hl hlh lh lhlh lh lhl hl hlh lh lhlh lh lhl hl hlh
+#                  ?                     ?
+# 521 lh lhlh lh lhl hl hlh lh lhlh lh lhl hl hlh lh lhlh
+#           ?                  ?                     ?
+# 559 lh lhl hl hlh lhl hlh lh lhl hl hlh lhl hlh lh lhl
+#                     ?                     ?
+# 596 hl hlh lhl hlh lh lhl hl hlh lhl hlh lh lhl hl hlhl
+#            ?                     ?                    ?
+# 634 hl hlh lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh
+#                         ?                     ?
+# 671 lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh lh lhl
+#               ?                     ?   
+# 708 hlh lhl hl hlh lh lhl hlh lhl hl hlh lh lhl hlh lhl
+#       ?                     ?                   ?
+# 746 hl hlh lh lhlh lh lhl hl hlh lh lhlh lh lhl hl hlh
+#                  ?                     ?
+# 783 lh lhlh lh lhl hl hlh lh lhlh lh lhl hl hlh lh lhlh
+#           ?                     ?                  ?
+# 821 lh lhl hl hlh lh lhlh lh lhl hl hlh lhl hlh lh lhl
+#                      ?                    ?
+# 858 hl hlh lhl hlh lh lhl hl hlh lhl hlh lh lhl hl hlhl
+#            ?                     ?                    ?
+# 896 hl hlh lh lhl hl hlhl hl hlh lh lhl hl hlhl
+#                         ?                  ? 
 
-function FixTransportShips(clip c)
+function FixTransportShips(clip c, bool blend)
 {
 	Trim(c, 18259, 18723)
 
@@ -88,36 +138,43 @@ function FixTransportShips(clip c)
 
 	Separatefields
 
-	DeleteFrame(18,34,48,63,79,93,109,125,141,157, \
-		170,187,202,216,232,248,264,280,294,309, \
-		325,341,357,371,387,403,416,432,448,464, \
-		478,494,510,526,540,555,571,587,601,617, \
-		633,649,665,679,694,710,726,740,756,772, \
-		788,804,818,833,849,863,879,895,911,925)
+	DeleteFrame(18,34,47,63,79,93,109,125,141,154, \
+		170,186,202,216,232,248,264,280,293,309, \
+		325,339,355,371,387,400,416,432,448,464, \
+		478,494,510,526,539,555,571,587,601,617, \
+		633,649,665,678,694,710,726,740,756,772, \
+		788,804,817,833,849,863,879,895,911,924)
 
 	SelectEvery(10, 0,1, 4,3, 6,7, 8,9).Weave.AssumeFPS(c)
 
-	# different releases have different field offsets, of course
-	
-	if(c.GetParity) # tff => koch
+	if(blend)
 	{
-		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+		ScriptClip("BobMerge(GetParity(current_frame))")
 	}
-	else # bff => alliance
+	else
 	{
-		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
+		# different releases have different field offsets, of course
+	
+		if(c.GetParity) # tff => koch
+		{
+			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+		}
+		else # bff => alliance
+		{
+			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
+		}
 	}
 	
 	if(c.GetParity) {AssumeTFF}
 	else {AssumeBFF}
 	
 	ConvertToYV12(interlaced = true)
+
+	#FixSlowMoI(0, FrameCount - 1, 32100)
+	FixSlowMoI(0, FrameCount - 1, 40200, pd = 0)
 }
 
-fix1 = FixTransportShips
-#fix1 = FixSlowMoI(fix1, 0, fix1.FrameCount - 1, 32100)
-fix1 = FixSlowMoI(fix1, 0, fix1.FrameCount - 1, 40200, pd = 0)
-#return fix1
+fix1 = FixTransportShips(true)
 	
 # first conveyor belt scene (side sync, amazingly this also makes mid row go in sync)
 
@@ -169,32 +226,25 @@ _fix3 = FixSlowMoI(141671, 141878, 35110, deint = 5, f = [ \
 	[1] \
 	])
 
-# 0
-# h lhlh lhl hl <-- WTF
-#
-# 10
-# hl hlh lh lhl hlh lhl hl hlhl hl hlhl hl hlhl hl hlhl hl hlh
-#                 ?        ?       ?       ?          ? 
-# 55
-# lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl hl hlhl hl 
-# ?         ?        ?       ?          ?       ?        ?         ?        ?       
-# 116
-# hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh
-#    ?    ?          ?        ?         ?        ?       ?          ?       ?
-# 175
-# lhl hlh lhl hlh lhl hl hlhl hl hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh 
-#     ?         ?        ?          ?       ?       ?        ?         ?       
-# 233
-# lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl hlh lhl hl hlhl hl hlhl hl hlhl
-# ?       ?          ?        ?         ?       ?        ?          ?       ?
-# 290
-# hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl
-#        ?         ?        ?       ?       ?          ?        ?         ?
-# 348
-# hl hlhl hl hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh l
-#    ?       ?          ?       ?        ?         ?        ?          ?    ?          ?
 	
-function FixMegashadow(clip c)
+# 0 h lhlh lhl hl <-- WTF
+#
+# 10 hl hlh lh lhl hlh lhl hl hlhl hl hlhl hl hlhl hl hlhl hl hlh
+#                    ?        ?       ?       ?          ? 
+# 55 lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl hl hlhl hl 
+#    ?         ?        ?       ?          ?       ?        ?         ?        ?       
+# 116 hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh
+#        ?    ?          ?        ?         ?        ?       ?          ?       ?
+# 175 lhl hlh lhl hlh lhl hl hlhl hl hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh 
+#         ?         ?        ?          ?       ?       ?        ?         ?       
+# 233 lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl hlh lhl hl hlhl hl hlhl hl hlhl
+#     ?       ?          ?        ?         ?       ?        ?          ?       ?
+# 290 hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh lhl hlh lhl hlh lhl
+#            ?         ?        ?       ?       ?          ?        ?         ?
+# 348 hl hlhl hl hlhl hl hlhl hl hlhl hl hlh lhl hlh lhl hlh lh lhlh lh lhlh lh lhlh lh lhlh lh l
+#        ?       ?          ?       ?        ?         ?        ?          ?    ?          ?
+	
+function FixMegashadow(clip c, bool blend)
 {
 	Trim(c, 141671, 141878)
 	
@@ -207,6 +257,11 @@ function FixMegashadow(clip c)
 	c1 = Trim(0, 9).SelectEvery(10, 0,1, 4,3, 6,5, 8,9).Weave.AssumeFPS(c)
 	c1 = c1.Trim(0,-1).nnedi3 + c1.Trim(1,0)
 
+	if(blend)
+	{
+		c1 = c1.ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	
 	DeleteFrame(22,28,34,40,49, \
 		55,63,69,75,84,90,96,104,110, \		
 		119,122,131,137,145,151,157,166,172, \
@@ -216,31 +271,39 @@ function FixMegashadow(clip c)
 		350,356,365,371,377,385,391,400,403,412)
 
 	Trim(10, 0).SelectEvery(10, 0,1, 2,3, 6,5, 8,9).Weave.AssumeFPS(c)
-
-	if(c.GetParity) # tff => koch
-	{
-		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
-	}
-	else # bff => alliance
-	{
-		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
-	}
 	
+	if(blend)
+	{
+		ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	else
+	{
+		if(c.GetParity) # tff => koch
+		{
+			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+		}
+		else # bff => alliance
+		{
+			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
+		}
+	}
+		
 	c2 = last
 
 	last = c1 + c2
 	
 	if(c.GetParity) {AssumeTFF}
 	else {AssumeBFF}
-	
+
 	ConvertToYV12(interlaced = true)
+
+	#FixSlowMoI(0, FrameCount - 1, 43850, pd = 0)
+	FixSlowMoI(0, FrameCount - 1, 34950)
 }
 
-fix3 = FixMegashadow
-fix3 = FixSlowMoI(fix3, 0, fix3.FrameCount - 1, 34950)
-#fix3 = FixSlowMoI(fix3, 0, fix3.FrameCount - 1, 43850, pd = 0)
+fix3 = FixMegashadow(true)
 #return fix3
-	
+
 # prisoner flattened (first swing looks better without vertical mv search)
 
 fix4_f = [ \
