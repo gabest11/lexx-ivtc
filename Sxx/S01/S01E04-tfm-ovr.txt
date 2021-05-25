@@ -262,8 +262,9 @@
 #10084,10086 ccp
 #10087,10126 pccccccp # pccc?ccp
 #10127,10149 pccpcccp
-10084,10149 c # fix3
+10084,10149 ccppc # fix3
 10150,10168 + # crossfade
+10150,10168 Q 5
 10169,10188 c
 10189,10419 cccpp
 10189,10284 --+++ # crossfade, c + cccpp
@@ -281,13 +282,14 @@
 10537,10582 Q 7
 10583,10670 c # still image moving sideways at 59.94i
 10583,10670 +
+10583,10670 Q 5
 10671,10720 cppcc
 10721,10795 cccpp
 10732 + # random interlaced frame
-10796,10981 ccppc # bg 59.94i(?)
-10796,10981 +
-#10796,10981 Q 7
-10982,11091 ppccc # bg stops moving then gets covered with ketchup
+10796,10979 ccppc # bg 59.94i(?) # fields are shaking when the ketchap is on the screen
+10980,11091 ccppc
+10796,11091 +
+10796,11091 Q 5
 11092,11144 ccppc
 11145,11160 pcccp
 11161,11195 cccpp
@@ -438,7 +440,9 @@
 20668,20707 cccpp
 20708,20751 pcccp
 20752,20901 c
-20902,20966 pu # top and bottom fields are split between frames
+#20902,20966 pu # top and bottom fields are split between frames
+20902,20966 c # fix
+20966 + # odd number of frames FIXME
 #20967,21097 c # 29.97 + cppcc
 #20967,21097 + # -++--
 #20967,21097 Q 7
@@ -980,8 +984,8 @@
 72965,73048 +
 73049,73121 cppcc
 73049,73121 -
-73122,73152 cpppp # ? first field might be shifted vertically too, they don't line up to make a nice frame
-73122,73152 + # -++++
+73122,73152 cpppp # ? fields are the same
+73122,73152 -++++
 73122,73152 Q 7
 73153,73154 ccppc
 73186,73322 ppccc
@@ -1872,6 +1876,8 @@
 146274,146275 - # MIC = 85,81
 146396,146475 pcccp
 146476,146550 ccppc
+146496,146534 + # crossfade
+146496,146534 Q 5
 146551,146624 pcccp
 146552,146624 -
 146625,146738 ccppc
@@ -1908,7 +1914,9 @@
 149007,149058 cppcc
 149059,149101 cppcc
 149102,149177 ccppc
-149178,149268 cppcc
+149178,149268 l # cppcc # single field, interpolated 
+149178,149268 +
+149178,149268 Q 7
 149269,149288 cppcc
 149289,149318 ppccc
 149319,149385 ppccc
@@ -1924,10 +1932,10 @@
 
 # 149394 and a few others have no field pair, Stanley's pp is already deinterlaced too
 
-149386,149530 c # one of those where the image shifts half pixel up and down
-149386,149530 +
-149386,149530 Q 5
-#149386,149530 ccppc # fix8
+#149386,149530 c # one of those where the image shifts half pixel up and down
+#149386,149530 +
+#149386,149530 Q 5
+149386,149530 ccppc # fix8
 149531,149594 cccpp
 149595,149675 ppccc
 149596,149675 -
@@ -2046,7 +2054,7 @@
 160740,166946 c # keyframe
 160740,166946 +
 160740,166946 Q 7
-166947,167234 c
+166947,167199 c
 
 1037 Q 4 # ppccc p
 1059 Q 4 # ppccc p

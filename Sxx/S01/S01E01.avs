@@ -6,40 +6,37 @@ Import("../../common.avsi")
 # 107819-107929 terrible mess
 # 107930-... -21 frames
 
-kochpath = "..\..\S01(Koch)\D01\title_t00p1.d2v"
+# if your audio is synced to the original Koch release, remove 2002/30000 ms from the beginning
+# I don't know how it happened, first dvd rip started 2 frames earler, too late now
+
+# Koch en   2
+# Koch ru   2
+# Koch fr   2
+# Alliance    5
+# .avs     0
+
+LoadEpisodeWithAlt("S01E01", 167325, \
+	["..\..\S01(Koch)\D01\title_t00.d2v", 2], \
+	["..\..\S01(Koch)\D01\title_t00p1.d2v"])
+
+# TODO: add V01\*
+	
+Letterbox(0,0,2,2)
+
 allipath = "..\..\S01(Alliance)\D01\title_t00.d2v"
 
-if(Exist(kochpath))
+if(Exist(allipath))
 {
-	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
+	c0 = ConvertToBFF()
 
-	if(Exist(allipath))
-	{		
-		c = ConvertToBFF()
-
-		MPEG2Source(allipath, cpu=4)
-
-		Trim(5, 107818) + \
-		Trim(c, 107814, 108064) + \
-		Trim(108044, 0)
-	}
-}
-else if(Exist(allipath))
-{
 	MPEG2Source(allipath, cpu=4)
-	
+		
 	Trim(5, 107818) + \
-	BlankClip(last, length = 108064 - 107814) + \
+	Trim(c0, 107814, 108064) + \
 	Trim(108044, 0)
-	
-	# damaged part blanked out, maybe it is just my disc
-}
-else
-{
-	assert(false, "Cannot find S01E01")
-}
 
-Trim(0, 167324)
+	Trim(0, c0.FrameCount - 1)
+}
 
 # transport ships flying in
 
@@ -153,16 +150,7 @@ function FixTransportShips(clip c, bool blend)
 	}
 	else
 	{
-		# different releases have different field offsets, of course
-	
-		if(c.GetParity) # tff => koch
-		{
-			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
-		}
-		else # bff => alliance
-		{
-			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
-		}
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
 	}
 	
 	if(c.GetParity) {AssumeTFF}
@@ -170,12 +158,12 @@ function FixTransportShips(clip c, bool blend)
 	
 	ConvertToYV12(interlaced = true)
 
-	#FixSlowMoI(0, FrameCount - 1, 32100)
 	FixSlowMoI(0, FrameCount - 1, 40200, pd = 0)
+	#FixSlowMoI(0, FrameCount - 1, 32100)
 }
 
 fix1 = FixTransportShips(true)
-	
+
 # first conveyor belt scene (side sync, amazingly this also makes mid row go in sync)
 
 # 46847,46966 by field (p: last c repeated, cap: picture shifts vertically)
@@ -278,14 +266,7 @@ function FixMegashadow(clip c, bool blend)
 	}
 	else
 	{
-		if(c.GetParity) # tff => koch
-		{
-			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
-		}
-		else # bff => alliance
-		{
-			ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.05, toffset = 0.10)")
-		}
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
 	}
 		
 	c2 = last
@@ -302,7 +283,6 @@ function FixMegashadow(clip c, bool blend)
 }
 
 fix3 = FixMegashadow(true)
-#return fix3
 
 # prisoner flattened (first swing looks better without vertical mv search)
 

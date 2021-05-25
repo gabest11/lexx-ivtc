@@ -546,6 +546,7 @@
 46847,46966 ccppc # fix2
 46967,47045 cluph # top cccpp, center cppcc, bottom ccppc
 46967,47045 -+--+
+46967,47045 Q 7 # too many holes with yadif
 47046,47101 phclu # pcccp + ppccc + cccpp
 47046,47101 -+-+-
 47046 + # starts with a p

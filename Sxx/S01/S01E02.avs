@@ -20,57 +20,48 @@ Import("../../common.avsi")
 # 108035
 # 168046 end
 
-kochpath = "..\..\S01(Koch)\D02\title_t00p1.d2v"
+# if your audio is synced to the original Koch release, remove 2002/30000 ms from the beginning
+# I don't know how it happened, first dvd rip started 2 frames earler, too late now
+
+# Koch en        30
+# Koch ru        30
+# Koch fr  0
+# Alliance            43
+# .avs          28
+
+LoadEpisodeWithAlt("S01E02", 168045, \
+	["..\..\S01(Koch)\V02\title_t15.d2v", 2], \
+	["..\..\S01(Koch)\D02\title_t00.d2v", 2], \
+	["..\..\S01(Koch)\D02\title_t00p1.d2v"], \
+	["..\..\S01(Koch)\V02\title_t05.d2v", -28]) # French (lower bitrate)
+
+Letterbox(0,0,2,2)
+
 allipath1 = "..\..\S01(Alliance)\D01\title_t00.d2v"
 allipath2 = "..\..\S01(Alliance)\D02\title_t00.d2v"
 
-if(Exist(kochpath))
+if(Exist(allipath1) && Exist(allipath2))
 {
-	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
+	c0 = ConvertToBFF
 
-	if(Exist(allipath1) && Exist(allipath2))
-	{
-		c0 = ConvertToBFF
-
-		c1 = MPEG2Source(allipath1, cpu=4)
-		c2 = MPEG2Source(allipath2, cpu=4)
-
-		Trim(c2, 15, 14329) + \
-		Trim(c1, 110947, 111169) + \
-		Trim(c2, 14553, 30369) + \
-		Trim(c0, 30355, 30538) + \
-		Trim(c2, 30554, 45045) + \
-		Trim(c1, 136067, 136155) + \
-		Trim(c2, 45135, 55304) + \
-		Trim(c1, 136067, 136155) + \
-		Trim(c2, 55394, 107681) + \
-		Trim(c0, 107667, 108034) + \
-		Trim(c2, 108048, 0)
-	}
-}
-else if(Exist(allipath1) && Exist(allipath2))
-{
 	c1 = MPEG2Source(allipath1, cpu=4)
 	c2 = MPEG2Source(allipath2, cpu=4)
-	
+
 	Trim(c2, 15, 14329) + \
 	Trim(c1, 110947, 111169) + \
-	Trim(c2, 14553, 45045) + \
+	Trim(c2, 14553, 30369) + \
+	Trim(c0, 30355, 30538) + \
+	Trim(c2, 30554, 45045) + \
 	Trim(c1, 136067, 136155) + \
 	Trim(c2, 45135, 55304) + \
 	Trim(c1, 136067, 136155) + \
-	Trim(c2, 55394, 0)
-	
-	# add the two missing frames by duplicating the surroundings
-	
-	Trim(0, 107866) + Trim(107866, -1) + Trim(107867, -1) + Trim(107867, 0)
-}
-else
-{
-	assert(false, "Cannot find S01E02")
+	Trim(c2, 55394, 107681) + \
+	Trim(c0, 107667, 108034) + \
+	Trim(c2, 108048, 0)
+
+	Trim(0, c0.FrameCount - 1)
 }
 
-Trim(0, 168044)
 
 function FixShower(clip c)
 {
@@ -149,6 +140,19 @@ function FixShower(clip c)
 	# 325 frames again
 	
 	AssumeFPS(c)
+}
+
+function FixTowers(clip c)
+{
+	last = c
+
+	c1 = Trim(107667, 107867)
+	c1 = c1.Crop(192, 0, -136, -100).Tweak(bright = -2) # brightness just below the other clip, we only need to transfer the blue light rings
+	c2 = Trim(110736, 110811).Reverse()
+	c3 = c2 + BlankClip(c2, c1.FrameCount - c2.FrameCount)
+	c3 = c3.FreezeFrame(c2.FrameCount, c1.FrameCount - 1, c2.FrameCount - 1)
+	#Overlay(c3, Overlay(c3, c1, x = 192, mode = "lighten"), mode = "difference").Levels(92,1,160,0,255)
+	Overlay(c3, c1, x = 192, mode = "lighten")
 }
 
 # cogwheels spinning up 
@@ -230,11 +234,66 @@ fix7 = FixSlowMoI(79962, 80058, 40600, pd = 0, f = [ \
 # 91700 cpccp pcc
 #       pcpcp cpc
 
-fix8 = FixSlowMoI(91648, 91707, 44100, deint = 5, f = [ \
+_fix8 = FixSlowMoI(91648, 91707, 44100, deint = 5, f = [ \
 	[1,3,5,7,8,10,12,14,15,18,19,21,23,25,26,29,30,32,34,36,37,39,41,43,45,47,48,50,52,54,55,58,59], \
 	[0,3,4,6,8,10,11,13,15,17,19,21,22,24,26,28,29,32,33,35,37,39,40,43,44,46,48,50,51,53,55,57,59], \
 	[1] \
 	])
+
+
+# 0 h lhlhl hlh lhlh lhl hlhl hlh lhlh lhl hlhlh lhl
+#     ?   ?   ?    ?   ? ?    ?   ?    ?   ?   ?   ?
+# 38 hlhl hlh lhlh lhl hlhlh lh lhlhl hlh lhlh lhl
+#       ? ?   ?    ?   ?   ?    ?   ?   ?    ? ?
+# 74 hlhl hlh lhlhl hlh lhlh lhl hlhl hlh lhlh lhl
+#    ?    ?   ?   ?   ?    ?   ?    ? ?   ?    ?
+# 110 hlhlh lhl hl
+#     ?   ?   ?
+
+function FixTorture1(clip c, bool blend)
+{
+	Trim(c, 91648, 91707)
+
+	ConvertToYV24(interlaced = true)
+
+	Separatefields
+
+	DeleteFrame(1,5,8,12,15,16,20,23,27,30,34,37,\
+		41,42,45,49,52,56,59,63,66,70,71,\
+		74,78,81,85,88,92,95,99,100,103,107,\
+		110,114,117)
+	
+	# pcccp (extend for ivtc)
+	
+	BlankClip(last, 2) + last
+	
+	# ppccc
+	
+	SelectEvery(10, 2,1, 4,5, 6,7, 8,9).Weave.AssumeFPS(c)
+	
+	# get rid of the half frames both ends
+	
+	Trim(1, FrameCount - 2) 
+
+	if(blend)
+	{
+		ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	else
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+	}
+	
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
+	
+	ConvertToYV12(interlaced = true)
+
+	#FixSlowMoI(0, FrameCount - 1, 40200, pd = 0, mv_search=6)
+	FixSlowMoI(0, FrameCount - 1, 45500, mv_search=6)
+}
+
+fix8 = FixTorture1(true)
 
 # Stanley's torture #2
 
@@ -243,24 +302,62 @@ fix8 = FixSlowMoI(91648, 91707, 44100, deint = 5, f = [ \
 # 92165 pcpcc pcpcp cpcpc cpcpc pcpcp ccpcp cpccp pccpc pc
 #       cpcpc pccpp ccpcp cpccp pccpc pcpcc pcpcp cpcpc cc
 
-fix9 = FixSlowMoI(92164, 92206, 44100, deint = 5, f = [ \
+_fix9 = FixSlowMoI(92164, 92206, 44100, deint = 5, f = [ \
 	[0,2,4,5,7,9,11,13,15,16,18,20,22,24,26,27,29,31,33,34,37,38,40,42], \
 	[0,1,3,5,7,8,11,12,14,16,18,19,22,23,25,27,29,30,32,34,36,38,40,41], \
 	[1] \
 	])
+	
+# 0 hlh 3 lhlh 7 lhl 10 hlhl 14 hlh 17 lhlhl 22 hlh 25 lhlh 29 lhl 32 hlhl 36 hlh 
+# 39 lhlhl 44 hlh 47 lhlh 51 lhl 54 hlhl 58 hlh 61 lhlh 65 lhl 68 hlhlh 73 lhl
+# 76 hlhl hlh lh l	
 
-function FixTowers(clip c)
+function FixTorture2(clip c, bool blend, bool sharp)
 {
-	last = c
+	Trim(c, 92164, 92206)
 
-	c1 = Trim(107667, 107867)
-	c1 = c1.Crop(192, 0, -136, -100).Tweak(bright = -2) # brightness just below the other clip, we only need to transfer the blue light rings
-	c2 = Trim(110736, 110811).Reverse()
-	c3 = c2 + BlankClip(c2, c1.FrameCount - c2.FrameCount)
-	c3 = c3.FreezeFrame(c2.FrameCount, c1.FrameCount - 1, c2.FrameCount - 1)
-	#Overlay(c3, Overlay(c3, c1, x = 192, mode = "lighten"), mode = "difference").Levels(92,1,160,0,255)
-	Overlay(c3, c1, x = 192, mode = "lighten")
+	ConvertToYV24(interlaced = true)
+
+	Separatefields
+
+	if(sharp)
+	{
+		DeleteFrame(2,6,7,10,14,17,21,24,25,29,35,36,39,\
+			43,46,50,53,54,58,61,65,68,72,75,79,80)
+	}
+	else
+	{
+		DeleteFrame(0,3,9,13,16,20,21,22,28,31,32,38,39,\
+			40,44,47,51,57,60,64,67,68,69,73,76,82)
+	}
+		
+	# ccppc
+	
+	SelectEvery(10, 0,1, 2,3, 6,5, 8,9).Weave.AssumeFPS(c)
+
+	# last frame half frame
+		
+	Trim(0, FrameCount - 2)
+
+	if(blend)
+	{
+		ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	else
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = -0.25)")
+	}
+
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
+	
+	ConvertToYV12(interlaced = true)
+
+	#FixSlowMoI(0, FrameCount - 1, 40200, pd = 0, mv_search=6)
+	FixSlowMoI(0, FrameCount - 1, 45500, mv_search=6)
 }
+
+fix9 = FixTorture2(true, true)
 
 # Zev in the intro
 

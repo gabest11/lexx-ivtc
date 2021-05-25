@@ -4,34 +4,35 @@ Import("../../common.avsi")
 #
 # +35, and the end credits are a bit longer with fade-out
 
-kochpath = "..\..\S01(Koch)\D03\title_t00p1.d2v"
+# if your audio is synced to the original Koch release, remove 2002/30000 ms from the beginning
+# I don't know how it happened, first dvd rip started 2 frames earler, too late now
+
+# Koch en   2
+# Koch ru   2
+# Koch fr   2
+# Alliance       35
+# .avs     0
+
+LoadEpisodeWithAlt("S01E03", 169590, \
+	["..\..\S01(Koch)\D03\title_t00.d2v", 2], \
+	["..\..\S01(Koch)\D03\title_t00p1.d2v"])
+
+# TODO: add V03\*
+
+Letterbox(0,0,2,2)
+
 allipath = "..\..\S01(Alliance)\D03\title_t00.d2v"
 
-if(Exist(kochpath))
+if(Exist(allipath))
 {
-	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
+	c0 = ConvertToBFF()
 
-	if(Exist(allipath))
-	{		
-		c = ConvertToBFF()
-
-		MPEG2Source(allipath, cpu=4)
-
-		Trim(35, 0) # + ...
-	}
-}
-else if(Exist(allipath))
-{
 	MPEG2Source(allipath, cpu=4)
-
+		
 	Trim(35, 0) # + ...
-}
-else
-{
-	assert(false, "Cannot find S01E03")
-}
 
-Trim(0, 169589)
+	Trim(0, c0.FrameCount - 1)
+}
 
 # head rolling
 
@@ -166,11 +167,63 @@ fix10 = FixSlowMoI(8076, 8107, 30000, pd = 0, f = [ \
 # 41220 cpccc cpccp ccpcc ccpcc pcccc pccp
 #       cccpc cpccc cpccp cccpc ccpcc pccc
 
-fix11 = FixSlowMoI(41064, 41248, 33000, deint = 5, f = [ \
+_fix11 = FixSlowMoI(41064, 41248, 33000, deint = 5, f = [ \
 	[1,3,4,5,6,8,9,11,12,13,14,16,17,19,20,22,23,24,25,27,28,30,31,32,34,35,36,38,39,41,42,43,44,46,47,49,50,51,53,54,55,57,58,60,61,62,63,65,66,68,69,71,72,73,74,76,77,79,80,81,83,84,85,87,88,90,91,92,93,95,96,98,99,100,102,103,104,106,107,109,110,111,112,114,115,117,118,120,121,122,123,125,126,128,129,130,132,133,134,136,137,139,140,141,142,144,145,147,148,149,151,152,153,155,156,158,159,160,161,163,164,166,167,169,170,171,172,174,175,177,178,179,180,182,183], \
 	[0,2,3,5,6,7,9,10,11,13,14,16,17,18,19,21,22,24,25,26,28,29,30,32,33,35,36,37,38,40,41,43,44,46,47,48,49,51,52,54,55,56,58,59,60,62,63,65,66,67,68,70,71,73,74,75,77,78,79,81,82,84,85,86,87,89,90,92,93,95,96,97,98,100,101,103,104,105,107,108,109,111,112,114,115,116,117,119,120,122,123,124,126,127,128,130,131,133,134,135,136,138,139,141,142,144,145,146,147,149,150,152,153,154,156,157,158,160,161,163,164,165,166,168,169,171,172,173,175,176,177,179,180,182,183], \
 	[1] \
 	])
+
+# 0 hl? hlh? 5 lh 7 lhl 10 hl 12 hlh 15 lhl 18 hlh 21 lh 
+# 23 lhl 26 hl 28 hlhl 32 hl 34 hlh lh 41 lhlh lh lhl hl 50 hlh lhl
+# 56 hlh lh lhl hlh 67 lhl hl hlh lh 77 lhlh 81 lh lhl 86 hl hlhl 
+# 92 hl hlh lh lhl 102 hlh lhl hl hlh 113 lhl 116 hlh lh lhl hl 126 hlhl 
+# 130 hl hlh lh lhlh 141 lh lhl hl hlh 151 lhl hlh lh lhl 162 hlh lhl
+# 168 hl hlh lh lhlh 179 lh lhl 184 hl hlhl 190 hl hlh 195 lh lhl
+# 200 hlh lhl 206 hl hlh 211 lhl hlh 217 lh lhl hl hlhl 
+# 228 hl hlh lh 235 lhlh lh lhl 244 hl hlh 249 lhl hlh 255 lh
+# 257 lhl hlh 263 lhl 266 hl hlh ...
+# only guessing the last part, moth is very tiny
+# 271 lh lhl ... 282 hl hlhl 288 hl hlh 293 lh lhl hl 300 hlhl hl
+# 306 hlh lhl 312 hlh lh lhl 320 hl hlhl 326 hl hlhl 332 hlhl ?? 
+# 337 lh lhl 342 hl hlh 347 lhl hlh 353 lh lhl 358 hl hlhl 
+# 364 hl hlh 369 l
+# last row of the drops were also guessed
+
+function FixFlyingMoth(clip c, bool blend)
+{
+	Trim(c, 41064, 41248)
+
+	ConvertToYV24(interlaced = true)
+	
+	Separatefields
+
+	DeleteFrame(4,17,31,41,53,66,77,88,102,115,126,140,151,\
+		164,175,189,200,213,224,238,249,262,\
+		274,281,283,287,298,311,324,335,349,360)
+		
+	# pcccp, trim it to cccpp, the first frame is the same as the second
+	
+	Trim(2, 0).SelectEvery(10, 0,1, 2,3, 4,5, 8,7).Weave.AssumeFPS(c)
+
+	if(blend)
+	{
+		ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	else
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = -0.25)")
+	}
+
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
+	
+	ConvertToYV12(interlaced = true)
+
+	#FixSlowMoI(0, FrameCount - 1, 41200, pd = 0, mv_search=7)
+	FixSlowMoI(0, FrameCount - 1, 33000, mv_search=7)
+}
+
+fix11 = FixFlyingMoth(true)
 
 # Zev in the oven
 

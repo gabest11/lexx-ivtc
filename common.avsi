@@ -196,8 +196,8 @@ function ShowFields(clip c)
 	c3 = Interleave(SelectEven.Trim(2, 0), SelectOdd).Weave
 	#c4 = StackVertical(c2.Crop(0, c.Height / 2, c.Width / 2, 0), c3.Crop(0, c.Height / 2, c.Width / 2, 0))
 	c4 = StackVertical(c2.Crop(c.Width / 4, c.Height / 4, c.Width / 2, c.Height / 2), c3.Crop(c.Width / 4, c.Height / 4, c.Width / 2, c.Height / 2))
-	StackHorizontal(StackHorizontal(c4, c1), StackVertical(SelectEven, SelectOdd))
-	#StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
+	#StackHorizontal(StackHorizontal(c4, c1), StackVertical(SelectEven, SelectOdd))
+	StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
 }
 
 function BlendFields(clip c)
@@ -214,6 +214,7 @@ function BlendFields2(clip c, float offset)
 	e = SelectEven.Spline64Resize(Width, c.Height, src_top = -0.25 + offset, src_height = Height)
 	o = SelectOdd.Spline64Resize(Width, c.Height, src_top = +0.25 + offset, src_height = Height)
 	Merge(e, o)
+	AssumeFrameBased
 }
 
 function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", bool "deintdisp", int "fin", int "fout", int "mv_blksize", int "mv_overlap", int "mv_search", int "mv_searchparam", val_array "f")
@@ -382,21 +383,19 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 function BobMerge(clip c, bool parity)
 {
 	last = c
+	
+	offset = 0
+	
+	if(!parity) {offset = 0.5}
 
 	SeparateFields
-	
-	if(c.GetParity() == parity)
-	{
-		e = SelectEven.Spline64Resize(Width, Height*2, src_top = -0.25)
-		o = SelectOdd.Spline64Resize(Width, Height*2, src_top = +0.25)
-	}
-	else
-	{
-		e = SelectEven.Spline64Resize(Width, Height*2, src_top = +0.25)
-		o = SelectOdd.Spline64Resize(Width, Height*2, src_top = -0.25)
-	}
 
-	Merge(e, o)
+	e = SelectEven.Spline64Resize(Width, Height*2, src_top = +0.25 - offset)
+	o = SelectOdd.Spline64Resize(Width, Height*2, src_top = -0.25 + offset)
+
+	Merge(e, o)	
+
+	#subtitle(format("{} {}", c.GetParity(), parity), align=2)
 }
 
 function FixFieldOffset(clip c, bool parity, float "offset", float "toffset", float "boffset")
@@ -429,12 +428,21 @@ function FixFieldOffset(clip c, bool parity, float "offset", float "toffset", fl
 		e = SelectEven.Spline64Resize(Width, Height, src_top = 0 + offset + toffset, src_height = Height)
 		o = SelectOdd.Spline64Resize(Width, Height, src_top = 0 + offset + toffset, src_height = Height)
 	}
-
+	
 	Interleave(e, o)
 	Weave
 
-	#if(c.GetParity()) {subtitle("X", align=2)}
-	#if(parity) {subtitle("O", align=5)}
+	#subtitle(format("{} {}", c.GetParity(), parity), align=2)
+}
+
+function FixSplitFieldsVideo(clip c, int s, int e)
+{
+	c.Trim(s, e)
+	AssumeFieldBased
+	Weave
+	AssumeFPS(c)
+	Spline64Resize(Width, Height / 2)
+	FixSlowMoI(0, FrameCount - 1, 60000, pd = 0)
 }
 
 function FixSplitFields(clip c, int s, int e, int pd)

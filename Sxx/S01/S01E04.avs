@@ -11,45 +11,41 @@ Import("../../common.avsi")
 # Koch 158550 missing from Alliance
 # 158551- = 158580- +29
 
-kochpath = "..\..\S01(Koch)\D04\title_t00p1.d2v"
+# if your audio is synced to the original Koch release, remove 2002/30000 ms from the beginning
+# I don't know how it happened, first dvd rip started 2 frames earler, too late now
+
+# Koch en   2
+# Koch ru   2
+# Koch fr   2
+# Alliance       30
+# .avs     0
+
+LoadEpisodeWithAlt("S01E04", 167200, \
+	["..\..\S01(Koch)\V04\title_t15.d2v", 2], \
+	["..\..\S01(Koch)\D04\title_t00.d2v", 2], \
+	["..\..\S01(Koch)\D04\title_t00p1.d2v"], \
+	["..\..\S01(Koch)\V04\title_t06.d2v", 2]) # French (lower bitrate)
+
+Letterbox(0,0,2,2)
+
 allipath = "..\..\S01(Alliance)\D04\title_t00.d2v"
 
-if(Exist(kochpath))
+if(Exist(allipath))
 {
-	MPEG2Source(kochpath, cpu=4).Letterbox(0,0,2,2)
+	c0 = ConvertToBFF()
 
-	if(Exist(allipath))
-	{
-		c = ConvertToBFF()
-
-		MPEG2Source(allipath, cpu=4)
-		
-		Trim(30, 75348) + \
-		Trim(c, 75319, 75506) + \
-		Trim(75538, 107839) + \
-		Trim(c, 107809, 107901) + \
-		Trim(107932, 158522) + \
-		Trim(c, 158493, 158550) + \
-		Trim(158580, 0)
-	}
-}
-else if(Exist(allipath))
-{
 	MPEG2Source(allipath, cpu=4)
-	
-	Trim(30, 75391) + \
-	Trim(75393, 107839) + \
-	Trim(107840, -1) + \
-	Trim(107840, 158579) + \
-	Trim(158579, -1) + \
+		
+	Trim(30, 75348) + \
+	Trim(c0, 75319, 75506) + \
+	Trim(75538, 107839) + \
+	Trim(c0, 107809, 107901) + \
+	Trim(107932, 158522) + \
+	Trim(c0, 158493, 158550) + \
 	Trim(158580, 0)
-}
-else
-{
-	assert(false, "Cannot find S01E04")
-}
 
-Trim(0, 167234)
+	Trim(0, c0.FrameCount - 1)
+}
 
 # moth flying over the exploding gigashadow
 
@@ -103,6 +99,50 @@ fix3 = FixSlowMoI(10084, 10149, 39800, pd = 0, deint = 5, f = [ \
 	[0,1,2,3,5,6,8,9,10,11,13,14,16,17,18,19,21,22,24,25,26,27,29,30,32,33,34,35,37,38,40,41,42,43,45,46,48,49,50,51,53,54,56,57,58,59,61,62,64,65], \
 	[1] \
 	])
+
+# same scene in S01E01, only this part:
+#
+# 618 hl hlh lh lhl hl hlhl
+#                         ?
+# 634 hl hlh lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh
+#                         ?                     ?
+# 671 lh lhl hl hlhl hl hlh lh lhl hl hlhl hl hlh lh lhl
+#               ?                     ?   
+# 708 hlh lhl hl hlh lh lhl hlh lhl hl hlh lh lhl hlh lhl
+#       ?                     ?                   ?
+# 746 hl hl
+
+function FixTransportShips(clip c, bool blend)
+{
+	Trim(c, 10084, 10149)
+
+	ConvertToYV24(interlaced = true)
+
+	Separatefields
+
+	DeleteFrame(15,31,47,60,76,92,108,122)
+
+	SelectEvery(10, 0,1, 2,3, 6,5, 8,9).Weave.AssumeFPS(c)
+
+	if(blend)
+	{
+		ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	else
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+	}
+	
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
+	
+	ConvertToYV12(interlaced = true)
+
+	#FixSlowMoI(0, FrameCount - 1, 40200, pd = 0)
+	FixSlowMoI(0, FrameCount - 1, 32100)
+}
+
+fix3 = FixTransportShips(true)
 
 # brain #1
 
@@ -242,7 +282,93 @@ fix15 = FixSlowMoI(13908, 14059, pd = 4, deint = 3, fc = 10, f = [ \
 	[0, 3] \
 	])
 
-#return showfields
+	
+# shadow spreading on the bridge of the Lexx
+
+# 0 hl hl hlh lh lhl hl|hl 16 h lh lhlh lh lhl hl 
+#                       ??         ?
+# 30 hlh lh lhlh lh lhl hl 46 hlh lh lhlh lh lhl hl 
+#              ?                     ?
+# 62 hlh lh lhlh lh lhl hl 78 hlh lh lhl hlh lhl hl 
+#              ?                         ?
+# 94 hlh lh lhl hlh lhl hl 110 hlh lh lhl hlh lhl hl 
+#                 ?                         ?
+# 126 hlh lh lhl hl hlhl hl 142 hlh lh lhl hl hlhl hl 
+#                   ?                         ?
+# 158 hlh lh lhl hl hlhl hl 174 hlh lh lhl hl hlhl hl 
+#                   ?                            ?
+# 190 hlh lh lhl hl hlhl hl 206 hlh lh lhl hl hlh lhl 
+#                      ?                          ?
+# 222 hlh lh lhl hl hlh lhl 238 hlh lh lhl hl hlh lhl
+#                         ?                         ? 
+# 254 hlh lh lhl hl hlh lh 269 lhlh lh lhl hl hlh lh 
+#                              ?
+# 285 lhlh l
+#     ?    ?
+
+# there is a funny part around 14-16, have to break it into two segments
+
+function FixShadowOnTheBridge(clip c, bool blend)
+{
+	Trim(c, 149386, 149530)
+
+	ConvertToYV24(interlaced = true)
+
+	Separatefields
+
+	DeleteFrame(14,15,19,38,51,70,86,104,120,136,152,168,187,203,219,237,253,269,285,289)
+	
+	c1 = Trim(0,13).SelectEvery(10, 0,1, 2,3, 4,5, 8,7)
+	c2 = Trim(14,0).SelectEvery(10, 2,1, 4,5, 6,7, 8,9)
+	
+	c1 + c2
+	
+	Weave.AssumeFPS(c)
+
+	if(blend)
+	{
+		ScriptClip("BobMerge(GetParity(current_frame))")
+	}
+	else
+	{
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.25)")
+	}
+	
+	if(c.GetParity) {AssumeTFF}
+	else {AssumeBFF}
+	
+	ConvertToYV12(interlaced = true)
+
+	# interpolate the cut frame? it does not add much
+	
+	#super = MSuper(pel=4)
+	#backward_vectors = MAnalyse(super, isb = true, blksize=32, overlap=8, search=3, delta=2)
+	#forward_vectors = MAnalyse(super, isb = false, blksize=32, overlap=8, search=3, delta=2)
+	#c3 = MFlowInter(super, backward_vectors, forward_vectors, time=50, ml=70)
+	#Trim(0, 5) + c3 + Trim(6, 0)
+	
+	#FixSlowMoI(0, FrameCount - 1, 40500, pd = 0)
+	FixSlowMoI(0, FrameCount - 1, 32500)
+}
+
+fix8 = FixShadowOnTheBridge(true)
+
+# after the guy leaves to the left, the fields start shaking randomly
+# no idea what's going on, nothing moves	
+
+function FixKetchapScene(clip c)
+{
+	c.Trim(10980, 11091)
+	
+	tv = Crop(74, 0, -72, 334)
+	
+	Bob(0, 1)
+	Merge(SelectEven, SelectOdd)
+
+	Overlay(tv, 74, 0)
+}
+
+fix16 = FixKetchapScene()
 
 Trim(0, 1093) + \
 fix6 + \
@@ -254,13 +380,16 @@ Trim(5557, 9830) + \
 fix10 + \
 Trim(9935, 10083) + \
 fix3 + \
-Trim(10150, 13907) + \
+Trim(10150, 10979) + \
+fix16 + \
+Trim(11092, 13907) + \
 fix15 + \
 Trim(14060, 16191) + \
 fix4 + \
 Trim(16251, 19769) + \
 fix5 + \
-Trim(19823, 20966) + \
+Trim(19823, 20901) + \
+FixSplitFieldsVideo(20902, 20966) + \
 Trim(20967, 21097).LeftToVideo(2, 600) + \
 Trim(21098, 21131) + \
 Trim(21132, 21156).LeftToVideo(1, 600) + \
@@ -273,6 +402,8 @@ Trim(132681, 133732) + \
 fix7 + \
 Trim(133881, 138457) + \
 fix2 + \
-Trim(138544, 151629) + \
+Trim(138544, 149385) + \
+fix8 + \
+Trim(149531, 151629) + \
 fix9 + \
 Trim(151705, 0)
