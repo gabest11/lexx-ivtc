@@ -94,7 +94,7 @@ if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
 	{
 		$fn2 = rtrim($m[1], '-');
 		
-		foreach(['mka', 'wav'] as $format)
+		foreach(['mka', 'wav', 'ac3'] as $format)
 		{
 			$fn = $fn2.'_'.$lang.'.'.$format;
 			
