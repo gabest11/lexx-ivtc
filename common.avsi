@@ -333,7 +333,8 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 		if(ivtc == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
 		if(ivtc == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
 		if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
-		if(ivtc == 5) {assert(false)} #{SelectEvery(10, 0,-1, 2,3, 4,5, 6,7)} # pcccp
+		#if(ivtc == 5) {assert(false)} #{SelectEvery(10, 0,-1, 2,3, 4,5, 6,7)} # pcccp
+		if(ivtc == 5) {Trim(0, -2).AssumeFPS(c) + Trim(2, 0).SelectEvery(10, 0,1, 2,3, 4,5, 8,7).AssumeFPS(c)} # pcccp
 		
 		Weave
 	}
@@ -488,60 +489,298 @@ function FixSplitFields(clip c, int s, int e, int pd)
 	}
 }
 
-function LeftToVideo(clip c, int i, int w)
+function LeftToVideo(clip c, int i, int w, int "fps_num")
+{
+	fps_num = Default(fps_num, 37500)
+	
+	InsideTo(c,  0, i,  0, 0, w, c.Height,  fps_num)
+}
+
+function RightToVideo(clip c, int i, int w, int "fps_num")
+{
+	fps_num = Default(fps_num, 37500)
+	
+	InsideTo(c,  0, i,  w, 0, c.Width, c.Height,  fps_num)
+}
+
+function TopToVideo(clip c, int i, int h, int "fps_num")
+{
+	fps_num = Default(fps_num, 37500)
+	
+	InsideTo(c,  0, i,  0, 0, c.Width, h,  fps_num)
+}
+
+function BottomToVideo(clip c, int i, int h, int "fps_num")
+{
+	fps_num = Default(fps_num, 37500)
+
+	InsideTo(c,  0, i,  0, h, c.Width, c.Height,  fps_num)
+}
+
+function InsideToVideo(clip c, int i, int l, int t, int r, int b, int "fps_num")
+{
+	fps_num = Default(fps_num, 37500)
+	
+	InsideTo(c,  0, i,  l, t, r, b,  fps_num)
+}
+
+function LeftToFilm(clip c, int i, int w, int "fps_num")
+{
+	fps_num = Default(fps_num, 24000)
+	
+	InsideTo(c,  i, 0,  0, 0, w, c.Height,  fps_num)
+}
+
+function RightToFilm(clip c, int i, int w, int "fps_num")
+{
+	fps_num = Default(fps_num, 24000)
+	
+	InsideTo(c,  i, 0,  w, 0, c.Width, c.Height,  fps_num)
+}
+
+function TopToFilm(clip c, int i, int h, int "fps_num")
+{
+	fps_num = Default(fps_num, 24000)
+	
+	InsideTo(c,  i, 0,  0, 0, c.Width, h,  fps_num)
+}
+
+function BottomToFilm(clip c, int i, int h, int "fps_num")
+{
+	fps_num = Default(fps_num, 24000)
+	
+	InsideTo(c,  i, 0,  0, h, c.Width, c.Height,  fps_num)
+}
+
+function InsideToFilm(clip c, int i, int l, int t, int r, int b, int "fps_num")
+{
+	fps_num = Default(fps_num, 24000)
+	
+	InsideTo(c,  i, 0,  l, t, r, b,  fps_num)
+}
+
+function InsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_num")
 {
 	last = c
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, 0, w, -0))
+	# FIXME: Overlay hides when FixSlowMoI isn't exaclty the right frame count
+	c1 = FixSlowMoI(0, FrameCount - 1, fps_num, pd = p, ivtc = i).Crop(l, t, r - l, b - t)
+	c2 = Overlay(c1, x = l, y = t)
+	
+	assert(c.FrameCount == c2.FrameCount, Format("wrong frame count {} != {}", c.FrameCount, c2.FrameCount))
+	
+	return c2
 }
 
-function RightToVideo(clip c, int i, int w)
+function OutsideToVideo(clip c, int i, int l, int t, int r, int b, int "fps_num")
+{
+	fps_num = Default(fps_num, 37500)
+
+	OutsideTo(c,  0, i,  l, t, r, b,  fps_num)
+}
+
+function OutsideToFilm(clip c, int i, int l, int t, int r, int b, int "fps_num")
+{
+	fps_num = Default(fps_num, 24000)
+	
+	OutsideTo(c,  i, 0,  l, t, r, b,  fps_num)
+}
+
+function OutsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_num")
 {
 	last = c
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(w, 0, -0, -0), x = w)
-}
-
-function TopToVideo(clip c, int i, int h)
-{
-	last = c
+	c2 = Overlay(FixSlowMoI(0, FrameCount - 1, fps_num, pd = p, ivtc = i), Crop(l, t, r - l, b - t), x = l, y = t)
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, 0, -0, h))
-}
-
-function BottomToVideo(clip c, int i, int h)
-{
-	last = c
+	assert(c.FrameCount == c2.FrameCount, Format("wrong frame count {} != {}", c.FrameCount, c2.FrameCount))
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = 0, ivtc = i).Crop(0, h, -0, -0), y = h)
+	return c2
 }
 
-function LeftToFilm(clip c, int i, int w)
+function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize", int "mv_overlap", int "mv_searchparam")
 {
-	last = c
+	mv_search = Default(mv_search, 3)
+	mv_blksize = Default(mv_blksize, 16)
+	mv_overlap = Default(mv_overlap, 2)
+	mv_searchparam = Default(mv_searchparam, 5)
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = i).Crop(0, 0, w, -0))
+	Trim(c, s, e)
+	
+	pp_super = MSuper(pel=4)
+	pp_bvec = MAnalyse(pp_super, isb=true, blksize=mv_blksize, overlap=mv_overlap, search=mv_search, searchparam=mv_searchparam, delta=3)
+	pp_fvec = MAnalyse(pp_super, isb=false, blksize=mv_blksize, overlap=mv_overlap, search=mv_search, searchparam=mv_searchparam, delta=3)
+	pp_int = MFlowInter(pp_super, pp_bvec, pp_fvec, time=50, ml=70)
+	
+	c1 = SeparateFields
+	c2 = pp_int.SeparateFields
+	
+	c1e = c1.SelectEven
+	c1o = c1.SelectOdd
+	c2e = c2.SelectEven
+	c2o = c2.SelectOdd
+	
+	#c1e = c1e.subtitle("c1-", align=8)
+	#c1o = c1o.subtitle("c1|", align=8)
+	#c2e = c2e.subtitle("c2-", align=8)
+	#c2o = c2o.subtitle("c2|", align=8)
+	
+	ce = Interleave(c1e, c2e)
+	co = Interleave(c1o, c2o)
+	
+	# TODO
+
+	if(ivtc == 1) # ppccc
+	{
+		#ce = ce.SelectEvery(10, -2, -1, 4, 6, 8)
+		#co = co.SelectEvery(10, -1, 4, 4, 6, 8)
+		ce = ce.Trim(0, 3).SelectEvery(2, 0).AssumeFPS(c) + ce.Trim(4, 0).SelectEvery(10, 0, 2, 2, 3, 8).AssumeFPS(c)
+		co = co.Trim(0, 3).SelectEvery(2, 0).AssumeFPS(c) + co.Trim(4, 0).SelectEvery(10, 0, 2, 3, 8, 8).AssumeFPS(c)
+		# TODO 1st+2nd p frame
+	}
+	else if(ivtc == 2) # cppcc
+	{
+		ce = ce.SelectEvery(10, 0, 0, 1, 6, 8)
+		co = co.SelectEvery(10, 0, 1, 6, 6, 8)
+	}
+	else if(ivtc == 3) # ccppc
+	{
+		ce = ce.SelectEvery(10, 0, 2, 2, 3, 8)
+		co = co.SelectEvery(10, 0, 2, 3, 8, 8)
+	}
+	else if(ivtc == 4) # cccpp
+	{
+		ce = ce.SelectEvery(10, 0, 2, 4, 4, 5)
+		co = co.SelectEvery(10, 0, 2, 4, 5, 10)
+		# TODO last p frame
+	}
+	else if(ivtc == 5) # pcccp
+	{
+		#ce = ce.SelectEvery(10, -3, 2, 4, 6, 6)
+		#co = co.SelectEvery(10, 2, 2, 4, 6, 7)
+		ce = ce.Trim(0, 1).SelectEvery(2, 0).AssumeFPS(c) + ce.Trim(2, 0).SelectEvery(10, 0, 2, 4, 4, 5).AssumeFPS(c)
+		co = co.Trim(0, 1).SelectEvery(2, 0).AssumeFPS(c) + co.Trim(2, 0).SelectEvery(10, 0, 2, 4, 5, 10).AssumeFPS(c)
+		# TODO 1st p frame
+	}
+	
+	Interleave(ce, co)
+	Weave
+	AssumeFPS(c)
+	Trim(0, length = e - s + 1)
+	
+	if(ivtc == 1) # ppccc
+	{
+		Trim(0, -2).nnedi3 + Trim(2, 0)
+	}
+	else if(ivtc == 2) # cppcc
+	{
+	}
+	else if(ivtc == 3) # ccppc
+	{
+	}
+	else if(ivtc == 4) # cccpp
+	{
+	}
+	else if(ivtc == 5) # pcccp
+	{
+		Trim(0, -1).nnedi3 + Trim(1, 0)
+	}
+
+	# TODO check if the last frame was a p, then the interpolated frame is between the scene change	
 }
 
-function RightToFilm(clip c, int i, int w)
+function FixPPVideo(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize", int "mv_overlap", int "mv_searchparam")
 {
-	last = c
+	mv_search = Default(mv_search, 3)
+	mv_blksize = Default(mv_blksize, 16)
+	mv_overlap = Default(mv_overlap, 2)
+	mv_searchparam = Default(mv_searchparam, 5)
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 37500, pd = i).Crop(w, 0, -0, -0), x = w)
-}
-
-function TopToFilm(clip c, int i, int h)
-{
-	last = c
+	Trim(c, s, e)
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 24000, pd = i).Crop(0, 0, -0, h))
-}
-
-function BottomToFilm(clip c, int i, int h)
-{
-	last = c
+	pp_super = MSuper(pel=4)
+	pp_bvec = MAnalyse(pp_super, isb=true, blksize=mv_blksize, overlap=mv_overlap, search=mv_search, searchparam=mv_searchparam, delta=3)
+	pp_fvec = MAnalyse(pp_super, isb=false, blksize=mv_blksize, overlap=mv_overlap, search=mv_search, searchparam=mv_searchparam, delta=3)
+	pp_int1 = MFlowInter(pp_super, pp_bvec, pp_fvec, time=33, ml=70)
+	pp_int2 = MFlowInter(pp_super, pp_bvec, pp_fvec, time=66, ml=70)
 	
-	Overlay(FixSlowMoI(0, FrameCount - 1, 24000, pd = i).Crop(0, h, -0, -0), y = h)
-}
+	c1 = SeparateFields
+	c2 = pp_int1.SeparateFields
+	c3 = pp_int2.SeparateFields
+	
+	c1e = c1.SelectEven
+	c1o = c1.SelectOdd
+	c2e = c2.SelectEven
+	c2o = c2.SelectOdd
+	c3e = c3.SelectEven
+	c3o = c3.SelectOdd
+	
+	#c1e = c1e.subtitle("c1-", align=8)
+	#c1o = c1o.subtitle("c1|", align=8)
+	#c2e = c2e.subtitle("c2-", align=8)
+	#c2o = c2o.subtitle("c2|", align=8)
+	#c3e = c3e.subtitle("c3-", align=8)
+	#c3o = c3o.subtitle("c3|", align=8)
+	
+	ce = Interleave(c1e, c2e, c3e)
+	co = Interleave(c1o, c2o, c3o)
+	
+	# TODO
 
-# TODO: rect to *
+	if(ivtc == 1) # ppccc
+	{
+		ce = ce.Trim(0, 5).SelectEvery(3, 0).AssumeFPS(c) + \
+			ce.Trim(6, 0).SelectEvery(15, 0, 3, 6, 7, 8).AssumeFPS(c)
+		co = co.Trim(0, 5).SelectEvery(3, 0).AssumeFPS(c) + \
+			co.Trim(6, 0).SelectEvery(15, 0, 3, 6, 7, 8).AssumeFPS(c)
+		# TODO 1st+2nd p frame
+	}
+	else if(ivtc == 2) # cppcc
+	{
+		ce = ce.SelectEvery(15, 0, 1, 2, 9, 12)
+		co = co.SelectEvery(15, 0, 1, 2, 9, 12)
+	}
+	else if(ivtc == 3) # ccppc
+	{
+		ce = ce.SelectEvery(15, 0, 3, 4, 5, 12)
+		co = co.SelectEvery(15, 0, 3, 4, 5, 12)
+	}
+	else if(ivtc == 4) # cccpp
+	{
+		ce = ce.SelectEvery(15, 0, 3, 6, 7, 8)
+		co = co.SelectEvery(15, 0, 3, 6, 7, 8)
+		# TODO last p frame
+	}
+	else if(ivtc == 5) # pcccp
+	{
+		ce = ce.Trim(0, 2).SelectEvery(3, 0).AssumeFPS(c) + \
+			ce.Trim(3, 0).SelectEvery(15, 0, 3, 6, 7, 8).AssumeFPS(c)
+		co = co.Trim(0, 2).SelectEvery(3, 0).AssumeFPS(c) + \
+			co.Trim(3, 0).SelectEvery(15, 0, 3, 6, 7, 8).AssumeFPS(c)
+		# TODO 1st p frame
+	}
+	
+	Interleave(ce, co)
+	Weave
+	AssumeFPS(c)
+	Trim(0, length = e - s + 1)
+	
+	if(ivtc == 1) # ppccc
+	{
+		Trim(0, -2).nnedi3 + Trim(2, 0)
+	}
+	else if(ivtc == 2) # cppcc
+	{
+	}
+	else if(ivtc == 3) # ccppc
+	{
+	}
+	else if(ivtc == 4) # cccpp
+	{
+	}
+	else if(ivtc == 5) # pcccp
+	{
+		Trim(0, -1).nnedi3 + Trim(1, 0)
+	}
+
+	# TODO check if the last frame was a p, then the interpolated frame is between the scene change	
+}

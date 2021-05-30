@@ -1077,6 +1077,8 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.00x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
 	}
 	
+	// TODO: rewrite Trims to ConditionalSelect
+	
 	$cl = [];
 	$total = 0;
 	

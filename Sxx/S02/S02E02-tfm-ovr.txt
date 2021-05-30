@@ -244,7 +244,7 @@
 17645,17756 -
 17757,17791 ppccc
 17792,17849 ppccc
-17850,17900 c # bbccc # nothing really fits this
+17850,17900 c # bbccc # as the head moves it is combed around the greenscreen
 17850,17900 ++---
 #17851,17900 -
 #17850,17851 +
@@ -559,12 +559,12 @@
 50854,50879 c # single field, smoothing it
 50854,50879 +
 50854,50879 Q 7
-50880,50917 c # pp badly deinterlaced
-50880,50917 ---++
+50880,50917 c # pp badly deinterlaced # fix3
+#50880,50917 ---++
 50918,50949 ccppc
 50950,51024 c # pp badly deinterlaced
 50950,51024 ---++
-51025,51145 cppcc
+51025,51145 cppcc # looks like the same scarf that pulled Zev by the legs in S01E03
 51025,51145 -
 51146,51234 cccpp
 51235,51300 cppcc
@@ -786,6 +786,9 @@
 71107,71146 ppccc
 71147,71205 c # ccppc # not sure and there is almost no movement, all c looks just as good
 71147,71205 - # --++-
+71147 + # first frame single field
+71147 f 0
+71147 Q 7
 71206,71256 ccppc
 71257,71297 c
 71298,71371 cppcc
@@ -941,9 +944,8 @@
 78702,78760 ppccc
 78761,78824 c
 78761,78787 --++-
-78788,78824 +-+++ # why did I do this?
+78788,78824 --++-
 78788,78824 Q 7
-78788,78824 M 2
 78825,78877 pcccp
 78878,78964 ppccc
 78965,79042 pcccp
