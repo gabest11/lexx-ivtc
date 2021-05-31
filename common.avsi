@@ -597,7 +597,19 @@ function OutsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_nu
 	return c2
 }
 
-function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize", int "mv_overlap", int "mv_searchparam")
+function BlendPP(clip c, int pos, bool scene_start)
+{
+	# ..cppc..
+	c.Trim(pos - 1, -4)
+	# cxpxpxcx (x = cross blended pp[2,1])
+	Interleave(last, SeparateFields.SelectEvery(8, 2,1, 4,3, 6,5, 8,7).Weave.BlendFields)
+	# back to ..cppc..
+	SeparateFields.SelectEvery(16, 0,1, (scene_start?4:0),7, 6,9, 12,13).Weave.AssumeFPS(c)
+	# pp
+	Trim(1, -2)
+}
+
+function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize", int "mv_overlap", int "mv_searchparam", val_array "ignore")
 {
 	mv_search = Default(mv_search, 3)
 	mv_blksize = Default(mv_blksize, 16)
@@ -631,11 +643,8 @@ function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize"
 
 	if(ivtc == 1) # ppccc
 	{
-		#ce = ce.SelectEvery(10, -2, -1, 4, 6, 8)
-		#co = co.SelectEvery(10, -1, 4, 4, 6, 8)
-		ce = ce.Trim(0, 3).SelectEvery(2, 0).AssumeFPS(c) + ce.Trim(4, 0).SelectEvery(10, 0, 2, 2, 3, 8).AssumeFPS(c)
-		co = co.Trim(0, 3).SelectEvery(2, 0).AssumeFPS(c) + co.Trim(4, 0).SelectEvery(10, 0, 2, 3, 8, 8).AssumeFPS(c)
-		# TODO 1st+2nd p frame
+		ce = ce.Trim(0, 5).SelectEvery(6, 0, 2, 4).AssumeFPS(c) + ce.Trim(6, 0).SelectEvery(10, 0, 2, 2, 3, 8).AssumeFPS(c)
+		co = co.Trim(0, 5).SelectEvery(6, 0, 2, 4).AssumeFPS(c) + co.Trim(6, 0).SelectEvery(10, 0, 2, 3, 8, 8).AssumeFPS(c)
 	}
 	else if(ivtc == 2) # cppcc
 	{
@@ -649,27 +658,26 @@ function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize"
 	}
 	else if(ivtc == 4) # cccpp
 	{
-		ce = ce.SelectEvery(10, 0, 2, 4, 4, 5)
-		co = co.SelectEvery(10, 0, 2, 4, 5, 10)
-		# TODO last p frame
+		ce = ce.Trim(0, 1).SelectEvery(2, 0).AssumeFPS(c) + ce.Trim(2, 0).SelectEvery(10, 0, 2, 2, 3, 8).AssumeFPS(c)
+		co = co.Trim(0, 1).SelectEvery(2, 0).AssumeFPS(c) + co.Trim(2, 0).SelectEvery(10, 0, 2, 3, 8, 8).AssumeFPS(c)
 	}
 	else if(ivtc == 5) # pcccp
 	{
-		#ce = ce.SelectEvery(10, -3, 2, 4, 6, 6)
-		#co = co.SelectEvery(10, 2, 2, 4, 6, 7)
-		ce = ce.Trim(0, 1).SelectEvery(2, 0).AssumeFPS(c) + ce.Trim(2, 0).SelectEvery(10, 0, 2, 4, 4, 5).AssumeFPS(c)
-		co = co.Trim(0, 1).SelectEvery(2, 0).AssumeFPS(c) + co.Trim(2, 0).SelectEvery(10, 0, 2, 4, 5, 10).AssumeFPS(c)
-		# TODO 1st p frame
+		ce = ce.Trim(0, 3).SelectEvery(4, 0, 2).AssumeFPS(c) + ce.Trim(4, 0).SelectEvery(10, 0, 2, 2, 3, 8).AssumeFPS(c)
+		co = co.Trim(0, 3).SelectEvery(4, 0, 2).AssumeFPS(c) + co.Trim(4, 0).SelectEvery(10, 0, 2, 3, 8, 8).AssumeFPS(c)
 	}
 	
 	Interleave(ce, co)
 	Weave
 	AssumeFPS(c)
 	Trim(0, length = e - s + 1)
+
+	# ...pp: fc%5 == (ivtc+1)%5
+	# ...p: fc%5 == ivtc%5
 	
 	if(ivtc == 1) # ppccc
 	{
-		Trim(0, -2).nnedi3 + Trim(2, 0)
+		BlendPP(c, s, true) + Trim(2, 0)
 	}
 	else if(ivtc == 2) # cppcc
 	{
@@ -682,10 +690,46 @@ function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize"
 	}
 	else if(ivtc == 5) # pcccp
 	{
-		Trim(0, -1).nnedi3 + Trim(1, 0)
+		Trim(0, -1).Blendfields + Trim(1, 0)
 	}
-
-	# TODO check if the last frame was a p, then the interpolated frame is between the scene change	
+	
+	if(ivtc >= 1 && ivtc <= 5)
+	{
+		if((FrameCount % 5) == ((ivtc + 1) % 5)) # ...pp
+		{
+			Trim(0, FrameCount - 3) + BlendPP(c, e - 1, false)
+		}
+		else if((FrameCount % 5) == (ivtc % 5)) # ...cp
+		{
+			Trim(0, FrameCount - 2) + BlendPP(c, e - 1, false).Trim(0, -1)
+		}
+	}
+	
+	if(ignore.IsArray())
+	{
+		for(i = 0, ignore.ArraySize() - 1, 1)
+		{
+			cc = Trim(c, ignore[i], -1)
+			
+			if(ignore[i] > s)
+			{
+				cc = Trim(0, length = ignore[i] - s) + cc
+			}
+			
+			if(ignore[i] < e)
+			{
+				cc = cc + Trim(ignore[i] - s + 1, 0)
+			}
+			
+			last = cc
+		}
+	}
+	
+	cc = last
+	
+	assert(FrameCount == e - s + 1, Format("bad frame count {} != {}", FrameCount, e - s + 1))
+	
+	return cc
 }
 
 function FixPPVideo(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize", int "mv_overlap", int "mv_searchparam")
@@ -766,7 +810,7 @@ function FixPPVideo(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blk
 	
 	if(ivtc == 1) # ppccc
 	{
-		Trim(0, -2).nnedi3 + Trim(2, 0)
+		Trim(0, -2).BlendFields + Trim(2, 0)
 	}
 	else if(ivtc == 2) # cppcc
 	{

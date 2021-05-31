@@ -257,33 +257,32 @@
 6838,6879 c
 6838,6879 -
 6880,7108 ccppc
-7109,7208 c#cccnb
+7109,7208 c # cccnb # pp badly deinterlaced
 7109,7208 ---++
 7109,7208 Q 5
 7209,7316 ccppc
-7209,7316 --++-
-7317,7367 c#upccc
+7317,7367 c # upccc # same
 7317,7367 ++---
 7317,7367 Q 5
 7368,7423 ccppc
 7368,7423 --++-
-7424,7605 c#upccc
+7424,7605 c # upccc # same
 7424,7605 ++---
 7424,7605 Q 5
 7606,7641 cppcc
-7606,7641 -++--
-7642,7705 c#cccup
+#7606,7641 -++--
+7642,7705 c # cccup # same
 7642,7705 ---++
 7642,7705 Q 5
 7706,7786 ppccc
-7706,7786 ++---
+#7706,7786 ++---
 7787,8053 pcccp
 8054,8170 cppcc
 8171,8207 cccpp
 8208,8264 ccppc
 8265,8310 pcccp
 8311,8386 pcccp
-8387,8437 c # ppccc
+8387,8437 c # ppccc # same
 8387,8437 ++---
 8387,8437 Q 5
 8438,8472 ccppc
@@ -332,7 +331,7 @@
 
 12628,13316 ccppc
 13317,13436 ppccc
-13437,13704 c # cccpp
+13437,13704 c # cccpp # display is 29.97, but the noise could be 59.94i
 13437,13704 - # ---++
 13667,13704 ---++ # stanley moves a little
 13705,13904 ppccc
@@ -342,7 +341,7 @@
 14422,14799 ppccc
 14800,14885 ccppc
 14886,15090 c
-14886,15090 ---++
+14886,15090 ---++ # bg 29.97
 15091,15189 cccpp
 15190,15225 pcccp
 15226,15366 pcccp
@@ -376,24 +375,18 @@
 
 17381,17585 cppcc
 
-# slow moving asteroids at 29.97 suffer from the 23.976 conversion, just a little
+# there are a few frames which cannot be nicely interpolated
+# even the surrounding c frames look broken
 
-17586,17752 ppccc#c#upccc
-17586,17752 ++---
-#17586,17752 Q 5
+17586,17752 ppccc 
+17701,17722 ++---
+17587,17752 Q 5
 17753,17978 ccppc
-17979,18069 pcccp#c#pcccu # same
+17979,18069 pcccp # pp seems okay
 17979,18069 +---+
-#17979,18069 Q 5
-18070,18340 cppcc#c#cupcc # same
-18070,18340 -++--
-#18070,18340 Q 5
-18341,18425 ccppc#c#ccupc # same
-18341,18425 --++-
-#18341,18425 Q 5
-18426,18644 cppcc#c#cupcc # same
-18426,18644 -++--
-#18426,18644 Q 5
+18070,18340 cppcc
+18341,18425 ccppc
+18426,18644 cppcc
 
 18645,18851 cccpp
 18790,18794 ---++
@@ -447,23 +440,18 @@
 23142,23171 cccpp
 23172,23593 ccppc
 23537,23550 --++-
-23594,23805 cppcc#c#cupcc
-23594,23805 -++--
-#23594,23805 Q 5
+23594,23805 cppcc
+23599,23628 -++--
+23594,23805 Q 5
 23806,24213 cccpp
 24214,24268 cppcc
 24269,24744 ppccc
-24745,24866 pcccp#c#pcccu
-24745,24866 +---+
-#24745,24866 Q 5
+24745,24866 pcccp
 24867,24978 ccppc
-24979,25040 c # pcccp
-24979,25040 +---+
-25041,25188 c # ppccc
-25041,25188 ++---
-25189,25299 pcccp#c#pcccu
-25189,25299 +---+
-#25189,25299 Q 5
+24979,25188 pcccp
+24980,25188 i 20 # light bulbs flashing
+24980,25188 Q 4 # always in dup frames
+25189,25299 pcccp
 25300,25807 ppccc
 25745,25759 ++---
 25808,26678 cccpp
@@ -478,9 +466,15 @@
 27847,27951 pcccp
 27952,28033 ppccc
 28034,28156 pcccp
-28157,28320 c
-28157,28320 + # single field and badly deinterlaced
-28157,28320 Q 7
+
+# few bad frames during the transition between the TVs
+# they are out of phase sadly
+
+28157,28215 cppcc
+28216,28320 cppcc
+28157,28320 + # single field
+28157,28320 Q 6
+
 28321,28653 ccppc
 28654,28735 ppccc
 28736,28864 ccppc
@@ -508,7 +502,7 @@
 31429,31586 cccpp
 31587,31756 cccpp
 31757,31948 pcccp
-31949,32183 c
+31949,32183 cppcc
 32184,32333 c
 32334,32499 pcccp
 32500,32626 ppccc
@@ -527,7 +521,8 @@
 35280,35356 cppcc
 35357,35390 c
 35391,35643 cppcc
-35644,35852 c
+35644,35759 cccpp
+35760,35852 cppcc
 35853,35956 pcccp
 35957,36153 c
 36154,36713 cccpp
@@ -567,7 +562,7 @@
 42020,42121 c # single field and 5th is a dup
 42020,42121 +
 42020,42121 Q 7
-42122,42295 c
+42122,42295 ppccc
 42296,42467 cccpp
 42468,42551 ccppc
 42552,42662 c
@@ -584,8 +579,8 @@
 43959 - # MIC = 94
 43963 - # MIC = 82
 43971,44056 c
-44057,44555 c
-44057,44555 +---+
+44057,44555 c # display and the fog all 29.97
+44057,44555 -
 44556,44667 c
 44668,45287 cppcc
 45288,45388 ccppc
@@ -612,7 +607,7 @@
 47842,47904 + # crossfade
 48147,48223 ppccc
 48224,48792 pcccp
-48793,48901 c
+48793,48901 cccpp
 48902,48989 cppcc
 48990,49090 pcccp
 49091,49288 pcccp
@@ -695,8 +690,7 @@
 62172 - # MIC = 105
 62197 + # MIC = 97
 62220,62278 cccpp
-62279,62334 pcccp
-62279,62334 +---+ # robot head 29.97
+62279,62334 pcccp # robot head 29.97
 62335,62384 ccppc
 62385,62450 pcccp
 62451,62485 ccppc
@@ -736,7 +730,7 @@
 66224,66762 pcccp
 66763,66847 ppccc
 66848,66983 cccpp
-66984,67079 c
+66984,67079 cppcc
 67080,67162 ppccc # hard to see
 67163,67653 ccppc
 67654,67974 pcccp
@@ -747,7 +741,7 @@
 68531,68767 cccpp
 68768,68883 c
 68884,69007 ccppc
-69008,69134 c
+69008,69134 ccppc
 69135,69312 ccppc
 69313,69423 pcccp
 69424,69608 pcccp
@@ -758,7 +752,7 @@
 69880,69967 cppcc
 69968,70001 pcccp
 70002,70149 cppcc
-70150,70228 c
+70150,70228 ccppc
 70229,70339 pcccp # exact same scene as 69313,69423
 70340,70601 cppcc
 70602,70706 ppccc
@@ -898,6 +892,7 @@
 5494 Q 4 # pcccp
 5566 Q 4 # ppccc
 5629 Q 4 # pcccp
+7706 Q 4 # ppccc p
 7787 Q 4 # pcccp
 8265 Q 4 # pcccp
 8311 Q 4 # pcccp
@@ -923,6 +918,7 @@
 15727 Q 4 # ppccc
 15784 Q 4 # pcccp
 15930 Q 4 # ppccc
+17586 Q 4
 19757 Q 4 # pcccp
 20670 Q 4 # ppccc
 20730 Q 4 # pcccp
@@ -934,6 +930,9 @@
 22837 Q 4 # ppccc
 22989 Q 4 # pcccp
 24269 Q 4 # ppccc
+24745 Q 4
+24979 Q 4
+25189 Q 4
 25300 Q 4 # ppccc
 27244 Q 4 # ppccc
 27847 Q 4 # pcccp
@@ -960,8 +959,10 @@
 40507 Q 4 # ppccc
 40843 Q 4 # ppccc
 41739 Q 4 # pcccp
+42122 Q 4 # ppccc p
 42663 Q 4 # ppccc
 43539 Q 4 # pcccp
+44057 Q 4 # pcccp p
 45520 Q 4 # pcccp
 45731 Q 4 # pcccp
 46693 Q 4 # ppccc
@@ -998,6 +999,7 @@
 61174 Q 4 # ppccc
 61471 Q 4 # ppccc
 61616 Q 4 # ppccc
+62279 Q 4 # pcccp p
 62385 Q 4 # pcccp
 62581 Q 4 # pcccp
 63771 Q 4 # ppccc
