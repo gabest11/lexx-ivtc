@@ -470,8 +470,9 @@
 # few bad frames during the transition between the TVs
 # they are out of phase sadly
 
-28157,28215 cppcc
-28216,28320 cppcc
+28157,28204 cppcc
+28205,28274 c # side scrolling 29.97
+28275,28320 ccppc
 28157,28320 + # single field
 28157,28320 Q 6
 
@@ -521,8 +522,9 @@
 35280,35356 cppcc
 35357,35390 c
 35391,35643 cppcc
-35644,35759 cccpp
-35760,35852 cppcc
+35644,35713 cccpp
+35714,35789 c # side scrolling 29.97
+35790,35852 cppcc
 35853,35956 pcccp
 35957,36153 c
 36154,36713 cccpp

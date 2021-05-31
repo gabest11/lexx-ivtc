@@ -768,7 +768,7 @@ function FixPPVideo(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blk
 	ce = Interleave(c1e, c2e, c3e)
 	co = Interleave(c1o, c2o, c3o)
 	
-	# TODO
+	# TODO: not finished
 
 	if(ivtc == 1) # ppccc
 	{

@@ -59,8 +59,7 @@
 2707,2936 c
 2937,3010 cccpp
 3011,3211 pcccp
-3212,3338 cpphc # c # ccppc + cppcc (tv, pp fields already blended, drop one)
-3212,3338 --++-
+3212,3338 cuppc # ccppc + cppcc (tv, pp fields already blended, fixed)
 3339,3434 ppccc
 3435,3536 c
 3537,3598 cccpp
@@ -148,10 +147,8 @@
 16651,16861 c
 16862,16940 pcccp
 16941,17032 pcccp
-17033,17146 ppccc # tv, pp fields already blended, drop one
-17033,17146 ++---
-17147,17206 cppcc # changes to a different scene with more movement in pp, keep this part as video
-17147,17206 -++--
+17033,17146 ppccc # tv, pp fields already blended
+17147,17206 cuppc # pp shifts ahead one frame
 17207,17375 c
 17376,18200 c
 18201,18268 c # 29.97 + 59.94i (noise)
@@ -331,13 +328,12 @@
 32503,32593 c
 32594,32861 cppcc
 32862,33047 pcccp
-33048,33217 cchhc # other field bad or just not 1:1 
-33048,33217 --++-
+33048,33217 ccppc # pp fixed
 33183,33248 + # crossfade
 33218,33337 cccpp
 33338,33539 c
 33540,33600 cccpp
-33601,33759 c # ccppc # not 1:1
+33601,33759 c # ccppc # not 1:1 (looks worse when fixed)
 33601,33759 --++-
 33760,33830 cccpp
 33831,33934 ppccc
@@ -748,6 +744,7 @@
 16418 Q 4 # pcccp p
 16862 Q 4 # pcccp p
 16941 Q 4 # pcccp p
+17033 Q 4 # ppccc p
 20154 Q 4 # pcccp p
 20489 Q 4 # pcccp p
 20853 Q 4 # ppccc p
