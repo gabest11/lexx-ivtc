@@ -74,13 +74,12 @@
 3574,3885 ppccc
 3886,3970 c
 3971,4179 pcccp
-4180,4278 c # cppcc # pp blended
-#4180,4278 -++--
-#4180,4278 Q 5
+4180,4278 cppcc # pp blended, fixed
 4279,4368 pcccp
 4369,4469 cppcc
-4470,4720 ccupc # pp blended again, this one is more repairable by combining them
-4470,4720 --++-
+4470,4720 ccupc # ccupc # pp blended again, this one is more repairable by combining them
+4510,4514 --++- # bg is bent
+4520,4524 --++- # same
 4470,4720 Q 5
 4721,4827 ppccc
 4828,5058 pcccp
@@ -90,8 +89,7 @@
 5814,5941 ppccc
 5942,6068 ccppc
 6069,6368 c # 59.94i, already deinterlaced
-6369,6506 c # fg pcccp, bg 29.97
-6369,6506 +---+
+6369,6506 pcccp # fg pcccp, bg 29.97, fixed
 6507,6651 ppccc
 6652,6775 ppccc
 6776,6894 cccpp
@@ -121,8 +119,7 @@
 9337,9464 pcccp
 9465,9516 ccppc
 9517,9647 pcccp
-9648,9715 c # cccpp # not 1:1?
-9648,9715 ---++
+9648,9715 cccpp # pp deinterlaced, fixed
 9716,9938 cccpp
 9939,10145 cppcc
 10146,10292 ccppc
@@ -626,13 +623,14 @@
 75098,75166 ccppc
 75167,75247 pcccp
 75248,75299 cccpp
-75300,75385 c#cupcc # order change mid scene?
-75300,75385 -++--
-75300,75385 Q 5
+75300,75385 cppcc # c # cupcc # pp deinterlaced, fixed
+#75300,75385 -++--
+#75300,75385 Q 5
 75386,75470 cccpp
-75471,75526 c#cccup
-75471,75526 ---++
-75471,75526 Q 5
+75471,75526 cccpp # c # cccup # pp deinterlaced, fixed (75520 still pretty bad either way)
+#75471,75526 ---++
+#75516,75521 ---++
+#75471,75526 Q 5
 75527,75650 cccpp
 75651,75790 ppccc
 75791,76044 pcccp
@@ -667,8 +665,8 @@
 78099,78278 Q 5
 78279,78379 cccpp
 78380,78549 pcccp
-78550,78611 cccup
-78550,78611 ---++
+78550,78611 cccup # fixed
+78550,78554 ---++
 78550,78611 Q 5
 78612,78720 ppccc
 78721,78745 upccc
@@ -683,17 +681,17 @@
 78996,79049 --++-
 78996,79049 Q 5
 79050,79093 pcccp
-79094,79222 pcccu
-79094,79222 +---+
+79094,79222 pcccu # fixed
+79128,79139 ++---
 79094,79222 Q 5
 79223 l # ends on u
 79223 +
 79224,79262 cccpp
 79263,79331 pcccu # starts with a p, ends with a u
-79263,79331 +---+
-79263,79331 Q 5
+79263 +
 79332 l # ends on u
 79332 +
+79263,79332 Q 5
 79333,79369 cppcc
 79370,79460 pcccu
 79370,79460 +---+
@@ -719,8 +717,8 @@
 81165,81216 --++-
 81165,81216 Q 5
 81217,81275 cppcc
-81276,81374 pcccu
-81276,81374 +---+
+81276,81374 pcccu # fixed
+#81276,81374 +---+
 81276,81374 Q 5
 81375,81644 ccppc
 81645,81700 cccpp
