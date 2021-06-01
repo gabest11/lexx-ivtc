@@ -609,6 +609,8 @@ function BlendPP(clip c, int pos, bool scene_start)
 	Trim(1, -2)
 }
 
+# FixPP is useable when objects don't move in front of other objects or skip a large distance
+
 function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize", int "mv_overlap", int "mv_searchparam", val_array "ignore")
 {
 	mv_search = Default(mv_search, 3)

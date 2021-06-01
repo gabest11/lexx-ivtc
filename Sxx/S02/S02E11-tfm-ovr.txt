@@ -63,23 +63,14 @@
 1830,1932 cccpp # keyframe
 1830,1859 + # fade-in
 1933,2078 pcccp
-
-2079,2147 c#cupcc
-2079,2147 -++--
-2079,2147 Q 5
-
+2079,2147 cppcc
 2148,2199 pcccp
 2200,2353 ccppc
 2354,2471 ccppc
-
-2472,2553 c#ccupc
-2472,2553 --++-
-2472,2553 Q 5
-
+2472,2553 ccppc
 2554,2662 cccpp
-
-2663,2758 c#cupcc
-2663,2758 +#-++--
+2663,2758 c # cppcc? ccppc? # fins are out of sync with the rest of the picture
+2663,2758 + # -++--
 #2663,2758 Q 5
 #2663,2758 Q 6
 
@@ -102,61 +93,48 @@
 5546,5591 c
 5592,5659 c
 5660,6967 c
-
-# don't know what's up with the deinterlacer in this episode, it's all wibbly-wobbly
-
-#6968,7077 ccupc # n
-#7078,7097 ccnbc # r
-#7098,7167 ccupc # n
-#7168,7248 ccccc # n r | r n | n r |...
-6968,7248 c
-6968,7248 --++-
+6968,7248 ccppc
+7053,7073 --++-
 6968,7248 Q 5
-
 7249,7314 ccppc
 
 #7315,7399 upccc
 #7400,7444 nbccc
 #7445,7470 upccc
-7315,7470 c
+7315,7470 c # ppccc
 7315,7470 ++---
 7315,7470 Q 5
 
 7471,7533 cppcc
 
-7534,7654 c#cupcc
+7534,7654 c # cupcc
 7534,7654 -++--
 7534,7654 Q 5
 
 7655,7906 cccpp
-
-7907,7953 c#cccup
-7907,7953 ---++
-7907,7953 Q 5
-
+7907,7953 cccpp
 7954,8003 ppccc
 8004,8103 cppcc # this one has a match, although same as the others
 8104,8170 pcccp
 
-8171,8246 c#cccup
-8171,8246 ---++
+8171,8246 cccup # c # cccup
+#8171,8246 ---++
+#8191,8195 ---++
+#8216,8220 ---++
+#8226,8230 ---++
+#8241,8245 ---++
 8171,8246 Q 5
 
 8247,8335 cppcc
-
-8336,8496 c#cccup
-8336,8496 ---++
-8336,8496 Q 5
-
+8336,8496 cccpp
 8497,8723 cccpp
-
-8724,8792 c#upccc
-8724,8792 ++---
-8724,8792 Q 5
-
+8724,8792 upccc # 8790 is not the best looking frame
+8762 + # combed a little
+8762 Q 7
 8793,8939 ppccc
-8940,9123 uphcl # pcccp bottom half, cppcc top half
-8940,9123 --+-+
+8940,9123 cppcc # tl cccpp tr cppcc bl cppcc br pcccp (amazing)
+8940 + # br starts with a p
+8940 PP 3
 9124,9890 pcccp
 9891,9942 ccppc
 9943,10036 cccpp
@@ -306,8 +284,6 @@
 40026,40373 ccppc
 40374,40499 cppcc
 40500,40599 cccup
-40500,40599 ---++
-40500,40599 Q 5
 40600,40898 cppcc
 40899,41034 cppcc
 41035,41131 cccpp
@@ -368,9 +344,9 @@
 50193,50257 + # crossfade
 50226,50677 ppccc
 
-50678,50768 c#upccc
-50678,50768 ++---
-50678,50768 Q 5
+50678,50768 upccc
+50678,50702 ++--- # guy in the back cannot be saved
+50678,50702 Q 5
 
 50769,50866 ccppc
 50867,50988 ccppc
@@ -499,11 +475,7 @@
 81084,81194 cccpp
 81156,81224 + # crossfade
 81195,81965 cppcc
-
-81966,82175 c#ccupc
-81966,82175 --++-
-81966,82175 Q 5
-
+81966,82175 ccppc
 82176,82272 ccppc
 82273,82464 c
 82465,82580 cppcc
@@ -513,8 +485,8 @@
 82860,82955 c
 82956,83136 c
 82956,83136 -
-83137,83290 c
-83137,83290 ++--- # foreground ppccc
+83137,83290 c # fg ppccc, bg cccpp (pp deinterlaced)
+83137,83290 ++---
 83291,83411 c
 83412,83541 c
 83542,83615 c
