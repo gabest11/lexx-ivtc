@@ -163,9 +163,9 @@
 5228,5329 pcccp
 5330,5392 cppcc
 5330,5392 -++--
-5393,5490 c # already deinterlaced (badly)
+5393,5490 cccpp
 5491,5518 cccpp
-5519,5542 c # ccpcp
+5519,5542 ccpcp # ?
 5519,5542 --+-+
 5543,5564 c # single field
 5543,5564 +
@@ -205,8 +205,8 @@
 8676,8741 c
 8742,8909 ccppc
 8910,9015 c
-9016,9183 c
-9016,9183 + # not all but very random
+9016,9183 c # fields are motion blurred individually
+9016,9183 +
 9184,9533 ppccc
 9534,9929 cccpp
 9930,10309 ppccc
@@ -251,7 +251,7 @@
 15172,15180 + # more sfx
 15235,15245 + # more sfx
 15255,15468 ccppc
-15395,15413 --++- # right side combed
+15395,15413 --++- # right side combed (you can see where it is held by someone)
 15469,15589 cppcc
 15469,15539 + # single field
 15469,15539 Q 7
@@ -460,12 +460,12 @@
 45555,45594 +---+
 45595,45750 cccpp
 45751,45891 cccup
-45751,45891 ---++
+45751,45891 ---++ # green screen combed
 45751,45891 Q 5
 45892,46524 ccppc
 46525,46652 cccpp
 46653,46780 cccup
-46653,46780 ---++ # still interlaced
+46653,46780 ---++ # same
 46653,46780 Q 5
 46781 l # ends on u
 46781 +
@@ -528,8 +528,7 @@
 49432,49460 cppcc
 49461,49497 ccppc
 49498,49585 cccpp
-49586,49675 ppccc
-49621,49675 ++---
+49586,49675 ppccc # fixed
 49676,49796 c
 49797,49916 ccppc
 49832,49916 --++-
@@ -639,11 +638,11 @@
 65102,65169 cccpp
 65170,65244 pcccp
 65245,65328 cppcc
-65329,65641 c#cccup/cccnb, order keeps switching
+65329,65641 c # pp badly deinterlaced + 29.97 robot arms
 65329,65641 ---++
 65329,65641 Q 5
 65642,65843 ccppc
-65844,66114 c#cccup
+65844,66114 c # cccup
 65844,66114 ---++
 65844,66114 Q 5
 66115,66310 cccpp
@@ -758,14 +757,12 @@
 76897,77030 pcccp
 77031,77192 cccpp
 77193,77302 pcccp
-77303,77597 c#ccupc
-77303,77597 --++- # not 1:1
-77303,77597 Q 5
+77303,77597 ccppc
 77598,77696 c
 77697,77811 pcccp
 77812,77952 c
 77953,78092 ccppc
-78093,78159 c
+78093,78159 c # fg ppccc but pp badly deinterlaced
 78093,78114 ++---
 78160,78219 ppccc
 78220,78300 c

@@ -147,26 +147,20 @@
 # intercom and outdoor green screen scenes have the terrible 29.97 deinterlacer applied to it
 # ... it is a disaster!
 
-15189,15260 llccc # fg ppccc, bg 29.97
-15189,15260 ++---
+15189,15260 ppccc # fg ppccc, bg ppccc (pp bad)
 15261,15468 cppcc
-15469,15617 c # c # fg ppccc, bg cccpp (not 1:1)
-15469,15617 + # ++---
+15469,15617 ppccc # fg ppccc, bg cccpp (pp bad)
 15618,15962 pcccp
 15963,16153 pcccp
 16154,16307 cccpp
-16308,16405 c # fg ccppc, bg 29.97
-16308,16405 --++-
+16308,16405 ccppc # fg ccppc, bg cccpp (pp bad)
 16406,16467 ccppc
 16468,16822 ppccc
-16823,16918 c # fg cccpp, bg 29.97
-16823,16918 ---++
+16823,16918 cccpp # fg cccpp, bg ccppc (pp bad)
 16919,16987 ppccc
-16988,17073 c # fg cccpp, bg 29.97
-16988,17073 ---++
+16988,17073 cccpp # fg cccpp, bg pcccp (pp bad) # Kai's pp is also a suspect
 17074,17209 ccppc
-17210,17319 c # fg cppcc, bg 29.97
-17210,17319 -++--
+17210,17319 cppcc # fg cppcc, bg ccppc (pp bad) # same
 17320,18945 pcccp
 
 18822,18945 +---+ # hand
@@ -178,14 +172,13 @@
 18946,19138 Q 5
 
 19139,19317 c
-19318,19467 c # cccpp, but pp blended
+19318,19467 c # cccpp, but pp blended, moving too fast for a fix
 19318,19467 ---++ # + for consistency? bg is moving
 19318,19467 Q 5
 19468,20480 ppccc
 20481,20639 ccppc
 20640,20801 pcccp
 20802,20995 c # fg 29.97, bg ppccc (tiny)
-20802,20846 ++--- # stop when the moth arrives
 20996,21202 pcccp
 21203,21309 ccppc
 21310,21439 ppccc
@@ -283,67 +276,52 @@
 41276,41357 ppccc
 41358,41471 pcccp
 41472,41604 pcccp
-41605,41820 hcccl # keep only one deinterlaced field of pp to avoid blending
-41605,41820 +---+ # not 1:1
+41605,41820 pcccp
 41821,41873 pcccp
 41874,41958 cppcc
 41959,42074 ccppc
 42075,42129 ppccc
 42130,42200 ppccc
 42201,42289 pcccp
-42290,42343 c
-42290,42343 +---+
-42290,42343 Q 5
+42290,42343 pcccu
+42299,42303 ++---
+42334,42343 ++---
+42291,42343 Q 5
 42344,42380 cccpp
-42381,42464 c # fg ? not moving much, bg 29.97 pp deinterlaced
-42381,42464 +---+
-42381,42464 Q 5
-42465,42534 c
-42465,42534 -++--
-42465,42534 Q 5
+42381,42464 pcccp
+42465,42534 cppcc
 42535,42558 cppcc
-42559,42602 c
-42559,42602 -++--
+42559,42602 cupcc
+42569,42587 -++-- # sad blending
 42559,42602 Q 5
 42603,42626 pcccp
 42627,42834 cppcc
 42835,43001 ccppc
-43002,43139 c # same
-43002,43139 +---+
-43002,43139 Q 5
+43002,43139 pcccp
 43140,43246 cccpp
-43247,43349 c # same
-43247,43349 ++---
-43247,43349 Q 5
+43247,43349 ppccc
 43350,43393 pcccp
-43394,43600 c
-43394,43600 ---++
-43394,43600 Q 5
+43394,43600 cccpp
 43601,43675 ppccc
-43676,43887 c
-43676,43887 --++-
-43676,43887 Q 5
+43676,43887 ccupc
+43801,43805 --++-
+43876,43880 --++-
+43676,43887 Q 7
 43888,44293 cppcc
 44294,44366 pcccp
 44367,44453 ppccc
-44454,44575 c
-44454,44575 ++---
-44454,44575 Q 5
+44454,44575 ppccc
 44576,44735 ccppc
 44736,44842 cppcc
 44805,44872 + # crossfade
 44843,44986 c
 44987,45407 ccppc
-45408,45582 c
-45408,45582 ++---
-45408,45582 Q 5
+45408,45582 ppccc
 45583,45831 pcccp # still interlaced against the bg
 45598,45739 +---+
 45753,45763 +---+
 45778,45793 +---+
-45832,46411 c
-45832,46411 +---+
-45832,46411 Q 5
+45832,46411 pcccp
 46412,46498 cccpp
 46499,46995 pcccp
 46996,47214 ccppc
@@ -436,9 +414,7 @@
 56216,56282 pcccp
 56283,56633 c
 56604,56665 + # crossfade
-56634,56851 c
-56634,56851 ---++
-56634,56851 Q 5
+56634,56851 cccpp
 56852,56965 cppcc
 56966,57028 pcccp
 57029,57109 ppccc
@@ -453,15 +429,11 @@
 57907,57996 ppccc
 57997,58059 cccpp
 58060,58208 ccppc
-58209,58349 c
-58209,58349 -++--
-58209,58349 Q 5
+58209,58349 cppcc
 58350,58442 pcccp
 58443,58509 ppccc
 58510,58750 cppcc
-58751,58889 c
-58751,58889 -++--
-58751,58889 Q 5
+58751,58889 cppcc
 58890,59096 cppcc
 59097,59225 pcccp
 59226,59420 ccppc
@@ -483,9 +455,7 @@
 62995,63123 cccpp
 63124,63214 c # ?
 63215,63312 cccpp
-63313,63586 c
-63313,63586 ---++
-63313,63586 Q 5
+63313,63586 cccpp
 63587,64293 ppccc
 64294,64534 cppcc
 64535,64692 cccpp
@@ -510,9 +480,10 @@
 67825,67849 pcccp
 67850,67895 pcccp
 67896,67919 cccpp
-67920,68062 cccpp
-67920,68062 ---++
-67920,68062 Q 5
+67920,68062 cccup
+67925,67949 ---++
+67960,67964 ---++
+67920,68062 Q 7
 68063,68108 cccpp
 68109,68131 pcccp
 68132,68249 cccpp
@@ -581,9 +552,12 @@
 73778,74085 cppcc
 74086,74168 ccppc
 74169,74254 cccpp
-74255,74311 c
-74255,74311 ++---
-74255,74311 Q 5
+
+74255,74311 ppccc
+#74255,74311 c
+#74255,74311 ++---
+#74255,74311 Q 5
+
 74312,76057 ccppc
 76058,76114 ccppc
 76115,76186 ppccc
@@ -697,6 +671,8 @@
 13736 Q 4 # ppccc p
 13896 Q 4 # pcccp p
 15059 Q 4 # ppccc p
+15189 Q 4 # ppccc p
+15469 Q 4 # ppccc p
 15618 Q 4 # pcccp p
 15963 Q 4 # pcccp p
 16468 Q 4 # ppccc p
@@ -741,17 +717,25 @@
 40266 Q 4 # ppccc p
 41276 Q 4 # ppccc p
 41358 Q 4 # pcccp p
+41605 Q 4 # pcccp p
 41472 Q 4 # pcccp p
 41821 Q 4 # pcccp p
 42075 Q 4 # ppccc p
 42130 Q 4 # ppccc p
 42201 Q 4 # pcccp p
+42290 Q 4 # pcccu p
+42381 Q 4 # pcccp p
 42603 Q 4 # pcccp p
+43002 Q 4 # pcccp p
+43247 Q 4 # ppccc p
 43350 Q 4 # pcccp p
 43601 Q 4 # ppccc p
 44294 Q 4 # pcccp p
 44367 Q 4 # ppccc p
+44454 Q 4 # ppccc p
+45408 Q 4 # ppccc p
 45583 Q 4 # pcccp p
+45832 Q 4 # pcccp p
 46499 Q 4 # pcccp p
 47320 Q 4 # ppccc p
 48633 Q 4 # ppccc p
@@ -826,6 +810,7 @@
 73595 Q 4 # ppccc p
 73636 Q 4 # pcccp p
 73672 Q 4 # pcccp p
+74255 Q 4 # ppccc p
 76115 Q 4 # ppccc p
 76187 Q 4 # ppccc p
 76229 Q 4 # pcccp p

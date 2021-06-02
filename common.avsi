@@ -641,8 +641,6 @@ function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize"
 	ce = Interleave(c1e, c2e)
 	co = Interleave(c1o, c2o)
 	
-	# TODO
-
 	if(ivtc == 1) # ppccc
 	{
 		ce = ce.Trim(0, 5).SelectEvery(6, 0, 2, 4).AssumeFPS(c) + ce.Trim(6, 0).SelectEvery(10, 0, 2, 2, 3, 8).AssumeFPS(c)
@@ -829,4 +827,50 @@ function FixPPVideo(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blk
 	}
 
 	# TODO check if the last frame was a p, then the interpolated frame is between the scene change	
+}
+
+	
+function FilmToVideo(clip c, int i) # aka ivtc
+{
+	c.SeparateFields
+	if(i == 1) {SelectEvery(10, 2,1, 4,5, 6,7, 8,9)} # ppccc
+	else if(i == 2) {SelectEvery(10, 0,1, 4,3, 6,7, 8,9)} # cppcc
+	else if(i == 3) {SelectEvery(10, 0,1, 2,3, 6,5, 8,9)} # ccppc
+	else if(i == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
+	else if(i == 5) {Trim(0, -2).AssumeFPS(c) + Trim(2, 0).SelectEvery(10, 0,1, 2,3, 4,5, 8,7).AssumeFPS(c)} # pcccp
+	Weave
+	AssumeFPS(c)
+	
+	if(i == 4 && (c.FrameCount % 5) == 4)
+	{
+		Trim(0, FrameCount - 2) + Trim(FrameCount - 1, -1).BlendFields
+	}
+	
+	# TODO: other edge cases, i == fc%5
+}
+
+function VideoToFilm(clip c, int pd) # aka pulldown
+{
+	c.SeparateFields
+	#if(pd == 1) {SelectEvery(8, -2,1, 0,3, 2,3, 4,5, 6,7)} # ppccc
+	if(pd == 1) {Trim(0, -6).SelectEvery(6, 0,1, 0,3, 4,5).AssumeFPS(24000,1001) + Trim(6, 0).SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7).AssumeFPS(24000,1001)} 
+	if(pd == 2) {SelectEvery(8, 0,1, 0,3, 2,5, 4,5, 6,7)} # cppcc
+	if(pd == 3) {SelectEvery(8, 0,1, 2,3, 2,5, 4,7, 6,7)} # ccppc
+	if(pd == 4) {SelectEvery(8, 0,1, 2,3, 4,5, 4,7, 6,9)} # cccpp
+	if(pd == 5) {SelectEvery(8, 0,3, 2,3, 4,5, 6,7, 6,9)} # pcccp
+	Weave
+	AssumeFPS(c)
+}
+
+function FilmToFilm(clip c, int isrc, idst)
+{
+	last = c
+	
+	# TODO: directly map the fields in all permutations?
+	
+	if(isrc != idst)
+	{
+		FilmToVideo(isrc)
+		VideoToFilm(idst)
+	}
 }

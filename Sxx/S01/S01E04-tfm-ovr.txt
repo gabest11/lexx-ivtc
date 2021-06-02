@@ -213,7 +213,7 @@
 6365,6419 ppccc
 6420,6447 phclu # crossfade, ppccc + cccpp
 6420,6447 -+-+-
-6448,6920 ppccc
+6448,6893 ppccc
 6894,6950 + # crossfade
 6921,7368 c
 7358,7372 + # crossfade
