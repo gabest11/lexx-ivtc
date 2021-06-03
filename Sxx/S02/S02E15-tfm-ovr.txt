@@ -119,8 +119,12 @@
 11666,11730 pcccp
 11731,11819 c
 11820,11864 cppcc
-11865,12014 c # already deinterlaced
-11865,12014 ++---
+
+11865,11894 c # already deinterlaced
+11895,12014 ppccc # second part has less motion, fixed
+11865,11894 ++---
+#11865,12014 Q 5
+
 12015,12106 c
 12107,12236 cccpp
 12237,12350 c
@@ -140,9 +144,7 @@
 13337,13418 pcccp
 13419,13523 pcccp
 13524,13652 pcccp
-13653,13826 c # already deinterlaced
-13653,13826 ++---
-13653,13826 Q 5
+13653,13826 ppccc # c # already deinterlaced
 13795,13852 + # crossfade
 13827,14064 ppccc
 14065,14206 ppccu # pcccp # ppccc (xev and stanley) + ppccc (kai), wtf?
@@ -169,15 +171,15 @@
 16519,16855 ccppc 
 16856,17263 pcccp 
 17264,17423 cppcc
-17264,17423 -++-- # robot head mouth cppcc, but the eyes are 29.97
+17264,17268 -++-- # robot head mouth cppcc, but the eyes are 29.97
+17294,17348 -++--
 17424,17518 ppccc
 17519,17605 ppccc 
 17606,17683 ppccc 
 17684,17780 pcccp 
 17781,17853 cppcc 
 17854,18037 pcccp 
-18038,18142 pcccp 
-18038,18142 +---+ # robot head
+18038,18142 pcccp # robot head
 18143,18223 ccppc 
 18224,18382 pcccp 
 18383,18484 ppccc 
@@ -191,70 +193,59 @@
 19368,19525 ccppc 
 19526,19760 cppcc 
 19761,19862 pcccp 
-19863,20005 pcccp
-19863,20005 +---+ # robot head
+19863,20005 pcccp # robot head
 20006,20082 pcccp 
-20083,20172 pcccp
-20083,20172 +---+ # robot head
+20083,20172 pcccp # robot head
 20173,20307 cccpp 
-20308,20402 pcccp
-20308,20402 +---+ # robot head
+20308,20402 pcccp # robot head
+20308,20402 +---+
+20377,20378 + # Xev can't stop moving her head...
 20403,20576 ppccc 
 20577,21113 pcccp 
-21114,21193 ppccc
-21114,21193 ++--- # robot head
+21114,21193 ppccc # robot head 
+21114,21193 ++--- # Xev noooooo
 21194,21326 cccpp 
 21327,21385 ccppc
 21386,21670 cppcc 
 21671,21775 pcccp
 21776,21836 cccpp 
-21837,21948 c # pp badly deinterlaced
-#21837,21948 ++--- # not much movement
+21837,21948 c # pp badly deinterlaced + fade-out
+21837,21948 ++--- # not much movement
 21837,21838 +
 21857 +
 21837,21948 Q 5
 21949,21978 + # fade-in
-21949,22020 ppccc
-21949,22020 ++--- # robot head
+21949,22020 ppccc # robot head
 22021,22132 cppcc 
 22133,22275 ppccc 
 22276,22410 cccpp 
 22411,22576 pcccp 
-22577,22675 cccpp
-22577,22675 ---++ # robot head
+22577,22675 cccpp # robot head
 22676,23029 cccpp
-23030,23134 ccppc
-23030,23134 --++- # robot head
+23030,23134 ccppc # robot head
 23135,23266 pcccp 
 23267,23356 ccppc 
-23357,23432 cccpp
-23357,23432 ---++ # robot head
+23357,23432 cccpp # robot head
 23433,23577 cppcc
 23578,23667 ppccc
 23668,23725 ppccc 
 23726,24050 ccppc 
-24051,24300 c # ccppc # prefer the hologram 29.97
-24051,24300 --++-
+24051,24300 ccppc # hologram 29.97, everybody is standing still, convert it to film
 24301,24466 ccppc 
-24467,24697 c # pcccp # hologram
-24467,24697 +---+
+24467,24697 pcccp # hologram
 24698,24818 ppccc 
-24819,25082 c # cppcc # hologram
+24819,25082 c # cppcc # hologram (big)
 24819,25082 -++--
-25083,25102 c # ppccc # hologram
-25083,25102 ++---
-25103,25227 ppccc
+25083,25227 ppccc # hologram 25083,25102
 25228,25314 ccppc 
 25315,25664 pcccp 
 25665,26475 cppcc 
 26476,26607 ccppc 
-26608,26659 cppcc
-26608,26659 -++-- # robot head
+26608,26659 cppcc # robot head
 26660,26888 cccpp 
 26889,26992 cppcc 
 26993,27065 ppccc
-27066,27173 ccppc
-27066,27173 --++- # robot head
+27066,27173 ccppc # robot head
 27174,27436 cccpp 
 27437,27564 ppccc
 27565,27731 cppcc 
@@ -281,10 +272,10 @@
 30873,30961 ccppc 
 30962,30978 cccpp 
 30979,31186 c # ccppc
-30979,31186 --++-
+30979,31186 --++- # sfx
 31187,31512 pcccp 
 31513,31664 c # pcccp
-31513,31664 +---+
+31513,31664 +---+ # sfx
 31665,31842 ppccc 
 31843,31929 pcccp
 31930,32004 ccppc 
@@ -766,6 +757,7 @@
 13337 Q 4 # pcccp p
 13419 Q 4 # pcccp p
 13524 Q 4 # pcccp p
+13653 Q 4 # ppccc p
 14065 Q 4 # ppccu p
 14341 Q 4 # pcccp p
 14575 Q 4 # ppccc p
@@ -779,13 +771,16 @@
 17606 Q 4 # ppccc p
 17684 Q 4 # pcccp p
 17854 Q 4 # pcccp p
+18038 Q 4 # pcccp p
 18224 Q 4 # pcccp p
 18383 Q 4 # ppccc p
 18485 Q 4 # ppccc p
 18686 Q 4 # ppccc p
 19041 Q 4 # pcccp p
 19761 Q 4 # pcccp p
+19863 Q 4 # pcccp p
 20006 Q 4 # pcccp p
+20083 Q 4 # pcccp p
 20403 Q 4 # ppccc p
 20577 Q 4 # pcccp p
 21671 Q 4 # pcccp p
@@ -794,6 +789,7 @@
 23135 Q 4 # pcccp p
 23578 Q 4 # ppccc p
 23668 Q 4 # ppccc p
+24467 Q 4 # pcccp p
 24698 Q 4 # ppccc p
 25315 Q 4 # pcccp p
 26993 Q 4 # ppccc p

@@ -25,3 +25,6 @@ catch(msg)
 	assert(false, "undo fix1 in the override files")
 }
 
+Trim(0, 74253) + \
+FixPPVideo(74254, 74334, 3, mv_blksize=16, mv_overlap=8) + \
+Trim(74335, 0)

@@ -227,13 +227,14 @@
 34220,34238 Q 2
 34300,34331 + # crossfade (same)
 34300,34331 Q 2
-34374,34646 c # cccpp # leave the gfx
+34374,34646 c # cccpp # leave the gfx (bg not even proper cccpp, pp bad)
 34374,34646 ---++
 34647,34705 ccppc
 34706,34806 ppccc
 34807,34886 ccppc
 34887,34977 ccppc
 34887,34977 --++-
+34887,34977 Q 7 # sfx nicer with nnedi3
 34978,35027 cppcc
 35028,35176 ccppc
 35177,35249 cccpp
@@ -559,9 +560,9 @@
 73925,74087 ccppc
 73925,74087 - # MIC too high
 74088,74253 cppcc
-74254,74334 c # ccppc
-74254,74334 --++- # not 1:1
-74254,74334 Q 5
+74254,74334 c # ccppc # not 1:1 # fixed
+#74254,74334 --++-
+#74254,74334 Q 5
 74335,74518 cccpp
 74335 - # MIC = 83
 74485,74518 ---++ # fade-out
