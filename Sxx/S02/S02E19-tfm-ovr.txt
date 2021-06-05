@@ -69,6 +69,7 @@
 3765,3810 cppcc
 3811,3832 cppcc # fg cppcc, bg already deinterlaced to 29.97
 3811,3832 -++--
+#3811,3832 Q 4
 3833,3870 cppcc
 3871,4323 cccpp
 4324,4664 ccppc
@@ -84,7 +85,10 @@
 6821,6949 cccpp
 6950,7039 c
 7040,7490 cccpp # S02E05 12742,13192 same scene without the mismatched bg frame rate, but also no "patches in the sky" and fade-in
-7040,7490 ---++ # bg 29.97
+#7040,7490 ---++ # bg 29.97
+7040,7189 +
+7244,7490 +
+7040,7490 Q 7
 7491,8421 pcccp
 8422,8633 cppcc
 8634,8930 cccpp
@@ -95,8 +99,7 @@
 9676,9723 ++--- # hand
 9738,10547 cppcc
 10548,10738 cccpp
-10739,10888 c # ppccc
-10739,10888 ++---
+10739,10888 ppccc # fg pp blended, window might be 29.97, slow moving
 10889,10978 ppccc
 10979,11249 ccppc
 11250,11367 c
@@ -113,8 +116,9 @@
 13034,13318 ccppc
 13319,13427 ccppc
 13428,13447 cccpp
-13448,13470 pccpccccpccccpccccpcccc # wtf?
-13448,13470 -+--+++--+++--+++--+++-
+13448,13470 c # pccpccccpccccpccccpcccc # wtf? second fields is shaking
+13448,13470 + # -+--+++--+++--+++--+++-
+13448,13470 Q 7
 13448 +
 13449 Q 4
 13471,13690 ppccc
@@ -137,8 +141,11 @@
 16664,16761 c
 16762,16994 ppccc
 16995,17176 c
-17177,17333 c # cccpp + 29.97
-17222,17333 ---++
+17177,17333 cccpp # bg 29.97 single field at the beginning, moth has a x=0.5 difference between its fields
+#17177,17221 +
+#17222,17333 ---++
+17177,17333 +
+17177,17333 Q 5
 17334,19185 pcccp
 19186,19272 pcccp
 19273,19371 ppccc
@@ -252,20 +259,22 @@
 42078,42200 cccpp
 42201,42365 c # single field and dup frames
 42201,42365 +
-#42201,42365 Q 6
+42201,42365 Q 7
 42366,42573 pcccp
 42574,42660 cppcc
 42661,42998 pcccp
 42999,43055 cppcc
 43056,43129 cccpp
-43130,43203 c
+43130,43203 c # fg 29.97, bg wtf
 43130,43203 +--+-+--+-++-+-++- # this pattern repeats in the bg
+43130,43203 Q 7
 43204,43246 cccpp
 43247,43299 cccpp
 43300,43659 ccppc
 43660,43741 ppccc
 43742,43904 cppcc # bg cppcc, fg terrible mess
 43742,43904 +
+43742,43904 Q 7
 43905,44045 ccppc
 44046,44199 pcccp
 44200,44307 pcccp
@@ -356,12 +365,13 @@
 52527,52616 ccppc
 52617,52695 cppcc
 52696,52799 ppccc
-52800,52890 c # badly deinterlaced to 29.97
+52800,52890 ccppc # badly deinterlaced to 29.97, fixed
 52891,52946 ppccc
 52947,53466 cppcc
 53467,53576 cccpp
 53577,53775 pcccp
-53577,53617 + # hand floating in the fg at 59.94i
+53577,53775 + # hands floating in the fg at 59.94i
+#53577,53775 Q 7
 53776,54149 cppcc
 54150,54374 ccppc
 54375,54613 ppccc
@@ -427,9 +437,8 @@
 66603,66710 c
 66711,66809 ppccc
 66810,67357 cccpp
-67358,67394 ccppc
-67395,67471 c # prefer bg, fg doesn't really move
-67395,67471 ++---
+67358,67389 ccppc
+67390,67471 c # fg pp blended, bg 29.97, fixed
 67472,67589 ccppc
 67590,67839 c
 67590,67655 + # first part 59.94i, rest is 29.97
@@ -460,8 +469,8 @@
 70988,71287 c
 70988,71287 + # 59.94i
 70988,71287 Q 7
-71288,71393 c # pcccp
-71288,71393 +---+
+71288,71393 c # pcccp # fixed
+#71288,71393 +---+
 71394,71506 c
 71507,71740 cccpp
 71741,72038 c
@@ -523,7 +532,7 @@
 
 #78423,78531 c # randomly interlaced
 #78423,78531 + # Lexx moves so slow, a few p frames don't cause combing
-# there must be a reason...
+# fields are motion blurred
 78423,78432 ccuppccupp 
 78433,78442 cccuppccup
 78443,78452 pcccuppccu 
@@ -585,6 +594,7 @@
 7491 Q 4 # pcccp p
 8931 Q 4 # pcccp p
 9256 Q 4 # ppccc p
+10739 Q 4 # ppccc p
 10889 Q 4 # ppccc p
 11368 Q 4 # ppccc p
 12574 Q 4 # pcccp p

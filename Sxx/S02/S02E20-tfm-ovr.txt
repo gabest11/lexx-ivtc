@@ -61,8 +61,7 @@
 1685,1827 Q 7
 
 1828,2378 c # keyframe
-2379,2540 ccppc
-2379,2540 --++- # not 1:1
+2379,2540 ccppc # pp bad, fixed
 2541,2617 c
 2646,2726 ppccc
 2727,2952 cccpp
@@ -166,8 +165,8 @@
 14213,14348 cccpp
 14213,14348 ---++
 14349,14431 ccppc
-14432,14727 c # pcccp
-14432,14727 +---+
+14432,14727 c # pcccp # fixed
+#14432,14727 +---+
 14728,14809 ccppc 
 14810,14826 pcccp 
 14827,14867 c
@@ -188,13 +187,25 @@
 15413,15424 cccpp 
 15425,15470 c
 15471,15599 cppcc 
+
+# 0245780235680135680..
+# 1346891246790246790..
+# few c and p frames
+
 15600,15627 cccccpccccpcccccpccccpccccpc # nice, a middle finger
 15600,15627 ++-++-+-++-+-+++-+-++-+-++-+
+
+# 02457802356801346
+# 13468912467902457
+# same...
+
 15628,15644 cccccpccccpccccpc
 15628,15644 ++-++-+-++-+-++-+
-15645,15712 c
+
+15645,15712 c # 59.94i
 15645,15712 +
 15645,15712 Q 7
+
 15713,15731 ppccc
 
 # there are nasty diagonals, looks nicer when the whole scene has nnedi3 applied
@@ -215,7 +226,7 @@
 16090,16185 c
 16186,16297 pcccp 
 16298,16428 c
-16298,16365 +
+16298,16365 + # 59.94i
 16429,16508 ppccc
 16509,16790 ccppc 
 16791,16839 ppccc 
@@ -227,6 +238,14 @@
 # similar to the LEXX logo in the intro of S02E01/2, but cannot be repaired
 # the hand behind the window is also combed randomly
 # two clean frames and one where both fields are the same
+
+# 0  l
+# 1  hLhLhLhLhLhLhLhLhL 
+# 19 HlHlHlHlHlHlHlHlHl
+# 37 hLhLhLhLhLhLhLhLhLh
+# 56 lHlHlHlHlHlHlHlHlH
+# 74 LhLhLhLhLhLhLhLhLh
+# 92 lHlHlHlHlHlHlHlHlH
 
 17004,17058 hlllllllllhhhhhhhh
 17004,17058 +
@@ -320,8 +339,7 @@
 22317,22477 ppccc
 22317,22477 ++---
 22478,22610 c
-22611,23906 cppcc 
-22611,22743 -++-- # pp badly deinterlaced when the robot head is visible
+22611,23906 cppcc # pp badly deinterlaced when the robot head is visible, fixed
 23907,24623 ccppc 
 24624,24719 cppcc 
 24720,25243 pcccp
@@ -383,7 +401,7 @@
 33371,34208 ccppc 
 34209,34286 cccpp
 34257,34317 + # crossfade
-34287,34571 ppccc # pp badly deinterlaced
+34287,34571 ppccc # Lexx's pp badly deinterlaced, everything else 29.97
 34287,34571 ++---
 34287,34571 Q 7
 34572,34879 c # pp blended, drifts ahead three frames by the end of the scene
@@ -404,9 +422,7 @@
 36610,36794 pcccp
 36655,36697 +---+ # hand
 36795,37016 cccpp 
-37017,37060 c # ppccc # not 1:1
-37017,37060 ++---
-37017 Q 2
+37017,37060 ppccc # pp bad, fixed
 37061,37101 c
 37102,37302 c
 37102,37302 - # MIC high
@@ -425,12 +441,11 @@
 38566,38710 ccppc 
 38711,38806 pcccp 
 38807,38942 pcccp 
-38943,39030 c # progressive?
+38943,39030 c # progressive? pp bad?
 39031,39045 cccpp 
 39046,39089 c
 39046,39089 +
-39090,39122 ccppc
-39090,39122 ---+- # one frame combed
+39090,39122 ccppc # pp bad, fixed
 39123,39304 c
 39305,39606 ccppc 
 39607,39736 c
@@ -504,7 +519,7 @@
 46683,46791 c
 46762,46823 + # crossfade
 46792,46869 ppccc 
-46870,47190 c # fg ppccc, cube 59.94i?
+46870,47190 c # fg randomly combed, cube 59.94i?
 46870,47190 +
 47191,47269 cppcc
 47270,47291 ppccc 
@@ -535,12 +550,11 @@
 47774,48122 cppcc 
 48123,48160 clluc # field magic, a few are missing
 48123,48160 -++--
-48161,48251 c # badly deinterlaced
+48161,48251 cccpp # badly deinterlaced, fixed
 48252,48347 cppcc 
 48348,48398 c
 48348,48398 - # MIC high
-48399,48476 c # no match
-48399,48476 --++-
+48399,48476 ccppc # pp bad, fixed
 48477,48517 c
 48518,48683 c
 48684,48732 c
@@ -569,8 +583,7 @@
 51761,51966 ppccc 
 51967,52068 c
 52069,52130 ccppc
-52131,52354 c # ccppc # not 1:1
-52201,52354 --++-
+52131,52354 ccppc # pp bad, fixed
 52355,52504 c
 52505,52636 c
 52505,52636 -
@@ -706,14 +719,14 @@
 70730,70951 c
 70952,71095 c
 71096,71313 c
-71314,71512 c # not 1:1, now that's a shame
+71314,71512 c # shaky cam
 71314,71377 --++-
 71314,71512 Q 5
 71513,71624 c
 71625,71666 c
 71667,71784 c
 71785,72055 c
-72056,72130 c # not 1:1
+72056,72130 c # shaky cam
 72096,72130 ++---
 72096,72130 Q 5
 72131,72410 pcccp
@@ -725,8 +738,7 @@
 73100,73409 ppccc 
 73410,73666 cccpp
 73667,73762 pcccp 
-73763,74058 c # already deinterlaced
-73763,74058 -
+73763,74058 c # already blended
 74059,75051 ppccc 
 74099,75051 ++---
 75052,75522 cccpp 
@@ -863,6 +875,9 @@
 16977 Q 4 # ppccc p
 17059 Q 4 # ppccc p
 17282 Q 4 # ppccc p
+17381 Q 4
+17409 Q 4
+17450 Q 4
 18258 Q 4 # pcccp p
 18296 Q 4 # pcccp p
 18374 Q 4 # ppccc p
@@ -896,6 +911,7 @@
 35597 Q 4 # pcccp p
 35888 Q 4 # pcccp p
 36610 Q 4 # pcccp p
+37017 Q 4
 37303 Q 4 # pcccp p
 37352 Q 4 # pcccp p
 37565 Q 4 # pcccp p

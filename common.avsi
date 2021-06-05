@@ -187,8 +187,9 @@ function Detect240p(clip c)
 	StackVertical(StackHorizontal(e1, o1),StackHorizontal(e2, o2))
 }
 
-function ShowFields(clip c)
+function ShowFields(clip c, bool ext)
 {
+	ext = Default(ext, false)
 	#c = c.Crop(0,0,360,0)
 	c1 = c
 	c.SeparateFields
@@ -196,8 +197,8 @@ function ShowFields(clip c)
 	c3 = Interleave(SelectEven.Trim(2, 0), SelectOdd).Weave
 	#c4 = StackVertical(c2.Crop(0, c.Height / 2, c.Width / 2, 0), c3.Crop(0, c.Height / 2, c.Width / 2, 0))
 	c4 = StackVertical(c2.Crop(c.Width / 4, c.Height / 4, c.Width / 2, c.Height / 2), c3.Crop(c.Width / 4, c.Height / 4, c.Width / 2, c.Height / 2))
-	#StackHorizontal(StackHorizontal(c4, c1), StackVertical(SelectEven, SelectOdd))
-	StackHorizontal(c, StackVertical(SelectEven, SelectOdd))
+	if(ext) {StackHorizontal(StackHorizontal(c4, c1), StackVertical(SelectEven, SelectOdd))}
+	else {StackHorizontal(c, StackVertical(SelectEven, SelectOdd))}
 }
 
 function BlendFields(clip c)
@@ -701,7 +702,7 @@ function FixPP(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blksize"
 		}
 		else if((FrameCount % 5) == (ivtc % 5)) # ...cp
 		{
-			Trim(0, FrameCount - 2) + BlendPP(c, e - 1, false).Trim(0, -1)
+			Trim(0, FrameCount - 2) + BlendPP(c, e, false).Trim(0, -1)
 		}
 	}
 	
@@ -827,6 +828,18 @@ function FixPPVideo(clip c, int s, int e, int ivtc, int "mv_search", int "mv_blk
 	}
 
 	# TODO check if the last frame was a p, then the interpolated frame is between the scene change	
+
+	if(ivtc >= 1 && ivtc <= 5)
+	{
+		if((FrameCount % 5) == ((ivtc + 1) % 5)) # ...pp
+		{
+			Trim(0, FrameCount - 3) + Trim(FrameCount - 2, -2).BlendFields
+		}
+		else if((FrameCount % 5) == (ivtc % 5)) # ...cp
+		{
+			Trim(0, FrameCount - 2) + Trim(FrameCount - 1, -1).BlendFields
+		}
+	}
 }
 
 	

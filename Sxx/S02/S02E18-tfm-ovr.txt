@@ -108,7 +108,7 @@
 8545,8573 Q 7
 8574,8622 cppcc
 8623,8676 cccpp
-8677,8773 c # cannot see a pattern, every frame is bad as p
+8677,8773 c
 8774,9054 cccpp
 9055,9185 cccpp
 9186,9335 cccpp
@@ -353,23 +353,17 @@
 44704,44808 cppcc
 44809,45063 pcccp
 45064,45120 cppcc
-45121,45255 c
-45121,45255 ++--- # pp already blended
-45121,45255 Q 5
+45121,45255 ppccc # fixed
 45256,45357 ccppc
 45358,45489 cccpp
 45490,45613 cccpp
 45614,45737 pcccp
 45738,45897 cppcc
 45898,45990 ppccc
-45991,46081 c
-45991,46081 ---++ # same
-45991,46081 Q 5
+45991,46081 cccpp # fixed
 46082,46148 cppcc
 46149,46331 c # no movement
-46332,46558 c
-46332,46558 ---++ # same
-46332,46558 Q 5
+46332,46558 cccpp # fixed
 46559,46631 ccppc
 46632,46793 c
 46757,46824 + # crossfade
@@ -523,9 +517,9 @@
 68699,68879 ppccc
 68880,69015 cccpp
 69016,69353 cppcc
-69354,69479 cppcc
-69413,69479 + # bg combed in other frames
-69480,69664 uppcc # cppcc + ppccc, bg still combed a little
+69354,69479 cppcc # bg fields have a kind of motion blur
+69413,69479 +
+69480,69664 uppcc # cppcc + ppccc, same problem
 69480,69664 -
 69480,69522 +
 69537,69577 +
@@ -534,8 +528,8 @@
 69951,70095 pcccp
 70096,70203 ccppc
 70204,70306 cppcc
-70307,70410 cppcc
-70307,70410 + # bg 59.94i
+70307,70410 cppcc # bg still blurred
+70307,70410 +
 70411,70559 pcccp
 70560,70670 ppccc
 70671,70778 cccpp
@@ -561,7 +555,7 @@
 71864,72460 pcccp
 72461,72714 cccpp
 72715,72919 cppcc
-72920,73078 c # ?
+72920,73078 ccppc
 73079,73230 ccppc
 73231,73310 pcccp
 73311,73758 ppccc
@@ -756,6 +750,7 @@
 43181 Q 4 # pcccp p
 44056 Q 4 # pcccp p
 44809 Q 4 # pcccp p
+45121 Q 4 # ppccc p
 45614 Q 4 # pcccp p
 45898 Q 4 # ppccc p
 47543 Q 4 # pcccp p
