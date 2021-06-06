@@ -214,7 +214,7 @@
 48123,48160 f
 48123,48160 +++-+
 48345,48349 v
-48348,48398 v
+48348,48398 v # 48398 is a dup, it will be auto-dropped because the next section is film without dups before 48400
 48477,48517 v
 48518,48683 v
 48684,48732 v

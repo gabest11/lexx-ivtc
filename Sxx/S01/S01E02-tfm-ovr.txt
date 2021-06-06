@@ -188,9 +188,10 @@
 8813,8847 ppccc
 8848,8898 cccpp
 8899,8931 cccpp
-8932,8994 ppccc
-8986,9014 + # crossfade
-8995,9524 ppccc
+8932,8986 ppccc
+8987,9014 phclu # crossfade, ppccc + cccpp
+8987,9014 -+-+-
+9015,9524 ppccc
 9525,9729 c
 
 9730,9937 ppccc # keyframe

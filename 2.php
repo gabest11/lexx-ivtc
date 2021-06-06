@@ -71,8 +71,8 @@ function getchapters($fn)
 }
 	
 
-if(preg_match('/(.+title_t[0-9]+[^-]*-)/i', $src, $m)
-|| preg_match('/(.+S[0-9]+E[0-9]+-)/i', $src, $m))
+if(preg_match('/(.*title_t[0-9]+[^-]*-)/i', $src, $m)
+|| preg_match('/(.*S[0-9]+(E|R)[0-9]+-)/i', $src, $m))
 {
 	$fn = $m[1].'timecodes.txt';
 	

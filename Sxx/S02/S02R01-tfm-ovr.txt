@@ -39,24 +39,7 @@
 2122,2398 cppcc
 2399,2637 ppccc
 2638,2758 cccpp 
-
-2759,2765 ppcccpp # scene from S01E01, but the first c is missing
-2766,2781 cppcccpp
-2782,2813 cppcccpc
-2814,2853 cppccccc # cppccc?c
-2854,2877 cppccpcc
-2878,2917 cppcppcc
-2918,2941 cpccppcc
-2942,2973 ccccppcc # c?ccppcc
-2974,2997 pcccppcc
-2998,3037 pcccppcp
-3038,3069 pcccpccp
-3070,3109 pccccccp # pccc?ccp
-3110,3133 pccpcccp
-3134,3181 pcppcccp
-3182,3197 ccppcccp
-3198,3222 ccppcccc # ccppccc?
-
+2759,3222 c # fix1
 3223,3251 c # already deinterlaced
 3252,3357 ccppc
 3358,4169 ccppc
@@ -124,7 +107,6 @@
 
 1187 Q 4 # pcccp
 2399 Q 4 # ppccc
-2759 Q 4 # ppcccpp
 6407 Q 4 # ppccc
 6449 Q 4 # pcccp
 6934 Q 4 # ppccc

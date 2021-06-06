@@ -88,7 +88,7 @@ function init()
 			
 			if(empty($m[3])) $m[3] = $m[1];
 			
-			if(empty($m[5])) continue; //$m[5] = '';
+			if(empty($m[5])) $m[5] = '';
 			
 			$scene = ['s' => (int)$m[1], 'e' => (int)$m[3], 't' => $m[5], 'row' => $row];
 			
@@ -174,7 +174,7 @@ function sanitycheck1()
 	$bogussc = [];
 
 	$tfmframes = [];
-
+	
 	foreach(explode("\n", file_get_contents("$title-tfm.txt")) as $row)
 	{
 		$row = trim($row);
@@ -776,6 +776,8 @@ function sanitycheck2()
 		
 		for($i = $scene['s'], $j = 0; $i <= $scene['e']; $i++)
 		{
+			if(!isset($ovrframes[$i])) continue;
+			
 			$f = $ovrframes[$i];
 	
 			if(isset($f['rate']) && $f['rate'] == 'v' && !isset($tdecframes[$i]))

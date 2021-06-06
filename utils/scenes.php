@@ -6,7 +6,8 @@
 
 $bogusscenes = [];
 
-if(preg_match('/^(title_t[0-9]+[^-]*-)/i', $argv[1], $m))
+if(preg_match('/^(title_t[0-9]+[^-]*-)/i', $argv[1], $m)
+|| preg_match('/^(S[0-9]+(E|R)[0-9]+-)/i', $argv[1], $m))
 {
 	$fn = $m[1].'bogusscenes.txt';
 	

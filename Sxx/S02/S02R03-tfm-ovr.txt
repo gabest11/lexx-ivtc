@@ -127,14 +127,10 @@
 12778,12791 pcccp
 12792,12861 cppcc
 12862,12878 ppccc # TODO
-12879,12888 cppcc
-12889,12903 cpccc
-12889,12903 +---- # missing field pair
+12879,12903 c # fix15
 12904,12927 ccppc # TODO
 12904 + # single field
-12928,12953 pcpccccccpppppcpccccccccpp
-12928,12953 ------+-+------------+-+-- # missing field pair
-12928 + # starts with p
+12928,12953 c # fix14
 12954,12970 cccpp # TODO
 12954 + # single field
 12971,12989 cppcc # TODO

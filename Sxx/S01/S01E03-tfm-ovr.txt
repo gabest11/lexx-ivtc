@@ -185,9 +185,11 @@
 8797,8831 ppccc
 8832,8882 cccpp
 8883,8915 cccpp
-8916,8978 ppccc
-8970,8998 + # crossfade
-8979,9508 ppccc
+8916,8970 ppccc
+8971,8998 phclu # crossfade, ppccc + cccpp
+8971,8998 -+-+-
+8999 c # p replaced with c (double dup between 8995,8999)
+9000,9508 cccpp # 9508 duplicated from 9507 (static image)
 9509,9714 c
 
 9715,9971 ccppc # keyframe

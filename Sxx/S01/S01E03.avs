@@ -29,6 +29,19 @@ if(Exist(allipath))
 	Trim(0, c0.FrameCount - 1)
 }
 
+# fix double dups
+
+# end of the intro 
+# 8995,9004 uphcppcccp
+# replace pp with uphccccp by extracting the [2,1] frame from pp
+# pad it with a static image at the end to restore the frame count
+
+Trim(0, 8998) + \
+Trim(8999, -2).SeparateFields.SelectEvery(4, 2,1).Weave.AssumeFPS(last) + \
+Trim(9001, 9508) + \
+Trim(9508, -1) + \
+Trim(9509, 0)
+
 # head rolling
 
 # 131288  ccpc

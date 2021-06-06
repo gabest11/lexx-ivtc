@@ -1,0 +1,260 @@
+# Rated 02
+
+0,502 cccpp
+0,502 -
+503,504 cp
+505,540 cppcc
+537 + # ?
+537 Q 2
+541,553 luphc # ppccc + ccppc
+541,553 +--+-
+554,565 ccupp # ccppc + cccpp
+564 + # ?
+566,576 ccppc # cppcc + ccppc + 29.97, should be cuppc, but the deinterlacer works nicer without u, which is dropped anyway
+566,576 --++-
+577 l # ends on u
+577 +
+577 Q 7
+578,587 cppcc
+578,587 -++--
+588,596 pcccp
+588,596 +---+
+597,604 ccppc
+597,604 --++-
+605,612 ccppc
+605,612 --++-
+613,620 ppccc
+613,620 ++---
+621,628 ppccc
+621,628 ++---
+629,636 ppccc
+629,636 ++---
+637,644 ppccc
+637,644 ++---
+645,656 c
+657,661 c
+662,667 c
+668,673 c
+674,682 pcccp
+674,682 +---+
+683,688 pcccp
+683,688 +---+
+689,697 c
+698,724 ccppc
+698,724 --++-
+725,791 pcccp
+725,791 +---+
+792,904 c
+825,829 + # RATED
+825,829 Q 7
+882,904 + # fade-out
+
+905,1092 c # keyframe
+905,1092 + # fade-in + blended fields
+905,1092 Q 5 # cgi
+1093,1352 c
+1353,1547 c # 5th is a dup
+1548,1625 pcccp
+1626,1695 c
+1696,1925 c
+1926,2055 c
+2056,2168 c
+2169,2317 c
+2318,2437 c # single field
+2318,2437 +
+2318,2437 Q 7
+2438,2497 c
+2498,2595 ppccc # +29.97
+2498,2595 ++---
+2596,2630 ccppc # TODO
+2631,2654 ppccc
+2655,2694 ppccc # TODO
+2695,2803 pcccp
+2804,2922 ccppc # TODO
+2923,2974 ccppc # TODO
+2975,3008 ccppc # TODO
+3009,3064 cppcc # TODO
+3065,3301 c
+3302,3698 ccppc # TODO
+3699,3908 c
+3909,3981 c
+3982,4125 c
+4126,4337 c
+4338,4381 c
+4382,4486 c
+4487,4633 c
+
+4634,4936 ccppc # keyframe
+4937,5138 ccppc # TODO
+5139,5227 c
+5139,5227 +
+5139,5227 Q 7
+5228,5309 pcccp
+5310,5394 c
+5310,5394 +
+5310,5394 Q 7
+5395,5470 cccpp
+5471,5538 cccpp
+5539,5605 cccpp
+5606,5762 cppcc
+5763,5842 cccpp
+5843,5892 cccpp
+5893,6171 cccpp
+6172,6262 ccppc
+6263,6327 ccppc
+6328,6476 pcccp
+6477,6651 ppccc
+
+6652,6839 cccpp # TODO
+
+6840,6915 c
+6840,6915 -
+6916,7375 ccppc
+7376,7678 c
+7376,7400 +
+7444,7457 +
+7479,7541 +
+7554,7678 +
+7376,7678 Q 5
+7679,8133 pcccp
+8134,8210 c
+8134,8210 +
+8134,8210 Q 5
+8211,8359 ccppc
+8360,8433 c
+8360,8433 +
+8360,8433 Q 5
+8434,8633 cppcc
+8634,8860 c
+8634,8860 +
+8634,8860 Q 5
+8861,9012 ccppc
+9013,9096 c
+9013,9096 +
+9013,9096 Q 5
+9097,9262 cccpp
+9263,9452 c
+9263,9452 +
+9263,9452 Q 5
+9453,9530 pcccp
+9531,9675 c
+9531,9675 +
+9531,9675 Q 5
+9676,9737 cccpp
+
+9738,9788 cppcc # TODO
+9789,9885 cccpp # TODO
+9886,9968 ccppc # TODO
+9969,10060 c
+
+10061,10260 ccppc # keyframe
+10261,10356 pcccp
+10357,10494 cppcc # TODO
+10495,10615 ppccc # TODO
+10616,10691 cccpp # TODO
+10692,10780 ccppc # TODO
+10781,10822 pcccp # TODO
+10823,10870 cccpp
+10871,10885 cppcc
+10886,10925 cppcc # TODO
+10926,10995 c
+10996,11163 cccpp # TODO
+11164,11248 ppccc # TODO
+11249,11416 ppccc # TODO
+11417,11529 ccppc # TODO
+11530,11593 ppccc
+11594,11755 cccpp # TODO
+
+11756,12007 ppccc # keyframe
+12008,12339 pcccp # TODO
+12340,12420 cccpp # TODO
+12421,12510 ppccc # TODO
+12511,12591 pcccp # TODO
+12592,12664 ppccc # TODO
+12665,12778 pcccp # TODO
+12779,12956 ccppc # TODO
+12957,13049 pcccp
+13050,13113 cppcc # TODO
+13114,13176 cppcc # TODO
+13177,13268 ccppc
+13269,13434 ccppc # TODO
+13435,13594 cppcc
+13595,13675 ccppc # TODO
+13676,13818 cppcc # TODO
+13819,13890 ppccc # TODO
+13891,14057 cppcc
+14058,14199 ppccc # TODO
+14200,14467 cccpp # TODO
+14314 + # clock
+14314 Q 5
+14468,14554 ccppc # TODO
+14555,14688 cccpp # TODO
+14689,14916 ccppc # TODO
+14917,15063 ccppc # TODO
+15064,15226 cccpp # TODO
+15227,15309 cppcc # TODO
+15310,15416 ppccc # TODO
+15417,15520 cppcc # TODO
+15521,15699 ppccc # TODO
+15700,15756 ppccc # TODO
+15757,16117 ccppc # TODO
+
+16118,16364 ccppc # keyframe
+16118,16364 - # MIC high
+16365,16579 cppcc # TODO
+16580,16634 c
+16635,16723 ppccc # TODO
+16724,16763 c
+16764,16789 ccppc # TODO
+16790,16823 c
+16824,16985 ppccc
+16845 + # clock
+16845 Q 5
+16855 + # clock
+16855 Q 5
+16986,17136 ccppc # TODO
+17137,17186 pcccp # TODO
+17187,17329 pcccp # TODO
+17330,17391 c
+17330,17349 +
+17330,17349 Q 5
+17392,17432 ccppc # TODO
+17433,17480 c
+17433,17480 -
+17481,17613 ccppc # TODO
+
+17614,18029 c # keyframe
+18005,18029 + # fade-out
+18005,18029 Q 5 # cgi
+
+1548 Q 4 # pcccp p
+2631 Q 4 # ppccc p
+2655 Q 4 # ppccc p
+2695 Q 4 # pcccp p
+5228 Q 4 # pcccp p
+6328 Q 4 # pcccp p
+6477 Q 4 # ppccc p
+7679 Q 4 # pcccp p
+9453 Q 4 # pcccp p
+10261 Q 4 # pcccp p
+10495 Q 4 # ppccc p
+10781 Q 4 # pcccp p
+11164 Q 4 # ppccc p
+11249 Q 4 # ppccc p
+11530 Q 4 # ppccc p
+11756 Q 4 # ppccc p
+12008 Q 4 # pcccp p
+12421 Q 4 # ppccc p
+12511 Q 4 # pcccp p
+12592 Q 4 # ppccc p
+12665 Q 4 # pcccp p
+12957 Q 4 # pcccp p
+13819 Q 4 # ppccc p
+14058 Q 4 # ppccc p
+15310 Q 4 # ppccc p
+15521 Q 4 # ppccc p
+15700 Q 4 # ppccc p
+16635 Q 4 # ppccc p
+16824 Q 4 # ppccc p
+17137 Q 4 # pcccp p
+17187 Q 4 # pcccp p
