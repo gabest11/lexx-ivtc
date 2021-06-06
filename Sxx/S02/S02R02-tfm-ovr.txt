@@ -60,7 +60,7 @@
 1926,2055 c
 2056,2168 c
 2169,2317 c
-2318,2437 c # single field
+2318,2437 c # single field, ppccccppcccccc repeating
 2318,2437 +
 2318,2437 Q 7
 2438,2497 c

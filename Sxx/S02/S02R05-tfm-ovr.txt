@@ -1,0 +1,253 @@
+# Rated 05
+
+0,498 pcccp
+1,498 -
+499,500 cp
+501,536 cppcc
+533 + # ?
+533 Q 2
+537,549 luphc # ppccc + ccppc
+537,549 +--+-
+550,561 ccupp # ccppc + cccpp
+560 + # ?
+562,572 ccppc # cppcc + ccppc + 29.97, should be cuppc, but the deinterlacer works nicer without u, which is dropped anyway
+562,572 --++-
+573 l # ends on u
+573 +
+573 Q 7
+574,583 cppcc
+574,583 -++--
+584,592 pcccp
+584,592 +---+
+593,600 ccppc
+593,600 --++-
+601,608 ccppc
+601,608 --++-
+609,616 ppccc
+609,616 ++---
+617,624 ppccc
+617,624 ++---
+625,632 ppccc
+625,632 ++---
+633,640 ppccc
+633,640 ++---
+641,652 c
+653,657 c
+658,663 c
+664,669 c
+670,678 pcccp
+670,678 +---+
+679,684 pcccp
+679,684 +---+
+685,693 c
+694,720 ccppc
+694,720 --++-
+721,787 pcccp
+721,787 +---+
+788,899 c
+821,825 + # RATED
+821,825 Q 7
+878,899 + # fade-out
+
+900,1629 cccpp # keyframe
+900,909 + # fade-in
+900,909 Q 5
+1630,2177 ccppc # TODO
+2178,2342 cccpp # pattern change
+2343,2532 cccpp # TODO
+2533,2689 pcccp # TODO
+2690,2837 cppcc # TODO
+2838,5309 cccpp # TODO
+4213 - # MIC high
+5310,5413 cppcc # TODO
+5414,5866 uppcc
+5867,5902 cppcc # TODO
+5903,5911 cccpp # TODO
+5912,5935 ccppc # TODO
+5936,6054 ppccc # TODO
+6055,6132 cppcc # TODO
+6133,6253 ccppc # TODO
+6254,6336 cppcc # TODO
+6337,6377 ppccc # TODO
+6378,6427 ccppc # TODO
+6428,6472 pcccp # TODO
+6473,6556 cppcc # TODO
+6557,6617 ppccc # TODO
+6618,6686 ppccc # TODO
+6687,6739 pcccp
+6740,6801 ccppc # TODO
+6802,6873 ppccc
+6874,6926 cccpp
+6927,7007 pcccp
+7008,7128 ppccc
+7129,7218 cppcc # TODO
+7180,7218 + # fade-out
+7219,7337 c # single field
+7219,7337 +
+7219,7337 Q 7
+7338,7508 pcccp # TODO
+7509,7817 pcccp # TODO
+7818,8154 ccppc # TODO
+8155,8490 cccpp # TODO
+8491,8645 c # ?
+8646,8934 ppccc # TODO
+8935,9073 ccppc # TODO
+9074,9165 ppccc # TODO
+9166,9429 cppcc
+9430,9500 pcccp # TODO
+9501,9566 ccppc # TODO
+9567,9621 cccpp # TODO
+9622,9707 # ?
+9645,9707 + # shaky cam
+9708,9712 c # crossfade
+9708,9712 +
+9713,9718 ccppc
+9713,9718 + # shaky cam
+9719,9726 c # crossfade
+9719,9726 +
+9727,9751 # ?
+9727,9751 + # shaky cam
+9752,9756 c # crossfade
+9752,9756 +
+9757,9785 # ?
+9757,9785 + # shaky cam
+9786,9790 c # crossfade
+9786,9790 +
+9791,9836 # ?
+9791,9836 + # shaky cam
+9837,9891 ccppc
+9892,9996 ppccc
+9997,10226 cppcc
+10227,10295 cppcc
+
+10296,10374 c # fg cccpp, bg 29.97
+10296,10374 ---++
+10375,10528 ccppc # fix1
+10529,10595 c # fg ppccc, bg ccppc, some flying rocks 29.97
+10529,10595 +
+10596,10655 ppccc # 59.94i
+10596,10655 +
+10596,10655 Q 5
+10596 Q 3
+10656,10814 pcccp
+10657,10814 - # MIC high
+10815,10953 cccpp # 59.94i
+10815,10953 +
+10815,10953 Q 5
+10954,11045 c
+10954,11045 +
+11046,11111 pcccp # 59.94i
+11046,11111 +
+11046,11111 Q 5
+11046 Q 3
+11112,11184 ppccc # 59.94i
+11112,11184 +
+11112,11184 Q 5
+11112 Q 3
+
+11185,11333 pcccp # TODO
+11334,11538 ppccc # TODO
+11539,11719 cccpp # TODO
+11539,11719 - # MIC high
+11720,11830 ccppc # TODO
+11831,12045 pcccp # TODO
+12046,12103 pcccp # TODO
+12104,12326 ccppc # TODO
+12104,12326 - # MIC high
+12327,12504 pcccp # TODO
+12328,12504 - # MIC high
+12505,12509 c # crossfade
+12505,12509 +
+12510,12668 c
+12510,12668 + # shaky cam
+12669,12670 c # crossfade
+12669,12670 +
+12671,12692 c
+12671,12692 + # shaky cam
+12693,12695 c # crossfade
+12693,12695 +
+12696,12727 c
+12696,12727 + # shaky cam
+12728,12782 ccppc # TODO
+12783,12786 c # crossfade
+12783,12786 +
+12787,12837 c
+12787,12837 + # shaky cam
+12838 c # crossfade
+12838 +
+12839,12883 c
+12839,12883 + # shaky cam
+12884,13059 cccpp # TODO
+13060,13091 cccpp
+13092,13157 pcccp
+13158,13291 ppccc # TODO
+13292,13450 cppcc # TODO
+13451,13489 c # ?
+13451,13489 +
+13490,13550 cccpp
+13551,13631 ppccc
+13632,13686 cppcc # TODO
+13687,13770 ccppc # TODO
+13771,13852 ccppc # TODO
+13853,14010 pcccp # TODO
+14011,14152 cccpp # TODO
+14153,14287 cppcc
+14288,14591 pcccp # TODO
+14592,14676 cccpp # TODO
+14677,14899 ppccu # u to avoid encoding error at 14826, first field is damaged, repeated in the next p
+14900,14967 ccppc
+14968,15143 cppcc # TODO
+15144,15290 cccpp # TODO
+15291,15402 ccppc # TODO
+15403,15537 ccppc # TODO
+15538,15806 cppcc # TODO
+15807,15874 pcccp # TODO
+15875,15982 ppccc # TODO
+15983,16115 c
+16116,16158 c
+16159,16247 ccppc
+16248,16262 c # ?
+16263,16302 cppcc # crossfade, c + cppcc
+16263,16302 +
+16303,16483 cppcc
+16484,16720 c
+16721,16770 c
+16771,16825 c
+16826,16884 c
+
+16885,17579 c
+17129,17156 + # crossfade
+17129,17156 Q 5
+17550,17579 + # fade-out
+17550,17579 Q 5
+
+2533 Q 4 # pcccp p
+5936 Q 4 # ppccc p
+6337 Q 4 # ppccc p
+6428 Q 4 # pcccp p
+6557 Q 4 # ppccc p
+6618 Q 4 # ppccc p
+6687 Q 4 # pcccp p
+6802 Q 4 # ppccc p
+6927 Q 4 # pcccp p
+7008 Q 4 # ppccc p
+7338 Q 4 # pcccp p
+7509 Q 4 # pcccp p
+8646 Q 4 # ppccc p
+9074 Q 4 # ppccc p
+9430 Q 4 # pcccp p
+9892 Q 4 # ppccc p
+10656 Q 4 # pcccp p
+11185 Q 4 # pcccp p
+11334 Q 4 # ppccc p
+11831 Q 4 # pcccp p
+12046 Q 4 # pcccp p
+12327 Q 4 # pcccp p
+13092 Q 4 # pcccp p
+13158 Q 4 # ppccc p
+13551 Q 4 # ppccc p
+13853 Q 4 # pcccp p
+14288 Q 4 # pcccp p
+14677 Q 4 # ppccc p
+15807 Q 4 # pcccp p
+15875 Q 4 # ppccc p
