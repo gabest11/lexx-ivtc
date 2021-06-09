@@ -660,7 +660,7 @@
 63113,63122 + # crossfade
 63118,63196 c # still image
 63123,63196 - # MIC high
-63197,63253 c # ? can't find a pattern
+63197,63253 cccpp
 63254,63305 c # still image
 63306,63350 ccppc
 63351,63551 pcccp

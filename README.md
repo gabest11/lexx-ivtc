@@ -14,9 +14,12 @@ Attempting the impossible, IVTC overrides for Lexx NTSC DVDs
 
 Planing to do newer releases if I can get them and are better quality.
 
+Alliance S01 has about 10% more bitrate, however the picture is shifted to the right by a ~0.3 pixels. You can see this in the intro when there are point like stars in the background. Koch has nice single pixel stars, never covering two. S03 also has more data, only episodes 01-03 have the brightness increased and clipped. Another notable difference, the field order is swapped, this makes combining clips from different releases difficult, as there is no lossless way to convert the chroma plane between the two in the YV12 color space.
+
 Still work in progress: 
 * parity changing scenes, very time consuming, but there are not a lot
 * interpolating new pp frames with MVTools where they were badly done decades ago, tests look promising
+* S01, S02 done
 
 ## Encoding
 

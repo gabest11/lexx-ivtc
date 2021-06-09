@@ -190,7 +190,7 @@
 19890,20008 ccppc
 19890,20008 - # MIC high
 20009,20174 cccpp
-20175,20299 pcppcpcccc # fg pcppcpcccc, monitor ccppc, but not 1:1, should be fine, it's noisy
+20175,20299 c # fg pcppcpcccc, monitor ccppc, but not 1:1, FixPP does not work # fix1
 20300,20561 pcccp
 20562,20808 ppccc
 20809,20866 ccppc
@@ -412,39 +412,34 @@
 47840,48096 cppcc
 48097,48249 pcccp
 48098,48249 - # MIC high
-48250,48373 c # ccppc, already deinterlaced
+48250,48373 ccppc # fix
 48374,48550 cccpp
 48551,48742 cppcc
 48551,48742 - # MIC high
 48743,48938 cppcc
-48939,49036 ppccc
+48939,49036 ppccc # pp bad?
 49037,49102 ccppc
 49103,49442 pcccp
 49443,49542 ccppc
-49543,49692 c # ccppc, already deinterlaced
-49543,49692 --++-
-49543,49692 Q 5
-49693,49841 pcccp
-49842,49924 
-49925,49982 c # same
-49925,49982 ---++
-49925,49982 Q 5
+49543,49692 c # fix
+49543,49692 -
+49693,49841 pcccp # pp bad?
+49842,49924 ppccc
+49925,49982 c # fix
+49925,49982 -
 49983,50058 cppcc
 50059,50158 ccppc # fg ?, bg ccppc
 50087,50092 + # fg combed, could be 59.94i, deinterlace the moving part
 50159,50420 ccppc
-50421,50754 c # same
-50421,50754 +---+
-50421,50754 Q 5
+50421,50754 c # fix
+50421,50754 -
 50755,50813 pcccp
 50814,50968 cppcc
-50969,51101 c # ppccc, already deinterlaced
+50969,51101 ppccc # fix
 51102,51206 pcccp
 51207,51246 ppccc
 51247,51453 cccpp
-51454,51741 c
-#51454,51741 --++- # same but does not help this time
-#51454,51741 Q 5
+51454,51741 c # fix
 51742,52528 cppcc
 52529,52705 ppccc
 52706,52758 cppcc
@@ -518,7 +513,7 @@
 60009,60075 cppcc
 60009,60075 - # MIC high (scanlines on the monitor)
 60076,60133 cppcc
-60134,60182 # ppccc or pcccp? cannot see
+60134,60182 ppccc
 60183,60240 cccpp
 60183,60240 - # MIC high
 60241,60279 pcccp

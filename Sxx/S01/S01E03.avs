@@ -3,22 +3,25 @@ Import("../../common.avsi")
 # Alliance vs Koch
 #
 # +33, and the end credits are a bit longer with fade-out
+#
+# original Koch (t14) has only 169575 frames, there is no end to the last title
 
-# Koch en  0?
-# Koch ru  0
-# Koch fr  0?
-# Alliance       33
+# Koch en      0
+# Koch ru      0
+# Koch fr  -15
+# Alliance           33
 
-LoadEpisodeWithAlt("S01E03", 169590, \
-	["..\..\S01(Koch)\D03\title_t00.d2v"])
-
-# TODO: add V03\*
+LoadEpisodeWithAlt("S01E03", 169575, \
+	["..\..\S01(Koch)\V03\title_t14.d2v"], \
+	["..\..\S01(Koch)\D03\title_t00.d2v"]) 
+	
+	# , ["..\..\S01(Koch)\V03\title_t06.d2v", -15]# French (same bitrate, image is shifted to the left by a sub-pixel, slightly more blue)
 
 Letterbox(0,0,2,2)
 
 allipath = "..\..\S01(Alliance)\D03\title_t00.d2v"
 
-if(Exist(allipath))
+if(false)#if(Exist(allipath))
 {
 	c0 = ConvertToBFF()
 

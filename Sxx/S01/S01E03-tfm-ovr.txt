@@ -2,6 +2,7 @@
 
 0,956 ppccc
 #0,956 ---++ # text runs at 29.97 and should be deinterlaced on p frames, TODO: pick only the most obvious cases
+661 + # ? text
 957,1859 ppccc
 1860,2273 ppccc
 2274,2311 c
@@ -36,6 +37,7 @@
 3747,3801 cccpp
 3802,3893 cccpp
 3894,3969 ccppc
+3894,3969 - # MIC high
 3970,4010 cppcc
 4011,4079 ppccc
 4080,4104 pcccp
@@ -158,6 +160,7 @@
 8110,8136 ccppc
 8137,8164 pcccp
 8165,8201 cccpp
+8179 - # MIC high
 8202,8259 ccppc
 8260,8285 c
 8286,8313 ccppc
@@ -186,6 +189,7 @@
 8832,8882 cccpp
 8883,8915 cccpp
 8916,8970 ppccc
+8970 - # MIC high
 8971,8998 phclu # crossfade, ppccc + cccpp
 8971,8998 -+-+-
 8999 c # p replaced with c (double dup between 8995,8999)
@@ -283,6 +287,7 @@
 17120,17152 -++-- # starts with c + cppcc crossfade
 17464,17694 cccpp
 17695,17752 cccpp
+17734 - # MIC high
 17753,17838 ppccc
 17839,18238 pcccp
 18239,18550 ppccc
@@ -700,6 +705,7 @@
 65660,65725 cccpp
 65726,65791 pcccp
 65792,66144 cppcc
+65899 - # MIC high
 66145,66422 cppcc
 66423,66493 pcccp
 66494,66640 cppcc
@@ -743,8 +749,10 @@
 71515,71547 ccppc
 71548,71712 pcccp
 71713,71902 cccpp
+71713,71902 - # MIC high
 71903,71949 cppcc
 71950,72083 cppcc
+71950,72083 - # MIC high
 72084,72262 cppcc
 72263,72411 cppcc
 72321 - # MIC = 103
@@ -758,6 +766,7 @@
 72887,72928 pcccp
 72929,73009 ccppc
 73010,73201 ppccc
+73047 - # MIC high
 73114,73115 - # MIC = 84 85
 73202,73263 pcccp
 73264,73315 ppccc
@@ -774,6 +783,7 @@
 74600,74653 pcccp
 74654,74707 ppccc
 74708,74834 cccpp
+74708,74834 - # MIC high
 74835,74918 cppcc
 74905 - # MIC = 92
 74906 - # MIC = 91
@@ -891,6 +901,7 @@
 ## the jump between 75825-75826 is a bit large
 
 75797,75852 c # fix24
+75804 - # MIC high
 75847 - # MIC high
 
 75853,76062 pcccp
@@ -905,12 +916,14 @@
 76787,76884 cccpp
 76885,76937 cppcc
 76938,77042 ppccc
+76954 - # MIC high
 77043,77111 pcccp
 77112,77152 pcccp
 77153,77211 pcccp
 77181 - # MIC = 86
 77212,77312 ppccc
 77313,77367 cccpp
+77320 - # MIC high
 77368,77424 cppcc
 77425,77687 cppcc
 77425,77687 i 10 # flame on the wall is combed, it should not deinterlace too many, adjecent clean frames will help out
@@ -952,6 +965,7 @@
 82168,82256 pcccp
 82257,82309 ppccc
 82310,82503 ppccc
+82354 - # MIC high
 82504,82578 ccppc
 82579,82678 ccppc
 82679,82738 pcccp
@@ -1054,6 +1068,7 @@
 95155,95199 cccpp
 95200,95290 ccppc
 95291,95491 pcccp
+95296 - # MIC high
 95492,95586 ppccc
 95587,95789 cccpp
 95790,95945 ccppc
@@ -1124,6 +1139,7 @@
 104416,104481 cccpp
 104482,104584 ccppc
 104585,104645 cccpp
+104599 - # MIC high
 104646,104994 ccppc
 
 #104995,105013 ccpcccpccppccppccpp
@@ -1293,6 +1309,7 @@
 124869,124966 ppccc
 124967,125025 ppccc
 125026,125144 ccppc
+125052 - # MIC high
 125145,125211 cccpp
 125212,125363 cppcc
 125364,125452 ppccc
@@ -1441,6 +1458,8 @@
 139677,139776 cccpp
 139777,139833 cbbcc
 139834,140030 ccppc
+140014,140015 + # encoding error, one of the fields
+140014,140015 f 0
 140031,140125 c # does not look interlaced
 140126,140489 cccpp
 140490,140517 ppccc
@@ -1500,6 +1519,7 @@
 145477,145498 Q 7
 145499,145559 pcccp
 145560,145656 ppccc
+145635 - # MIC high
 #145657,145698 cpcppccpppcccppcpcppccpppcppppcppppcppppcp
 145657,145698 ccppc # fix2
 145657,145698 -
@@ -1574,6 +1594,7 @@
 150440,150512 cppcc
 150513,150603 cppcc
 150604,150674 ppccc
+150605,150674 - # MIC high
 150675,150803 ppccc
 150804,150863 ppccc
 150864,150920 cccpp
@@ -1612,6 +1633,7 @@
 153649,153698 c
 153649,153698 +
 153699,153989 ppccc
+153700,153989 - MIC high (floor)
 153990,154051 ppccc
 154052,154108 cccpp
 154109,154127 ppccc
@@ -1700,12 +1722,13 @@
 160259,160418 ccppc
 160419,160828 ccppc
 160829,160899 ccppc
+160829,160899 - # MIC high
 160900,161007 ccppc
 161008,161079 cppcc
 161080,161138 ccppc
 161139,161185 ccppc
 161186,161232 ccppc
-161189 - # MIC = 82
+161186,161232 - # MIC high
 161233,161294 ccppc
 161295,161414 ccppc
 161415,161525 ppccc
@@ -1746,7 +1769,7 @@
 164789,165111 ccppc
 165076,165111 + # fade-out
 
-165112,169589 c # keyframe
+165112,169574 c # keyframe
 165112,169456 +
 165112,169456 Q 7
 

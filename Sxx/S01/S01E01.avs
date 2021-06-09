@@ -21,7 +21,7 @@ Letterbox(0,0,2,2)
 
 allipath = "..\..\S01(Alliance)\D01\title_t00.d2v"
 
-if(Exist(allipath))
+if(false)#if(Exist(allipath))
 {
 	c0 = ConvertToBFF()
 
@@ -32,6 +32,10 @@ if(Exist(allipath))
 	Trim(108044, 0)
 
 	Trim(0, c0.FrameCount - 1)
+
+#	c1 = Spline64Resize(Width, Height, src_left = 0.3)
+#	Merge(c1, c0)
+#	MergeChroma(c1)
 }
 
 # transport ships flying in

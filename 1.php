@@ -943,14 +943,14 @@ EOT;
 
 $avs_field0 = <<<EOT
 Import("$title.avs")
-ConvertToYV24
+ConvertToYV24(interlaced=true)
 SeparateRows(2)
 SelectOdd
 EOT;
 
 $avs_field1 = <<<EOT
 Import("$title.avs")
-ConvertToYV24
+ConvertToYV24(interlaced=true)
 SeparateRows(2)
 SelectEven
 EOT;
@@ -1071,12 +1071,20 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 
 	if($has_field[0])
 	{
-		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_2.00x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_2.25x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+	}
+	else
+	{
+		fprintf($fp, "i0 = BlankClip(i2, %d)\n", $title, $useframe);
 	}
 
 	if($has_field[1])
 	{
-		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.00x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.25x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
+	}
+	else
+	{
+		fprintf($fp, "i1 = BlankClip(i2, %d)\n", $title, $useframe);
 	}
 	
 	// TODO: rewrite Trims to ConditionalSelect
@@ -1117,6 +1125,9 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	
 	fputs($fp, implode('+', $cl)."\n");
 
+	fputs($fp, "ConvertBits(16)\n");
+	fputs($fp, "ConvertToYUV444(matrix=\"rec709\")\n");
+			
 	fclose($fp);
 	
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));

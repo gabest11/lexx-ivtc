@@ -35,7 +35,7 @@ Letterbox(0,0,2,2)
 allipath1 = "..\..\S01(Alliance)\D01\title_t00.d2v"
 allipath2 = "..\..\S01(Alliance)\D02\title_t00.d2v"
 
-if(Exist(allipath1) && Exist(allipath2))
+if(false)#if(Exist(allipath1) && Exist(allipath2))
 {
 	c0 = ConvertToBFF
 
@@ -55,6 +55,24 @@ if(Exist(allipath1) && Exist(allipath2))
 	Trim(c2, 108048, 0)
 
 	Trim(0, c0.FrameCount - 1)
+}
+else
+{
+	c1 = LoadEpisodeWithAlt("S01E01", 167300, \
+		["..\..\S01(Koch)\D01\title_t00.d2v", 0], \
+		["..\..\S01(Koch)\D01\title_t00p1.d2v", -2])
+
+	# TODO: add V01\*
+	
+	c1 = c1.Letterbox(0,0,2,2)
+	
+	Trim(0, 14316) + \
+	Trim(c1, 110970, 111192) + \
+	Trim(14540, 45032) + \
+	Trim(c1, 136090, 136178) + \
+	Trim(45122, 55291) + \
+	Trim(c1, 136090, 136178) + \
+	Trim(55381, 0)
 }
 
 function FixShower(clip c)
@@ -174,7 +192,7 @@ function _FixTowers(clip c, bool blend)
 	c1 = c1.Trim(0,8).SelectEvery(10, 0,1, 2,3, 6,5, 8,8).Weave.AssumeFPS(c)
 	c2 = c2.Trim(10,0).SelectEvery(10, 0,1, 2,3, 6,5, 8,9).Weave.AssumeFPS(c)
 	
-	last = c1.Trim(0,-1).nnedi3(field=0) + c1.Trim(1,-2) + c1.Trim(3,-1).nnedi3(field=1) + c2
+	last = c1.Trim(0,-1).nnedi3 + c1.Trim(1,-2) + c1.Trim(3,-1).nnedi3 + c2
 
 	if(blend)
 	{
@@ -182,12 +200,12 @@ function _FixTowers(clip c, bool blend)
 	}
 	else
 	{
-		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0.0)")
+		ScriptClip("FixFieldOffset(GetParity(current_frame), offset = 0)")
 	}
 	
 	if(c.GetParity) {AssumeTFF}
 	else {AssumeBFF}
-	
+
 	ConvertToYV12(interlaced = true)
 
 	#FixSlowMoI(0, FrameCount - 1, 38000, pd = 0)
@@ -199,7 +217,7 @@ function FixTowers(clip c)
 	last = c
 
 	c1 = _FixTowers(true) # Trim(107669, 107869)
-	c1 = c1.Crop(192, 0, -136, -100).Tweak(bright = -2) # brightness just below the other clip, we only need to transfer the blue light rings
+	c1 = c1.Crop(192, 0, -136, -100).Tweak(bright = -5) # brightness just below the other clip, we only need to transfer the blue light rings
 	c2 = Trim(110738, 110813).Reverse()
 	c3 = c2 + BlankClip(c2, c1.FrameCount - c2.FrameCount)
 	c3 = c3.FreezeFrame(c2.FrameCount, c1.FrameCount - 1, c2.FrameCount - 1)

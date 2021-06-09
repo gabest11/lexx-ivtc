@@ -18,14 +18,15 @@ Import("../../common.avsi")
 
 LoadEpisodeWithAlt("S01E04", 167095, \
 	["..\..\S01(Koch)\V04\title_t15.d2v"], \
-	["..\..\S01(Koch)\D04\title_t00.d2v"], \
-	["..\..\S01(Koch)\V04\title_t06.d2v"]) # French (lower bitrate, also seems darker in a few places)
+	["..\..\S01(Koch)\D04\title_t00.d2v"])
+	
+	# , ["..\..\S01(Koch)\V04\title_t06.d2v"] # French (lower bitrate, few scenes are different, censored?)
 
 Letterbox(0,0,2,2)
 
 allipath = "..\..\S01(Alliance)\D04\title_t00.d2v"
 
-if(Exist(allipath))
+if(false)#if(Exist(allipath))
 {
 	c0 = ConvertToBFF()
 

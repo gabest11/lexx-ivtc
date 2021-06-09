@@ -105,6 +105,7 @@ function Fix240p2E(clip c)
 	Weave
 	#SeparateRows(2).SelectEven
 	#PointResize(c.Width, c.Height)
+	MergeChroma(c)
 }
 
 function Fix240p2O(clip c)
@@ -115,16 +116,17 @@ function Fix240p2O(clip c)
 	Weave
 	#SeparateRows(2).SelectOdd
 	#PointResize(c.Width, c.Height)
+	MergeChroma(c)
 }
 
 function Fix240p(clip c, string title)
 {
 	last = c
-	ConditionalFilter(GetParity() ? Fix240p1E : Fix240p1O, last, "_fix", "==", "1")
-	ConditionalFilter(GetParity() ? Fix240p1O : Fix240p1E, last, "_fix", "==", "2")
-	# not sure about these yet, needs parity check and make sure even selects first row by assume*
-	#ConditionalFilter(Fix240p2E, last, "_fix", "==", "3")
-	#ConditionalFilter(Fix240p2O, last, "_fix", "==", "4")
+	ConditionalSelect(last, "_fix - 1", \
+		GetParity() ? Fix240p1E : Fix240p1O, \
+		GetParity() ? Fix240p1O : Fix240p1E, \
+		GetParity() ? Fix240p2E : Fix240p2O, \
+		GetParity() ? Fix240p2O : Fix240p2E)
 	ConditionalReader(title + "-var-fix.txt", "_fix")
 }
 
@@ -336,6 +338,7 @@ function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "iv
 		if(ivtc == 4) {SelectEvery(10, 0,1, 2,3, 4,5, 8,7)} # cccpp
 		#if(ivtc == 5) {assert(false)} #{SelectEvery(10, 0,-1, 2,3, 4,5, 6,7)} # pcccp
 		if(ivtc == 5) {Trim(0, -2).AssumeFPS(c) + Trim(2, 0).SelectEvery(10, 0,1, 2,3, 4,5, 8,7).AssumeFPS(c)} # pcccp
+		# TODO: deinterlace first p when ivtc == 5?
 		
 		Weave
 	}
@@ -875,7 +878,7 @@ function VideoToFilm(clip c, int pd) # aka pulldown
 	AssumeFPS(c)
 }
 
-function FilmToFilm(clip c, int isrc, idst)
+function FilmToFilm(clip c, int isrc, int idst)
 {
 	last = c
 	

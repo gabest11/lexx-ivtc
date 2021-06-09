@@ -82,7 +82,8 @@
 6021,6115 -+---
 6116,6188 ccchp # the other field in p is also a different frame, just cheat and forget about it...
 6116,6188 ---+-
-6020,6188 Q 4
+6020,6188 Q 7
+6020,6188 M 2 # text vs motion
 
 6189,6284 ppccc
 6285,6449 ccppc
@@ -295,7 +296,7 @@
 30425,30501 c
 30502,30568 c
 30569,30628 c
-30569,30628 + # shake effect moves the screen between the fields
+30569,30628 + # shaky cam
 30629,30669 c
 30629,30669 +
 30670,30744 c
@@ -469,31 +470,21 @@
 # while 5 is softer image, I cannot see a subpixel difference on the tv screen when it is upscaled
 # it is also closer to the original 59.94i when both fields are present
 
-43206,43346 c # tv 59.94i, bg pcccp
-43206,43346 +
-43206,43346 Q 5 # 7
+43206,43346 c # tv 59.94i, bg pcccp # fix
+43206 + # FIXME
+43206 Q 4
 43347,43399 ccppc
 43400,43572 pcccp
-43573,43794 c # bg cccpp
-43573,43794 +
-43573,43794 Q 5 # 7
+43573,43794 c # tv 59.94i, bg cccpp # fix
 43795,43950 ccppc
-43951,44071 c
-43951,44071 +
-43951,44071 Q 5 # 7
+43951,44071 c # tv 59.94i # fix
 44072,44178 cccpp
 44179,44474 cccpp
-44475,44577 c
-44475,44577 +
-44475,44577 Q 5 # 7
+44475,44577 c # tv 59.94i # fix
 44578,44700 ccppc
-44701,44795 c # bg cccpp
-44701,44795 +
-44701,44795 Q 5 # 7
+44701,44795 c # tv 59.94i, bg cccpp # fix
 44796,45043 ccppc
-45044,45207 c
-45044,45207 +
-45044,45207 Q 5 # 7
+45044,45207 c # tv 59.94i # fix
 45208,45364 pcccp
 45365,45473 ccppc
 45474,45640 cccpp
@@ -506,40 +497,31 @@
 46168,46252 pcccp
 46253,46451 ccppc
 46452,46529 ccppc
-46530,46554 c # fg & tv1 ccppc, tv2 cccpp, tv3 59.94i
-46530,46554 +
-46555,46580 ccupp # tv3 stops moving, everything else starts
+46530,46580 ccupp # fg ccppc, tv1 & tv2 59.94i, tv3 cccpp # fix
 46581,46704 cppcc
 46705,46841 ppccc
-46842,46955 c
-46842,46955 +
-46842,46955 Q 5 # 7
+46842,46955 c # tv 59.94i # fix
 46956,47007 ccppc
-47008,47042 c
-47008,47042 +
-47008,47042 Q 5 # 7
+47008,47042 c # tv 59.94i # fix
 47043,47227 cppcc
 47228,47289 cppcc
-47290,47576 c
-47290,47576 +
-47290,47576 Q 5 # 7
+47290,47576 c # tv 59.94i # fix
 47577,47681 cccpp
-47682,47769 c
-47682,47769 +
-47682,47769 Q 5 # 7
+47682,47769 c # tv 59.94i # fix
 47770,47875 ppccc
 47876,47926 cccpp
 47927,47987 cccpp
 47988,48071 ccppc
-48072,48176 ccppc # fg ccppc, tvs ?, prefer fg
-48177,48387 pcccp # fg ccppc, tvs pcccp, prefer tvs
-48187 + # tv switches programme on a p frame
+48072,48176 ccppc # fg & tv3 ccppc, tv1 & tv2 59.94i? # fix
+48177,48186 ccppc # fg & tv3 ccppc, tv1 pcccp => ccppc converted, tv2 59.94i? # fix
+48187,48230 ccppc # fg ccppc, tv1 & tv3 pcccp => ccppc converted, tv2 59.94i? # fix
+48231,48387 cccpp # fg cccpp, every tv ppccc => cccpp converted # fix
+48177 + # tv switches programme on a p frame
+48177 Q 7
+48187 + # same
 48187 Q 7
-48231 + # same
-48231 Q 7
-48269,48294 + # fg moves a bit
 48388,48434 cppcc
-48435,48589 pcccp
+48435,48589 pcccp # fix1
 48436,48589 - # spinnig star, flag combed a little, maybe deinterlace?
 48590,48663 pcccp
 48664,48848 cccpp
