@@ -3,10 +3,19 @@ Import("../../common.avsi")
 LoadEpisodeWithAlt("S04E03", 80785, \
 	["..\..\S04(Koch)\V01\title_t02.d2v"], \
 	["..\..\S04(Acorn)\D02\title_t00.d2v"])
-	
+
 #return showfields(false)
 
 # 790 on the computer and Longbore
+
+# 20175 pcpcc pcccc pcpcc pcccc pcpcc pcccc pcpcc pcccc pcpcc pcccc
+#       cpccp cpccc cpccp cpccc cpccp cpccc cpccp cpccc cpccp cpccc
+# 20225 pcpcc pcccc pcpcc pcccc pcpcc pcccc pcpcc pcccc pcpcc pcccc
+#       cpccp cpccc cpccp cpccc cpccp cpccc cpccp cpccc cpccp cpccc
+# 20275 pcpcc pcccc pcpcc pcccc pcpcc
+#       cpccp cpccc cpccp cpccc cpccp
+
+# there is also something else wrong here, the fields are shaking, can be seen on the glass or keyboard
 
 #fix1 = FixSlowMoI(20175, 20299, 34600, pd = 3, f = [ \
 fix1 = FixSlowMoI(20175, 20299, 43500, pd = 0, f = [ \

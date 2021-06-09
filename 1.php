@@ -944,14 +944,14 @@ EOT;
 $avs_field0 = <<<EOT
 Import("$title.avs")
 ConvertToYV24(interlaced=true)
-SeparateRows(2)
+SeparateFields
 SelectOdd
 EOT;
 
 $avs_field1 = <<<EOT
 Import("$title.avs")
 ConvertToYV24(interlaced=true)
-SeparateRows(2)
+SeparateFields
 SelectEven
 EOT;
 
@@ -1126,8 +1126,8 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	fputs($fp, implode('+', $cl)."\n");
 
 	fputs($fp, "ConvertBits(16)\n");
-	fputs($fp, "ConvertToYUV444(matrix=\"rec709\")\n");
-			
+	//fputs($fp, "ConvertToYUV444(matrix=\"rec709\")\n");
+
 	fclose($fp);
 	
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
