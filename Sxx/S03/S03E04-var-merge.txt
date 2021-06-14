@@ -1,0 +1,4 @@
+Type float
+Default 0
+
+#R <start> <end> <ratio>

@@ -941,18 +941,30 @@ TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cth
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-$avs_field0 = <<<EOT
-Import("$title.avs")
-ConvertToYV24(interlaced=true)
-SeparateFields
-SelectOdd
+$avs_topaz_png = <<<EOT
+Import("../../common.avsi")
+i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+i2 = i2.Spline64Resize(1080, 540) # TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
+amq = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_amq-13_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+aaa = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+amq = amq.Spline64Resize(i2.Width, i2.Height)
+aaa = aaa.Degrain.Spline64Resize(i2.Width, i2.Height)
+last = amq
+ScriptClip("Merge(aaa, _merge)")
+ConditionalReader("$title-var-merge.txt", "_merge", false)
+i0 = last
+i1 = last
 EOT;
 
-$avs_field1 = <<<EOT
+$avs_field = <<<EOT
 Import("$title.avs")
 ConvertToYV24(interlaced=true)
-SeparateFields
-SelectEven
+i2 = BlendFields.Spline64Resize(Width, Height / 2)
+i0 = SeparateFields.SelectOdd
+i1 = SeparateFields.SelectEven
+last = i2
+ConditionalSelect("_field", i0, i1, i2)
+ConditionalReader("$title-var-field.txt", "_field", false)
 EOT;
 
 function ffmpeg($cmd, $avs)
@@ -1057,37 +1069,12 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	
 	$fp = fopen($title.'-topaz-png.avs', 'w');
 	
-	if($has_field[2])
-	{
-		fprintf($fp, "i2 = ImageSource(file=\"%s-huffyuv_1.50x_1080x720_ahq-11_png\\%%06d.png\", start=0, end=%d)\n", $title, $inframe);
-		
-		if($has_field[0] || $has_field[1])
-		{
-			// TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
-			
-			fprintf($fp, "i2 = i2.Spline64Resize(1080, 540)\n");
-		}
-	}
+	$s = $avs_topaz_png;
+	$s = str_replace("INFRAME", $inframe, $s);
+	$s = str_replace("USEFRAME", $useframe, $s);	
+	fputs($fp, $s."\n");
 
-	if($has_field[0])
-	{
-		fprintf($fp, "i0 = ImageSource(file=\"%s-f0-huffyuv_2.25x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
-	}
-	else
-	{
-		fprintf($fp, "i0 = BlankClip(i2, %d)\n", $title, $useframe);
-	}
-
-	if($has_field[1])
-	{
-		fprintf($fp, "i1 = ImageSource(file=\"%s-f1-huffyuv_2.25x_1080x540_aaa-9_png\\%%06d.png\", start=0, end=%d)\n", $title, $useframe);
-	}
-	else
-	{
-		fprintf($fp, "i1 = BlankClip(i2, %d)\n", $title, $useframe);
-	}
-	
-	// TODO: rewrite Trims to ConditionalSelect
+	// TODO: rewrite Trims to ConditionalSelect (not possible yet, i2 is decimated, i0/1 are not)
 	
 	$cl = [];
 	$total = 0;
@@ -1125,37 +1112,46 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	
 	fputs($fp, implode('+', $cl)."\n");
 
-	fputs($fp, "ConvertBits(16)\n");
+	//fputs($fp, "ConvertBits(16)\n");
 	//fputs($fp, "ConvertToYUV444(matrix=\"rec709\")\n");
 
 	fclose($fp);
-	
+
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
 	
-	$cmd = '-map 0:v -y -c:v ffvhuff -aspect 480:240'; 
+	//
 	
-	# upscale with topaz ai, aa, 2.25x, 1080x540, anything >=2.5x and the picture falls apart, small features like stripes and holes connect in a wrong way
-	
-	if($has_field[0])
+	if(!file_exists($title.'-var-merge.txt'))
 	{
-		$dst = $title.'-f0-huffyuv.avi';
-	
-		if($force || !file_exists($dst))
-		{
-			ffmpeg($cmd.' "'.$dst.'"', $avs_field0);
-		}
+		file_put_contents($title.'-var-merge.txt', "Type float\nDefault 0\n\n#R <start> <end> <ratio>\n");
 	}
 	
-	if($has_field[1])
-	{
-		$dst = $title.'-f1-huffyuv.avi';
+	//
 	
-		if($force || !file_exists($dst))
-		{
-			ffmpeg($cmd.' "'.$dst.'"', $avs_field1);
-		}
+	$var_fields = $title.'-var-field.txt';
+	
+	register_shutdown_function(function() use($var_fields) { unlink($var_fields); });
+	
+	$fp = fopen($var_fields, 'w');
+	
+	fputs($fp, "Type int\nDefault 2\n");
+
+	foreach($trim as $t)
+	{
+		if($t['f'] == 2) continue;
+
+		fprintf($fp, "R %d %d %d\n", $t['s'], $t['e'], $t['f']);
 	}
-		
+	
+	fclose($fp);
+
+	$dst = $title.'-huffyuv-field.avi';
+
+	if($force || !file_exists($dst))
+	{
+		ffmpeg('-map 0:v -y -c:v ffvhuff -aspect 480:240 "'.$dst.'"', $avs_field);
+	}
+	
 	exit;
 }
 

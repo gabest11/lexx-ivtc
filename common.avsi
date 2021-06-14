@@ -220,6 +220,18 @@ function BlendFields2(clip c, float offset)
 	AssumeFrameBased
 }
 
+function LightenDarken(clip c1, clip c2, int l, int t, int r, int b, int th)
+{
+	c1.Layer(c2, op="lighten", threshold=th).Layer(c2, op="darken", threshold=th)
+	c1.Overlay(Crop(l, t, r - l, b - t), l, t)
+}
+
+function BlendFieldsWithText(clip c, int l, int t, int r, int b, int "th")
+{
+	th = Default(th, 10)
+	c.BlendFields.LightenDarken(c, l, t, r, b, th)
+}
+
 function FixSlowMoI(clip c, int start, int end, int "fps_num", int "fc", int "ivtc", int "pd", int "deint", bool "deintdisp", int "fin", int "fout", int "mv_blksize", int "mv_overlap", int "mv_search", int "mv_searchparam", val_array "f")
 {
 	# depending on the last array argument, it operates on frames if f[1] is empty, 
@@ -889,4 +901,15 @@ function FilmToFilm(clip c, int isrc, int idst)
 		FilmToVideo(isrc)
 		VideoToFilm(idst)
 	}
+}
+
+function Degrain(clip c)
+{
+	last = c
+	super = MSuper(pel=4, sharp=1)
+	backward_vec2 = MAnalyse(super, isb = true, delta = 2, overlap=4)
+	backward_vec1 = MAnalyse(super, isb = true, delta = 1, overlap=4)
+	forward_vec1 = MAnalyse(super, isb = false, delta = 1, overlap=4)
+	forward_vec2 = MAnalyse(super, isb = false, delta = 2, overlap=4)
+	MDegrain2(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,thSAD=400)
 }

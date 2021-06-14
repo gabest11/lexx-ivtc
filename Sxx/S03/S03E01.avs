@@ -30,3 +30,34 @@ catch(msg)
 # denoise single field sections
 
 Fix240p(title)
+
+#
+
+Trim(0, 2056) + \
+Trim(2057, 2145).BlendFieldsWithText(220, 372, 498, 430) + \
+Trim(2146, 2192).BlendFields + \
+Trim(2193, 2280).BlendFieldsWithText(126, 370, 592, 428) + \
+Trim(2281, 2327).BlendFields + \
+Trim(2328, 2414).BlendFieldsWithText(240, 374, 490, 428) + \
+Trim(2415, 2456).BlendFields + \
+Trim(2457, 2544).BlendFieldsWithText(156, 372, 562, 430) + \
+Trim(2545, 2591).BlendFields + \
+Trim(2592, 2679).BlendFieldsWithText(128, 368, 596, 432) + \
+Trim(2680, 2726).BlendFields + \
+Trim(2727, 2814).BlendFieldsWithText(156, 370, 562, 430) + \
+Trim(2815, 2842).BlendFields + \
+Trim(2843, 2930).BlendFieldsWithText(206, 370, 512, 430) + \
+Trim(2931, 2978).BlendFields + \
+Trim(2979, 3064).BlendFieldsWithText(148, 368, 570, 430) + \
+Trim(3065, 3087).BlendFields + \
+Trim(3088, 3155) + \
+Trim(3156, 3162).BlendFields + \
+Trim(3163, 3250).BlendFieldsWithText(210, 368, 502, 428) + \
+Trim(3251, 3298).BlendFields + \
+Trim(3299, 3385).BlendFieldsWithText(138, 366, 586, 430) + \
+Trim(3386, 3432).BlendFields + \
+Trim(3433, 3520).BlendFieldsWithText(212, 306, 506, 434) + \
+Trim(3521, 3567).BlendFields + \
+Trim(3568, 3655).BlendFieldsWithText(230, 364, 488, 428) + \
+Trim(3656, 3748).BlendFields + \
+Trim(3749, 0)
