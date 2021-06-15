@@ -12,11 +12,14 @@ $timecodes = '';
 $audio = [];
 $subtitle = [];
 $chapters = [];
-$about = dirname(__FILE__).'/about.txt';
 $title = '';
 $fps_mod = 0;
 $fps_demod = 0;
 $mkvmerge = "E:\\tmp\\media\\util\\mkvtoolnix\\mkvmerge.exe";
+$attachments = [
+	['desc' => 'About', 'path' => dirname(__FILE__).'/about.txt'],
+	['desc' => 'common.avsi', 'path' => dirname(__FILE__).'/common.avsi']
+	];
 
 $dst = preg_replace('/\\.mkv$/i', '-'.$codec.$preset.preg_replace('/(([0-9]+):)?([0-9]+)$/', '\\3', $resolution).'crf'.$crf.'.mkv', $dst);
 
@@ -69,26 +72,57 @@ function getchapters($fn)
 	$obj = json_decode($str, true);
 	return isset($obj['chapters']) ? $obj['chapters'] : false;
 }
-	
 
 if(preg_match('/(.*title_t[0-9]+[^-]*-)/i', $src, $m)
 || preg_match('/(.*S[0-9]+(E|R)[0-9]+-)/i', $src, $m))
 {
+	$dir = dirname($m[1]);
+	$basename = basename($m[1]);
+
+	$fn = rtrim($m[1], '-').'.avs';
+	
+	if(file_exists($fn))
+	{
+		$attachments[] = ['desc' => basename($fn), 'path' => $fn];
+	}
+	
+	foreach(scandir(dirname($m[1])) as $fn)
+	{
+		if(!preg_match('/'.$basename.'var-.+\\.txt$/i', $fn)) continue;
+
+		$attachments[] = ['desc' => $fn, 'path' => $dir.'/'.$fn];
+	}
+
 	$fn = $m[1].'timecodes.txt';
 	
-	if(file_exists($fn)) $timecodes = $fn;
+	if(file_exists($fn))
+	{
+		$timecodes = $fn;
+		$attachments[] = ['desc' => 'VFR timecodes', 'path' => $fn];
+	}
 	
 	$fn = $m[1].'tfm-ovr.txt';
 	
-	if(file_exists($fn)) $tfm_ovr = $fn;
+	if(file_exists($fn))
+	{
+		$tfm_ovr = $fn;
+		$attachments[] = ['desc' => 'TFM overrides', 'path' => $fn];
+	}
 	
 	$fn = $m[1].'tdec-ovr.txt';
 	
-	if(file_exists($fn)) $tdec_ovr = $fn;
+	if(file_exists($fn))
+	{
+		$tdec_ovr = $fn;
+		$attachments[] = ['desc' => 'TDecimate overrides', 'path' => $fn];
+	}
 
 	$fn = $m[1].'huffyuv.avi';
 	
-	if(file_exists($fn)) getfps($fn, $fps_mod, $fps_demod);
+	if(file_exists($fn))
+	{
+		getfps($fn, $fps_mod, $fps_demod);
+	}
 
 	foreach(['eng', 'hun', 'fra', 'rus'] as $lang)
 	{
@@ -141,6 +175,8 @@ if(preg_match('/(.*title_t[0-9]+[^-]*-)/i', $src, $m)
 
 if(!empty($tfm_ovr) && file_exists($tfm_ovr))
 {
+	// all this code only to extract the title and the keyframes
+	
 	$frames = [];
 
 	if(!empty($timecodes) && file_exists($timecodes))
@@ -220,39 +256,117 @@ if(!empty($tfm_ovr) && file_exists($tfm_ovr))
 	$keyframes = implode(',', $keyframes);
 }
 
-$cmd = [];
+$cmd = ['ffmpeg -hide_banner'];
 
-$cmd[] = 'ffmpeg -hide_banner';
-if($resolution[1] >= 720) $cmd[] = '-colorspace bt709';
-if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) {$src = $m[1];} // $cmd[] = '-start_number '.$m[2];} // changing the start isn't compatible with the vfr timecode file
-if(strpos($src, ".avi") === false && $fps_demod > 0) $cmd[] = "-r $fps_mod/$fps_demod"; // -framerate? if the fps is not set to match the real duration, the audio will stop playing at a random position, ffmpeg tries to be smart when muxing or something
+if($resolution[1] >= 720) 
+{
+	$cmd[] = '-colorspace bt709';
+}
+
+if(preg_match('/^(.+):([0-9]+)$/i', $src, $m)) 
+{
+	$src = $m[1];
+	
+	// $cmd[] = '-start_number '.$m[2];} // changing the start isn't compatible with the vfr timecode file
+}
+
+if(strpos($src, ".avi") === false && $fps_demod > 0)
+{
+	$cmd[] = "-r $fps_mod/$fps_demod"; // -framerate? if the fps is not set to match the real duration, the audio will stop playing at a random position, ffmpeg tries to be smart when muxing or something
+}
+
+// input
+
 $cmd[] = '-i "'.$src.'"';
-foreach($audio as $a) $cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
-foreach($subtitle as $s) $cmd[] = '-i "'.$s['fn'].'"';
-if(strpos($codec, 'p10') !== false) $cmd[] = '-pix_fmt yuv420p10le';
-else $cmd[] = '-pix_fmt yuv420p';
+
+foreach($audio as $a)
+{
+	$cmd[] = ($a['is51'] ? '-channel_layout 5.1 ' : '').'-i "'.$a['fn'].'"';
+}
+
+foreach($subtitle as $s)
+{
+	$cmd[] = '-i "'.$s['fn'].'"';
+}
+
+$cmd[] = '-pix_fmt '.(strpos($codec, 'p10') !== false ? 'yuv420p10le' : 'yuv420p');
+
+// map
+
 $cmd[] = '-map 0:v';
-foreach($audio as $index => $a) $cmd[] = '-map '.($index + 1).':a';
-foreach($subtitle as $index => $s) $cmd[] = '-map '.($index + count($audio) + 1).':s';
+
+foreach($audio as $index => $a)
+{
+	$cmd[] = '-map '.($index + 1).':a';
+}
+
+foreach($subtitle as $index => $s)
+{
+	$cmd[] = '-map '.($index + count($audio) + 1).':s';
+}
+
 $cmd[] = '-map_metadata -1';
 $cmd[] = '-map_chapters -1';
+
+// codecs
+
 $cmd[] = '-c copy';
-foreach($audio as $index => $a) {$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; if($a['format'] == 'wav') $cmd[] = '-c:a:'.$index.' aac';}
-foreach($subtitle as $index => $s) {$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];}
-if($codec == 'h264') $cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
-else if($codec == 'h264p10') $cmd[] = '-c:v libx264 -profile:v high10 -level:v 4.1';
-else if($codec == 'h265') $cmd[] = '-c:v libx265';
-else if($codec == 'h265p10') $cmd[] = '-c:v libx265 -profile:v main10';
+
+foreach($audio as $index => $a) 
+{
+	$cmd[] = '-metadata:s:a:'.$index.' language='.$a['lang']; 
+	
+	if($a['format'] == 'wav') 
+	{
+		$cmd[] = '-c:a:'.$index.' aac '; 
+		
+		if(!$a['is51'])
+		{
+			$cmd[] = '-b:a:'.$index.' 192k ';
+		}
+	}
+}
+
+if($codec == 'h264')
+{
+	$cmd[] = '-c:v libx264 -profile:v high -level:v 4.1';
+}
+else if($codec == 'h264p10')
+{
+	$cmd[] = '-c:v libx264 -profile:v high10 -level:v 4.1';
+}
+else if($codec == 'h265')
+{
+	$cmd[] = '-c:v libx265';
+}
+else if($codec == 'h265p10')
+{
+	$cmd[] = '-c:v libx265 -profile:v main10';
+}
+
 //if(strpos($codec, 'h265') !== false) $cmd[] = '-x265-params "strong-intra-smoothing=0"';
+
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
 $cmd[] = '-vf "scale='.implode(':', $resolution).':flags=lanczos"';
 if(!empty($tune) && $tune != 'notune') $cmd[] = '-tune '.$tune;
+
+// misc
+
 $cmd[] = '-aspect 4:3';
 $cmd[] = '-movflags +faststart';
 if(!empty($keyframes)) $cmd[] = '-force_key_frames '.$keyframes;
+
+// meta
+
 $cmd[] = '-metadata title="'.$title.'"';
 $cmd[] = '-metadata description="https://github.com/gabest11/lexx-ivtc" ';
 $cmd[] = '-metadata:s title= ';
+
+foreach($subtitle as $index => $s) 
+{
+	$cmd[] = '-metadata:s:s:'.$index.' language='.$s['lang'];
+}
+
 /*
 // does not work correctly, ffmpeg chops off the audio early, calculated from the vfr rate, do a 2pass
 if(!empty($timecodes) && preg_match('/# TDecimate Mode [0-9]+: +Last Frame = ([0-9]+)/i', file_get_contents($timecodes), $m))
@@ -260,6 +374,7 @@ if(!empty($timecodes) && preg_match('/# TDecimate Mode [0-9]+: +Last Frame = ([0
 	$cmd[] = '-frames:v '.($m[1] + 1);
 }
 */
+
 $cmd[] = '"'.$dst.'"';
 
 $cmd = implode(' ', $cmd);
@@ -283,9 +398,6 @@ $mkvmerge ^
 --default-track 1:yes ^
 --timestamps "0:$timecodes" ^
 --fix-bitstream-timing-information 0:1 ^
---attachment-description "VFR timecodes" ^
---attachment-mime-type text/plain ^
---attach-file "$timecodes" ^
 
 EOT;
 
@@ -294,34 +406,14 @@ foreach($subtitle as $index => $s)
 	$cmd .= '--default-track '.($index + count($audio) + 1).':no ^'.PHP_EOL;
 }
 
-if(file_exists($tfm_ovr))
+foreach($attachments as $a)
 {
-$cmd .= <<<EOT
---attachment-description "TFM overrides" ^
---attachment-mime-type text/plain ^
---attach-file "$tfm_ovr" ^
-
-EOT;
-}
-
-if(file_exists($tdec_ovr))
-{
-$cmd .= <<<EOT
---attachment-description "TDecimate overrides" ^
---attachment-mime-type text/plain ^
---attach-file "$tdec_ovr" ^
-
-EOT;
-}
-
-if(file_exists($about))
-{
-$cmd .= <<<EOT
---attachment-description "About this release" ^
---attachment-mime-type text/plain ^
---attach-file "$about" ^
-
-EOT;
+	if(file_exists($a['path']))
+	{
+		$cmd .= '--attachment-description "'.$a['desc'].'" ^'.PHP_EOL;
+		$cmd .= '--attachment-mime-type text/plain ^'.PHP_EOL;
+		$cmd .= '--attach-file "'.$a['path'].'" ^'.PHP_EOL;
+	}
 }
 
 $cmd .= '"'.$dst.'"';
