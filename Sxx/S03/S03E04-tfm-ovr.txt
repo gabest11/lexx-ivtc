@@ -79,7 +79,7 @@
 5171,5324 Q 4
 5325,5429 c
 
-5430,5527 c # keyframe # text # let's try to keep the main title 480p, clouds don't look so bad
+5430,5527 c # keyframe # text
 5528,5728 c # text
 5729,5814 c # text
 5815,5942 c # text
