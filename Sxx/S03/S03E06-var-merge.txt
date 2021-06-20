@@ -1,0 +1,3 @@
+Type float
+Default 0
+

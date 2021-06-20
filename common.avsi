@@ -122,11 +122,15 @@ function Fix240p2O(clip c)
 function Fix240p(clip c, string title)
 {
 	last = c
+	p1e = Fix240p1E
+	p1o = Fix240p1O
+	p2e = c # Fix240p2E
+	p2o = c # Fix240p2O
 	ConditionalSelect(last, "_fix - 1", \
-		GetParity() ? Fix240p1E : Fix240p1O, \
-		GetParity() ? Fix240p1O : Fix240p1E, \
-		GetParity() ? Fix240p2E : Fix240p2O, \
-		GetParity() ? Fix240p2O : Fix240p2E)
+		GetParity() ? p1e : p1o, \
+		GetParity() ? p1o : p1e, \
+		GetParity() ? p2e : p2o, \
+		GetParity() ? p2o : p2e)
 	ConditionalReader(title + "-var-fix.txt", "_fix")
 }
 
@@ -903,13 +907,14 @@ function FilmToFilm(clip c, int isrc, int idst)
 	}
 }
 
-function Degrain(clip c)
+function Degrain(clip c, int "bs")
 {
 	last = c
+	bs = Default(bs, 4)
 	super = MSuper(pel=4, sharp=1)
-	backward_vec2 = MAnalyse(super, isb = true, delta = 2, overlap=4)
-	backward_vec1 = MAnalyse(super, isb = true, delta = 1, overlap=4)
-	forward_vec1 = MAnalyse(super, isb = false, delta = 1, overlap=4)
-	forward_vec2 = MAnalyse(super, isb = false, delta = 2, overlap=4)
+	backward_vec2 = MAnalyse(super, isb = true, delta = 2, blksize=bs, overlap=bs/2)
+	backward_vec1 = MAnalyse(super, isb = true, delta = 1, blksize=bs, overlap=bs/2)
+	forward_vec1 = MAnalyse(super, isb = false, delta = 1, blksize=bs, overlap=bs/2)
+	forward_vec2 = MAnalyse(super, isb = false, delta = 2, blksize=bs, overlap=bs/2)
 	MDegrain2(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,thSAD=400)
 }

@@ -520,11 +520,10 @@ print_r([$i, $tfm, $f]);
 	foreach($ovrscenes as $scene)
 	{
 		$i = $scene['s'];
-		$f = $ovrframes[$i];
 		
-		if(isset($f['type']['value']))
+		if(isset($ovrframes[$i]['type']['value']))
 		{
-			$t = $f['type']['value'];
+			$t = $ovrframes[$i]['type']['value'];
 			
 			if($i == $ip + 1 && ($tp == 'p' || $tp == 'h') && ($t == 'u' || $t == 'l'))
 			{
@@ -947,24 +946,36 @@ i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start
 i2 = i2.Spline64Resize(1080, 540) # TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
 amq = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_amq-13_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
 aaa = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-amq = amq.Spline64Resize(i2.Width, i2.Height)
-aaa = aaa.Degrain.Spline64Resize(i2.Width, i2.Height)
+aaa = aaa.Degrain
 last = amq
 ScriptClip("Merge(aaa, _merge)")
 ConditionalReader("$title-var-merge.txt", "_merge", false)
+Spline64Resize(i2.Width, i2.Height)
 i0 = last
 i1 = last
+EOT;
+
+$avs_topaz_aaa = <<<EOT
+Import("../../common.avsi")
+i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+i2 = i2.Spline64Resize(1080, 540)
+aaa = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+aaa = aaa.Spline64Resize(i2.Width, i2.Height)
+i0 = aaa
+i1 = aaa
 EOT;
 
 $avs_field = <<<EOT
 Import("$title.avs")
 ConvertToYV24(interlaced=true)
+#Degrain
 i2 = BlendFields.Spline64Resize(Width, Height / 2)
 i0 = SeparateFields.SelectOdd
 i1 = SeparateFields.SelectEven
 last = i2
 ConditionalSelect("_field", i0, i1, i2)
 ConditionalReader("$title-var-field.txt", "_field", false)
+#Degrain
 EOT;
 
 function ffmpeg($cmd, $avs)
@@ -1075,6 +1086,7 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	fputs($fp, $s."\n");
 
 	// TODO: rewrite Trims to ConditionalSelect (not possible yet, i2 is decimated, i0/1 are not)
+	// TODO: alternatively, merge repeating drop patterns to SelectEvery
 	
 	$cl = [];
 	$total = 0;
