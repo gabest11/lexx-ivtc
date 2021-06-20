@@ -944,12 +944,14 @@ $avs_topaz_png = <<<EOT
 Import("../../common.avsi")
 i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
 i2 = i2.Spline64Resize(1080, 540) # TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
-amq = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_amq-13_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-aaa = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-aaa = aaa.Degrain
-last = amq
+ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+Degrain
+if(Exist("$title-var-merge.txt")) {
+aaa = last
+ImageSource(file="$title-huffyuv-field_2.25x_1080x540_amq-13_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
 ScriptClip("Merge(aaa, _merge)")
 ConditionalReader("$title-var-merge.txt", "_merge", false)
+}
 Spline64Resize(i2.Width, i2.Height)
 i0 = last
 i1 = last
@@ -959,10 +961,10 @@ $avs_topaz_aaa = <<<EOT
 Import("../../common.avsi")
 i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
 i2 = i2.Spline64Resize(1080, 540)
-aaa = ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-aaa = aaa.Spline64Resize(i2.Width, i2.Height)
-i0 = aaa
-i1 = aaa
+ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+Spline64Resize(i2.Width, i2.Height)
+i0 = last
+i1 = last
 EOT;
 
 $avs_field = <<<EOT
