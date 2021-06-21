@@ -1,0 +1,2 @@
+Type float
+Default 0.5
