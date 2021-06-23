@@ -8,6 +8,7 @@ LoadEpisodeWithAlt("S03E09", 86050, \
 	["..\..\S03(Acorn)\D05\title_t00.d2v"])
 
 #return detect240p
+#return showfields(false)
 	
 # denoise single field sections
 

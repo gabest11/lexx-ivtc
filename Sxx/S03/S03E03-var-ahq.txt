@@ -1,4 +1,5 @@
 Type float
 Default 0.5
 
-#R <start> <end> <ratio>
+R 9849 10054 1.25
+R 10110 11263 1.01

@@ -7,7 +7,14 @@ function LoadEpisodeWithAlt(string title, int frames, val_array files)
 	{
 		if(Exist(files[i][0]))
 		{
-			MPEG2Source(files[i][0], cpu=4)
+			if(GetProcessInfo(0) == 32)
+			{
+				MPEG2Source(files[i][0], cpu=4)
+			}
+			else
+			{
+				MPEG2Source(files[i][0])
+			}
 
 			if(files[i].ArraySize() > 1)
 			{
@@ -912,9 +919,12 @@ function Degrain(clip c, int "bs")
 	last = c
 	bs = Default(bs, 4)
 	super = MSuper(pel=4, sharp=1)
+	backward_vec3 = MAnalyse(super, isb = true, delta = 3, blksize=bs, overlap=bs/2)
 	backward_vec2 = MAnalyse(super, isb = true, delta = 2, blksize=bs, overlap=bs/2)
 	backward_vec1 = MAnalyse(super, isb = true, delta = 1, blksize=bs, overlap=bs/2)
 	forward_vec1 = MAnalyse(super, isb = false, delta = 1, blksize=bs, overlap=bs/2)
 	forward_vec2 = MAnalyse(super, isb = false, delta = 2, blksize=bs, overlap=bs/2)
-	MDegrain2(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,thSAD=400)
+	forward_vec3 = MAnalyse(super, isb = false, delta = 2, blksize=bs, overlap=bs/2)
+	#MDegrain2(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,thSAD=400)
+	MDegrain3(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,backward_vec3,forward_vec3,thSAD=400)
 }

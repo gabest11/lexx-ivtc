@@ -31,7 +31,23 @@ catch(msg)
 
 Fix240p(title)
 
-#
+# Lexx drifting in space, original version has interpolated field, S03E09 very similar but full frame
+
+fix1 = Trim(27447, 27563).nnedi3(field=1)
+
+try
+{
+	c = LoadEpisodeWithAlt("S03E09", 86050, \
+		["..\..\S03(Alliance)\V03\title_t01.d2v", -15])
+		
+	#fix1 = StackHorizontal(fix1, Trim(c, 10890, 11006)).Spline64Resize(Width, Height)
+	
+	fix1 = Trim(c, 10890, 11006)
+}
+catch(msg)
+{
+	last # clip undefined if the script ends here
+}
 
 Trim(0, 2056) + \
 Trim(2057, 2145).BlendFieldsWithText(220, 372, 498, 430) + \
@@ -60,4 +76,6 @@ Trim(3433, 3520).BlendFieldsWithText(212, 306, 506, 434) + \
 Trim(3521, 3567).BlendFields + \
 Trim(3568, 3655).BlendFieldsWithText(230, 364, 488, 428) + \
 Trim(3656, 3748).BlendFields + \
-Trim(3749, 0)
+Trim(3749, 27446) + \
+fix1 + \
+Trim(27564, 0)

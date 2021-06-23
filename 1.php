@@ -940,14 +940,14 @@ TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cth
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-$avs_topaz_png = <<<EOT
+$avs_topaz_amq = <<<EOT
 Import("../../common.avsi")
-i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
 i2 = i2.Spline64Resize(1080, 540) # TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
 ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-Degrain
+#Degrain
 if(Exist("$title-var-merge.txt")) {
-aaa = last
+aaa = Spline64Resize(Width, Height, src_left=0.5, src_top=0.5) # half pel difference between amq and aaa, TODO: y offset should be l/h dependent, similar to avs_topaz_ahq
 ImageSource(file="$title-huffyuv-field_2.25x_1080x540_amq-13_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
 ScriptClip("Merge(aaa, _merge)")
 ConditionalReader("$title-var-merge.txt", "_merge", false)
@@ -957,14 +957,27 @@ i0 = last
 i1 = last
 EOT;
 
-$avs_topaz_aaa = <<<EOT
+$avs_topaz_ahq = <<<EOT
 Import("../../common.avsi")
-i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-11_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
-i2 = i2.Spline64Resize(1080, 540)
-ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-Spline64Resize(i2.Width, i2.Height)
-i0 = last
-i1 = last
+field_offset = Import("$title.avs").GetParity ? 0 : 1
+ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+#Degrain
+i0 = Spline64Resize(Width, Height, src_left = 0.5, src_top = field_offset)
+i1 = Spline64Resize(Width, Height, src_left = 0.5, src_top = 1.0 - field_offset)
+i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+i2 = i2.Spline64Resize(i0.Width, i0.Height)
+EOT;
+
+$avs_topaz_ahq2 = <<<EOT
+if(Exist("$title-var-ahq.txt"))
+{
+	ScriptClip("Merge(i2, 1.0 - _merge)")
+	ConditionalReader("$title-var-ahq.txt", "_merge", false)
+}
+else
+{
+	Merge(i2, 0.5)
+}
 EOT;
 
 $avs_field = <<<EOT
@@ -1078,66 +1091,53 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	else
 	{
 		$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
-	}
+	}	
+/*	
+	$fp = fopen($title.'-topaz-amq.avs', 'w');
 	
-	$fp = fopen($title.'-topaz-png.avs', 'w');
-	
-	$s = $avs_topaz_png;
+	$s = $avs_topaz_amq;
 	$s = str_replace("INFRAME", $inframe, $s);
 	$s = str_replace("USEFRAME", $useframe, $s);	
 	fputs($fp, $s."\n");
-
-	// TODO: rewrite Trims to ConditionalSelect (not possible yet, i2 is decimated, i0/1 are not)
-	// TODO: alternatively, merge repeating drop patterns to SelectEvery
+*/
+	$fp2 = fopen($title.'-topaz-ahq.avs', 'w');
 	
+	$s = $avs_topaz_ahq;
+	$s = str_replace("INFRAME", $inframe, $s);
+	$s = str_replace("USEFRAME", $useframe, $s);	
+	fputs($fp2, $s."\n");
+
+	$sl = [];
 	$cl = [];
 	$total = 0;
-	
+
 	foreach($trim as $i => $t)
 	{
 		$c = sprintf("c%d", $i);
-		fprintf($fp, "%s = Trim(i%d, %d, %d)\n", $c, $t['f'], $t['s'], $t['e']);
+		$sl[] = $s = sprintf("%s = Trim(i%d, %d, %d)\n", $c, $t['f'], $t['s'], $t['e']);
 		$cl[] = $c;
 		$total += $t['e'] - $t['s'] + 1;
 	}
 
-	// experiment to test if avisynth reads clips organized into a tree faster
+//	fputs($fp, implode($sl)."\n".implode('+', $cl)."\n\n");
+//	fclose($fp);
 
-	$next = count($cl);
-	
-	$batchsize = 10;
-
-	if(0)
-	while(count($cl) > 1)
-	{
-		$cl2 = [];
-	
-		for($i = 0; $i < count($cl); $i += $batchsize)
-		{
-			$c = sprintf("c%d", $next++);
-			fprintf($fp, "%s = %s\n", $c, implode('+', array_slice($cl, $i, $batchsize)));
-			$cl2[] = $c;
-		}
-	
-		$cl = $cl2;
-	}
-	
-	//
-	
-	fputs($fp, implode('+', $cl)."\n");
-
-	//fputs($fp, "ConvertBits(16)\n");
-	//fputs($fp, "ConvertToYUV444(matrix=\"rec709\")\n");
-
-	fclose($fp);
+	fputs($fp2, implode($sl)."\n".implode('+', $cl)."\n\n");
+	fputs($fp2, $avs_topaz_ahq2);
+	fclose($fp2);
 
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
 	
 	//
-	
+/*	
 	if(!file_exists($title.'-var-merge.txt'))
 	{
-		file_put_contents($title.'-var-merge.txt', "Type float\nDefault 0\n\n#R <start> <end> <ratio>\n");
+		file_put_contents($title.'-var-merge.txt', "Type float\nDefault 0.5\n\n#R <start> <end> <ratio>\n");
+	}
+*/	
+	if(!file_exists($title.'-var-ahq.txt'))
+	{
+		file_put_contents($title.'-var-ahq.txt', "Type float\nDefault 0.5\n\n#R <start> <end> <ratio>\n");
 	}
 	
 	//

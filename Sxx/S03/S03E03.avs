@@ -67,3 +67,5 @@ Trim(5856, 5877).BlendFields + \
 Trim(5878, 5966).BlendFieldsWithText(228, 362, 490, 428) + \
 Trim(5967, 6050).BlendFields + \
 Trim(6051, 0)
+
+# TODO: try to reduce the halo in scenes like 10126,10382 / 10438,11879
