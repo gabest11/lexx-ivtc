@@ -1,7 +1,7 @@
 Import("../../common.avsi")
 
 LoadEpisodeWithAlt("S04E17", 80470, \
-	["..\..\S04(Koch)\V0\title_t.d2v"], \
+	["..\..\S04(Acorn)\V05\title_t00.d2v"], \
 	["..\..\S04(Acorn)\D09\title_t00.d2v"])
 	
 # moth flying over the clouds

@@ -30,8 +30,6 @@ Trim(4461, 4549).BlendFieldsWithText(206, 370, 512, 430) + \
 Trim(4550, 4628).BlendFields + \
 Trim(4629, 4719).BlendFieldsWithText(148, 370, 572, 434) + \
 Trim(4720, 4765) + \
-Trim(4766, 4993).BlendFields + \
-Trim(4994, 4765).BlendFields + \
 Trim(4766, 4854).BlendFieldsWithText(210, 368, 502, 430) + \
 Trim(4855, 4910).BlendFields + \
 Trim(4911, 4993).BlendFieldsWithText(200, 364, 522, 430) + \
