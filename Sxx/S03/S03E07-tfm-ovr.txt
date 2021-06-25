@@ -55,9 +55,9 @@
 3376,3445 +
 3376,3445 Q 5
 3446,3550 l
-3551,3654 c # slightly combed frames
+3551,3654 upccc # pp bad, cannot fix due to fade-out
 3551,3654 +
-3551,3654 Q 7
+3551,3654 Q 5
 
 # intro
 
