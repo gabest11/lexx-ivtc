@@ -42,6 +42,6 @@ Trim(7220, 7380).BlendFields + \
 Trim(7381, 78672) + \
 FixPP(78673, 78724, 2) + \
 Trim(78725, 78747) + \
-FixPP(78748, 78790, 1, mv_blksize=32,mv_overlap=4) + \
+FixPP(78748, 78790, 1, mv_blksize=32, mv_overlap=4) + \
 Trim(78791, 0)
 
