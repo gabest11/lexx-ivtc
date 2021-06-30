@@ -8,7 +8,7 @@
 364,506 cccpp # TODO
 507,633 ppccc # TODO
 634,682 c
-683,727 c
+683,727 cccpp
 728,754 c
 755,813 cccpp # still combed a little
 770,813 + # sfx
