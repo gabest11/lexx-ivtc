@@ -91,7 +91,7 @@
 5562,5608 cccpp
 5609,5691 ppccc
 5692,5711 pcccp
-5712,5745 cccpp
+5712,5745 ccupp # fg cccpp, bg ccppc # actors out of sync, robot eyes/mouth not the usual blue (?)
 5746,5788 cccpp
 5789,5853 pcccp
 5854,5875 ccppc
