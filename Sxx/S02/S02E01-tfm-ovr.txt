@@ -658,6 +658,7 @@
 72696,72935 cccpp
 72936,72985 ccppc
 # three different patterns mixed
+# first field jumps two frames, needs fastmo/mode2 fix, not really possible due to overlapping layers
 72986,74074 c
 72986,73328 ++--++---++--+++-+-+
 # more insanity, myst drops a combed frame midsection 73384-73452

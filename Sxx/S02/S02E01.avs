@@ -4,6 +4,8 @@ LoadEpisodeWithAlt("S02E01", 86075, \
 	["..\..\S02(Acorn)\V01\title_t00.d2v"], \
 	["..\..\S02(Acorn)\D01\title_t00.d2v"])
 
+#return ShowFields(true)
+
 # His Shadow going up on the column
 
 # 8939     0

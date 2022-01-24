@@ -2,6 +2,9 @@
 
 $codec = !empty($argv[1]) ? $argv[1] : 'h265p10';
 $preset = !empty($argv[2]) ? $argv[2] : 'veryslow';
+$resolution = !empty($argv[3]) ? $argv[3] : '';
+$height = $resolution;
+if(preg_match('/[x:]([0-9]+)$/i', $height, $m)) $height = $m[1];
 
 //
 
@@ -9,9 +12,10 @@ $exists = [];
 
 foreach(scandir('.') as $fn)
 {
-	if(preg_match('/S0*([0-9]+)([ER])0*([0-9]+).+\\.mkv/i', $fn, $m)
+	if(preg_match('/S0*([0-9]+)([ER])0*([0-9]+).+\\.mkv$/i', $fn, $m)
 	&& strpos($fn, $codec) !== false
-	&& strpos($fn, $preset) !== false)
+	&& strpos($fn, $preset) !== false
+	&& strpos($fn, $height) !== false)
 	{
 		$exists[$m[2]][$m[1]][$m[3]] = true;
 	}
@@ -48,9 +52,9 @@ foreach([1 => 4, 2 => 20, 3 => 13, 4 => 24] as $season => $epcount)
 			}
 		}
 
-		
 		$tmp = sprintf("Sxx/S%02d/S%02dE%02d-topaz-ahq.avs", $season, $season, $episode);
 
+		if($season == 3)
 		if(file_exists($tmp))
 		{
 			$src = $tmp;
@@ -58,7 +62,9 @@ foreach([1 => 4, 2 => 20, 3 => 13, 4 => 24] as $season => $epcount)
 		
 		if(empty($src)) die('no source');
 	
-		$cmd = sprintf('php 2.php "%s" "%s" %s %s %d', $src, $dst, $codec, $preset, $season == 3 ? 540 : 720);
+		$cmd = sprintf('php 2.php "%s" "%s" %s %s %s', 
+			$src, $dst, $codec, $preset, 
+			!empty($resolution) ? $resolution : ($season == 3 ? 540 : 720));
 	
 		echo $cmd.PHP_EOL;
 		
@@ -101,6 +107,7 @@ foreach([2 => 5] as $season => $epcount)
 		
 		$tmp = sprintf("Sxx/S%02d/S%02dR%02d-topaz-ahq.avs", $season, $season, $episode);
 
+		if($season == 3)
 		if(file_exists($tmp))
 		{
 			$src = $tmp;
@@ -108,7 +115,9 @@ foreach([2 => 5] as $season => $epcount)
 		
 		if(empty($src)) die('no source');
 	
-		$cmd = sprintf('php 2.php "%s" "%s" %s %s %d', $src, $dst, $codec, $preset, $season == 3 ? 540 : 720);
+		$cmd = sprintf('php 2.php "%s" "%s" %s %s %s', 
+			$src, $dst, $codec, $preset, 
+			!empty($resolution) ? $resolution : ($season == 3 ? 540 : 720));
 	
 		echo $cmd.PHP_EOL;
 	

@@ -960,11 +960,11 @@ EOT;
 $avs_topaz_ahq = <<<EOT
 Import("../../common.avsi")
 field_offset = Import("$title.avs").GetParity ? 0 : 1
-ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
 #Degrain
 i0 = Spline64Resize(Width, Height, src_left = 0.5, src_top = field_offset)
 i1 = Spline64Resize(Width, Height, src_left = 0.5, src_top = 1.0 - field_offset)
-i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
 i2 = i2.Spline64Resize(i0.Width, i0.Height)
 EOT;
 
