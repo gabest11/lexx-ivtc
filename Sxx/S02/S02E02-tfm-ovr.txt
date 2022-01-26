@@ -556,7 +556,7 @@
 50759,50784 cccpp
 50785,50809 ppccc
 50810,50853 ccppc
-50854,50879 c # single field, smoothing it
+50854,50879 c # single field, smoothing it, frame between xxxx4/5 missing, xxxx6 dup
 50854,50879 +
 50854,50879 Q 7
 50880,50917 c # pp badly deinterlaced # fix3
