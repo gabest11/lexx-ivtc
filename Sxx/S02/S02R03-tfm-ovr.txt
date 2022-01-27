@@ -1,4 +1,4 @@
-# Rated 03
+# S02R03 Rated 3
 
 0,505 cppcc
 0,505 -
