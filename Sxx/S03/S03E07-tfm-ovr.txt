@@ -591,7 +591,7 @@
 66081,66140 +
 66081,66140 Q 5
 66141,66836 ccppc
-66141,66836 --++- # combed in front of the sky (green screen?)
+66141,66836 --++- # as Kai gets up, the background moves unevenly and gets combed in p frames
 66141,66836 Q 7
 66837,66871 c # 59.94i + fields are motion blurred
 66837,66871 +

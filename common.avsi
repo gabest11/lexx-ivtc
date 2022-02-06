@@ -187,6 +187,10 @@ function Detect240p(clip c)
 	# tr odd fields are interpolated (1=(0+2)/2,3=(2+4)/2,...)
 	# bl even and odd fields are the same (0=1,2=3,...)
 	# br odd and even fields are the same (1=2,3=4,...)
+	# 
+	# *-var-fix.txt codes: 
+	# tl 4 tr 3 
+	# bl 2 br 1
 	
 	c1 = c.SeparateRows(2)
 	c2 = c.PointResize(c.Width, c.Height, src_top = 1, src_height = c.Height)

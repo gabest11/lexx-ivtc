@@ -189,7 +189,7 @@
 17549,17640 cccpp
 17549,17640 ---++ # bg 29.97
 17641,17967 cccpp
-17641,17967 ---++ # bg 29.97
+17641,17967 ---++ # bg 29.97 # TODO: would be nice to fix, flowers overlap with the characters
 17641,17649 + # fade-in
 17968,18003 pcccp
 18004,18072 cccpp
@@ -199,7 +199,7 @@
 18128,18160 ppccc
 18129,18160 - # MIC high
 18161,18313 ccppc
-18161,18313 --++- # bg 29.97
+#18161,18313 --++- # bg 29.97 # fixed
 18314,18454 ccppc
 18314,18454 - # MIC high
 18455,18511 cppcc
@@ -374,7 +374,7 @@
 51139,51259 l
 51260,51895 l
 51896,51978 l
-51979,53977 l # crossfades
+51979,53977 l # crossfades (fg mix of everything, background has dups and double dups, and of course missing the second field)
 53978,54285 l
 54286,54782 l
 54783,54853 l
@@ -412,11 +412,11 @@
 59691,59876 cppcc
 59877,60384 ccppc
 60385,60490 cccpp
-#60385,60490 ---++
+#60385,60490 ---++ # fixed
 60491,60579 cccpp
 60580,60630 ppccc
 60631,60823 cccpp
-#60631,60823 ---++
+#60631,60823 ---++ # floating flower to the right still combed a little # fixed
 60824,60988 cppcc
 60989,61127 cppcc
 61128,61240 cuppc # cppcc + ccppc (ghost image)

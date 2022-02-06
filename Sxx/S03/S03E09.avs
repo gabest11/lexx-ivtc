@@ -29,7 +29,14 @@ Trim(6815, 6902).BlendFieldsWithText(148, 370, 572, 432) + \
 Trim(6903, 6934).BlendFields + \
 Trim(6935, 7022).BlendFieldsWithText(210, 368, 504, 430) + \
 Trim(7023, 7064).BlendFields + \
-Trim(7065, 64181) + \
+Trim(7065, 18160) + \
+Trim(18161, 18313).OutsideToFilm(3, 280, 300, 530, 480) + \
+Trim(18314, 60384) + \
+Trim(60385, 60464).InsideToFilm(4, 320, 0, 410, 70) + \
+Trim(60465, 60630) + \
+Trim(60631, 60745).InsideToFilm(4, 462, 90, 600, 220) + \
+Trim(60746, 60823).InsideToFilm(4, 430, 40, 530, 140) + \
+Trim(60824, 64181) + \
 FixPP(64182, 64298, 3) + \
 Trim(64299, 65115) + \
 FixPP(65116, 65199, 2) + \

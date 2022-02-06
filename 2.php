@@ -384,7 +384,7 @@ echo $cmd.PHP_EOL;
 
 $ret = 0;
 passthru($cmd, $ret);
-if(!empty($ret)) die($ret);
+if(!empty($ret)) die(sprintf("ffmpeg %d\n", $ret));
 
 if(!empty($timecodes))
 {
@@ -425,7 +425,7 @@ echo $cmd.PHP_EOL;
 	
 $ret = 0;
 passthru($cmd, $ret);
-if(!empty($ret)) die(sprintf("%d\n", $ret));
+if(!empty($ret)) die(sprintf("ffmpeg %d\n", $ret));
 
 echo 'del '.$dst.PHP_EOL;
 
@@ -467,7 +467,7 @@ if(!empty($chapters))
 	
 	$ret = 0;
 	passthru($cmd, $ret);
-	if(!empty($ret)) die(sprintf("%d\n", $ret));
+	if(!empty($ret)) die(sprintf("ffmpeg %d\n", $ret));
 
 	echo 'del '.$dst.PHP_EOL;
 

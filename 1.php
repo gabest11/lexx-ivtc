@@ -960,7 +960,7 @@ EOT;
 $avs_topaz_ahq = <<<EOT
 Import("../../common.avsi")
 field_offset = Import("$title.avs").GetParity ? 0 : 1
-ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+ImageSource(file="$title-huffyuv-field_2.00x_720x480_gcg-5_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
 #Degrain
 i0 = Spline64Resize(Width, Height, src_left = 0.5, src_top = field_offset)
 i1 = Spline64Resize(Width, Height, src_left = 0.5, src_top = 1.0 - field_offset)
@@ -969,6 +969,10 @@ i2 = i2.Spline64Resize(i0.Width, i0.Height)
 EOT;
 
 $avs_topaz_ahq2 = <<<EOT
+return last
+
+# does not really look good mixed, pure 480p GCG is usually better on living room TVs (large screen)
+
 if(Exist("$title-var-ahq.txt"))
 {
 	ScriptClip("Merge(i2, 1.0 - _merge)")
@@ -1056,6 +1060,11 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 			{
 				$field = $f['type']['value'] == 'h' ? 1 : 0;
 			}
+			
+			if($hl_scene && $field == 2) 
+			{
+				echo '* '.$useframe.' Q '.$f['Q']['value'].PHP_EOL;
+			}
 		}
 		
 		$has_field[$field] = true;
@@ -1091,7 +1100,7 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	else
 	{
 		$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
-	}	
+	}
 /*	
 	$fp = fopen($title.'-topaz-amq.avs', 'w');
 	
@@ -1123,11 +1132,12 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 //	fclose($fp);
 
 	fputs($fp2, implode($sl)."\n".implode('+', $cl)."\n\n");
-	fputs($fp2, $avs_topaz_ahq2);
+	fputs($fp2, "Prefetch\n\n");
+	fputs($fp2, $avs_topaz_ahq2."\n\n");
 	fclose($fp2);
 
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
-	
+
 	//
 /*	
 	if(!file_exists($title.'-var-merge.txt'))
@@ -1163,7 +1173,9 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 
 	if($force || !file_exists($dst))
 	{
-		ffmpeg('-map 0:v -y -c:v ffvhuff -aspect 480:240 "'.$dst.'"', $avs_field);
+		// do a 2.00x upscale to 720x480, or change it to -aspect 480x240 for 1080x540 at 2.25x
+		
+		ffmpeg('-map 0:v -y -c:v ffvhuff -aspect 360:240 "'.$dst.'"', $avs_field);
 	}
 	
 	exit;

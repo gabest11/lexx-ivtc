@@ -33,4 +33,8 @@ Trim(4720, 4765) + \
 Trim(4766, 4854).BlendFieldsWithText(210, 368, 502, 430) + \
 Trim(4855, 4910).BlendFields + \
 Trim(4911, 4993).BlendFieldsWithText(200, 364, 522, 430) + \
-Trim(4994, 0)
+Trim(4994, 81473) + \
+FixPP(81474, 81714, 2) + \
+FixPP(81715, 82012, 3) + \
+FixPP(82013, 82289, 1) + \
+Trim(82290, 0)

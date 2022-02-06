@@ -39,7 +39,9 @@ Trim(7011, 7099).BlendFieldsWithText(210, 364, 506, 428) + \
 Trim(7100, 7130).BlendFields + \
 Trim(7131, 7219).BlendFieldsWithText(154, 362, 564, 426) + \
 Trim(7220, 7380).BlendFields + \
-Trim(7381, 78672) + \
+Trim(7381, 49375) + \
+Trim(49376, 49436).InsideToFilm(4, 400, 0, 720, 240) + \
+Trim(49437, 78672) + \
 FixPP(78673, 78724, 2) + \
 Trim(78725, 78747) + \
 FixPP(78748, 78790, 1, mv_blksize=32, mv_overlap=4) + \
