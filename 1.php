@@ -1063,7 +1063,7 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 			
 			if($hl_scene && $field == 2) 
 			{
-				echo '* '.$useframe.' Q '.$f['Q']['value'].PHP_EOL;
+				echo '* '.$useframe.' Q '.(isset($f['Q']['value']) ? $f['Q']['value'] : '?').PHP_EOL;
 			}
 		}
 		

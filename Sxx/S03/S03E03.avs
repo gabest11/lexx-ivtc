@@ -31,6 +31,20 @@ catch(msg)
 
 Fix240p(title)
 
+# Lexx firing, second field is dupped of course (replace it from other episode?)
+
+# 34840 cpccp cccpc ccpcc cpccc pcccp ccpcc cpccc pcccp cccpc ccpcc
+#       cpccp cccpc ccpcc cpccc pcccp ccpcc cpccc pcccp cccpc ccpcc
+# 34890 pcccp cccpc ccpcc cpccc pccpc ccpcc cpccc pcccp cccpc cpccc
+#       pcccp cccpc ccpcc cpccc pccpc ccpcc cpccc pcccp cccpc cpccc
+# 34940 pcccp cccpc ccpcc cpcc
+#       pcccp cccpc ccpcc cpcc
+
+fix1 = FixSlowMoI(34840, 34958, 40700, pd = 0, f = [ \
+	[0,2,3,5,6,7,9,10,11,13,14,15,17,18,19,21,22,23,25,26,28,29,30,32,33,34,36,37,38,40,41,42,44,45,46,48,49,51,52,53,55,56,57,59,60,61,63,64,65,67,68,69,71,72,74,75,76,78,79,80,82,83,84,86,87,88,90,91,92,94,95,97,98,99,101,102,103,105,106,107,109,110,111,113,114,115,117,118], \
+	[0,2,3,5,6,7,9,10,11,13,14,15,17,18,19,21,22,23,25,26,28,29,30,32,33,34,36,37,38,40,41,42,44,45,46,48,49,51,52,53,55,56,57,59,60,61,63,64,65,67,68,69,71,72,74,75,76,78,79,80,82,83,84,86,87,88,90,91,92,94,95,97,98,99,101,102,103,105,106,107,109,110,111,113,114,115,117,118] \
+	])
+
 #
 
 Trim(0, 84).BlendFields + \
@@ -66,6 +80,8 @@ Trim(5767, 5855).BlendFieldsWithText(212, 308, 506, 436) + \
 Trim(5856, 5877).BlendFields + \
 Trim(5878, 5966).BlendFieldsWithText(228, 362, 490, 428) + \
 Trim(5967, 6050).BlendFields + \
-Trim(6051, 0)
+Trim(6051, 34839) + \
+fix1 + \
+Trim(34959, 0)
 
 # TODO: try to reduce the halo in scenes like 10126,10382 / 10438,11879

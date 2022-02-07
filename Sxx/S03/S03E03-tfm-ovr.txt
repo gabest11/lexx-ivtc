@@ -308,12 +308,12 @@
 34712,34781 c
 34712,34781 -++--
 34782,34839 cccpp
-34840,34958 l # single field, 3/4 dups, vertically shifted by 1 pixel
+34840,34958 h # single field, 3/4 dups, vertically shifted by 1 pixel # dups fixed
 34959,35130 l
 35131,35346 l
 35347,35422 l
 35423,35527 l
-34959,35527 Q 4
+34840,35527 Q 4
 35528,35668 c # already blended
 35669,35805 l
 35806,35883 l

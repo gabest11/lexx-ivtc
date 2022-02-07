@@ -13,6 +13,41 @@ LoadEpisodeWithAlt("S03E08", 86060, \
 
 Fix240p(title)
 
+# Better quality of this scene from S03E11
+
+c = last
+
+fix1 = Trim(21130, 21378)
+
+try
+{
+	tmp = fix1.Trim(0, -20)
+
+	fix1 = Import("S03E11.avs").Trim(58397, 58625)
+
+	# it's mirrored
+	
+	fix1 = fix1.FlipHorizontal
+
+	# ... and has a different brighness level, this is as close I can get it
+	
+	fix1 = fix1.ConvertBits(16).Levels(4208, 1, 57020, 0, 65536).ConvertBits(8, dither=1)
+
+	# ... and starts later
+	
+	fix1 = tmp + fix1
+
+	# ... and has more noise, just denoise both
+	
+#	fix1 = fix1.Degrain
+}
+catch(msg)
+{
+	last # clip undefined if the script ends here
+}
+
+last = c
+
 #
 
 Trim(0, 3628) + \
@@ -38,4 +73,6 @@ Trim(4783, 5056) + \
 Trim(5057, 5087).BlendFields + \
 Trim(5088, 5175).BlendFieldsWithText(230, 364, 490, 428) + \
 Trim(5176, 6106).BlendFields + \
-Trim(6107, 0)
+Trim(6107, 21129) + \
+fix1 + \
+Trim(21379, 0)

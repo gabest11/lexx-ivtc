@@ -159,7 +159,9 @@
 20766,20847 l
 20848,21037 l
 21038,21129 l
-21130,21378 l # TODO: better quality at S03E11 58397,58625 (mirrored and starts a few frames later)
+# better quality at S03E11 58397,58625 (mirrored and starts a few frames later)
+# 21150,21378 = 58397,58625
+21130,21378 l
 21379,21433 l
 21434,21463 l
 21464,21500 l
