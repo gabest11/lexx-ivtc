@@ -16,11 +16,6 @@ Planing to do newer releases if I can get them and are better quality.
 
 Alliance S01 has about 10% more bitrate, however the picture is shifted to the right by a ~0.3 pixels. You can see this in the intro when there are point like stars in the background. Koch has nice single pixel stars, never covering two. S03 also has more data, only episodes 01-03 have the brightness increased and clipped. Another notable difference, the field order is swapped, this makes combining clips from different releases difficult, as there is no lossless way to convert the chroma plane between the two in the YV12 color space.
 
-Still work in progress: 
-* parity changing scenes, very time consuming, but there are not a lot
-* interpolating new pp frames with MVTools where they were badly done decades ago, tests look promising
-* S01, S02 done
-
 ## Encoding
 
 Need a bunch of tools like avisynth, ffmpeg, dgindex, mpeg2dec, yadifmod2, eedi3, php... Also, some paths point to locations on my hard disk.
@@ -33,7 +28,7 @@ First step is to rip every disc with mkvmerge.
 
 0.bat title_tNN.mkv will demux the video elementary streams and call dgindex to produce the corresponding .d2v file. I work on elementary streams because the timestamps are stripped and if the disc is damaged the audio is easier to resync. There is a certain version floating on the internet which has a problem with S02E02. But this project isn't for that.
 
-php 1.php title_tNN.mkv 1pass|2pass|fields will do tfm/tdec run and output a huffyuv compressed avi. 
+php 1.php title_tNN.mkv 1pass/2pass/fields will do tfm/tdec run and output a huffyuv compressed avi. 
 
 The "fields" option creates avis for both fields and Topaz AI can be used to individually upscale those to 540p (higher is not recommended). This seems to be a better option for S03 than nnedi3. A special .avs file is also generated which maps to those 240p fields, with as many Trims as needed, could be thousands.
 

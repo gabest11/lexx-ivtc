@@ -348,7 +348,7 @@ else if($codec == 'h265p10')
 //if(strpos($codec, 'h265') !== false) $cmd[] = '-x265-params "strong-intra-smoothing=0"';
 
 $cmd[] = '-preset '.$preset.' -crf '.$crf;
-$cmd[] = '-vf "scale='.implode(':', $resolution).':flags=lanczos"';
+$cmd[] = '-vf "scale='.implode(':', $resolution).':flags=spline"'; //lanczos"';
 if(!empty($tune) && $tune != 'notune') $cmd[] = '-tune '.$tune;
 
 // misc
