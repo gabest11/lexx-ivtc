@@ -921,25 +921,25 @@
 72246,72400 cccpp
 72401,72549 pcccp
 72550,72685 cccpp
-72686,72759 ccppc # it's 23.976, but the blinking led is 59.94i
-72686,72759 +
-72686,72759 Q 5
+72686,72759 ccppc # it's 23.976, but the blinking led is 59.94i # fix17
+#72686,72759 +
+#72686,72759 Q 5
 #72760,72787 ppcccpccpccppc # wtf?
 #72788,72844 ppccpcccpccppc # p moves one position to the left
 72760,72844 ccppc # fix7
-72845,72959 cccpp
-72845,72959 +
-72845,72959 Q 5
+72845,72959 cccpp # it's 23.976, but the blinking led is 59.94i # fix18
+#72845,72959 +
+#72845,72959 Q 5
 72960,73035 ppccc
 73036,73081 ppccc
 73082,73130 ppccc
 73131,73194 cccpp
 73195,73243 cppcc
 73244,73325 ppccc
-73326,73429 ppccc
-73326,73429 +
-73326,73429 Q 5
-73326 Q 3
+73326,73429 ppccc # it's 23.976, but the blinking led is 59.94i # fix19
+#73326,73429 +
+#73326,73429 Q 5
+#73326 Q 3
 73430,73503 cppcc
 73504,73560 cppcc
 73561,73719 c

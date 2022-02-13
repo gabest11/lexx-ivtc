@@ -524,79 +524,86 @@ function LeftToVideo(clip c, int i, int w, int "fps_num")
 {
 	fps_num = Default(fps_num, 37500)
 	
-	InsideTo(c,  0, i,  0, 0, w, c.Height,  fps_num)
+	InsideTo(c,  0, i,  0, 0, w, c.Height,  fps_num, false)
 }
 
 function RightToVideo(clip c, int i, int w, int "fps_num")
 {
 	fps_num = Default(fps_num, 37500)
 	
-	InsideTo(c,  0, i,  w, 0, c.Width, c.Height,  fps_num)
+	InsideTo(c,  0, i,  w, 0, c.Width, c.Height,  fps_num, false)
 }
 
 function TopToVideo(clip c, int i, int h, int "fps_num")
 {
 	fps_num = Default(fps_num, 37500)
 	
-	InsideTo(c,  0, i,  0, 0, c.Width, h,  fps_num)
+	InsideTo(c,  0, i,  0, 0, c.Width, h,  fps_num, false)
 }
 
 function BottomToVideo(clip c, int i, int h, int "fps_num")
 {
 	fps_num = Default(fps_num, 37500)
 
-	InsideTo(c,  0, i,  0, h, c.Width, c.Height,  fps_num)
+	InsideTo(c,  0, i,  0, h, c.Width, c.Height,  fps_num, false)
 }
 
 function InsideToVideo(clip c, int i, int l, int t, int r, int b, int "fps_num")
 {
 	fps_num = Default(fps_num, 37500)
 	
-	InsideTo(c,  0, i,  l, t, r, b,  fps_num)
+	InsideTo(c,  0, i,  l, t, r, b,  fps_num, false)
 }
 
-function LeftToFilm(clip c, int i, int w, int "fps_num")
+function LeftToFilm(clip c, int i, int w, int "fps_num", bool "blend_fields")
 {
 	fps_num = Default(fps_num, 24000)
+	blend_fields = Default(blend_fields, false)
 	
-	InsideTo(c,  i, 0,  0, 0, w, c.Height,  fps_num)
+	InsideTo(c,  i, 0,  0, 0, w, c.Height,  fps_num, blend_fields)
 }
 
-function RightToFilm(clip c, int i, int w, int "fps_num")
+function RightToFilm(clip c, int i, int w, int "fps_num", bool "blend_fields")
 {
 	fps_num = Default(fps_num, 24000)
+	blend_fields = Default(blend_fields, false)
 	
-	InsideTo(c,  i, 0,  w, 0, c.Width, c.Height,  fps_num)
+	InsideTo(c,  i, 0,  w, 0, c.Width, c.Height,  fps_num, blend_fields)
 }
 
-function TopToFilm(clip c, int i, int h, int "fps_num")
+function TopToFilm(clip c, int i, int h, int "fps_num", bool "blend_fields")
 {
 	fps_num = Default(fps_num, 24000)
+	blend_fields = Default(blend_fields, false)
 	
-	InsideTo(c,  i, 0,  0, 0, c.Width, h,  fps_num)
+	InsideTo(c,  i, 0,  0, 0, c.Width, h,  fps_num, blend_fields)
 }
 
-function BottomToFilm(clip c, int i, int h, int "fps_num")
+function BottomToFilm(clip c, int i, int h, int "fps_num", bool "blend_fields")
 {
 	fps_num = Default(fps_num, 24000)
+	blend_fields = Default(blend_fields, false)
 	
-	InsideTo(c,  i, 0,  0, h, c.Width, c.Height,  fps_num)
+	InsideTo(c,  i, 0,  0, h, c.Width, c.Height,  fps_num, blend_fields)
 }
 
-function InsideToFilm(clip c, int i, int l, int t, int r, int b, int "fps_num")
+function InsideToFilm(clip c, int i, int l, int t, int r, int b, int "fps_num", bool "blend_fields")
 {
 	fps_num = Default(fps_num, 24000)
+	blend_fields = Default(blend_fields, false)
 	
-	InsideTo(c,  i, 0,  l, t, r, b,  fps_num)
+	InsideTo(c,  i, 0,  l, t, r, b,  fps_num, blend_fields)
 }
 
-function InsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_num")
+function InsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_num", bool "blend_fields")
 {
 	last = c
 	
+	if(blend_fields) { BlendFields }
+	
 	# FIXME: Overlay hides when FixSlowMoI isn't exaclty the right frame count
 	c1 = FixSlowMoI(0, FrameCount - 1, fps_num, pd = p, ivtc = i).Crop(l, t, r - l, b - t)
-	c2 = Overlay(c1, x = l, y = t)
+	c2 = c.Overlay(c1, x = l, y = t)
 	
 	assert(c.FrameCount == c2.FrameCount, Format("wrong frame count {} != {}", c.FrameCount, c2.FrameCount))
 	
@@ -607,21 +614,24 @@ function OutsideToVideo(clip c, int i, int l, int t, int r, int b, int "fps_num"
 {
 	fps_num = Default(fps_num, 37500)
 
-	OutsideTo(c,  0, i,  l, t, r, b,  fps_num)
+	OutsideTo(c,  0, i,  l, t, r, b,  fps_num, false)
 }
 
-function OutsideToFilm(clip c, int i, int l, int t, int r, int b, int "fps_num")
+function OutsideToFilm(clip c, int i, int l, int t, int r, int b, int "fps_num", bool "blend_fields")
 {
 	fps_num = Default(fps_num, 24000)
+	blend_fields = Default(blend_fields, false)
 	
-	OutsideTo(c,  i, 0,  l, t, r, b,  fps_num)
+	OutsideTo(c,  i, 0,  l, t, r, b,  fps_num, blend_fields)
 }
 
-function OutsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_num")
+function OutsideTo(clip c, int p, int i, int l, int t, int r, int b, int "fps_num", bool "blend_fields")
 {
 	last = c
 	
-	c2 = Overlay(FixSlowMoI(0, FrameCount - 1, fps_num, pd = p, ivtc = i), Crop(l, t, r - l, b - t), x = l, y = t)
+	if(blend_fields) { BlendFields }
+	
+	c2 = FixSlowMoI(0, FrameCount - 1, fps_num, pd = p, ivtc = i).Overlay(c.Crop(l, t, r - l, b - t), x = l, y = t)
 	
 	assert(c.FrameCount == c2.FrameCount, Format("wrong frame count {} != {}", c.FrameCount, c2.FrameCount))
 	
