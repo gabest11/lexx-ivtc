@@ -84,4 +84,46 @@ Trim(6051, 34839) + \
 fix1 + \
 Trim(34959, 0)
 
+# this scene is incredibly grainy
+
+Trim(0, 7418) + \
+Trim(7419, 8184).Degrain + \
+Trim(8185, 0)
+
+# white balance fix for the important scenes
+
+s0 = last
+s1 = Tweak(bright=-32.0, cont=1.30, sat=1.0, dither=true)
+s2 = Tweak(bright=-32.0, cont=1.20, sat=1.0, dither=true)
+s3 = Tweak(bright=-16.0, cont=1.05, sat=1.0, dither=true)
+
+s0.Trim(0,49174) + \
+s1.Trim(49175,49892) + \
+s3.Trim(49893,49919) + \
+s1.Trim(49920,50140) + \
+s3.Trim(50141,50252) + \
+s0.Trim(50253,50318) + \
+s1.Trim(50319,50503) + \
+s0.Trim(50504,50604) + \
+s1.Trim(50605,50833) + \
+s0.Trim(50834,50906) + \
+s1.Trim(50907,51207) + \
+s0.Trim(51208,51334) + \
+s1.Trim(51335,51444) + \
+s0.Trim(51445,51513) + \
+s1.Trim(51514,51896) + \
+s0.Trim(51897,51965) + \
+s1.Trim(51966,52075) + \
+s0.Trim(52076,52144) + \
+s1.Trim(52145,52463) + \
+s0.Trim(52464,52527) + \
+s1.Trim(52528,52641) + \
+s0.Trim(52642,52701) + \
+s1.Trim(52702,53002) + \
+s0.Trim(53003,53174) + \
+s1.Trim(53175,53313) + \
+s0.Trim(53314,53532) + \
+s1.Trim(53533,54349) + \
+s0.Trim(54350,0)
+
 # TODO: try to reduce the halo in scenes like 10126,10382 / 10438,11879

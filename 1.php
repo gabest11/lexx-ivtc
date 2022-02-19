@@ -940,61 +940,35 @@ TFM(clip2=deint2,clip3=deint3,nnedi3f0=f0,nnedi3f1=f1,mode=0,slow=2,cthresh=$cth
 TDecimate(mode=5,hybrid=2,denoise=true,vfrDec=0,input="$title-tdec.txt",tfmIn="$title-tfm.txt",mkvOut="$title-timecodes.txt",debugOut="$title-tdec-debug.txt",ovr="$title-tdec-ovr.txt")
 EOT;
 
-$avs_topaz_amq = <<<EOT
-Import("../../common.avsi")
-i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
-i2 = i2.Spline64Resize(1080, 540) # TODO: if the majority is 480p, resize i0/i1 to 1080x720 instead (very unlikely in S03)
-ImageSource(file="$title-huffyuv-field_2.25x_1080x540_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-#Degrain
-if(Exist("$title-var-merge.txt")) {
-aaa = Spline64Resize(Width, Height, src_left=0.5, src_top=0.5) # half pel difference between amq and aaa, TODO: y offset should be l/h dependent, similar to avs_topaz_ahq
-ImageSource(file="$title-huffyuv-field_2.25x_1080x540_amq-13_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-ScriptClip("Merge(aaa, _merge)")
-ConditionalReader("$title-var-merge.txt", "_merge", false)
-}
-Spline64Resize(i2.Width, i2.Height)
-i0 = last
-i1 = last
-EOT;
-
-$avs_topaz_ahq = <<<EOT
-Import("../../common.avsi")
-field_offset = Import("$title.avs").GetParity ? 0 : 1
-ImageSource(file="$title-huffyuv-field_2.00x_720x480_gcg-5_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-#Degrain
-i0 = Spline64Resize(Width, Height, src_left = 0.5, src_top = field_offset)
-i1 = Spline64Resize(Width, Height, src_left = 0.5, src_top = 1.0 - field_offset)
-i2 = ImageSource(file="$title-huffyuv_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
-i2 = i2.Spline64Resize(i0.Width, i0.Height)
-EOT;
-
-$avs_topaz_ahq2 = <<<EOT
-return last
-
-# does not really look good mixed, pure 480p GCG is usually better on living room TVs (large screen)
-
-if(Exist("$title-var-ahq.txt"))
-{
-	ScriptClip("Merge(i2, 1.0 - _merge)")
-	ConditionalReader("$title-var-ahq.txt", "_merge", false)
-}
-else
-{
-	Merge(i2, 0.5)
-}
-EOT;
-
 $avs_field = <<<EOT
+# step 1: amqs 100% png (noise filtering only)
 Import("$title.avs")
 ConvertToYV24(interlaced=true)
-#Degrain
 i2 = BlendFields.Spline64Resize(Width, Height / 2)
 i0 = SeparateFields.SelectOdd
 i1 = SeparateFields.SelectEven
 last = i2
 ConditionalSelect("_field", i0, i1, i2)
-ConditionalReader("$title-var-field.txt", "_field", false)
-#Degrain
+ConditionalReader("$title-field.txt", "_field", false)
+EOT;
+
+$avs_field_aaa = <<<EOT
+# step 2: $title-field-aaa.bat => $title-field-aaa.avi => aaa 200% grain 1% png
+c1 = Import("$title-field.avs").ConvertToYV24
+c2 = ImageSource("$title-field_1.00x_720x240_amqs-2_png\%06d.png", start=0, end=USEFRAME).AssumeFPS(c1).ConvertToYV24
+c3 = Merge(c1, c2, 0.25) # avoid too much noise filtering, messes up the followng aaa/gcg step, 25%-50% is okay
+return c3
+EOT;
+
+$avs_field_ahq = <<<EOT
+# step 3: ffmpeg 2.php $title-field-ahq.avs h264 veryslow 720x480
+Import("../../common.avsi")
+field_offset = Import("$title.avs").GetParity ? 0 : 1
+ImageSource(file="$title-field-aaa_2.00x_720x480_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
+i0 = last # Spline64Resize(Width, Height, src_left = 0.0, src_top = field_offset)
+i1 = last # Spline64Resize(Width, Height, src_left = 0.0, src_top = 1.0 - field_offset)
+i2 = ImageSource(file="$title-frame_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+i2 = i2.Spline64Resize(i0.Width, i0.Height)
 EOT;
 
 function ffmpeg($cmd, $avs)
@@ -1014,7 +988,39 @@ function ffmpeg($cmd, $avs)
 	if(!empty($ret)) die($ret);
 }
 
-if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
+$out = strpos($argv[2], 'null') === false ? '-c:v ffvhuff -aspect 720:480 "'.$title.'-frame.avi"' : '-f null -';
+
+if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
+{
+	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
+	{
+		ffmpeg('-map 0:v '.($force ? '-y ' : '').$out, $avs_1pass);
+	}
+
+	sanitycheck1();
+}
+else // if(isset($argv[2]) && strpos($argv[2], '2pass') !== false)
+{
+	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
+	{
+		ffmpeg('-c copy -f null -', $avs_2pass1st);
+	}
+
+	sanitycheck1();
+
+	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-frame.avi")))
+	{
+		ffmpeg('-map 0:v '.($force ? '-y ' : '').$out, $avs_2pass2nd);
+	}
+}
+
+sanitycheck2();
+
+genranges();
+
+// fields
+
+if(file_exists("$title-tdec-debug.txt") && file_exists("$title-var-fix.txt"))
 {
 	$trim = [];
 	$has_field = [false, false, false];
@@ -1101,114 +1107,66 @@ if(isset($argv[2]) && strpos($argv[2], 'fields') !== false)
 	{
 		$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
 	}
-/*	
-	$fp = fopen($title.'-topaz-amq.avs', 'w');
-	
-	$s = $avs_topaz_amq;
-	$s = str_replace("INFRAME", $inframe, $s);
-	$s = str_replace("USEFRAME", $useframe, $s);	
-	fputs($fp, $s."\n");
-*/
-	$fp2 = fopen($title.'-topaz-ahq.avs', 'w');
-	
-	$s = $avs_topaz_ahq;
-	$s = str_replace("INFRAME", $inframe, $s);
-	$s = str_replace("USEFRAME", $useframe, $s);	
-	fputs($fp2, $s."\n");
 
-	$sl = [];
-	$cl = [];
-	$total = 0;
-
-	foreach($trim as $i => $t)
+	if($force || !file_exists($title.'-field.avs'))
 	{
-		$c = sprintf("c%d", $i);
-		$sl[] = $s = sprintf("%s = Trim(i%d, %d, %d)\n", $c, $t['f'], $t['s'], $t['e']);
-		$cl[] = $c;
-		$total += $t['e'] - $t['s'] + 1;
+		file_put_contents($title.'-field.avs', $avs_field); // => amqs 100% png (noise filtering only)
+		
+		$fp = fopen($title.'-field.txt', 'w');
+	
+		fputs($fp, "Type int\nDefault 2\n");
+
+		foreach($trim as $t)
+		{
+			if($t['f'] == 2) continue;
+
+			fprintf($fp, "R %d %d %d\n", $t['s'], $t['e'], $t['f']);
+		}
+	
+		fclose($fp);
 	}
+	
+	if($force || !file_exists($title.'-field-aaa.avs'))
+	{
+		$fp = fopen($title.'-field-aaa.avs', 'w'); // => ffmpeg -i $title-field-aaa.avs -c:v ffvhuff -aspect 360:240 $title-field-aaa.avi => aaa 200% grain 1% png
+		
+		$s = $avs_field_aaa;
+		$s = str_replace("INFRAME", $inframe, $s);
+		$s = str_replace("USEFRAME", $useframe, $s);	
+		fputs($fp, $s."\n");
+	
+		fclose($fp);
+	
+		file_put_contents($title.'-field-aaa.bat', "ffmpeg -i $title-field-aaa.avs -c:v ffvhuff -aspect 360:240 $title-field-aaa.avi");
+	}
+	
+	if($force || !file_exists($title.'-field-ahq.avs'))
+	{
+		$fp = fopen($title.'-field-ahq.avs', 'w'); // => ffmpeg 2.php $title-field-ahq.avs h264 veryslow 720x480
+	
+		$s = $avs_field_ahq;
+		$s = str_replace("INFRAME", $inframe, $s);
+		$s = str_replace("USEFRAME", $useframe, $s);	
+		fputs($fp, $s."\n");
 
-//	fputs($fp, implode($sl)."\n".implode('+', $cl)."\n\n");
-//	fclose($fp);
+		$sl = [];
+		$cl = [];
+		$total = 0;
 
-	fputs($fp2, implode($sl)."\n".implode('+', $cl)."\n\n");
-	fputs($fp2, "Prefetch\n\n");
-	fputs($fp2, $avs_topaz_ahq2."\n\n");
-	fclose($fp2);
+		foreach($trim as $i => $t)
+		{
+			$c = sprintf("c%d", $i);
+			$sl[] = $s = sprintf("%s = Trim(i%d, %d, %d)\n", $c, $t['f'], $t['s'], $t['e']);
+			$cl[] = $c;
+			$total += $t['e'] - $t['s'] + 1;
+		}
+
+		fputs($fp, implode($sl)."\n".implode('+', $cl)."\n\n");
+		fputs($fp, "Prefetch\n\n");
+		fclose($fp);
+	}
 
 	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
-
-	//
-/*	
-	if(!file_exists($title.'-var-merge.txt'))
-	{
-		file_put_contents($title.'-var-merge.txt', "Type float\nDefault 0.5\n\n#R <start> <end> <ratio>\n");
-	}
-*/	
-	if(!file_exists($title.'-var-ahq.txt'))
-	{
-		file_put_contents($title.'-var-ahq.txt', "Type float\nDefault 0.5\n\n#R <start> <end> <ratio>\n");
-	}
-	
-	//
-	
-	$var_fields = $title.'-var-field.txt';
-	
-	register_shutdown_function(function() use($var_fields) { unlink($var_fields); });
-	
-	$fp = fopen($var_fields, 'w');
-	
-	fputs($fp, "Type int\nDefault 2\n");
-
-	foreach($trim as $t)
-	{
-		if($t['f'] == 2) continue;
-
-		fprintf($fp, "R %d %d %d\n", $t['s'], $t['e'], $t['f']);
-	}
-	
-	fclose($fp);
-
-	$dst = $title.'-huffyuv-field.avi';
-
-	if($force || !file_exists($dst))
-	{
-		// do a 2.00x upscale to 720x480, or change it to -aspect 480x240 for 1080x540 at 2.25x
-		
-		ffmpeg('-map 0:v -y -c:v ffvhuff -aspect 360:240 "'.$dst.'"', $avs_field);
-	}
-	
-	exit;
 }
-
-$out = strpos($argv[2], 'null') === false ? '-c:v ffvhuff -aspect 720:480 "'.$title.'-huffyuv.avi"' : '-f null -';
-
-if(isset($argv[2]) && strpos($argv[2], '1pass') !== false)
-{
-	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
-	{
-		ffmpeg('-map 0:v '.($force ? '-y ' : '').$out, $avs_1pass);
-	}
-
-	sanitycheck1();
-}
-else // if(isset($argv[2]) && strpos($argv[2], '2pass') !== false)
-{
-	if($force || !file_exists("$title-tfm.txt") || !file_exists("$title-tdec.txt"))
-	{
-		ffmpeg('-c copy -f null -', $avs_2pass1st);
-	}
-
-	sanitycheck1();
-
-	if($force || file_exists("$title-tfm.txt") && file_exists("$title-tdec.txt") && (!file_exists("$title-timecodes.txt") || !file_exists("$title-huffyuv.avi")))
-	{
-		ffmpeg('-map 0:v '.($force ? '-y ' : '').$out, $avs_2pass2nd);
-	}
-}
-
-sanitycheck2();
-
-genranges();
 
 ?>

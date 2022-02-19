@@ -118,7 +118,7 @@ if(preg_match('/(.*title_t[0-9]+[^-]*-)/i', $src, $m)
 		$attachments[] = ['desc' => 'TDecimate overrides', 'path' => $fn];
 	}
 
-	$fn = $m[1].'huffyuv.avi';
+	$fn = $m[1].'frame.avi';
 	
 	if(file_exists($fn))
 	{

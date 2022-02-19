@@ -461,7 +461,7 @@ fix17 = Trim(72686, 72759).InsideToFilm(3, 550, 300, 580, 340, blend_fields = tr
 fix18 = Trim(72845, 72959).InsideToFilm(4, 550, 300, 580, 340, blend_fields = true)
 fix19 = Trim(73326, 73429).InsideToFilm(1, 604, 340, 630, 374, blend_fields = true)
 
-#return showfields
+#return showfields(false)
 
 Trim(0,18260) + \
 fix1 + \

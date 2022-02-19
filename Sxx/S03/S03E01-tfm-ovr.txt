@@ -501,7 +501,7 @@
 81860,82037 l
 82038,82124 l
 82125,82216 l # 2
-82217,82369 l # 3 (when Kai falls, he does not move in dup frames, but rotates slightly)
+82217,82369 l # 2 (when Kai falls, he does not move in dup frames, but rotates slightly)
 82370,82499 l
 82500,82593 l
 82594,82680 l

@@ -33,6 +33,8 @@ $srcs = [
 
 foreach([1 => 4, 2 => 20, 3 => 13, 4 => 24] as $season => $epcount)
 {
+	if(!empty($argv[4]) && $argv[4] != $season) continue;
+	
 	for($episode = 1; $episode <= $epcount; $episode++)
 	{
 		$dst = sprintf('S%02dE%02d.mkv', $season, $episode);
@@ -64,7 +66,7 @@ foreach([1 => 4, 2 => 20, 3 => 13, 4 => 24] as $season => $epcount)
 	
 		$cmd = sprintf('php 2.php "%s" "%s" %s %s %s', 
 			$src, $dst, $codec, $preset, 
-			!empty($resolution) ? $resolution : ($season == 3 ? 540 : 720));
+			!empty($resolution) ? $resolution : ($season == 3 ? 480 : 720));
 	
 		echo $cmd.PHP_EOL;
 		
@@ -85,6 +87,8 @@ $srcs = [
 
 foreach([2 => 5] as $season => $epcount)
 {
+	if(!empty($argv[4]) && $argv[4] != $season) continue;
+	
 	for($episode = 1; $episode <= $epcount; $episode++)
 	{
 		$dst = sprintf('S%02dR%02d.mkv', $season, $episode);
@@ -117,7 +121,7 @@ foreach([2 => 5] as $season => $epcount)
 	
 		$cmd = sprintf('php 2.php "%s" "%s" %s %s %s', 
 			$src, $dst, $codec, $preset, 
-			!empty($resolution) ? $resolution : ($season == 3 ? 540 : 720));
+			!empty($resolution) ? $resolution : ($season == 3 ? 480 : 720));
 	
 		echo $cmd.PHP_EOL;
 	

@@ -942,3 +942,8 @@ function Degrain(clip c, int "bs")
 	#MDegrain2(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,thSAD=400)
 	MDegrain3(super, backward_vec1,forward_vec1,backward_vec2,forward_vec2,backward_vec3,forward_vec3,thSAD=400)
 }
+
+function MergeRect(clip c1, clip c2, float weight, int l, int t, int r, int b)
+{
+	c1.Overlay(c1.Merge(c2, weight).Crop(l, t, r - l, b - t), l, t)
+}
