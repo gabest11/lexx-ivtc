@@ -972,7 +972,7 @@ i1 = Spline64Resize(Width, Height, src_left = 0.0, src_top = 1.0 - field_offset)
 i2 = ImageSource(file="$title-frame_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
 i2 = i2.Spline64Resize(i0.Width, i0.Height)
 ConditionalSelect(i2, "_field", i0, i1)
-ConditionalReader("$title-field.txt", "_field", true)
+ConditionalReader("$title-field.txt", "_field")
 EOT;
 
 function ffmpeg($cmd, $avs)
