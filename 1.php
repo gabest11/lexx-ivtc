@@ -2,6 +2,8 @@
 
 if(!file_exists($argv[1])) die('check file name');
 
+$ffmpeg = 'e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe';
+
 $title = preg_replace('/\\.[^\\.]+$/i', '', $argv[1]);
 
 $force = isset($argv[3]) && $argv[3] == 'force';
@@ -942,20 +944,20 @@ EOT;
 
 $avs_field = <<<EOT
 # step 1: amqs 100% png (noise filtering only)
-Import("$title.avs")
+Import("../../common.avsi")
+FFVideoSource("$title-frame.avi") # AVISource no vfw codec for ffvhuff
 ConvertToYV24(interlaced=true)
 i2 = BlendFields.Spline64Resize(Width, Height / 2)
 i0 = SeparateFields.SelectOdd
 i1 = SeparateFields.SelectEven
-last = i2
-ConditionalSelect("_field", i0, i1, i2)
+ConditionalSelect(i2, "_field", i0, i1)
 ConditionalReader("$title-field.txt", "_field", false)
 EOT;
 
 $avs_field_aaa = <<<EOT
 # step 2: $title-field-aaa.bat => $title-field-aaa.avi => aaa 200% grain 1% png
 c1 = Import("$title-field.avs").ConvertToYV24
-c2 = ImageSource("$title-field_1.00x_720x240_amqs-2_png\%06d.png", start=0, end=USEFRAME).AssumeFPS(c1).ConvertToYV24
+c2 = ImageSource("$title-field_1.00x_720x240_amqs-2_png\%06d.png", start=0, end=INFRAME).AssumeFPS(c1).ConvertToYV24
 c3 = Merge(c1, c2, 0.25) # avoid too much noise filtering, messes up the followng aaa/gcg step, 25%-50% is okay
 return c3
 EOT;
@@ -964,22 +966,25 @@ $avs_field_ahq = <<<EOT
 # step 3: ffmpeg 2.php $title-field-ahq.avs h264 veryslow 720x480
 Import("../../common.avsi")
 field_offset = Import("$title.avs").GetParity ? 0 : 1
-ImageSource(file="$title-field-aaa_2.00x_720x480_aaa-9_png\%06d.png", start=0, end=USEFRAME).ConvertToYV24
-i0 = last # Spline64Resize(Width, Height, src_left = 0.0, src_top = field_offset)
-i1 = last # Spline64Resize(Width, Height, src_left = 0.0, src_top = 1.0 - field_offset)
+ImageSource(file="$title-field-aaa_2.00x_720x480_aaa-9_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
+i0 = Spline64Resize(Width, Height, src_left = 0.0, src_top = field_offset)
+i1 = Spline64Resize(Width, Height, src_left = 0.0, src_top = 1.0 - field_offset)
 i2 = ImageSource(file="$title-frame_1.50x_1080x720_ahq-12_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
 i2 = i2.Spline64Resize(i0.Width, i0.Height)
+ConditionalSelect(i2, "_field", i0, i1)
+ConditionalReader("$title-field.txt", "_field", true)
 EOT;
 
 function ffmpeg($cmd, $avs)
 {
 	global $title;
+	global $ffmpeg;
 	
 	$src = tempnam('.', $title);
 	file_put_contents($src, $avs);
 	register_shutdown_function(function() use($src) { unlink($src); });	
 
-	$cmd = '"e:\\tmp\\media\\util\\ffmpeg_x86\\bin\\ffmpeg.exe" -hide_banner -f avisynth -i "'.$src.'" '.$cmd;
+	$cmd = $ffmpeg.' -hide_banner -f avisynth -i "'.$src.'" '.$cmd;
 
 	echo $cmd.PHP_EOL;
 	
@@ -1075,18 +1080,11 @@ if(file_exists("$title-tdec-debug.txt") && file_exists("$title-var-fix.txt"))
 		
 		$has_field[$field] = true;
 		
-		if($field != $prev_field || $prev_field != 2 && $useframe > $useframe_e + 1)
+		if($field != $prev_field || $prev_field != 2 && $inframe > $inframe_e + 1) // $useframe > $useframe_e + 1)
 		{
 			if($useframe_e >= 0)
 			{
-				if($prev_field != 2)
-				{
-					$trim[] = ['s' => $useframe_s, 'e' => $useframe_e, 'f' => $prev_field];
-				}
-				else
-				{
-					$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
-				}
+				$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
 			}
 			
 			$inframe_s = $inframe;
@@ -1099,15 +1097,10 @@ if(file_exists("$title-tdec-debug.txt") && file_exists("$title-var-fix.txt"))
 		$useframe_e = $useframe;
 	}
 	
-	if($prev_field != 2)
-	{
-		$trim[] = ['s' => $useframe_s, 'e' => $useframe_e, 'f' => $prev_field];
-	}
-	else
-	{
-		$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
-	}
+	$trim[] = ['s' => $inframe_s, 'e' => $inframe_e, 'f' => $prev_field];
 
+	//
+	
 	if($force || !file_exists($title.'-field.avs'))
 	{
 		file_put_contents($title.'-field.avs', $avs_field); // => amqs 100% png (noise filtering only)
@@ -1126,6 +1119,11 @@ if(file_exists("$title-tdec-debug.txt") && file_exists("$title-var-fix.txt"))
 		fclose($fp);
 	}
 	
+	if($force || !file_exists($title.'-field.bat')) // not really needed, just load -field.avs in Topaz
+	{
+		file_put_contents($title.'-field.bat', $ffmpeg." -i $title-field.avs -c:v ffvhuff -aspect 720:240 $title-field.avi");
+	}
+	
 	if($force || !file_exists($title.'-field-aaa.avs'))
 	{
 		$fp = fopen($title.'-field-aaa.avs', 'w'); // => ffmpeg -i $title-field-aaa.avs -c:v ffvhuff -aspect 360:240 $title-field-aaa.avi => aaa 200% grain 1% png
@@ -1136,8 +1134,11 @@ if(file_exists("$title-tdec-debug.txt") && file_exists("$title-var-fix.txt"))
 		fputs($fp, $s."\n");
 	
 		fclose($fp);
-	
-		file_put_contents($title.'-field-aaa.bat', "ffmpeg -i $title-field-aaa.avs -c:v ffvhuff -aspect 360:240 $title-field-aaa.avi");
+	}
+
+	if($force || !file_exists($title.'-field-aaa.bat')) // this one is needed, AR must be changed
+	{
+		file_put_contents($title.'-field-aaa.bat', $ffmpeg." -i $title-field-aaa.avs -c:v ffvhuff -aspect 360:240 $title-field-aaa.avi");
 	}
 	
 	if($force || !file_exists($title.'-field-ahq.avs'))
@@ -1148,25 +1149,9 @@ if(file_exists("$title-tdec-debug.txt") && file_exists("$title-var-fix.txt"))
 		$s = str_replace("INFRAME", $inframe, $s);
 		$s = str_replace("USEFRAME", $useframe, $s);	
 		fputs($fp, $s."\n");
-
-		$sl = [];
-		$cl = [];
-		$total = 0;
-
-		foreach($trim as $i => $t)
-		{
-			$c = sprintf("c%d", $i);
-			$sl[] = $s = sprintf("%s = Trim(i%d, %d, %d)\n", $c, $t['f'], $t['s'], $t['e']);
-			$cl[] = $c;
-			$total += $t['e'] - $t['s'] + 1;
-		}
-
-		fputs($fp, implode($sl)."\n".implode('+', $cl)."\n\n");
 		fputs($fp, "Prefetch\n\n");
 		fclose($fp);
 	}
-
-	if($total != $inframe + 1) die('check frame count '.$total.' != '.($inframe + 1));
 }
 
 ?>
