@@ -13,6 +13,33 @@ LoadEpisodeWithAlt("S03E05", 86090, \
 
 Fix240p(title)
 
+# two planets, every 68 frames repeat, irregular dups
+
+#
+# 12295 ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+#       ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+# 12363 ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+#       ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+# 12431 ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+#       ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+# 12499 ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+#       ccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccpcccpccccp
+# 12567 ccc
+#       ccc
+
+fix1 = FixSlowMoI(12295, 12569, 38500, pd = 0, fc = 68, f = [ \
+	[0,1,2,3,5,6,7,9,10,11,12,14,15,16,18,19,20,21,23,24,25,27,28,29,30,32,33,34,36,37,38,39,41,42,43,45,46,47,48,50,51,52,54,55,56,57,59,60,61,63,64,65,66], \
+	[0,1,2,3,5,6,7,9,10,11,12,14,15,16,18,19,20,21,23,24,25,27,28,29,30,32,33,34,36,37,38,39,41,42,43,45,46,47,48,50,51,52,54,55,56,57,59,60,61,63,64,65,66] \
+	])
+
+#fix1 = SeparateFields.SelectEven.AssumeFrameBased.FixSlowMoI(12295, 12569, 38500, pd = 0, fc = 68, f = [ \
+#	[0,1,2,3,5,6,7,9,10,11,12,14,15,16,18,19,20,21,23,24,25,27,28,29,30,32,33,34,36,37,38,39,41,42,43,45,46,47,48,50,51,52,54,55,56,57,59,60,61,63,64,65,66], \
+#	[0,1,2,3,5,6,7,9,10,11,12,14,15,16,18,19,20,21,23,24,25,27,28,29,30,32,33,34,36,37,38,39,41,42,43,45,46,47,48,50,51,52,54,55,56,57,59,60,61,63,64,65,66] \
+#	]).AssumeFieldBased
+#fix1 = Interleave(fix1, fix1).Weave
+
+#
+
 Trim(0, 4223) + \
 Trim(4224, 4234).BlendFields + \
 Trim(4235, 4323).BlendFieldsWithText(248, 404, 472, 434) + \
@@ -32,7 +59,9 @@ Trim(6373, 10230) + \
 Trim(10231, 10472).BlendFields + \
 Trim(10473, 10693) + \
 Trim(10694, 10769).BlendFields + \
-Trim(10770, 30142) + \
+Trim(10770, 12294) + \
+fix1 + \
+Trim(12570, 30142) + \
 Trim(30143, 30178).BlendFields + \
 Trim(30179, 31929) + \
 Trim(31930, 32002).BlendFields + \

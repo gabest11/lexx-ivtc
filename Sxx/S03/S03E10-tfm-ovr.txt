@@ -733,7 +733,7 @@
 64402,64666 --++-
 64402,64666 M 1 # low contrast
 64667,65050 l
-65051,65714 l
+65051,65714 l # gcg (mouth looks bad with aaa in topaz, or even with ahq)
 65715,65818 l
 65819,65880 l
 65881,65929 l

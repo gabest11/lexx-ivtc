@@ -40,6 +40,14 @@ _fix1 = FixSlowMoI(37457, 37613, 31600, pd = 2, f = [ \
 
 fix1 = Trim(37457, 37613) # too many blended frames, keep the original
 
+# two planets in a repeating cpc pattern, ccppc works, but 30fps is nicer
+
+#fix2 = FixSlowMoI(45554, 45691, 36000, pd = 3, fc = 3, f = [ \    
+fix2 = FixSlowMoI(45554, 45691, 45200, pd = 0, fc = 3, f = [ \    
+        [0,2], \
+        [0,2] \
+        ])
+
 #
 
 Trim(0, 60).BlendFields + \
@@ -78,4 +86,6 @@ Trim(5023, 5111).BlendFieldsWithText(232, 364, 490, 428) + \
 Trim(5112, 5205).BlendFields + \
 Trim(5206, 37456) + \
 fix1 + \
-Trim(37614, 0)
+Trim(37614, 45553) + \
+fix2 + \
+Trim(45692, 0)

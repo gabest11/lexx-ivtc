@@ -963,7 +963,7 @@ return c3
 EOT;
 
 $avs_field_ahq = <<<EOT
-# step 3: ffmpeg 2.php $title-field-ahq.avs h264 veryslow 720x480
+# step 3: php 2.php $title-field-ahq.avs h264 veryslow 720x480
 Import("../../common.avsi")
 field_offset = Import("$title.avs").GetParity ? 0 : 1
 ImageSource(file="$title-field-aaa_2.00x_720x480_aaa-9_png\%06d.png", start=0, end=INFRAME).ConvertToYV24
