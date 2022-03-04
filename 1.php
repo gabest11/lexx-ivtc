@@ -958,6 +958,7 @@ $avs_field_aaa = <<<EOT
 # step 2: $title-field-aaa.bat => $title-field-aaa.avi => aaa 200% grain 1% png
 c1 = Import("$title-field.avs").ConvertToYV24
 c2 = ImageSource("$title-field_1.00x_720x240_amqs-2_png\%06d.png", start=0, end=INFRAME).AssumeFPS(c1).ConvertToYV24
+assert(c1.FrameCount == c2.FrameCount)
 c3 = Merge(c1, c2, 0.25) # avoid too much noise filtering, messes up the followng aaa/gcg step, 25%-50% is okay
 return c3
 EOT;

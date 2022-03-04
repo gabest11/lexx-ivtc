@@ -285,6 +285,8 @@
 28365,28484 l
 28485,28599 l
 28600,28718 c # FIXME 35274,35393 zoomed in, not the same, different angle sadly
+28600,28628 + # fade-in
+28600,28628 Q 5
 28719,28778 l
 28779,28838 l
 28839,28898 l
