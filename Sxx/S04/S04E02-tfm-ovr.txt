@@ -565,29 +565,29 @@
 # I think they scaled only one field for zoomed-in scenes
 # 53667- is full picture and does not have a second interpolated field
 # there is also another section towards the end
-52932,53047 c # 4/5 dup
-53048,53160 c # 4/5 dup
-53161,53346 c # 4/5 dup
-53347,53452 c # 3/4 dup
-53453,53549 c # 3/4 dup
-53550,53666 c # 3/4 dup
+52932,53047 l # 4/5 dup
+53048,53160 l # 4/5 dup
+53161,53346 l # 4/5 dup
+53347,53452 l # 3/4 dup
+53453,53549 l # 3/4 dup
+53550,53666 l # 3/4 dup
 53667,53865 ccppc
-53866,54089 c # 3/4 dup
-54090,54153 c # 3/4 dup
+53866,54089 l # 3/4 dup
+54090,54153 l # 3/4 dup
 54154,54228 c
-54229,54278 c # 3/4 dup
-54279,54336 c # 2/3 dup
-54337,54574 c # 2/3 dup (bg blurred in certain frames)
-54575,54674 c # 3/4 dup
-54675,55016 c # 1/2 dup
-55017,55071 c # 4/5 dup
-55072,55132 c # 3/4 dup
-55133,55223 c # 2/3 dup
-55224,55260 c # 3/4 dup
-55261,55321 c # 1/2 dup
-55322,55337 c # 4/5 dup
-55338,55380 c # 2/3 dup
-55381,55594 c # 1/2 dup
+54229,54278 l # 3/4 dup
+54279,54336 l # 2/3 dup
+54337,54574 l # 2/3 dup (bg blurred in certain frames)
+54575,54674 l # 3/4 dup
+54675,55016 l # 1/2 dup
+55017,55071 l # 4/5 dup
+55072,55132 l # 3/4 dup
+55133,55223 l # 2/3 dup
+55224,55260 l # 3/4 dup
+55261,55321 l # 1/2 dup
+55322,55337 l # 4/5 dup
+55338,55380 l # 2/3 dup
+55381,55594 l # 1/2 dup
 52932,55594 + # single field, other is interpolated
 53667,53865 - # except this
 54154,54228 - # and this

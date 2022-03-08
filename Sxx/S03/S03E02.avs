@@ -14,6 +14,10 @@ try
 		["..\..\S03(Alliance)\V01\title_t01.d2v", -15])
 	c2 = ConvertToBFF()
 
+	# denoise single field sections
+
+	c1 = c1.Fix240p(title)
+
 	# correct Alliance levels
 
 	c1 = c1.ColorCorrectAllianceS03()
@@ -26,10 +30,6 @@ catch(msg)
 {
 	last # clip undefined if the script ends here
 }
-
-# denoise single field sections
-
-Fix240p(title)
 
 #
 

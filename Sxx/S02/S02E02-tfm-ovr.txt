@@ -228,7 +228,7 @@
 16957,16962 c
 16963,17052 c # still image
 17053,17140 c
-17053,17140 + # combed with drifting offset
+17053,17140 + # combed with drifting offset (fields are blended, interlaced motion blur)
 17141,17269 c
 17141,17269 + # same as above, but only the projectile
 17270,17320 c

@@ -131,8 +131,8 @@ function Fix240p(clip c, string title)
 	last = c
 	p1e = Fix240p1E
 	p1o = Fix240p1O
-	p2e = c # Fix240p2E
-	p2o = c # Fix240p2O
+	p2e = Fix240p2E
+	p2o = Fix240p2O
 	ConditionalSelect(last, "_fix - 1", \
 		GetParity() ? p1e : p1o, \
 		GetParity() ? p1o : p1e, \
