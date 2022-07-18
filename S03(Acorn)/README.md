@@ -42,3 +42,11 @@ When point sampling was used to create the missing rows, the average of the two 
 
 There are a few 59.94i scenes, where small features, like stars, are on alternating fields, a single field deinterlacer would mean losing a lot of detail and shimmering. There are also the usual hybrid scenes, 4 + 1 dup and 5 real frames layered on top of each other. These are harder to fix, as there are no redundant fields to choose from.
 
+The PAL version was made based on this, resized to 288 lines, sides missing, and each scene follows this field pattern:
+
+     0   1  2 3+4 4+5
+    0+1 1+2 3  4   5
+
+6 frames in (one field, since both fields are the same), 5 frames out.
+
+If it looks less pixelated, that's only because the smoothing effect of the resizing filter and motion blur. There is no additional information in the picture compared to the NTSC version. The colors are also slightly shifted towards green and it has chroma errors.
